@@ -1,0 +1,333 @@
+
+@media (max-width: 1920px)
+{
+	.profile_photo {height: 520px;margin-bottom: 30px;}
+	.inside_bc_img {margin-top: 14%;height: 570px;}
+	.right_content_text { margin-top: 18%;}
+	.profile_text { height: 750px;}
+	.inside_bc {padding: 13% 6% 0;}
+	.below_title_text.bc_heading_title h2 {font-size: 75px;text-align: left;line-height: 70px;}
+	.below_title_text.bc_heading_title {height: 400px;}
+	.bc_text_inner .text_inner p { font-size: 20px;}
+	.inside_bc .bc_address {padding-left: 6%;margin-top: 27%;}
+	.profile_imge_bc {width: 220px;height: 335px;}
+	.ibc_profile {height: 350px;}
+}
+@media (max-width: 1787px) 
+{
+	.profile_photo { height:490px;}
+	.inside_bc_img {margin-top: 18%;height: 500px;}
+	.right_content_text {margin-top: 20%;}
+	.profile_text { height: 700px;}
+	.inside_bc .bc_address {padding-left: 6%;margin-top: 20%;}
+	.profile_imge_bc {width: 200px;height: 320px;}
+}
+@media (max-width: 1708px)
+{
+	.inside_bc .bc_address {padding-left: 6%;margin-top: 18%;}
+	.profile_imge_bc {width: 190px;height: 310px;}
+}
+@media (max-width: 1600px) 
+{
+	.profile_photo { height:450px;}
+	.inside_bc_img { height: 450px;margin-top: 16%;}
+	.below_title_text.bc_heading_title {height: 330px;}
+	.below_title_text.bc_heading_title h2 {font-size: 70px;text-align: left;line-height: 60px;}
+	.profile_imge_bc {width: 184px;height: 295px;}
+}
+@media (max-width: 1525px) 
+{
+	.profile_photo { height:410px;}
+	.right_ifc_content p { margin-bottom: 20px;}
+	.profile_imge_bc {width: 170px;height: 270px;}
+	.inside_bc .bc_address {padding-left: 6%;margin-top: 14%;}
+	.ibc_profile {height: 300px;}
+}
+
+@media (max-width: 1440px)
+{
+	.profile_text p, .right_ifc_content p {font-size: 18px;}
+	.profile_text p b { font-size: 17px;}
+	.inside_ibc .ibc_logo { height: 100px;}
+	.inside_bc_img { height: 400px;}
+	.right_content_text { margin-top: 26%; font-size: 20px;}
+	.below_title_text.bc_heading_title h2 {font-size: 60px;line-height: 50px;}
+	.below_title_text.bc_heading_title {height: 280px;}
+	.bc_text_inner .text_inner p {font-size: 16px;}
+	.inside_bc .bc_address {padding-left: 6%;margin-top: 19%;}
+	
+}
+
+@media (max-width: 1366px)
+{
+	.profile_photo {height: 380px;}
+	.inside_bc .bc_address {padding-left: 6%;margin-top: 17%;}
+	.profile_imge_bc {width: 150px; height: 250px;}
+	.ibc_profile {height: 260px;}
+}
+
+@media (max-width: 1360px) 
+{
+
+}
+
+@media (max-width: 1333px) 
+{
+	.inside_bc .bc_address {margin-top: 13%;}
+	.profile_imge_bc { height: 260px;}
+}
+
+@media (max-width: 1247px) 
+{
+	.inside_ifc {padding: 10% 7%;}
+	.profile_photo {height: 345px;}
+	.profile_text p {line-height: 20px;}
+	.profile_text p, .right_ifc_content p {font-size: 16px;}
+	.inside_ibc {padding: 6% 6%;}
+	.inside_ibc .ibc_logo {height: 75px;}
+	.inside_bc_img {height: 340px;}
+	.below_title_text h2, .below_title_text h1, .below_title_text h3, .below_title_text h4, .below_title_text h5, .below_title_text h6 {font-size:75px; line-height: 70px;}
+	.right_content_text { margin-top: 25%; font-size: 17px; line-height: 25px;}
+	.inside_ibc .pl-5.col-md-8 {padding-left:1rem!important;}
+	.profile_text {height: 600px;}
+	.below_title_text {height: 220px;}
+	.inside_bc .bc_address {padding: 0% 0 0% 7%;}
+	.top-title{padding: 5% 0 0 5%;}
+	.below_title_text.bc_heading_title h2 {font-size: 55px;line-height: 45px;}
+	.below_title_text.bc_heading_title {height: 250px;}
+	.profile_imge_bc {width: 140px;height: 240px;}
+	.inside_bc .bc_address {margin-top: 15%;}
+}
+@media (max-width: 1152px) 
+{
+	.profile_photo {height: 355px;}
+	.right_ifc_content {margin: 43% 0 0 7%;}
+	.inside_bc .bc_address {padding: 0% 0 0% 8%;font-size: 15px;}
+	.bc_text_inner .text_inner p{font-size: 15px;}
+	.below_title_text.bc_heading_title h2 {font-size: 45px;line-height: 40px;}
+	.bc_text_inner .text_inner p {font-size: 13px;}
+	.below_title_text.bc_heading_title {height: 215px;}
+	.inside_bc .bc_address {padding: 0% 0 0% 7%;margin-top: 21.5%;}
+	.profile_imge_bc {width: 120px; height: 195px;}
+	.ibc_profile {height: 230px;}
+}
+@media (max-width: 1067px) 
+{
+	.profile_photo {height: 325px;}
+	.profile_text h2, .profile_text h1, .profile_text h3, .profile_text h4, .profile_text h5, .profile_text h6  { font-size: 22px;}
+	.profile_text p, .right_ifc_content p {font-size: 15px;}
+	.profile_text p b {font-size: 14px;}
+	.profile_text {height: 560px;}
+	.bc_text_inner .text_inner p{font-size:14px}
+	.inside_bc .bc_address { margin-top: 11.5%;}
+}
+@media (max-width: 1028px)
+{
+	.profile_photo { height: 300px;}
+	.profile_text {height: 480px;}
+	.profile_text p {line-height: 17px;}
+	.profile_text p, .right_ifc_content p { font-size: 13px;}
+	.inside_ibc {padding: 4% 5%;}
+	.inside_bc_img {height: 290px;}
+	.below_title_text h2, .below_title_text h1, .below_title_text h3, .below_title_text h4, .below_title_text h5, .below_title_text h6 {font-size: 60px; line-height: 60px;}
+	.right_content_text {margin-top: 27%; font-size: 14px; line-height: 20px;}
+	.below_title_text {height: 180px;}
+	.bc_backCover .top-title {font-size:14px}
+	.bc_backCover .ibc_logo img{max-height: 78%;}
+	.bc_backCover .below_title_text.bc_heading_title h2{font-size: 40px;line-height: 45px;} 
+	.bc_backCover .below_title_text.bc_heading_title{height: 190px;}
+}
+@media (max-width: 1024px)
+{
+	
+}
+@media (max-width:980px)
+{
+	.left_side, .right_side {max-width: 100%;padding: 0px;flex:0 0 100%; margin-bottom: 20px;}
+	.left_side ul.nav {flex-direction: row !important;flex-wrap: nowrap; width: 100%;height: auto;}
+	.bc_backCover .top-title{padding: 8% 0 0 5%;}
+	.bc_text_inner .text_inner p{font-size: 17px;}
+	.inside_bc .bc_address {margin-top: 14%;padding: 0% 0 0% 6.5%;}
+	.profile_imge_bc {width: 133px;height: 215px;}
+	.bc_address h2 { font-size: 20px;}
+	.bc_address p { font-size: 15px;}
+	.bc_backCover .below_title_text.bc_heading_title {height: 240px;}
+	.preview_mag {top: -23px;left: 20px;}
+	.profile_photo {height: 350px;}
+	.right_side {height: auto;overflow: inherit;}
+	.ibc_profile {height: 260px;}
+	
+}
+@media (max-width:800px)
+{
+	.profile_photo {height: 270px;}
+	.logo {margin-top: 2rem!important;}
+	.above_img_text .logo img { height: 60px;}
+	.above_img_text .row { margin: 0px;}
+	.inside_bc_img {height: 220px;}
+	.below_title_text h2, .below_title_text h1, .below_title_text h3, .below_title_text h4, .below_title_text h5, .below_title_text h6 {font-size: 50px; line-height: 50px;}
+	.right_content_text { margin-top: 27%; font-size: 12px;line-height: 18px;}
+	.inside_ibc .pt-5.col-md-8 {padding-top:2rem!important;}
+	.below_title_text {height: 160px;}
+	.bc_text_inner .text_inner p{font-size: 14px;}
+	.inside_bc .bc_address{margin-top: 13%;font-size: 13px;}
+	.bc_backCover .below_title_text.bc_heading_title h2{font-size: 35px;line-height: 30px;}
+	.bc_backCover .below_title_text.bc_heading_title{height: 160px;}
+	.bc_backCover .bc_address h2 {font-size: 17px;font-weight: 400;}
+	.bc_address p {font-size: 11px;}
+	.top_preview.gjs-pn-buttons { display: none;}
+	.profile_imge_bc {width: 110px;height: 175px;}
+	.right_side {height: auto;padding-top: 30px;}
+	.save_ifc_to_db {top: 6px;}
+	.ifc_signature_image {height: 45px;}
+	.ibc_profile {height: 230px;}
+}
+@media (max-width:767px)
+{
+	.left_side, .right_side {max-width: 100%;flex:0 0 100%; margin-bottom: 20px;}
+	.left_side ul.nav {flex-direction: row !important;flex-wrap: nowrap; width: 100%;}
+	.inside_ifc .col-md-8 {width: 69%; flex: 0 0 69%;}
+	.profile_photo {height: 290px;}
+	.right_ifc_content {margin: 40% 0 0 7%;}
+	.right_ifc_content p {font-size: 15px;}
+	.below_title_text h2, .below_title_text h1, .below_title_text h3, .below_title_text h4, .below_title_text h5, .below_title_text h6 { font-size: 70px; line-height: 63px;}
+	.right_content_text {margin-top: 24%;font-size: 16px;line-height: 23px;}
+	.inside_ibc .col-md-8 .col-md-3 img { width: 100%; margin-bottom: 20px;}
+	.inside_ibc .col-md-4 , .inside_ibc .pt-5.col-md-8{ width: 100%; flex: 0 0 100%; text-align: center;}
+	.inside_ibc .profile_text { margin-bottom: 30px;    padding: 0 !important;}
+	.inside_ibc .profile_text p, .inside_ibc .profile_text p b {font-size: 18px; line-height: 28px;}
+	.profile_text h2, .profile_text h1, .profile_text h3, .profile_text h4, .profile_text h5, .profile_text h6  {font-size: 28px;}
+	.profile_text p {font-size: 14px;line-height: 18px;}
+	.profile_text p b {font-size: 16px;}
+	.profile_text {height: 550px;}
+	.below_title_text { min-height: 170px; height: auto;}
+	.bc_backCover .bc_text h2{float: right;padding:0;}
+	.inside_bc .ibc_logo {height: 70px;}
+	.bc_backCover .ibc_logo img {max-height: 100%;}
+	.bc_text_inner .text_inner p {font-size: 12px;}
+	.inside_bc .bc_address{margin-top:15%;}
+	.profile_imge_bc {height: 163px;}
+	.inside_bc_img {height: 360px;}
+	.bc_backCover .below_title_text.bc_heading_title h2 { width: 100%;}
+	.ibc_profile {height: 290px;margin-bottom: 30px;width: 220px;float: left;margin-bottom: 30px;}
+	.ibc_profile + .col-md-9 {float:left; width:auto;}
+	.below_title_text .col-md-6 { width: 50%;}
+	.inside_ibc .profile_text {text-align: left;}
+	
+	
+}
+@media (max-width:736px)
+{
+	.bc_backCover .bc_text h2{padding: 0 23% 0 0;}
+	.bc_backCover .below_title_text.bc_heading_title h2{font-size: 27px;line-height: 27px;}
+	.profile_imge_bc {height: 172px;}
+	.bc_text_inner .text_inner p{font-size: 13px;}
+	.bc_backCover .bc_address h2{font-size: 27px;}
+	.below_title_text {min-height: 150px;}
+	.inside_bc {padding: 9% 3% 0;}
+	.inside_bc .bc_address {margin-top: 15%;}
+	.inside_bc_img {height: 300px;}
+}
+@media (max-width:667px)
+{
+	.profile_photo {height: 250px;}
+	.inside_ifc .col-md-4, .inside_ifc .col-md-8 { width: 100%; flex: 0 0 100%;}
+	.profile_photo {height: 340px;text-align: center;width: 250px;margin: 0 0 30px;}
+	.profile_photo img {width: 100%;}
+	.below_logo  {width: 45%;margin: 0 auto;}
+	.profile_text {height: auto;min-height: auto;width: 250px;margin: 0 0;text-align: left;}
+	.profile_text p {font-size: 17px; line-height: 22px;}
+	.right_ifc_content {margin: 20% 0 0 0%;}
+	.bc_backCover .ibc_logo img{ max-height: 68%;}
+	.bc_backCover .top-title{padding: 3% 0 0 5%;}
+	.bc_backCover .below_title_text.bc_heading_title h2{font-size: 32px;line-height: 28px;}
+	.bc_backCover .below_title_text.bc_heading_title{height: 150px;}
+	.bc_text_inner .text_inner p {font-size: 11px;padding: 0px;}
+	.inside_bc .bc_address {margin-top: 19%;}
+	.logo_middle {width: 250px;display: table;height: 150px;margin-top: 20px;position: relative;margin: 20px 0 0;}
+	.below_title_text .col-md-6 {padding:0 0 0 13px;}
+	.right_content_text {margin-top: 30px;}
+	.below_title_text h2, .below_title_text h1, .below_title_text h3, .below_title_text h4, .below_title_text h5, .below_title_text h6 { text-align: left;}
+	.ibc_profile {margin-left: 20px;}
+	.ibc_profile + .col-md-9 { width: 100%;}
+	.inside_ibc .below_title_text .col-md-6 { width: 100%;}
+}
+@media (max-width:640px)
+{
+	.inside_bc .bc_address {margin-top: 15%;}
+	.profile_imge_bc {height: 150px;width: 95px;}
+}
+@media (max-width:600px)
+{
+	.profile_photo {height: auto;}
+	.profile_text p b {font-size: 11px;}
+	.profile_text p, .right_ifc_content p {font-size: 9px;}
+	.inside_ibc .ibc_logo {height: 55px;}
+	.below_title_text h2, .below_title_text h1, .below_title_text h3, .below_title_text h4, .below_title_text h5, .below_title_text h6 {font-size: 55px;line-height: 50px;}
+	.profile_text p, .right_ifc_content p {font-size: 18px;}
+	.profile_text p b {font-size: 20px;}
+	.bc_backCover .below_title_text.bc_heading_title h2 {font-size: 25px;line-height: 24px;padding:0px;}
+	.below_title_text {min-height: 130px;}
+	.bc_text_inner .text_inner p {font-size: 9px;padding: 0px;}
+	.profile_imge_bc {height: 160px;width: 95px;margin-right: 10px;}
+	.bc_backCover .bc_address h2 {font-size: 20px;}
+}
+@media (max-width:568px)
+{
+	.left_side .nav { flex-direction: unset !important; flex-wrap: nowrap; width: 100%; display: inline-block;}
+	.left_side .nav li { display: inline-block;width: 49%;}
+	.bc_backCover .below_title_text.bc_heading_title { height: 130px;}
+	.bc_text_inner .col-sm-6 { width: 50%;}
+	.inside_bc .bc_address {margin-top: 10%;padding:0px;}
+	.profile_imge_bc {height: 190px;width: 120px;margin: 0 auto;margin-left: 39%;margin-right:37%;}
+	.bc_backCover .bc_address h2 {font-size: 20px;color: #000;text-align: center;}
+	.bc_address p {font-size: 14px;color: #000;text-align: center;}
+}
+@media (max-width:536px)
+{
+	.inside_ifc .col-md-4, .inside_ifc .col-md-8 { width: 100%; flex: 0 0 100%;}
+	.profile_photo {height: auto;}
+	.profile_text h2, .profile_text h1, .profile_text h3, .profile_text h4, .profile_text h5, .profile_text h6  { font-size: 30px;}
+	.profile_text p b {font-size: 18px;}
+	.profile_text p, .right_ifc_content p {font-size: 18px;}
+	.above_img_text .logo img { height: 40px;}
+	.inside_bc_img { height: 190px;}
+	.below_title_text h2, .below_title_text h1, .below_title_text h3, .below_title_text h4, .below_title_text h5, .below_title_text h6 { font-size: 40px; line-height: 40px;}
+	.right_content_text {font-size: 18px;line-height: 25px;}
+}
+@media (max-width:480px)
+{
+	.ibc_profile {width: 170px;height: 260px;}
+	.bc_text_inner .text_inner p {font-size: 7px;}
+	.bc_backCover .below_title_text.bc_heading_title h2 {font-size: 20px;line-height: 20px;}
+	.bc_backCover .below_title_text.bc_heading_title {height: 100px;min-height: 105px;}
+	.profile_imge_bc {height: 148px;width: 103px;}
+}
+@media (max-width:414px)
+{
+	.logo {margin-top: 1rem!important;}
+	.inside_bc_img {height: 140px;margin-bottom: 20px;}
+	.inside_bc {padding: 0% 3% 0;}
+	.profile_imge_bc {height: 122px;width: 85px;margin: 0 auto;margin-left: 37%;margin-right: 37%;}
+	.inside_bc .bc_address {margin-top: 7%;}
+	
+}
+@media (max-width:375px)
+{
+	.inside_bc_img { height: 125px;}
+	.inside_ibc .col-md-8 .col-md-3 img{ width: 100%;}
+	.bc_backCover .top-title { font-size: 12px;}
+	.inside_bc .ibc_logo {height: 52px;}
+}
+@media (max-width:360px)
+{
+	.bc_backCover .below_title_text.bc_heading_title h2 {font-size: 15px;line-height: 15px;}
+	.bc_backCover .below_title_text.bc_heading_title {height: 80px;min-height: 80px;}
+}	
+@media (max-width:320px)
+{
+	.above_img_text .logo img {height: 35px;}
+	.bc_backCover .top-title { font-size: 10px;}
+	.bc_backCover .below_title_text.bc_heading_title h2 {font-size: 12px;line-height: 12px;}
+	.bc_backCover .below_title_text.bc_heading_title {height: 64px;min-height: 60px;}
+}
