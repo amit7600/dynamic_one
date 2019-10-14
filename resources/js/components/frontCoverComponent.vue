@@ -80,7 +80,7 @@
 											</button>
 										</div>
 										<div  class="add-media-show" id="addMedia_id" data-section="section-1" v-if="radioButton == 'addMedia'">
-											<img :src="fcImage" alt="" data-target="#fileModal" data-toggle="modal"  title=""  style="margin-bottom:20px;" >
+											<img :src="fcImagePath" alt="" data-target="#fileModal" data-toggle="modal"  title=""  style="margin-bottom:20px;" >
 											
 											<!-- <img data-target="#fileModal" data-toggle="modal"  alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;"> -->
 										</div>
@@ -157,11 +157,11 @@
 					</div>
 					<div class="modal-footer">
 						<div class="inner_footer_content">
-							<button class="btn bottom_btn" data-dismiss="modal" @click="cancel">
-								<i class="ti-close" aria-hidden="true"></i>
+							<button class="btn btn_save"  data-dismiss="modal" @click="saveChange">
+								Save <i class="ti-check" ></i>
 							</button>
-							<button class="btn bottom_btn float-right"  data-dismiss="modal" @click="saveChange">
-								<i class="ti-check" ></i>
+							<button class="btn btn_close" data-dismiss="modal" @click="cancel">
+								Cancel <i class="ti-close" aria-hidden="true"></i>
 							</button>
 						</div>
 					</div>

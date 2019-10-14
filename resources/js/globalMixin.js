@@ -98,21 +98,21 @@ export const globalMixin = {
             'displayIbcProfileMedia',
             'displayIbcMainMedia',
             'displayIbcLogoMedia',
-            'ifcTitleText',
-            'ifcCompanyName',
-            'designation1',
-            'designation2',
-            'designation3',
-            'designationTitle1',
-            'designationTitle2',
-            'designationTitle3',
-            'designationTitle4',
-            'addressIfc1',
-            'directPhoneIfc',
-            'officePhone',
-            'websiteUrlIfc',
-            'emailIfc',
-            'stNumberIfc',
+            // 'ifcTitleText',
+            // 'ifcCompanyName',
+            // 'designation1',
+            // 'designation2',
+            // 'designation3',
+            // 'designationTitle1',
+            // 'designationTitle2',
+            // 'designationTitle3',
+            // 'designationTitle4',
+            // 'addressIfc1',
+            // 'directPhoneIfc',
+            // 'officePhone',
+            // 'websiteUrlIfc',
+            // 'emailIfc',
+            // 'stNumberIfc',
             'showTextAreaIfcRight',
             'ifcRightTextValue',
             'showCover',
@@ -173,7 +173,7 @@ export const globalMixin = {
             'ibcProfileCheckChoose',
 
             'displayAddressLable',
-            'addAddressButton',
+            // 'addAddressButton',
             'ifcCompanyName2',
             'designationifc',
             'designationifc1',
@@ -502,7 +502,7 @@ export const globalMixin = {
             this.ACTION_CHANGE_STATE(["setIfcLogo_bind", ""])
             this.ACTION_CHANGE_STATE(["setIfcSignature_bind", ""])
             this.ACTION_CHANGE_STATE(['displayAddressLable', false])
-            this.ACTION_CHANGE_STATE(['addAddressButton', true])
+            // this.ACTION_CHANGE_STATE(['addAddressButton', true])
             //console.log(this.ifcBelowimageChoose,'Rushi')
             this.ACTION_CHANGE_STATE(['tempFcAlignValue', this.tempAlignFc])
             this.ACTION_CHANGE_STATE(['ImageFcAlignValue', this.tempImageAlignFc])
@@ -1285,33 +1285,33 @@ export const globalMixin = {
                     defaultSignatureImage: this.defaultIfcSignaturePath,
                     NewAddedSignatureImage: this.imageIfcSignaturePath,
                 }],
-                profileText: [{
-                    ifcTitleText: this.ifcTitleText,
-                    ifcCompanyName: this.ifcCompanyName,
-                    designation1: this.designation1,
-                    designation2: this.designation2,
-                    designation3: this.designation3,
-                    designationTitle: this.designationTitle,
-                    designationTitleset2: this.designationTitleset2,
-                    designationTitleset3: this.designationTitleset3,
-                    designationTitleset4: this.designationTitleset4,
+                // profileText: [{
+                //     ifcTitleText: this.ifcTitleText,
+                //     ifcCompanyName: this.ifcCompanyName,
+                //     designation1: this.designation1,
+                //     designation2: this.designation2,
+                //     designation3: this.designation3,
+                //     designationTitle: this.designationTitle,
+                //     designationTitleset2: this.designationTitleset2,
+                //     designationTitleset3: this.designationTitleset3,
+                //     designationTitleset4: this.designationTitleset4,
 
-                    ifcCompanyName2: this.ifcCompanyName2,
-                    designationifc: this.designationifc,
-                    designationifc1: this.designationifc1,
-                    designationifc2: this.designationifc2,
-                    designationTitle1: this.designationTitle1,
-                    designationTitle2: this.designationTitle2,
-                    designationTitle3: this.designationTitle3,
-                    designationTitle4: this.designationTitle4,
+                //     ifcCompanyName2: this.ifcCompanyName2,
+                //     designationifc: this.designationifc,
+                //     designationifc1: this.designationifc1,
+                //     designationifc2: this.designationifc2,
+                //     designationTitle1: this.designationTitle1,
+                //     designationTitle2: this.designationTitle2,
+                //     designationTitle3: this.designationTitle3,
+                //     designationTitle4: this.designationTitle4,
 
-                    addressIfc1: this.addressIfc1,
-                    directPhoneIfc: this.directPhoneIfc,
-                    officePhone: this.officePhone,
-                    websiteUrlIfc: this.websiteUrlIfc,
-                    emailIfc: this.emailIfc,
-                    stNumberIfc: this.stNumberIfc
-                }],
+                //     addressIfc1: this.addressIfc1,
+                //     directPhoneIfc: this.directPhoneIfc,
+                //     officePhone: this.officePhone,
+                //     websiteUrlIfc: this.websiteUrlIfc,
+                //     emailIfc: this.emailIfc,
+                //     stNumberIfc: this.stNumberIfc
+                // }],
                 right_ifc_content: this.ifcRightTextInputValue != '' ? this.ifcRightTextInputValue : this.inputTextRightIfc
             }
             console.log(data, 'ifc')
@@ -1349,7 +1349,7 @@ export const globalMixin = {
                     var ifcCompanyNameData = response.data.data.inside_front_cover.profileText[0].ifcCompanyName2
                     if (ifcCompanyNameData != null) {
                         this.ACTION_CHANGE_STATE(['displayAddressLable', true])
-                        this.ACTION_CHANGE_STATE(['addAddressButton', false])
+                        // this.ACTION_CHANGE_STATE(['addAddressButton', false])
                     }
 
                     responseDbDataProfileText.map((d) => {
@@ -1625,7 +1625,7 @@ export const globalMixin = {
         },
         showAddAddress() {
             this.ACTION_CHANGE_STATE(['displayAddressLable', true])
-            this.ACTION_CHANGE_STATE(['addAddressButton', false])
+            // this.ACTION_CHANGE_STATE(['addAddressButton', false])
         },
         getCompanyName2Ifc(value) {
             this.ACTION_CHANGE_STATE(['ifcCompanyName2', value])
@@ -1652,7 +1652,7 @@ export const globalMixin = {
             this.ACTION_CHANGE_STATE(['designationTitleset4', value])
         },
         removeAddAddress() {
-            this.ACTION_CHANGE_STATE(['addAddressButton', true])
+            // this.ACTION_CHANGE_STATE(['addAddressButton', true])
             this.ACTION_CHANGE_STATE(['displayAddressLable', false])
             this.ACTION_CHANGE_STATE(['ifcCompanyName2', ''])
             this.ACTION_CHANGE_STATE(['designationifc', ''])
@@ -1662,7 +1662,8 @@ export const globalMixin = {
             this.ACTION_CHANGE_STATE(['designationTitleset2', ''])
             this.ACTION_CHANGE_STATE(['designationTitleset3', ''])
             this.ACTION_CHANGE_STATE(['designationTitleset4', ''])
-        }
+        },
+        
     }
 
 }

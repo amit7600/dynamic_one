@@ -8897,9 +8897,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['title'],
+  props: ["title"],
   data: function data() {
     return {
       titleText: this.title
@@ -8920,10 +8919,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _model_modelInputComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./model/modelInputComponent */ "./resources/js/components/model/modelInputComponent.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-var _computed$components$;
-
+/* harmony import */ var _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./model/fileModalComponent */ "./resources/js/components/model/fileModalComponent.vue");
+/* harmony import */ var _model_modelInputComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model/modelInputComponent */ "./resources/js/components/model/modelInputComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -9104,38 +9102,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_computed$components$ = {
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['fcPreview'])),
+
+/* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ModelInputComponent: _model_modelInputComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ModelInputComponent: _model_modelInputComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    fileModalComponent: _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
@@ -9144,153 +9117,164 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       radioButton: this.$store.state.fcRadioButton,
       defaultImage: 'images/logo.png',
       imageAlign: this.$store.state.fcImageAlign,
-      logoTextAlign: this.$store.state.fcTextAlign
+      logoTextAlign: this.$store.state.fcTextAlign,
+      fcImagePath: this.$store.state.fcImage
     };
-  }
-}, _defineProperty(_computed$components$, "computed", _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['fcRadioButton', 'fcTextLogoEditor', 'fcImageAlign', 'fcImage', 'fcTextAlign', 'fcHeadingText']))), _defineProperty(_computed$components$, "mounted", function mounted() {
-  this.textLogo = $('.editable').html();
-  this.getUserData();
-  $("#exampleModal").modal({
-    focus: false,
-    // Do not show modal when innitialized.
-    show: false,
-    backdrop: 'static',
-    // For static modal
-    keyboard: false // prevent click outside of the modal
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(['fcRadioButton', 'fcTextLogoEditor', 'fcImageAlign', 'fcImage', 'fcTextAlign', 'fcHeadingText', 'fcPreview'])),
+  created: function created() {
+    this.getUserData();
+  },
+  mounted: function mounted() {
+    this.textLogo = $('.editable').html();
+    $("#exampleModal").modal({
+      focus: false,
+      // Do not show modal when innitialized.
+      show: false,
+      backdrop: 'static',
+      // For static modal
+      keyboard: false // prevent click outside of the modal
 
-  });
-}), _defineProperty(_computed$components$, "methods", _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['ACTION_CHANGE_STATE']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['EMPTY_MESSAGE_LIST', 'PUSH_SUCCESS_MESSAGE', 'PUSH_ERROR_MESSAGE']), {
-  changeHeadingTag: function changeHeadingTag(e) {
-    var headingTag = e != undefined ? e.target.value : this.HeadingTag;
-    var ClassName = document.getElementsByClassName("editable");
-    var innerText = document.createTextNode(ClassName[0].innerText);
-    var h = document.createElement(headingTag);
-    h.appendChild(innerText);
-    document.getElementById("editable").innerHTML = "";
-    document.getElementById("editable").appendChild(h); // document.execCommand('formatblock', false, headingTag)
-    // this.ACTION_CHANGE_STATE(["headingTagFc", headingTag])
+    });
   },
-  resetActiveOnAlign: function resetActiveOnAlign(type, value) {
-    this.textLeft = false;
-    this.textRight = false;
-    this.textCenter = false;
-    this.textJustify = false;
-    this[type] = !this[value];
-  },
-  cancel: function cancel() {
-    this.radioButton = this.fcRadioButton;
-    this.imageAlign = this.fcImageAlign;
-    this.logoTextAlign = this.fcTextAlign;
-    this.HeadingTag = this.fcHeadingText;
-  },
-  saveChange: function saveChange() {
-    var text = $('.editable').html();
-    this.ACTION_CHANGE_STATE(['fcRadioButton', this.radioButton]);
-    this.ACTION_CHANGE_STATE(['fcTextLogoEditor', text]);
-    this.ACTION_CHANGE_STATE(['fcImageAlign', this.imageAlign]);
-    this.ACTION_CHANGE_STATE(['fcTextAlign', this.logoTextAlign]);
-    this.ACTION_CHANGE_STATE(['fcHeadingText', this.HeadingTag]);
-  },
-  radioButtonChange: function radioButtonChange() {},
-  displayModal: function displayModal() {
-    if (this.openModal == 'front-cover') {
-      // this.ACTION_CHANGE_STATE(['fcModalHide', 'true'])
-      $('#exampleModal').modal('show');
-    } //console.log(this.openModal)
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['ACTION_CHANGE_STATE']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])(['EMPTY_MESSAGE_LIST', 'PUSH_SUCCESS_MESSAGE', 'PUSH_ERROR_MESSAGE']), {
+    changeHeadingTag: function changeHeadingTag(e) {
+      var headingTag = e != undefined ? e.target.value : this.HeadingTag;
+      var ClassName = document.getElementsByClassName("editable");
+      var innerText = document.createTextNode(ClassName[0].innerText);
+      var h = document.createElement(headingTag);
+      h.appendChild(innerText);
+      document.getElementById("editable").innerHTML = "";
+      document.getElementById("editable").appendChild(h); // document.execCommand('formatblock', false, headingTag)
+      // this.ACTION_CHANGE_STATE(["headingTagFc", headingTag])
+    },
+    resetActiveOnAlign: function resetActiveOnAlign(type, value) {
+      this.textLeft = false;
+      this.textRight = false;
+      this.textCenter = false;
+      this.textJustify = false;
+      this[type] = !this[value];
+    },
+    cancel: function cancel() {
+      this.radioButton = this.fcRadioButton;
+      this.imageAlign = this.fcImageAlign;
+      this.logoTextAlign = this.fcTextAlign;
+      this.HeadingTag = this.fcHeadingText;
+      this.fcImagePath = this.fcImage;
+    },
+    saveChange: function saveChange() {
+      var text = $('.editable').html();
+      this.ACTION_CHANGE_STATE(['fcRadioButton', this.radioButton]);
+      this.ACTION_CHANGE_STATE(['fcTextLogoEditor', text]);
+      this.ACTION_CHANGE_STATE(['fcImageAlign', this.imageAlign]);
+      this.ACTION_CHANGE_STATE(['fcTextAlign', this.logoTextAlign]);
+      this.ACTION_CHANGE_STATE(['fcHeadingText', this.HeadingTag]);
+      this.ACTION_CHANGE_STATE(['fcImage', this.fcImagePath]);
+    },
+    radioButtonChange: function radioButtonChange() {},
+    displayModal: function displayModal() {
+      if (this.openModal == 'front-cover') {
+        // this.ACTION_CHANGE_STATE(['fcModalHide', 'true'])
+        $('#exampleModal').modal('show');
+      } //console.log(this.openModal)
 
 
-    if (this.openModal == 'inside-front-cover') {
-      $('#ifcModal').modal('show');
+      if (this.openModal == 'inside-front-cover') {
+        $('#ifcModal').modal('show');
+      }
+    },
+    imageAlignment: function imageAlignment(value) {
+      this.imageAlign = value;
+    },
+    changeLogoTextAlign: function changeLogoTextAlign(value) {
+      this.logoTextAlign = value;
+      document.getElementById("editable").style.textAlign = value;
+    },
+    save_front_cover: function save_front_cover() {
+      var _this = this;
+
+      this.EMPTY_MESSAGE_LIST();
+      this.ACTION_CHANGE_STATE(['Savefcloader', true]);
+      var data = {
+        columnName: 'front_cover',
+        HeadingTag: this.HeadingTag,
+        radioButton: this.radioButton,
+        defaultImage: this.defaultImage,
+        imageAlign: this.imageAlign,
+        logoTextAlign: this.logoTextAlign,
+        fcImage: this.fcImage,
+        fcTextLogoEditor: this.fcTextLogoEditor
+      };
+      axios.post("api/userBooks", data).then(function (response) {
+        var front_cover = response.data.data;
+
+        _this.ACTION_CHANGE_STATE(['fcImageAlign', front_cover.imageAlign]);
+
+        _this.ACTION_CHANGE_STATE(['fcTextAlign', front_cover.logoTextAlign]);
+
+        _this.ACTION_CHANGE_STATE(['fcHeadingText', front_cover.HeadingTag]);
+
+        _this.ACTION_CHANGE_STATE(['fcRadioButton', front_cover.radioButton]);
+
+        _this.defaultImage = front_cover.defaultImage;
+
+        _this.ACTION_CHANGE_STATE(['fcImage', front_cover.fcImage]);
+
+        _this.ACTION_CHANGE_STATE(['fcTextLogoEditor', front_cover.fcTextLogoEditor]);
+
+        _this.PUSH_SUCCESS_MESSAGE('Front cover saved successfully!');
+
+        _this.ACTION_CHANGE_STATE(['Savefcloader', false]);
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this.PUSH_ERROR_MESSAGE('Internal server error');
+      });
+    },
+    getUserData: function getUserData() {
+      var _this2 = this;
+
+      axios.get("api/userBooks/1").then(function (response) {
+        var front_cover = response.data.data.front_cover; // store into vuex
+
+        _this2.ACTION_CHANGE_STATE(['fcImageAlign', front_cover.imageAlign]);
+
+        _this2.ACTION_CHANGE_STATE(['fcTextAlign', front_cover.logoTextAlign]);
+
+        _this2.ACTION_CHANGE_STATE(['fcHeadingText', front_cover.HeadingTag]);
+
+        _this2.ACTION_CHANGE_STATE(['fcRadioButton', front_cover.radioButton != null ? front_cover.radioButton : 'default']);
+
+        _this2.ACTION_CHANGE_STATE(['fcImage', front_cover.fcImage != null ? front_cover.fcImage : _this2.fcImage]);
+
+        _this2.ACTION_CHANGE_STATE(['fcTextLogoEditor', front_cover.fcTextLogoEditor]);
+
+        _this2.defaultImage = front_cover.defaultImage != null ? front_cover.defaultImage : _this2.defaultImage;
+        _this2.radioButton = front_cover.radioButton != null ? front_cover.radioButton : 'default';
+        _this2.HeadingTag = front_cover.HeadingTag != null ? front_cover.HeadingTag : '';
+        _this2.imageAlign = front_cover.imageAlign;
+        _this2.logoTextAlign = front_cover.logoTextAlign;
+        _this2.fcImagePath = front_cover.fcImage;
+      })["catch"](function (error) {// this.PUSH_ERROR_MESSAGE('Internal server error');
+      });
+    },
+    save_and_download: function save_and_download() {
+      this.save_front_cover();
+      axios.get('api/download_pdf/' + 1).then(function (response) {
+        // console.log(response.data)
+        // window.open(response.data.url, '_blank');
+        var link = document.createElement('a');
+        link.href = response.data.url;
+        link.setAttribute('download', response.data.name);
+        document.body.appendChild(link);
+        link.click();
+      });
+    },
+    setImage: function setImage(value) {
+      this.fcImagePath = value;
     }
-  },
-  imageAlignment: function imageAlignment(value) {
-    this.imageAlign = value;
-  },
-  changeLogoTextAlign: function changeLogoTextAlign(value) {
-    this.logoTextAlign = value;
-    document.getElementById("editable").style.textAlign = value;
-  },
-  save_front_cover: function save_front_cover() {
-    var _this = this;
-
-    this.EMPTY_MESSAGE_LIST();
-    this.ACTION_CHANGE_STATE(['Savefcloader', true]);
-    var data = {
-      columnName: 'front_cover',
-      HeadingTag: this.HeadingTag,
-      radioButton: this.radioButton,
-      defaultImage: this.defaultImage,
-      imageAlign: this.imageAlign,
-      logoTextAlign: this.logoTextAlign,
-      fcImage: this.fcImage,
-      fcTextLogoEditor: this.fcTextLogoEditor
-    };
-    axios.post("api/userBooks", data).then(function (response) {
-      var front_cover = response.data.data;
-
-      _this.ACTION_CHANGE_STATE(['fcImageAlign', front_cover.imageAlign]);
-
-      _this.ACTION_CHANGE_STATE(['fcTextAlign', front_cover.logoTextAlign]);
-
-      _this.ACTION_CHANGE_STATE(['fcHeadingText', front_cover.HeadingTag]);
-
-      _this.ACTION_CHANGE_STATE(['fcRadioButton', front_cover.radioButton]);
-
-      _this.defaultImage = front_cover.defaultImage;
-
-      _this.ACTION_CHANGE_STATE(['fcImage', front_cover.fcImage]);
-
-      _this.ACTION_CHANGE_STATE(['fcTextLogoEditor', front_cover.fcTextLogoEditor]);
-
-      _this.PUSH_SUCCESS_MESSAGE('Front cover saved successfully!');
-
-      _this.ACTION_CHANGE_STATE(['Savefcloader', false]);
-    })["catch"](function (error) {
-      console.log(error);
-
-      _this.PUSH_ERROR_MESSAGE('Internal server error');
-    });
-  },
-  getUserData: function getUserData() {
-    var _this2 = this;
-
-    axios.get("api/userBooks/1").then(function (response) {
-      var front_cover = response.data.data.front_cover;
-      console.log(front_cover);
-      _this2.radioButton = front_cover.radioButton != null ? front_cover.radioButton : 'default';
-      _this2.defaultImage = front_cover.defaultImage != null ? front_cover.defaultImage : _this2.defaultImage;
-      _this2.HeadingTag = front_cover.HeadingTag != null ? front_cover.HeadingTag : '';
-      _this2.imageAlign = front_cover.imageAlign;
-      _this2.logoTextAlign = front_cover.logoTextAlign; // store into vuex
-
-      _this2.ACTION_CHANGE_STATE(['fcImageAlign', front_cover.imageAlign]);
-
-      _this2.ACTION_CHANGE_STATE(['fcTextAlign', front_cover.logoTextAlign]);
-
-      _this2.ACTION_CHANGE_STATE(['fcHeadingText', front_cover.HeadingTag]);
-
-      _this2.ACTION_CHANGE_STATE(['fcRadioButton', front_cover.radioButton != null ? front_cover.radioButton : 'default']);
-
-      _this2.ACTION_CHANGE_STATE(['fcImage', front_cover.fcImage != null ? front_cover.fcImage : _this2.fcImage]);
-
-      _this2.ACTION_CHANGE_STATE(['fcTextLogoEditor', front_cover.fcTextLogoEditor]);
-    })["catch"](function (error) {
-      _this2.PUSH_ERROR_MESSAGE('Internal server error');
-    });
-  },
-  save_and_download: function save_and_download() {
-    this.save_front_cover();
-    axios.get('api/download_pdf/' + 1).then(function (response) {
-      // console.log(response.data)
-      // window.open(response.data.url, '_blank');
-      var link = document.createElement('a');
-      link.href = response.data.url;
-      link.setAttribute('download', response.data.name);
-      document.body.appendChild(link);
-      link.click();
-    });
-  }
-})), _computed$components$);
+  })
+});
 
 /***/ }),
 
@@ -9314,10 +9298,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -9890,19 +9870,54 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
       //ibcContent :'' ,
       //new amit
       open_pop_up: '',
-      defaultImage: 'images/profile_pic.jpg',
-      radioButton: 'default'
+      defaultPhotoImage: 'images/profile_pic.jpg',
+      photoRadioButton: this.$store.state.ifcPhotoRadio,
+      photoImage: this.$store.state.ifcPhotoImage,
+      secondAddress: this.$store.state.ifcAddSecondAddress,
+      displaySecondAddress: this.$store.state.ifcSecondAddress,
+      name: this.$store.state.ifcName,
+      company_name: this.$store.state.ifcCompanyName,
+      designation1: this.$store.state.ifcdesignation1,
+      designation2: this.$store.state.ifcdesignation2,
+      designation3: this.$store.state.ifcdesignation3,
+      title1: this.$store.state.ifcTitle1,
+      title2: this.$store.state.ifcTitle2,
+      title3: this.$store.state.ifcTitle3,
+      title4: this.$store.state.ifcTitle4,
+      company_name2: this.$store.state.ifcCompanyName2,
+      designation21: this.$store.state.ifcdesignation21,
+      designation22: this.$store.state.ifcdesignation22,
+      designation23: this.$store.state.ifcdesignation23,
+      title21: this.$store.state.ifcTitle21,
+      title22: this.$store.state.ifcTitle22,
+      title23: this.$store.state.ifcTitle23,
+      title24: this.$store.state.ifcTitle24,
+      address: this.$store.state.ifcaddress,
+      directPhone: this.$store.state.ifcDirectPhone,
+      officePhone: this.$store.state.ifcOfficePhone,
+      website: this.$store.state.ifcWebsite,
+      email: this.$store.state.ifcEmail,
+      memberCstNumber: this.$store.state.ifcMemberCstNumber,
+      // logo section
+      logoImage: this.$store.state.ifcLogoImage,
+      logoRadioButton: this.$store.state.ifcLogoRadioButton,
+      defaultLogoImage: 'images/footer_logo.png',
+      // signature section
+      defaultSignatureImage: 'images/signature.png',
+      signatureImage: this.$store.state.ifcSignatureImage,
+      signatureRadioButton: this.$store.state.ifcSignatureRadioButton
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(['ifcPreview', 'bcPreview'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(['ifcPreview', 'bcPreview', 'ifcPhotoRadio', 'ifcPhotoImage', 'ifcName', 'ifcCompanyName', 'ifcdesignation1', 'ifcdesignation2', 'ifcdesignation3', 'ifcTitle1', 'ifcTitle2', 'ifcTitle3', 'ifcTitle4', 'ifcaddress', 'ifcDirectPhone', 'ifcOfficePhone', 'ifcWebsite', 'ifcEmail', 'ifcMemberCstNumber', 'ifcCompanyName2', 'ifcdesignation21', 'ifcdesignation22', 'ifcdesignation23', 'ifcTitle21', 'ifcTitle22', 'ifcTitle23', 'ifcTitle24', 'ifcSecondAddress', 'ifcAddSecondAddress', 'ifcLogoImage', 'ifcLogoRadioButton', // signature
+  'ifcSignatureImage', 'ifcSignatureRadioButton'])),
   mounted: function mounted() {
-    this.saveIFCPreview();
-    this.getifcUserBook();
+    this.saveIFCPreview(); // this.getifcUserBook()
+
     this.ACTION_CHANGE_STATE(['defaultIfcImagePath', this.preifcimagepath]);
     this.ACTION_CHANGE_STATE(['defaultIfcLogoPath', this.preifclogoimagepath]);
     this.ACTION_CHANGE_STATE(['defaultIfcSignaturePath', this.preifcSignatureimagepath]);
   },
-  methods: {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])(['CHANGE_STATE']), {
     resetActiveOnAlign: function resetActiveOnAlign(type, value) {
       this.textLeft = false;
       this.textRight = false;
@@ -9910,16 +9925,151 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
       this.textJustify = false;
       this[type] = !this[value];
     },
+    cancelModal: function cancelModal() {
+      this.photoRadioButton = this.ifcPhotoRadio;
+      this.photoImage = this.ifcPhotoImage;
+      this.name = this.ifcName;
+      this.company_name = this.ifcCompanyName;
+      this.designation1 = this.ifcdesignation1;
+      this.designation2 = this.ifcdesignation2;
+      this.designation3 = this.ifcdesignation3;
+      this.title1 = this.ifcTitle1;
+      this.title2 = this.ifcTitle2;
+      this.title3 = this.ifcTitle3;
+      this.title4 = this.ifcTitle4;
+      this.company_name2 = this.ifcCompanyName2;
+      this.designation21 = this.ifcdesignation21;
+      this.designation22 = this.ifcdesignation22;
+      this.designation23 = this.ifcdesignation23;
+      this.title21 = this.ifcTitle21;
+      this.title22 = this.ifcTitle22;
+      this.title23 = this.ifcTitle23;
+      this.title24 = this.ifcTitle24;
+      this.address = this.ifcaddress;
+      this.directPhone = this.ifcDirectPhone;
+      this.officePhone = this.ifcOfficePhone;
+      this.website = this.ifcWebsite;
+      this.email = this.ifcEmail;
+      this.memberCstNumber = this.ifcMemberCstNumber;
+      this.displaySecondAddress = this.ifcSecondAddress;
+      this.secondAddress = this.ifcAddSecondAddress; //logo section
+
+      this.logoRadioButton = this.ifcLogoRadioButton;
+      this.logoImage = this.ifcLogoImage; // signature section
+
+      this.signatureRadioButton = this.ifcSignatureRadioButton;
+      this.signatureImage = this.ifcSignatureImage;
+    },
+    saveChanges: function saveChanges() {
+      if (this.company_name2 == '' && this.designation21 == '' && this.designation22 == '' && this.designation23 == '' && this.title21 == '' && this.title22 == '' && this.title23 == '' && this.title24 == '') {
+        this.secondAddress = true;
+        this.displaySecondAddress = false;
+      }
+
+      this.CHANGE_STATE(['ifcPhotoRadio', this.photoRadioButton]);
+      this.CHANGE_STATE(['ifcPhotoImage', this.photoImage]);
+      this.CHANGE_STATE(['ifcName', this.name]);
+      this.CHANGE_STATE(['ifcCompanyName', this.company_name]);
+      this.CHANGE_STATE(['ifcdesignation1', this.designation1]);
+      this.CHANGE_STATE(['ifcdesignation2', this.designation2]);
+      this.CHANGE_STATE(['ifcdesignation3', this.designation3]);
+      this.CHANGE_STATE(['ifcTitle1', this.title1]);
+      this.CHANGE_STATE(['ifcTitle2', this.title2]);
+      this.CHANGE_STATE(['ifcTitle3', this.title3]);
+      this.CHANGE_STATE(['ifcTitle4', this.title4]);
+      this.CHANGE_STATE(['ifcaddress', this.address]);
+      this.CHANGE_STATE(['ifcDirectPhone', this.directPhone]);
+      this.CHANGE_STATE(['ifcOfficePhone', this.officePhone]);
+      this.CHANGE_STATE(['ifcWebsite', this.website]);
+      this.CHANGE_STATE(['ifcEmail', this.email]);
+      this.CHANGE_STATE(['ifcMemberCstNumber', this.memberCstNumber]);
+      this.CHANGE_STATE(['ifcCompanyName2', this.company_name2]);
+      this.CHANGE_STATE(['ifcdesignation21', this.designation21]);
+      this.CHANGE_STATE(['ifcdesignation22', this.designation22]);
+      this.CHANGE_STATE(['ifcdesignation23', this.designation23]);
+      this.CHANGE_STATE(['ifcTitle21', this.title21]);
+      this.CHANGE_STATE(['ifcTitle22', this.title22]);
+      this.CHANGE_STATE(['ifcTitle23', this.title23]);
+      this.CHANGE_STATE(['ifcTitle24', this.title24]); // this section for address button
+
+      this.CHANGE_STATE(['ifcSecondAddress', this.displaySecondAddress]);
+      this.CHANGE_STATE(['ifcAddSecondAddress', this.secondAddress]); // this section for logo image
+
+      this.CHANGE_STATE(['ifcLogoRadioButton', this.logoRadioButton]);
+      this.CHANGE_STATE(['ifcLogoImage', this.logoImage]); // this section for signature image
+
+      this.CHANGE_STATE(['ifcSignatureRadioButton', this.signatureRadioButton]);
+      this.CHANGE_STATE(['ifcSignatureImage', this.signatureImage]);
+    },
     displayModal: function displayModal() {
       $('#ifcModal').modal('show');
     },
     openPopUp: function openPopUp(value) {
       this.open_pop_up = value;
     },
-    changeRadio: function changeRadio(e) {
-      this.radioButton = e.target.value;
+    changePhotoRadio: function changePhotoRadio(e) {
+      this.photoRadioButton = e.target.value;
+    },
+    setImage: function setImage(value) {
+      if (this.open_pop_up == 1) {
+        this.photoImage = value;
+      } else if (this.open_pop_up == 3) {
+        this.logoImage = value;
+      } else if (this.open_pop_up == 4) {
+        this.signatureImage = value;
+      }
+    },
+    showAddress: function showAddress() {
+      this.secondAddress = false;
+      this.displaySecondAddress = true;
+    },
+    removeAddress: function removeAddress() {
+      this.secondAddress = true;
+      this.displaySecondAddress = false;
+      this.company_name2 = '';
+      this.designation21 = '';
+      this.designation22 = '';
+      this.designation23 = '';
+      this.title21 = '';
+      this.title22 = '';
+      this.title23 = '';
+      this.title24 = '';
+    },
+    logoRadioButtonChange: function logoRadioButtonChange(e) {
+      var value = e.target.value;
+      this.logoRadioButton = value;
+    },
+    signatureRadioButtonChange: function signatureRadioButtonChange(e) {
+      var value = e.target.value;
+      this.signatureRadioButton = value;
+    },
+    changeFont: function changeFont(command, showUI, value) {
+      document.execCommand(command, showUI, value);
+    },
+    insertTag: function insertTag(tag) {
+      var sel = window.getSelection();
+
+      if (sel.toString() != '') {
+        for (var i = sel.rangeCount; i--;) {
+          var wrapper = this.htmlToDom('<' + tag + '/>');
+          var range = sel.getRangeAt(i);
+          wrapper.appendChild(range.extractContents());
+          range.insertNode(wrapper);
+        }
+
+        document.execCommand('heading', false, tag);
+      } else {
+        this.headingTag = '';
+        alert('Please select text!!!');
+      } // document.execCommand('formatblock', false, headingTag)
+
+    },
+    htmlToDom: function htmlToDom(htmlEl) {
+      var elm = document.createElement('div');
+      elm.innerHTML = htmlEl;
+      return elm.children[0];
     }
-  }
+  })
 });
 
 /***/ }),
@@ -10733,6 +10883,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -10743,13 +10899,14 @@ __webpack_require__.r(__webpack_exports__);
       focus: false,
       // Do not show modal when innitialized.
       show: false,
-      backdrop: 'static',
+      backdrop: "static",
       // For static modal
       keyboard: false // prevent click outside of the modal
 
     });
   },
-  methods: {// getLibraryImages () {
+  methods: {
+    // getLibraryImages () {
     //     axios.get('api/getImageLibrary')
     //     .then (response => {
     //         this.libraryImages = response.data.data
@@ -10780,6 +10937,9 @@ __webpack_require__.r(__webpack_exports__);
     //         console.log(errorResponse, "errorResponse");
     //     });
     // },
+    selectedImage: function selectedImage(value) {
+      this.$parent.setImage(value);
+    }
   }
 });
 
@@ -12122,6 +12282,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (errorResponse) {
         console.log(errorResponse, "errorResponse");
       });
+    },
+    setImage: function setImage(image) {
+      this.$parent.selectedImage(image);
     }
   }
 });
@@ -52556,14 +52719,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tooltips_main" }, [
-    _c("div", { staticClass: "tooltip_component" }, [
-      _c("i", { staticClass: "far fa-question-circle" }),
-      _vm._v(" "),
-      _c("span", { staticClass: "tooltiptext" }, [
-        _vm._v(_vm._s(_vm.titleText))
-      ])
-    ])
+  return _c("div", { staticClass: "tooltip tool_tips_hover" }, [
+    _c("i", { staticClass: "far fa-question-circle" }),
+    _vm._v(" "),
+    _c("span", { staticClass: "tooltiptext" }, [_vm._v(_vm._s(_vm.titleText))])
   ])
 }
 var staticRenderFns = []
@@ -52588,737 +52747,764 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.showFrontCover
-      ? _c("div", { staticClass: "inner_right_side 1" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "above_img_text" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-4" }),
-              _vm._v(" "),
-              _vm.radioButton != "remove" && _vm.radioButton != "textLogo"
-                ? _c(
-                    "div",
-                    {
-                      class: { "col-md-4": true, "mt-5": true, logo: true },
-                      style: {
-                        "text-align":
-                          _vm.radioButton == "default"
-                            ? "center"
-                            : this.imageAlign
-                      }
-                    },
-                    [
-                      _vm.radioButton == "addMedia"
-                        ? _c("img", {
-                            staticStyle: { "margin-bottom": "20px" },
-                            attrs: { src: _vm.fcImage, alt: "", srcset: "" }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("iconHoverComponent", { staticClass: "hoverShow" }),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm.radioButton == "default"
+  return _c(
+    "div",
+    [
+      _vm.showFrontCover
+        ? _c("div", { staticClass: "inner_right_side 1" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "above_img_text" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }),
+                _vm._v(" "),
+                _vm.radioButton != "remove" && _vm.radioButton != "textLogo"
+                  ? _c(
+                      "div",
+                      {
+                        class: { "col-md-4": true, "mt-5": true, logo: true },
+                        style: {
+                          "text-align":
+                            _vm.radioButton == "default"
+                              ? "center"
+                              : this.imageAlign
+                        }
+                      },
+                      [
+                        _vm.radioButton == "addMedia"
                           ? _c("img", {
-                              attrs: { src: _vm.defaultImage, title: "" }
+                              staticStyle: { "margin-bottom": "20px" },
+                              attrs: {
+                                src: this.fcImagePath,
+                                alt: "",
+                                srcset: ""
+                              }
                             })
-                          : _vm._e()
-                      ])
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.radioButton == "textLogo"
-                ? _c(
-                    "div",
-                    { staticClass: "col-md-4 mt-5 logo text_Fc_logo" },
-                    [
-                      _c("div", {
-                        style: { "text-align": this.logoTextAlign },
-                        domProps: { innerHTML: _vm._s(this.fcTextLogoEditor) }
-                      }),
-                      _vm._v(" "),
-                      _c("iconHoverComponent")
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.radioButton == "remove"
-                ? _c(
-                    "div",
-                    { staticClass: "col-md-4 mt-5 logo text_Fc_logo" },
-                    [_c("iconHoverComponent")],
-                    1
-                  )
-                : _vm._e()
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("iconHoverComponent", { staticClass: "hoverShow" }),
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm.radioButton == "default"
+                            ? _c("img", {
+                                attrs: { src: _vm.defaultImage, title: "" }
+                              })
+                            : _vm._e()
+                        ])
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.radioButton == "textLogo"
+                  ? _c(
+                      "div",
+                      { staticClass: "col-md-4 mt-5 logo text_Fc_logo" },
+                      [
+                        _c("div", {
+                          style: { "text-align": this.logoTextAlign },
+                          domProps: { innerHTML: _vm._s(this.fcTextLogoEditor) }
+                        }),
+                        _vm._v(" "),
+                        _c("iconHoverComponent")
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.radioButton == "remove"
+                  ? _c(
+                      "div",
+                      { staticClass: "col-md-4 mt-5 logo text_Fc_logo" },
+                      [_c("iconHoverComponent")],
+                      1
+                    )
+                  : _vm._e()
+              ])
             ])
           ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade show_data",
-        attrs: {
-          id: "exampleModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-xl", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "tab-content" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "side_bar_content tab-pane active",
-                      attrs: { id: "content" }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "tab-pane", attrs: { id: "design" } },
-                        [
-                          _c("div", { staticClass: "content_area" }, [
-                            _c("div", { staticClass: "font_content" }, [
-                              _vm._v(
-                                "\n\t\t\t\t\t\t\t\t\t\t\tUpload Image\n\t\t\t\t\t\t\t\t\t\t"
-                              )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade show_data",
+          attrs: {
+            id: "exampleModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-xl",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "tab-content" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "side_bar_content tab-pane active",
+                        attrs: { id: "content" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "tab-pane", attrs: { id: "design" } },
+                          [
+                            _c("div", { staticClass: "content_area" }, [
+                              _c("div", { staticClass: "font_content" }, [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t\t\t\tUpload Image\n\t\t\t\t\t\t\t\t\t\t"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "Logo_select_option row" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "row modal_radiobox" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "col-sm-12 text_field" },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "slideTwo" } },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.radioButton,
+                                                    expression: "radioButton"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "radio",
+                                                  value: "remove",
+                                                  id: "slideTwo",
+                                                  name: "check",
+                                                  chacked:
+                                                    _vm.radioButton == "remove"
+                                                      ? "checked"
+                                                      : ""
+                                                },
+                                                domProps: {
+                                                  checked: _vm._q(
+                                                    _vm.radioButton,
+                                                    "remove"
+                                                  )
+                                                },
+                                                on: {
+                                                  change: [
+                                                    function($event) {
+                                                      _vm.radioButton = "remove"
+                                                    },
+                                                    _vm.radioButtonChange
+                                                  ]
+                                                }
+                                              }),
+                                              _vm._v(
+                                                "Remove logo\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "row modal_radiobox" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "col-sm-12 text_field" },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "UseDefault" } },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.radioButton,
+                                                    expression: "radioButton"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "radio",
+                                                  id: "UseDefault",
+                                                  value: "default",
+                                                  name: "check",
+                                                  chacked:
+                                                    _vm.radioButton == "default"
+                                                      ? "checked"
+                                                      : ""
+                                                },
+                                                domProps: {
+                                                  checked: _vm._q(
+                                                    _vm.radioButton,
+                                                    "default"
+                                                  )
+                                                },
+                                                on: {
+                                                  change: [
+                                                    function($event) {
+                                                      _vm.radioButton =
+                                                        "default"
+                                                    },
+                                                    _vm.radioButtonChange
+                                                  ]
+                                                }
+                                              }),
+                                              _vm._v(
+                                                "Use Default\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "row modal_radiobox" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "col-sm-12 text_field" },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "addMedia" } },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.radioButton,
+                                                    expression: "radioButton"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "radio",
+                                                  id: "addMedia",
+                                                  "data-id": "addMedia_id",
+                                                  value: "addMedia",
+                                                  name: "check",
+                                                  chacked:
+                                                    _vm.radioButton ==
+                                                    "addMedia"
+                                                      ? "checked"
+                                                      : ""
+                                                },
+                                                domProps: {
+                                                  checked: _vm._q(
+                                                    _vm.radioButton,
+                                                    "addMedia"
+                                                  )
+                                                },
+                                                on: {
+                                                  change: [
+                                                    function($event) {
+                                                      _vm.radioButton =
+                                                        "addMedia"
+                                                    },
+                                                    _vm.radioButtonChange
+                                                  ]
+                                                }
+                                              }),
+                                              _vm._v(
+                                                "Add media\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              ),
+                                              _c("toolTipsComponent", {
+                                                attrs: { title: "100 X 100" }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "row modal_radiobox" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "col-sm-12 text_field" },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "Usetextlogo" } },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.radioButton,
+                                                    expression: "radioButton"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "radio",
+                                                  id: "Usetextlogo",
+                                                  value: "textLogo",
+                                                  name: "check",
+                                                  chacked:
+                                                    _vm.radioButton ==
+                                                    "Usetextlogo"
+                                                      ? "checked"
+                                                      : ""
+                                                },
+                                                domProps: {
+                                                  checked: _vm._q(
+                                                    _vm.radioButton,
+                                                    "textLogo"
+                                                  )
+                                                },
+                                                on: {
+                                                  change: [
+                                                    function($event) {
+                                                      _vm.radioButton =
+                                                        "textLogo"
+                                                    },
+                                                    _vm.radioButtonChange
+                                                  ]
+                                                }
+                                              }),
+                                              _vm._v(
+                                                "Use text logo\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm.radioButton == "addMedia"
+                                ? _c("div", { staticClass: "add_media" }, [
+                                    _vm._m(2)
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.radioButton == "addMedia"
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass: "add-media-show",
+                                      attrs: {
+                                        id: "addMedia_id",
+                                        "data-section": "section-1"
+                                      }
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticStyle: {
+                                          "margin-bottom": "20px"
+                                        },
+                                        attrs: {
+                                          src: _vm.fcImagePath,
+                                          alt: "",
+                                          "data-target": "#fileModal",
+                                          "data-toggle": "modal",
+                                          title: ""
+                                        }
+                                      })
+                                    ]
+                                  )
+                                : _vm._e()
                             ]),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "Logo_select_option row" },
-                              [
-                                _c(
-                                  "div",
-                                  { staticClass: "row modal_radiobox" },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-sm-12 text_field" },
-                                      [
-                                        _c(
-                                          "label",
-                                          { attrs: { for: "slideTwo" } },
-                                          [
-                                            _c("input", {
-                                              directives: [
-                                                {
-                                                  name: "model",
-                                                  rawName: "v-model",
-                                                  value: _vm.radioButton,
-                                                  expression: "radioButton"
-                                                }
-                                              ],
-                                              attrs: {
-                                                type: "radio",
-                                                value: "remove",
-                                                id: "slideTwo",
-                                                name: "check",
-                                                chacked:
-                                                  _vm.radioButton == "remove"
-                                                    ? "checked"
-                                                    : ""
-                                              },
-                                              domProps: {
-                                                checked: _vm._q(
-                                                  _vm.radioButton,
-                                                  "remove"
-                                                )
-                                              },
-                                              on: {
-                                                change: [
-                                                  function($event) {
-                                                    _vm.radioButton = "remove"
-                                                  },
-                                                  _vm.radioButtonChange
-                                                ]
-                                              }
-                                            }),
-                                            _vm._v(
-                                              "Remove logo\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "row modal_radiobox" },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-sm-12 text_field" },
-                                      [
-                                        _c(
-                                          "label",
-                                          { attrs: { for: "UseDefault" } },
-                                          [
-                                            _c("input", {
-                                              directives: [
-                                                {
-                                                  name: "model",
-                                                  rawName: "v-model",
-                                                  value: _vm.radioButton,
-                                                  expression: "radioButton"
-                                                }
-                                              ],
-                                              attrs: {
-                                                type: "radio",
-                                                id: "UseDefault",
-                                                value: "default",
-                                                name: "check",
-                                                chacked:
-                                                  _vm.radioButton == "default"
-                                                    ? "checked"
-                                                    : ""
-                                              },
-                                              domProps: {
-                                                checked: _vm._q(
-                                                  _vm.radioButton,
-                                                  "default"
-                                                )
-                                              },
-                                              on: {
-                                                change: [
-                                                  function($event) {
-                                                    _vm.radioButton = "default"
-                                                  },
-                                                  _vm.radioButtonChange
-                                                ]
-                                              }
-                                            }),
-                                            _vm._v(
-                                              "Use Default\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "row modal_radiobox" },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-sm-12 text_field" },
-                                      [
-                                        _c(
-                                          "label",
-                                          { attrs: { for: "addMedia" } },
-                                          [
-                                            _c("input", {
-                                              directives: [
-                                                {
-                                                  name: "model",
-                                                  rawName: "v-model",
-                                                  value: _vm.radioButton,
-                                                  expression: "radioButton"
-                                                }
-                                              ],
-                                              attrs: {
-                                                type: "radio",
-                                                id: "addMedia",
-                                                "data-id": "addMedia_id",
-                                                value: "addMedia",
-                                                name: "check",
-                                                chacked:
-                                                  _vm.radioButton == "addMedia"
-                                                    ? "checked"
-                                                    : ""
-                                              },
-                                              domProps: {
-                                                checked: _vm._q(
-                                                  _vm.radioButton,
-                                                  "addMedia"
-                                                )
-                                              },
-                                              on: {
-                                                change: [
-                                                  function($event) {
-                                                    _vm.radioButton = "addMedia"
-                                                  },
-                                                  _vm.radioButtonChange
-                                                ]
-                                              }
-                                            }),
-                                            _vm._v(
-                                              "Add media\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            ),
-                                            _c("toolTipsComponent", {
-                                              attrs: { title: "100 X 100" }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "row modal_radiobox" },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-sm-12 text_field" },
-                                      [
-                                        _c(
-                                          "label",
-                                          { attrs: { for: "Usetextlogo" } },
-                                          [
-                                            _c("input", {
-                                              directives: [
-                                                {
-                                                  name: "model",
-                                                  rawName: "v-model",
-                                                  value: _vm.radioButton,
-                                                  expression: "radioButton"
-                                                }
-                                              ],
-                                              attrs: {
-                                                type: "radio",
-                                                id: "Usetextlogo",
-                                                value: "textLogo",
-                                                name: "check",
-                                                chacked:
-                                                  _vm.radioButton ==
-                                                  "Usetextlogo"
-                                                    ? "checked"
-                                                    : ""
-                                              },
-                                              domProps: {
-                                                checked: _vm._q(
-                                                  _vm.radioButton,
-                                                  "textLogo"
-                                                )
-                                              },
-                                              on: {
-                                                change: [
-                                                  function($event) {
-                                                    _vm.radioButton = "textLogo"
-                                                  },
-                                                  _vm.radioButtonChange
-                                                ]
-                                              }
-                                            }),
-                                            _vm._v(
-                                              "Use text logo\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
                             _vm.radioButton == "addMedia"
-                              ? _c("div", { staticClass: "add_media" }, [
-                                  _vm._m(2)
+                              ? _c("div", { staticClass: "content_area" }, [
+                                  _c("div", { staticClass: "font_content" }, [
+                                    _vm._v("Image Alignment")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "font_body",
+                                      attrs: {
+                                        contenteditable: "false",
+                                        id: "alignImage"
+                                      }
+                                    },
+                                    [
+                                      _c("ul", [
+                                        _c("li", [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass: "btn",
+                                              class: {
+                                                active:
+                                                  this.imageAlign == "left"
+                                              },
+                                              attrs: {
+                                                title: "Left",
+                                                "data-toggle": "tooltip",
+                                                "data-placement": "top"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.imageAlignment(
+                                                    "left"
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "ti-align-left"
+                                              })
+                                            ]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("li", [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass: "btn",
+                                              class: {
+                                                active:
+                                                  this.imageAlign == "center"
+                                              },
+                                              attrs: {
+                                                title: "Center",
+                                                "data-toggle": "tooltip",
+                                                "data-placement": "top"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.imageAlignment(
+                                                    "center"
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "ti-align-center"
+                                              })
+                                            ]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("li", [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass: "btn",
+                                              class: {
+                                                active:
+                                                  this.imageAlign == "right"
+                                              },
+                                              attrs: {
+                                                title: "Right",
+                                                "data-toggle": "tooltip",
+                                                "data-placement": "top"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.imageAlignment(
+                                                    "right"
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "ti-align-right"
+                                              })
+                                            ]
+                                          )
+                                        ])
+                                      ])
+                                    ]
+                                  )
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm.radioButton == "addMedia"
-                              ? _c(
-                                  "div",
+                            _c(
+                              "div",
+                              {
+                                directives: [
                                   {
-                                    staticClass: "add-media-show",
-                                    attrs: {
-                                      id: "addMedia_id",
-                                      "data-section": "section-1"
-                                    }
-                                  },
-                                  [
-                                    _c("img", {
-                                      staticStyle: { "margin-bottom": "20px" },
-                                      attrs: {
-                                        src: _vm.fcImage,
-                                        alt: "",
-                                        "data-target": "#fileModal",
-                                        "data-toggle": "modal",
-                                        title: ""
-                                      }
-                                    })
-                                  ]
-                                )
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _vm.radioButton == "addMedia"
-                            ? _c("div", { staticClass: "content_area" }, [
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.radioButton == "textLogo",
+                                    expression: "radioButton == 'textLogo'"
+                                  }
+                                ],
+                                staticClass: "content_area"
+                              },
+                              [
                                 _c("div", { staticClass: "font_content" }, [
-                                  _vm._v("Image Alignment")
+                                  _vm._v("Body Content")
                                 ]),
                                 _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "font_body",
-                                    attrs: {
-                                      contenteditable: "false",
-                                      id: "alignImage"
-                                    }
+                                _c("div", {
+                                  staticClass: "editable",
+                                  style: { "text-align": this.logoTextAlign },
+                                  attrs: {
+                                    contenteditable: "true",
+                                    id: "editable"
                                   },
-                                  [
-                                    _c("ul", [
-                                      _c("li", [
-                                        _c(
-                                          "a",
-                                          {
-                                            staticClass: "btn",
-                                            class: {
-                                              active: this.imageAlign == "left"
-                                            },
-                                            attrs: {
-                                              title: "Left",
-                                              "data-toggle": "tooltip",
-                                              "data-placement": "top"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.imageAlignment(
-                                                  "left"
-                                                )
-                                              }
-                                            }
+                                  domProps: {
+                                    innerHTML: _vm._s(this.fcTextLogoEditor)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "font_content" }, [
+                                  _vm._v("Font Heading Tag")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "heading_tag" }, [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.HeadingTag,
+                                          expression: "HeadingTag"
+                                        }
+                                      ],
+                                      on: {
+                                        change: [
+                                          function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.HeadingTag = $event.target
+                                              .multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "ti-align-left"
-                                            })
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("li", [
-                                        _c(
-                                          "a",
-                                          {
-                                            staticClass: "btn",
-                                            class: {
-                                              active:
-                                                this.imageAlign == "center"
-                                            },
-                                            attrs: {
-                                              title: "Center",
-                                              "data-toggle": "tooltip",
-                                              "data-placement": "top"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.imageAlignment(
-                                                  "center"
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c("i", {
-                                              staticClass: "ti-align-center"
-                                            })
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("li", [
-                                        _c(
-                                          "a",
-                                          {
-                                            staticClass: "btn",
-                                            class: {
-                                              active: this.imageAlign == "right"
-                                            },
-                                            attrs: {
-                                              title: "Right",
-                                              "data-toggle": "tooltip",
-                                              "data-placement": "top"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.imageAlignment(
-                                                  "right"
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c("i", {
-                                              staticClass: "ti-align-right"
-                                            })
-                                          ]
-                                        )
-                                      ])
-                                    ])
-                                  ]
-                                )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.radioButton == "textLogo",
-                                  expression: "radioButton == 'textLogo'"
-                                }
-                              ],
-                              staticClass: "content_area"
-                            },
-                            [
-                              _c("div", { staticClass: "font_content" }, [
-                                _vm._v("Body Content")
-                              ]),
-                              _vm._v(" "),
-                              _c("div", {
-                                staticClass: "editable",
-                                style: { "text-align": this.logoTextAlign },
-                                attrs: {
-                                  contenteditable: "true",
-                                  id: "editable"
-                                },
-                                domProps: {
-                                  innerHTML: _vm._s(this.fcTextLogoEditor)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "font_content" }, [
-                                _vm._v("Font Heading Tag")
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "heading_tag" }, [
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.HeadingTag,
-                                        expression: "HeadingTag"
+                                          _vm.changeHeadingTag
+                                        ]
                                       }
-                                    ],
-                                    on: {
-                                      change: [
-                                        function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.HeadingTag = $event.target
-                                            .multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
+                                    },
+                                    [
+                                      _c("option", { attrs: { value: "" } }, [
+                                        _vm._v("Select Heading Tag")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "h1" } }, [
+                                        _vm._v("Heading <h1>")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "h2" } }, [
+                                        _vm._v("Heading <h2>")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "h3" } }, [
+                                        _vm._v("Heading <h3>")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "h4" } }, [
+                                        _vm._v("Heading<h4>")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "h5" } }, [
+                                        _vm._v("Heading <h5>")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "h6" } }, [
+                                        _vm._v("Heading <h6>")
+                                      ])
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "font_content" }, [
+                                  _vm._v("Text Alignment")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "font_body" }, [
+                                  _c("ul", [
+                                    _c("li", [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "btn",
+                                          class: {
+                                            active: this.logoTextAlign == "left"
+                                          },
+                                          attrs: {
+                                            title: "Left",
+                                            "data-toggle": "tooltip",
+                                            "data-placement": "top"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.changeLogoTextAlign(
+                                                "left"
+                                              )
+                                            }
+                                          }
                                         },
-                                        _vm.changeHeadingTag
-                                      ]
-                                    }
-                                  },
-                                  [
-                                    _c("option", { attrs: { value: "" } }, [
-                                      _vm._v("Select Heading Tag")
+                                        [
+                                          _c("i", {
+                                            staticClass: "ti-align-left"
+                                          })
+                                        ]
+                                      )
                                     ]),
                                     _vm._v(" "),
-                                    _c("option", { attrs: { value: "h1" } }, [
-                                      _vm._v("Heading <h1>")
+                                    _c("li", [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "btn",
+                                          class: {
+                                            active:
+                                              this.logoTextAlign == "center"
+                                          },
+                                          attrs: {
+                                            title: "Center",
+                                            "data-toggle": "tooltip",
+                                            "data-placement": "top"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.changeLogoTextAlign(
+                                                "center"
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ti-align-center"
+                                          })
+                                        ]
+                                      )
                                     ]),
                                     _vm._v(" "),
-                                    _c("option", { attrs: { value: "h2" } }, [
-                                      _vm._v("Heading <h2>")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "h3" } }, [
-                                      _vm._v("Heading <h3>")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "h4" } }, [
-                                      _vm._v("Heading<h4>")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "h5" } }, [
-                                      _vm._v("Heading <h5>")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "h6" } }, [
-                                      _vm._v("Heading <h6>")
+                                    _c("li", [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "btn",
+                                          class: {
+                                            active:
+                                              this.logoTextAlign == "right"
+                                          },
+                                          attrs: {
+                                            title: "Right",
+                                            "data-toggle": "tooltip",
+                                            "data-placement": "top"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.changeLogoTextAlign(
+                                                "right"
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ti-align-right"
+                                          })
+                                        ]
+                                      )
                                     ])
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "font_content" }, [
-                                _vm._v("Text Alignment")
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "font_body" }, [
-                                _c("ul", [
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "btn",
-                                        class: {
-                                          active: this.logoTextAlign == "left"
-                                        },
-                                        attrs: {
-                                          title: "Left",
-                                          "data-toggle": "tooltip",
-                                          "data-placement": "top"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.changeLogoTextAlign(
-                                              "left"
-                                            )
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "ti-align-left"
-                                        })
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "btn",
-                                        class: {
-                                          active: this.logoTextAlign == "center"
-                                        },
-                                        attrs: {
-                                          title: "Center",
-                                          "data-toggle": "tooltip",
-                                          "data-placement": "top"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.changeLogoTextAlign(
-                                              "center"
-                                            )
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "ti-align-center"
-                                        })
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "btn",
-                                        class: {
-                                          active: this.logoTextAlign == "right"
-                                        },
-                                        attrs: {
-                                          title: "Right",
-                                          "data-toggle": "tooltip",
-                                          "data-placement": "top"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.changeLogoTextAlign(
-                                              "right"
-                                            )
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "ti-align-right"
-                                        })
-                                      ]
-                                    )
                                   ])
                                 ])
-                              ])
-                            ]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c("div", { staticClass: "inner_footer_content" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn bottom_btn",
-                      attrs: { "data-dismiss": "modal" },
-                      on: { click: _vm.cancel }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "ti-close",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn bottom_btn float-right",
-                      attrs: { "data-dismiss": "modal" },
-                      on: { click: _vm.saveChange }
-                    },
-                    [_c("i", { staticClass: "ti-check" })]
-                  )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c("div", { staticClass: "inner_footer_content" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn_save",
+                        attrs: { "data-dismiss": "modal" },
+                        on: { click: _vm.saveChange }
+                      },
+                      [
+                        _vm._v("\n\t\t\t\t\t\t\t\tSave "),
+                        _c("i", { staticClass: "ti-check" })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn_close",
+                        attrs: { "data-dismiss": "modal" },
+                        on: { click: _vm.cancel }
+                      },
+                      [
+                        _vm._v("\n\t\t\t\t\t\t\t\tCancel "),
+                        _c("i", {
+                          staticClass: "ti-close",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
+                    )
+                  ])
                 ])
               ])
-            ])
-          ]
-        )
-      ]
-    )
-  ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("fileModalComponent")
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -53452,22 +53638,22 @@ var render = function() {
                                     }
                                   }),
                                   _vm._v(" "),
-                                  _vm.imageIfcPath == ""
+                                  _vm.photoRadioButton == "default"
                                     ? _c("img", {
                                         attrs: {
-                                          src: _vm.defaultImage,
+                                          src: _vm.defaultPhotoImage,
                                           title: ""
                                         }
                                       })
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _vm.imageIfcPath != ""
+                                  _vm.photoRadioButton == "addMedia"
                                     ? _c("img", {
                                         staticStyle: {
                                           "margin-bottom": "20px"
                                         },
                                         attrs: {
-                                          src: _vm.imageIfcPath,
+                                          src: _vm.photoImage,
                                           alt: "",
                                           srcset: ""
                                         }
@@ -53491,87 +53677,94 @@ var render = function() {
                                         }
                                       }),
                                       _vm._v(" "),
-                                      _c("h2", [
-                                        _vm._v(_vm._s(this.ifcTitleText))
-                                      ]),
+                                      _c("h2", [_vm._v(_vm._s(this.name))]),
                                       _vm._v(" "),
                                       _c("p", [
                                         _c("b", [
-                                          _vm._v(_vm._s(this.ifcCompanyName))
+                                          _vm._v(_vm._s(this.company_name))
                                         ])
                                       ]),
                                       _vm._v(" "),
                                       _c("p", [
                                         _vm._v(
-                                          _vm._s(this.designation1) +
-                                            ", " +
-                                            _vm._s(this.designation2) +
-                                            ", " +
+                                          _vm._s(
+                                            this.designation1 != ""
+                                              ? this.designation1 + " ,"
+                                              : ""
+                                          ) +
+                                            " " +
+                                            _vm._s(
+                                              this.designation2 != ""
+                                                ? this.designation2 + " ,"
+                                                : ""
+                                            ) +
+                                            " " +
                                             _vm._s(this.designation3)
                                         )
                                       ]),
                                       _vm._v(" "),
                                       _c("p", [
                                         _vm._v(
-                                          _vm._s(this.designationTitle1) +
+                                          _vm._s(this.title1) +
                                             "\n                                            " +
-                                            _vm._s(this.designationTitle2) +
+                                            _vm._s(this.title2) +
                                             "\n                                            " +
-                                            _vm._s(this.designationTitle3) +
+                                            _vm._s(this.title3) +
                                             "\n                                            " +
-                                            _vm._s(this.designationTitle4)
+                                            _vm._s(this.title4)
                                         )
                                       ]),
                                       _vm._v(" "),
                                       _c("p", { staticClass: "mb-3" }),
                                       _vm._v(" "),
-                                      this.displayAddressLable
+                                      this.displaySecondAddress
                                         ? _c("div", [
                                             _c("p", [
                                               _c("b", [
                                                 _vm._v(
-                                                  _vm._s(this.ifcCompanyName2)
+                                                  _vm._s(this.company_name2)
                                                 )
                                               ])
                                             ]),
                                             _vm._v(" "),
                                             _c("p", [
                                               _vm._v(
-                                                _vm._s(this.designationifc) +
-                                                  ", " +
-                                                  _vm._s(this.designationifc1) +
-                                                  " ," +
-                                                  _vm._s(this.designationifc2)
+                                                _vm._s(
+                                                  this.designation21 != ""
+                                                    ? this.designation21 + " ,"
+                                                    : ""
+                                                ) +
+                                                  " " +
+                                                  _vm._s(
+                                                    this.designation22 != ""
+                                                      ? this.designation22 +
+                                                          " ,"
+                                                      : ""
+                                                  ) +
+                                                  " " +
+                                                  _vm._s(this.designation23)
                                               )
                                             ]),
                                             _vm._v(" "),
                                             _c("p", [
                                               _vm._v(
-                                                _vm._s(this.designationTitle) +
+                                                _vm._s(this.title21) +
                                                   "\n                                                " +
-                                                  _vm._s(
-                                                    this.designationTitleset2
-                                                  ) +
+                                                  _vm._s(this.title22) +
                                                   "\n                                                " +
-                                                  _vm._s(
-                                                    this.designationTitleset3
-                                                  ) +
+                                                  _vm._s(this.title23) +
                                                   "\n                                                " +
-                                                  _vm._s(
-                                                    this.designationTitleset4
-                                                  ) +
+                                                  _vm._s(this.title24) +
                                                   "\n                                            "
                                               )
                                             ])
                                           ])
                                         : _vm._e(),
                                       _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(_vm._s(this.addressIfc1))
-                                      ]),
+                                      _c("p", [_vm._v(_vm._s(this.address))]),
                                       _vm._v(" "),
                                       _c("p", [
-                                        _vm._v(_vm._s(this.directPhoneIfc))
+                                        _vm._v(_vm._s(this.directPhone))
                                       ]),
                                       _vm._v(" "),
                                       _c("p", [
@@ -53580,16 +53773,14 @@ var render = function() {
                                       _vm._v(" "),
                                       _c("p", { staticClass: "mb-3" }),
                                       _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(_vm._s(this.websiteUrlIfc))
-                                      ]),
+                                      _c("p", [_vm._v(_vm._s(this.website))]),
                                       _vm._v(" "),
-                                      _c("p", [_vm._v(_vm._s(this.emailIfc))]),
+                                      _c("p", [_vm._v(_vm._s(this.email))]),
                                       _vm._v(" "),
                                       _c("p", { staticClass: "mb-3" }),
                                       _vm._v(" "),
                                       _c("p", [
-                                        _vm._v(_vm._s(this.stNumberIfc))
+                                        _vm._v(_vm._s(this.memberCstNumber))
                                       ])
                                     ],
                                     1
@@ -53629,22 +53820,22 @@ var render = function() {
                                       }
                                     }),
                                     _vm._v(" "),
-                                    _vm.imageIfcLogoPath == ""
+                                    this.logoRadioButton == "default"
                                       ? _c("img", {
                                           attrs: {
-                                            src: _vm.defaultIfcLogoPath,
+                                            src: _vm.defaultLogoImage,
                                             title: ""
                                           }
                                         })
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.imageIfcLogoPath != ""
+                                    this.logoRadioButton == "addMedia"
                                       ? _c("img", {
                                           staticStyle: {
                                             "margin-bottom": "20px"
                                           },
                                           attrs: {
-                                            src: _vm.imageIfcLogoPath,
+                                            src: _vm.logoImage,
                                             alt: "",
                                             srcset: ""
                                           }
@@ -53748,7 +53939,7 @@ var render = function() {
                                                             click: function(
                                                               $event
                                                             ) {
-                                                              _vm.addfont(
+                                                              _vm.changeFont(
                                                                 "italic",
                                                                 false,
                                                                 null
@@ -53783,7 +53974,7 @@ var render = function() {
                                                             click: function(
                                                               $event
                                                             ) {
-                                                              _vm.addfont(
+                                                              _vm.changeFont(
                                                                 "bold",
                                                                 false,
                                                                 null
@@ -53819,7 +54010,7 @@ var render = function() {
                                                             click: function(
                                                               $event
                                                             ) {
-                                                              _vm.addfont(
+                                                              _vm.changeFont(
                                                                 "underline",
                                                                 false,
                                                                 null
@@ -53854,7 +54045,7 @@ var render = function() {
                                                             click: function(
                                                               $event
                                                             ) {
-                                                              _vm.addfont(
+                                                              _vm.changeFont(
                                                                 "justifyLeft",
                                                                 false,
                                                                 null
@@ -53893,7 +54084,7 @@ var render = function() {
                                                             click: function(
                                                               $event
                                                             ) {
-                                                              _vm.addfont(
+                                                              _vm.changeFont(
                                                                 "justifyCenter",
                                                                 false,
                                                                 null
@@ -53932,7 +54123,7 @@ var render = function() {
                                                             click: function(
                                                               $event
                                                             ) {
-                                                              _vm.addfont(
+                                                              _vm.changeFont(
                                                                 "justifyRight",
                                                                 false,
                                                                 null
@@ -53971,7 +54162,7 @@ var render = function() {
                                                             click: function(
                                                               $event
                                                             ) {
-                                                              _vm.addfont(
+                                                              _vm.changeFont(
                                                                 "justifyFull",
                                                                 false,
                                                                 null
@@ -54210,21 +54401,21 @@ var render = function() {
                                         "div",
                                         { staticClass: "ifc_signature_image" },
                                         [
-                                          this.imageIfcSignaturePath == ""
+                                          this.signatureRadioButton == "default"
                                             ? _c("img", {
                                                 attrs: {
                                                   src:
-                                                    _vm.defaultIfcSignaturePath,
+                                                    _vm.defaultSignatureImage,
                                                   alt: ""
                                                 }
                                               })
                                             : _vm._e(),
                                           _vm._v(" "),
-                                          this.imageIfcSignaturePath != ""
+                                          this.signatureRadioButton ==
+                                          "addMedia"
                                             ? _c("img", {
                                                 attrs: {
-                                                  src:
-                                                    _vm.imageIfcSignaturePath,
+                                                  src: _vm.signatureImage,
                                                   alt: ""
                                                 }
                                               })
@@ -54275,7 +54466,7 @@ var render = function() {
             "div",
             {
               staticClass: "modal-dialog modal-xl",
-              class: { custom_address: this.openIfcModalForText == "ifc-text" },
+              class: { custom_address: this.open_pop_up == 2 },
               attrs: { role: "document" }
             },
             [
@@ -54314,315 +54505,7 @@ var render = function() {
                                             staticClass: "row modal_radiobox",
                                             class: {
                                               activeRadio:
-                                                this.radioButton == "default"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "col-sm-12 text_field"
-                                              },
-                                              [
-                                                _c(
-                                                  "label",
-                                                  {
-                                                    attrs: { for: "UseDefault" }
-                                                  },
-                                                  [
-                                                    _c("input", {
-                                                      directives: [
-                                                        {
-                                                          name: "model",
-                                                          rawName: "v-model",
-                                                          value:
-                                                            _vm.radioButton,
-                                                          expression:
-                                                            "radioButton"
-                                                        }
-                                                      ],
-                                                      attrs: {
-                                                        type: "radio",
-                                                        id: "UseDefault",
-                                                        value: "default",
-                                                        name: "check"
-                                                      },
-                                                      domProps: {
-                                                        checked: _vm._q(
-                                                          _vm.radioButton,
-                                                          "default"
-                                                        )
-                                                      },
-                                                      on: {
-                                                        change: [
-                                                          function($event) {
-                                                            _vm.radioButton =
-                                                              "default"
-                                                          },
-                                                          _vm.changeRadio
-                                                        ]
-                                                      }
-                                                    }),
-                                                    _vm._v(
-                                                      "Use Default Profile\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass: "row modal_radiobox",
-                                            class: {
-                                              activeRadio:
-                                                this.radioButton == "addMedia"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "col-sm-12 text_field"
-                                              },
-                                              [
-                                                _c(
-                                                  "label",
-                                                  {
-                                                    attrs: { for: "addMedia" }
-                                                  },
-                                                  [
-                                                    _c("input", {
-                                                      directives: [
-                                                        {
-                                                          name: "model",
-                                                          rawName: "v-model",
-                                                          value:
-                                                            _vm.radioButton,
-                                                          expression:
-                                                            "radioButton"
-                                                        }
-                                                      ],
-                                                      attrs: {
-                                                        type: "radio",
-                                                        id: "addMedia",
-                                                        "data-id":
-                                                          "addMedia_id",
-                                                        value: "addMedia",
-                                                        name: "check"
-                                                      },
-                                                      domProps: {
-                                                        checked: _vm._q(
-                                                          _vm.radioButton,
-                                                          "addMedia"
-                                                        )
-                                                      },
-                                                      on: {
-                                                        change: [
-                                                          function($event) {
-                                                            _vm.radioButton =
-                                                              "addMedia"
-                                                          },
-                                                          _vm.changeRadio
-                                                        ]
-                                                      }
-                                                    }),
-                                                    _vm._v(
-                                                      "Add Profile Image\n                                                                "
-                                                    ),
-                                                    _c("toolTipsComponent", {
-                                                      attrs: {
-                                                        title: "400 X 400"
-                                                      }
-                                                    })
-                                                  ],
-                                                  1
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "add_media" }, [
-                                      this.$store.state.displayIfcMedia
-                                        ? _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-block media_btn ",
-                                              attrs: {
-                                                "data-target": "#fileModal",
-                                                "data-toggle": "modal"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.check_Value(1)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "span",
-                                                { staticClass: "font_content" },
-                                                [_vm._v("Add Media")]
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    ]),
-                                    _vm._v(" "),
-                                    this.$store.state.displayIfcMedia
-                                      ? _c(
-                                          "div",
-                                          {
-                                            staticClass: "add-media-show",
-                                            attrs: {
-                                              id: "addMedia_id",
-                                              "data-section": "section-1"
-                                            }
-                                          },
-                                          [
-                                            _c("img", {
-                                              directives: [
-                                                {
-                                                  name: "show",
-                                                  rawName: "v-show",
-                                                  value: _vm.imageIfcPath == "",
-                                                  expression:
-                                                    "imageIfcPath == ''"
-                                                }
-                                              ],
-                                              staticStyle: {
-                                                "margin-bottom": "20px"
-                                              },
-                                              attrs: {
-                                                src: "images/avatar_image.jpg",
-                                                alt: "",
-                                                "data-target": "#fileModal",
-                                                "data-toggle": "modal",
-                                                title: ""
-                                              }
-                                            }),
-                                            _vm._v(" "),
-                                            _vm.imageIfcPath != ""
-                                              ? _c("img", {
-                                                  staticStyle: {
-                                                    "margin-bottom": "20px",
-                                                    "margin-top": "37px"
-                                                  },
-                                                  attrs: {
-                                                    "data-target": "#fileModal",
-                                                    "data-toggle": "modal",
-                                                    src: _vm.imageIfcPath,
-                                                    alt: "",
-                                                    srcset: ""
-                                                  }
-                                                })
-                                              : _vm._e()
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              this.open_pop_up == 3
-                                ? _c("div", [
-                                    _c("div", { staticClass: "font_content" }, [
-                                      _vm._v(
-                                        "\n        \t\t\t\t\t\t\t\t\t\t\tUpload Logo Image\n        \t\t\t\t\t\t\t\t\t\t"
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "Logo_select_option row" },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass: "row modal_radiobox",
-                                            class: {
-                                              activeRadio:
-                                                this.selectIfcLogoValue ==
-                                                "remove"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "col-sm-12 text_field"
-                                              },
-                                              [
-                                                _c(
-                                                  "label",
-                                                  {
-                                                    attrs: { for: "slideTwo" }
-                                                  },
-                                                  [
-                                                    _c("input", {
-                                                      directives: [
-                                                        {
-                                                          name: "model",
-                                                          rawName: "v-model",
-                                                          value:
-                                                            _vm.selectIfcLogoValue,
-                                                          expression:
-                                                            "selectIfcLogoValue"
-                                                        }
-                                                      ],
-                                                      attrs: {
-                                                        type: "radio",
-                                                        value: "remove",
-                                                        id: "slideTwo",
-                                                        name: "check",
-                                                        checked: ""
-                                                      },
-                                                      domProps: {
-                                                        checked: _vm._q(
-                                                          _vm.selectIfcLogoValue,
-                                                          "remove"
-                                                        )
-                                                      },
-                                                      on: {
-                                                        change: [
-                                                          function($event) {
-                                                            _vm.selectIfcLogoValue =
-                                                              "remove"
-                                                          },
-                                                          function($event) {
-                                                            return _vm.getIfcLogoInputValue(
-                                                              _vm.selectIfcLogoValue
-                                                            )
-                                                          }
-                                                        ]
-                                                      }
-                                                    }),
-                                                    _vm._v(
-                                                      "Remove Logo\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass: "row modal_radiobox",
-                                            class: {
-                                              activeRadio:
-                                                this.selectIfcLogoValue ==
+                                                this.photoRadioButton ==
                                                 "default"
                                             }
                                           },
@@ -54646,40 +54529,35 @@ var render = function() {
                                                           name: "model",
                                                           rawName: "v-model",
                                                           value:
-                                                            _vm.selectIfcLogoValue,
+                                                            _vm.photoRadioButton,
                                                           expression:
-                                                            "selectIfcLogoValue"
+                                                            "photoRadioButton"
                                                         }
                                                       ],
                                                       attrs: {
                                                         type: "radio",
                                                         id: "UseDefault",
                                                         value: "default",
-                                                        name: "check",
-                                                        checked: ""
+                                                        name: "check"
                                                       },
                                                       domProps: {
                                                         checked: _vm._q(
-                                                          _vm.selectIfcLogoValue,
+                                                          _vm.photoRadioButton,
                                                           "default"
                                                         )
                                                       },
                                                       on: {
                                                         change: [
                                                           function($event) {
-                                                            _vm.selectIfcLogoValue =
+                                                            _vm.photoRadioButton =
                                                               "default"
                                                           },
-                                                          function($event) {
-                                                            return _vm.getIfcLogoInputValue(
-                                                              _vm.selectIfcLogoValue
-                                                            )
-                                                          }
+                                                          _vm.changePhotoRadio
                                                         ]
                                                       }
                                                     }),
                                                     _vm._v(
-                                                      "Use Default Logo\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "Use Default Profile\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 )
@@ -54694,7 +54572,7 @@ var render = function() {
                                             staticClass: "row modal_radiobox",
                                             class: {
                                               activeRadio:
-                                                this.selectIfcLogoValue ==
+                                                this.photoRadioButton ==
                                                 "addMedia"
                                             }
                                           },
@@ -54718,9 +54596,9 @@ var render = function() {
                                                           name: "model",
                                                           rawName: "v-model",
                                                           value:
-                                                            _vm.selectIfcLogoValue,
+                                                            _vm.photoRadioButton,
                                                           expression:
-                                                            "selectIfcLogoValue"
+                                                            "photoRadioButton"
                                                         }
                                                       ],
                                                       attrs: {
@@ -54729,35 +54607,30 @@ var render = function() {
                                                         "data-id":
                                                           "addMedia_id",
                                                         value: "addMedia",
-                                                        name: "check",
-                                                        checked: ""
+                                                        name: "check"
                                                       },
                                                       domProps: {
                                                         checked: _vm._q(
-                                                          _vm.selectIfcLogoValue,
+                                                          _vm.photoRadioButton,
                                                           "addMedia"
                                                         )
                                                       },
                                                       on: {
                                                         change: [
                                                           function($event) {
-                                                            _vm.selectIfcLogoValue =
+                                                            _vm.photoRadioButton =
                                                               "addMedia"
                                                           },
-                                                          function($event) {
-                                                            return _vm.getIfcLogoInputValue(
-                                                              _vm.selectIfcLogoValue
-                                                            )
-                                                          }
+                                                          _vm.changePhotoRadio
                                                         ]
                                                       }
                                                     }),
                                                     _vm._v(
-                                                      "Add Logo\n                                                                "
+                                                      "Add Profile Image\n                                                                "
                                                     ),
                                                     _c("toolTipsComponent", {
                                                       attrs: {
-                                                        title: "500 X 500"
+                                                        title: "400 X 400"
                                                       }
                                                     })
                                                   ],
@@ -54771,20 +54644,15 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "add_media" }, [
-                                      this.$store.state.displayIfcLogoMedia
+                                      this.photoRadioButton == "addMedia"
                                         ? _c(
                                             "button",
                                             {
                                               staticClass:
-                                                "btn btn-block media_btn",
+                                                "btn btn-block media_btn ",
                                               attrs: {
                                                 "data-target": "#fileModal",
                                                 "data-toggle": "modal"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.check_Value(2)
-                                                }
                                               }
                                             },
                                             [
@@ -54798,7 +54666,7 @@ var render = function() {
                                         : _vm._e()
                                     ]),
                                     _vm._v(" "),
-                                    this.$store.state.displayIfcLogoMedia
+                                    this.photoRadioButton == "addMedia"
                                       ? _c(
                                           "div",
                                           {
@@ -54810,43 +54678,17 @@ var render = function() {
                                           },
                                           [
                                             _c("img", {
-                                              directives: [
-                                                {
-                                                  name: "show",
-                                                  rawName: "v-show",
-                                                  value:
-                                                    _vm.imageIfcLogoPath == "",
-                                                  expression:
-                                                    "imageIfcLogoPath == ''"
-                                                }
-                                              ],
                                               staticStyle: {
                                                 "margin-bottom": "20px"
                                               },
                                               attrs: {
-                                                src: "images/avatar_image.jpg",
+                                                src: this.photoImage,
                                                 alt: "",
                                                 "data-target": "#fileModal",
                                                 "data-toggle": "modal",
                                                 title: ""
                                               }
-                                            }),
-                                            _vm._v(" "),
-                                            _vm.imageIfcLogoPath != ""
-                                              ? _c("img", {
-                                                  staticStyle: {
-                                                    "margin-bottom": "20px",
-                                                    "margin-top": "37px"
-                                                  },
-                                                  attrs: {
-                                                    "data-target": "#fileModal",
-                                                    "data-toggle": "modal",
-                                                    src: _vm.imageIfcLogoPath,
-                                                    alt: "",
-                                                    srcset: ""
-                                                  }
-                                                })
-                                              : _vm._e()
+                                            })
                                           ]
                                         )
                                       : _vm._e()
@@ -54865,8 +54707,8 @@ var render = function() {
                                           {
                                             name: "model",
                                             rawName: "v-model",
-                                            value: _vm.titleInputIfc,
-                                            expression: "titleInputIfc"
+                                            value: _vm.name,
+                                            expression: "name"
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -54875,19 +54717,13 @@ var render = function() {
                                           id: "usr",
                                           placeholder: "Name"
                                         },
-                                        domProps: { value: _vm.titleInputIfc },
+                                        domProps: { value: _vm.name },
                                         on: {
-                                          keyup: function($event) {
-                                            return _vm.getTitleIfc(
-                                              _vm.titleInputIfc
-                                            )
-                                          },
                                           input: function($event) {
                                             if ($event.target.composing) {
                                               return
                                             }
-                                            _vm.titleInputIfc =
-                                              $event.target.value
+                                            _vm.name = $event.target.value
                                           }
                                         }
                                       })
@@ -54903,8 +54739,8 @@ var render = function() {
                                           {
                                             name: "model",
                                             rawName: "v-model",
-                                            value: _vm.companyInputIfc,
-                                            expression: "companyInputIfc"
+                                            value: _vm.company_name,
+                                            expression: "company_name"
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -54913,20 +54749,13 @@ var render = function() {
                                           id: "usr",
                                           placeholder: "Company Name"
                                         },
-                                        domProps: {
-                                          value: _vm.companyInputIfc
-                                        },
+                                        domProps: { value: _vm.company_name },
                                         on: {
-                                          keyup: function($event) {
-                                            return _vm.getCompanyNameIfc(
-                                              _vm.companyInputIfc
-                                            )
-                                          },
                                           input: function($event) {
                                             if ($event.target.composing) {
                                               return
                                             }
-                                            _vm.companyInputIfc =
+                                            _vm.company_name =
                                               $event.target.value
                                           }
                                         }
@@ -54941,9 +54770,8 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.designationInputIfc1,
-                                                expression:
-                                                  "designationInputIfc1"
+                                                value: _vm.designation1,
+                                                expression: "designation1"
                                               }
                                             ],
                                             staticClass: "form-control",
@@ -54953,19 +54781,14 @@ var render = function() {
                                               placeholder: "Designation 1"
                                             },
                                             domProps: {
-                                              value: _vm.designationInputIfc1
+                                              value: _vm.designation1
                                             },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getdesignationIfc1(
-                                                  _vm.designationInputIfc1
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.designationInputIfc1 =
+                                                _vm.designation1 =
                                                   $event.target.value
                                               }
                                             }
@@ -54978,9 +54801,8 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.designationInputIfc2,
-                                                expression:
-                                                  "designationInputIfc2"
+                                                value: _vm.designation2,
+                                                expression: "designation2"
                                               }
                                             ],
                                             staticClass: "form-control",
@@ -54990,19 +54812,14 @@ var render = function() {
                                               placeholder: "Designation 2"
                                             },
                                             domProps: {
-                                              value: _vm.designationInputIfc2
+                                              value: _vm.designation2
                                             },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getdesignationIfc2(
-                                                  _vm.designationInputIfc2
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.designationInputIfc2 =
+                                                _vm.designation2 =
                                                   $event.target.value
                                               }
                                             }
@@ -55015,9 +54832,8 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.designationInputIfc3,
-                                                expression:
-                                                  "designationInputIfc3"
+                                                value: _vm.designation3,
+                                                expression: "designation3"
                                               }
                                             ],
                                             staticClass: "form-control",
@@ -55027,19 +54843,14 @@ var render = function() {
                                               placeholder: "Designation 3"
                                             },
                                             domProps: {
-                                              value: _vm.designationInputIfc3
+                                              value: _vm.designation3
                                             },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getdesignationIfc3(
-                                                  _vm.designationInputIfc3
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.designationInputIfc3 =
+                                                _vm.designation3 =
                                                   $event.target.value
                                               }
                                             }
@@ -55056,10 +54867,8 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value:
-                                                  _vm.designationTitleInputIfc1,
-                                                expression:
-                                                  "designationTitleInputIfc1"
+                                                value: _vm.title1,
+                                                expression: "title1"
                                               }
                                             ],
                                             staticClass: "form-control",
@@ -55068,22 +54877,13 @@ var render = function() {
                                               id: "usr",
                                               placeholder: "Title 1"
                                             },
-                                            domProps: {
-                                              value:
-                                                _vm.designationTitleInputIfc1
-                                            },
+                                            domProps: { value: _vm.title1 },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getdesignationTitleIfc1(
-                                                  _vm.designationTitleInputIfc1
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.designationTitleInputIfc1 =
-                                                  $event.target.value
+                                                _vm.title1 = $event.target.value
                                               }
                                             }
                                           })
@@ -55095,10 +54895,8 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value:
-                                                  _vm.designationTitleInputIfc2,
-                                                expression:
-                                                  "designationTitleInputIfc2"
+                                                value: _vm.title2,
+                                                expression: "title2"
                                               }
                                             ],
                                             staticClass: "form-control",
@@ -55107,22 +54905,13 @@ var render = function() {
                                               id: "usr",
                                               placeholder: "Title 2"
                                             },
-                                            domProps: {
-                                              value:
-                                                _vm.designationTitleInputIfc2
-                                            },
+                                            domProps: { value: _vm.title2 },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getdesignationTitleIfc2(
-                                                  _vm.designationTitleInputIfc2
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.designationTitleInputIfc2 =
-                                                  $event.target.value
+                                                _vm.title2 = $event.target.value
                                               }
                                             }
                                           })
@@ -55138,10 +54927,8 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value:
-                                                  _vm.designationTitleInputIfc3,
-                                                expression:
-                                                  "designationTitleInputIfc3"
+                                                value: _vm.title3,
+                                                expression: "title3"
                                               }
                                             ],
                                             staticClass: "form-control",
@@ -55150,22 +54937,13 @@ var render = function() {
                                               id: "usr",
                                               placeholder: "Title 3"
                                             },
-                                            domProps: {
-                                              value:
-                                                _vm.designationTitleInputIfc3
-                                            },
+                                            domProps: { value: _vm.title3 },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getdesignationTitleIfc3(
-                                                  _vm.designationTitleInputIfc3
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.designationTitleInputIfc3 =
-                                                  $event.target.value
+                                                _vm.title3 = $event.target.value
                                               }
                                             }
                                           })
@@ -55177,10 +54955,8 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value:
-                                                  _vm.designationTitleInputIfc4,
-                                                expression:
-                                                  "designationTitleInputIfc4"
+                                                value: _vm.title4,
+                                                expression: "title4"
                                               }
                                             ],
                                             staticClass: "form-control",
@@ -55189,22 +54965,13 @@ var render = function() {
                                               id: "usr",
                                               placeholder: "Title 4"
                                             },
-                                            domProps: {
-                                              value:
-                                                _vm.designationTitleInputIfc4
-                                            },
+                                            domProps: { value: _vm.title4 },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getdesignationTitleIfc4(
-                                                  _vm.designationTitleInputIfc4
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.designationTitleInputIfc4 =
-                                                  $event.target.value
+                                                _vm.title4 = $event.target.value
                                               }
                                             }
                                           })
@@ -55212,7 +54979,7 @@ var render = function() {
                                       ])
                                     ]),
                                     _vm._v(" "),
-                                    this.addAddressButton
+                                    this.secondAddress
                                       ? _c(
                                           "div",
                                           { staticClass: "ifc_title" },
@@ -55234,7 +55001,7 @@ var render = function() {
                                                     },
                                                     on: {
                                                       click: function($event) {
-                                                        return _vm.showAddAddress()
+                                                        return _vm.showAddress()
                                                       }
                                                     }
                                                   },
@@ -55255,7 +55022,7 @@ var render = function() {
                                         )
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    this.displayAddressLable
+                                    this.displaySecondAddress
                                       ? _c("div", [
                                           _c(
                                             "div",
@@ -55272,9 +55039,8 @@ var render = function() {
                                                   {
                                                     name: "model",
                                                     rawName: "v-model",
-                                                    value: _vm.company2InputIfc,
-                                                    expression:
-                                                      "company2InputIfc"
+                                                    value: _vm.company_name2,
+                                                    expression: "company_name2"
                                                   }
                                                 ],
                                                 staticClass: "form-control",
@@ -55284,21 +55050,16 @@ var render = function() {
                                                   placeholder: "Company Name"
                                                 },
                                                 domProps: {
-                                                  value: _vm.company2InputIfc
+                                                  value: _vm.company_name2
                                                 },
                                                 on: {
-                                                  keyup: function($event) {
-                                                    return _vm.getCompanyName2Ifc(
-                                                      _vm.company2InputIfc
-                                                    )
-                                                  },
                                                   input: function($event) {
                                                     if (
                                                       $event.target.composing
                                                     ) {
                                                       return
                                                     }
-                                                    _vm.company2InputIfc =
+                                                    _vm.company_name2 =
                                                       $event.target.value
                                                   }
                                                 }
@@ -55324,9 +55085,9 @@ var render = function() {
                                                             name: "model",
                                                             rawName: "v-model",
                                                             value:
-                                                              _vm.designationInput1,
+                                                              _vm.designation21,
                                                             expression:
-                                                              "designationInput1"
+                                                              "designation21"
                                                           }
                                                         ],
                                                         staticClass:
@@ -55339,16 +55100,9 @@ var render = function() {
                                                         },
                                                         domProps: {
                                                           value:
-                                                            _vm.designationInput1
+                                                            _vm.designation21
                                                         },
                                                         on: {
-                                                          keyup: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.getdesignation1(
-                                                              _vm.designationInput1
-                                                            )
-                                                          },
                                                           input: function(
                                                             $event
                                                           ) {
@@ -55358,7 +55112,7 @@ var render = function() {
                                                             ) {
                                                               return
                                                             }
-                                                            _vm.designationInput1 =
+                                                            _vm.designation21 =
                                                               $event.target.value
                                                           }
                                                         }
@@ -55376,9 +55130,9 @@ var render = function() {
                                                             name: "model",
                                                             rawName: "v-model",
                                                             value:
-                                                              _vm.designationInput2,
+                                                              _vm.designation22,
                                                             expression:
-                                                              "designationInput2"
+                                                              "designation22"
                                                           }
                                                         ],
                                                         staticClass:
@@ -55391,16 +55145,9 @@ var render = function() {
                                                         },
                                                         domProps: {
                                                           value:
-                                                            _vm.designationInput2
+                                                            _vm.designation22
                                                         },
                                                         on: {
-                                                          keyup: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.getdesignation2(
-                                                              _vm.designationInput2
-                                                            )
-                                                          },
                                                           input: function(
                                                             $event
                                                           ) {
@@ -55410,7 +55157,7 @@ var render = function() {
                                                             ) {
                                                               return
                                                             }
-                                                            _vm.designationInput2 =
+                                                            _vm.designation22 =
                                                               $event.target.value
                                                           }
                                                         }
@@ -55428,9 +55175,9 @@ var render = function() {
                                                             name: "model",
                                                             rawName: "v-model",
                                                             value:
-                                                              _vm.designationInput3,
+                                                              _vm.designation23,
                                                             expression:
-                                                              "designationInput3"
+                                                              "designation23"
                                                           }
                                                         ],
                                                         staticClass:
@@ -55443,16 +55190,9 @@ var render = function() {
                                                         },
                                                         domProps: {
                                                           value:
-                                                            _vm.designationInput3
+                                                            _vm.designation23
                                                         },
                                                         on: {
-                                                          keyup: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.getdesignation3(
-                                                              _vm.designationInput3
-                                                            )
-                                                          },
                                                           input: function(
                                                             $event
                                                           ) {
@@ -55462,7 +55202,7 @@ var render = function() {
                                                             ) {
                                                               return
                                                             }
-                                                            _vm.designationInput3 =
+                                                            _vm.designation23 =
                                                               $event.target.value
                                                           }
                                                         }
@@ -55491,10 +55231,9 @@ var render = function() {
                                                           {
                                                             name: "model",
                                                             rawName: "v-model",
-                                                            value:
-                                                              _vm.designationTitleInput1,
+                                                            value: _vm.title21,
                                                             expression:
-                                                              "designationTitleInput1"
+                                                              "title21"
                                                           }
                                                         ],
                                                         staticClass:
@@ -55505,17 +55244,9 @@ var render = function() {
                                                           placeholder: "Title 1"
                                                         },
                                                         domProps: {
-                                                          value:
-                                                            _vm.designationTitleInput1
+                                                          value: _vm.title21
                                                         },
                                                         on: {
-                                                          keyup: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.getdesignationTitle1(
-                                                              _vm.designationTitleInput1
-                                                            )
-                                                          },
                                                           input: function(
                                                             $event
                                                           ) {
@@ -55525,7 +55256,7 @@ var render = function() {
                                                             ) {
                                                               return
                                                             }
-                                                            _vm.designationTitleInput1 =
+                                                            _vm.title21 =
                                                               $event.target.value
                                                           }
                                                         }
@@ -55542,10 +55273,9 @@ var render = function() {
                                                           {
                                                             name: "model",
                                                             rawName: "v-model",
-                                                            value:
-                                                              _vm.designationTitleInput2,
+                                                            value: _vm.title22,
                                                             expression:
-                                                              "designationTitleInput2"
+                                                              "title22"
                                                           }
                                                         ],
                                                         staticClass:
@@ -55556,17 +55286,9 @@ var render = function() {
                                                           placeholder: "Title 2"
                                                         },
                                                         domProps: {
-                                                          value:
-                                                            _vm.designationTitleInput2
+                                                          value: _vm.title22
                                                         },
                                                         on: {
-                                                          keyup: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.getdesignationTitle2(
-                                                              _vm.designationTitleInput2
-                                                            )
-                                                          },
                                                           input: function(
                                                             $event
                                                           ) {
@@ -55576,7 +55298,7 @@ var render = function() {
                                                             ) {
                                                               return
                                                             }
-                                                            _vm.designationTitleInput2 =
+                                                            _vm.title22 =
                                                               $event.target.value
                                                           }
                                                         }
@@ -55605,10 +55327,9 @@ var render = function() {
                                                           {
                                                             name: "model",
                                                             rawName: "v-model",
-                                                            value:
-                                                              _vm.designationTitleInput3,
+                                                            value: _vm.title23,
                                                             expression:
-                                                              "designationTitleInput3"
+                                                              "title23"
                                                           }
                                                         ],
                                                         staticClass:
@@ -55619,17 +55340,9 @@ var render = function() {
                                                           placeholder: "Title 3"
                                                         },
                                                         domProps: {
-                                                          value:
-                                                            _vm.designationTitleInput3
+                                                          value: _vm.title23
                                                         },
                                                         on: {
-                                                          keyup: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.getdesignationTitle3(
-                                                              _vm.designationTitleInput3
-                                                            )
-                                                          },
                                                           input: function(
                                                             $event
                                                           ) {
@@ -55639,7 +55352,7 @@ var render = function() {
                                                             ) {
                                                               return
                                                             }
-                                                            _vm.designationTitleInput3 =
+                                                            _vm.title23 =
                                                               $event.target.value
                                                           }
                                                         }
@@ -55656,10 +55369,9 @@ var render = function() {
                                                           {
                                                             name: "model",
                                                             rawName: "v-model",
-                                                            value:
-                                                              _vm.designationTitleInput4,
+                                                            value: _vm.title24,
                                                             expression:
-                                                              "designationTitleInput4"
+                                                              "title24"
                                                           }
                                                         ],
                                                         staticClass:
@@ -55670,17 +55382,9 @@ var render = function() {
                                                           placeholder: "Title 4"
                                                         },
                                                         domProps: {
-                                                          value:
-                                                            _vm.designationTitleInput4
+                                                          value: _vm.title24
                                                         },
                                                         on: {
-                                                          keyup: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.getdesignationTitle4(
-                                                              _vm.designationTitleInput4
-                                                            )
-                                                          },
                                                           input: function(
                                                             $event
                                                           ) {
@@ -55690,7 +55394,7 @@ var render = function() {
                                                             ) {
                                                               return
                                                             }
-                                                            _vm.designationTitleInput4 =
+                                                            _vm.title24 =
                                                               $event.target.value
                                                           }
                                                         }
@@ -55717,7 +55421,7 @@ var render = function() {
                                                     "button",
                                                     {
                                                       staticClass:
-                                                        "btn btn-block media_btn",
+                                                        "btn btn-block media_btn remove_btn",
                                                       staticStyle: {
                                                         margin: "0px"
                                                       },
@@ -55725,7 +55429,7 @@ var render = function() {
                                                         click: function(
                                                           $event
                                                         ) {
-                                                          return _vm.removeAddAddress()
+                                                          return _vm.removeAddress()
                                                         }
                                                       }
                                                     },
@@ -55734,9 +55438,9 @@ var render = function() {
                                                         "span",
                                                         {
                                                           staticClass:
-                                                            "font_content"
+                                                            "font_content "
                                                         },
-                                                        [_vm._v("Remoove")]
+                                                        [_vm._v("Remove")]
                                                       )
                                                     ]
                                                   )
@@ -55757,8 +55461,8 @@ var render = function() {
                                           {
                                             name: "model",
                                             rawName: "v-model",
-                                            value: _vm.addressInputIfc1,
-                                            expression: "addressInputIfc1"
+                                            value: _vm.address,
+                                            expression: "address"
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -55767,21 +55471,13 @@ var render = function() {
                                           id: "usr",
                                           placeholder: "Address"
                                         },
-                                        domProps: {
-                                          value: _vm.addressInputIfc1
-                                        },
+                                        domProps: { value: _vm.address },
                                         on: {
-                                          keyup: function($event) {
-                                            return _vm.getAddressIfc1(
-                                              _vm.addressInputIfc1
-                                            )
-                                          },
                                           input: function($event) {
                                             if ($event.target.composing) {
                                               return
                                             }
-                                            _vm.addressInputIfc1 =
-                                              $event.target.value
+                                            _vm.address = $event.target.value
                                           }
                                         }
                                       })
@@ -55795,9 +55491,8 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.directPhoneInputIfc,
-                                                expression:
-                                                  "directPhoneInputIfc"
+                                                value: _vm.directPhone,
+                                                expression: "directPhone"
                                               }
                                             ],
                                             staticClass: "form-control",
@@ -55807,19 +55502,14 @@ var render = function() {
                                               placeholder: "Direct Phone"
                                             },
                                             domProps: {
-                                              value: _vm.directPhoneInputIfc
+                                              value: _vm.directPhone
                                             },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getdirectPhoneIfc(
-                                                  _vm.directPhoneInputIfc
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.directPhoneInputIfc =
+                                                _vm.directPhone =
                                                   $event.target.value
                                               }
                                             }
@@ -55832,9 +55522,8 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.officePhoneInputIfc,
-                                                expression:
-                                                  "officePhoneInputIfc"
+                                                value: _vm.officePhone,
+                                                expression: "officePhone"
                                               }
                                             ],
                                             staticClass: "form-control",
@@ -55844,19 +55533,14 @@ var render = function() {
                                               placeholder: "Office Phone"
                                             },
                                             domProps: {
-                                              value: _vm.officePhoneInputIfc
+                                              value: _vm.officePhone
                                             },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getOfficePhoneIfc(
-                                                  _vm.officePhoneInputIfc
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.officePhoneInputIfc =
+                                                _vm.officePhone =
                                                   $event.target.value
                                               }
                                             }
@@ -55875,27 +55559,23 @@ var render = function() {
                                           {
                                             name: "model",
                                             rawName: "v-model",
-                                            value: _vm.websiteUrlInputIfc,
-                                            expression: "websiteUrlInputIfc"
+                                            value: _vm.website,
+                                            expression: "website"
                                           }
                                         ],
                                         staticClass: "form-control",
-                                        attrs: { type: "text", id: "usr" },
-                                        domProps: {
-                                          value: _vm.websiteUrlInputIfc
+                                        attrs: {
+                                          type: "text",
+                                          id: "usr",
+                                          placeholder: "Website URL"
                                         },
+                                        domProps: { value: _vm.website },
                                         on: {
-                                          keyup: function($event) {
-                                            return _vm.getWebsiteUrlIfc(
-                                              _vm.websiteUrlInputIfc
-                                            )
-                                          },
                                           input: function($event) {
                                             if ($event.target.composing) {
                                               return
                                             }
-                                            _vm.websiteUrlInputIfc =
-                                              $event.target.value
+                                            _vm.website = $event.target.value
                                           }
                                         }
                                       })
@@ -55915,27 +55595,19 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.emailInputIfc,
-                                                expression: "emailInputIfc"
+                                                value: _vm.email,
+                                                expression: "email"
                                               }
                                             ],
                                             staticClass: "form-control",
                                             attrs: { type: "text", id: "usr" },
-                                            domProps: {
-                                              value: _vm.emailInputIfc
-                                            },
+                                            domProps: { value: _vm.email },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getEmailIfc(
-                                                  _vm.emailInputIfc
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.emailInputIfc =
-                                                  $event.target.value
+                                                _vm.email = $event.target.value
                                               }
                                             }
                                           })
@@ -55953,26 +55625,21 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.stNumberInputIfc,
-                                                expression: "stNumberInputIfc"
+                                                value: _vm.memberCstNumber,
+                                                expression: "memberCstNumber"
                                               }
                                             ],
                                             staticClass: "form-control",
                                             attrs: { type: "text", id: "usr" },
                                             domProps: {
-                                              value: _vm.stNumberInputIfc
+                                              value: _vm.memberCstNumber
                                             },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getstNumberIfc(
-                                                  _vm.stNumberInputIfc
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.stNumberInputIfc =
+                                                _vm.memberCstNumber =
                                                   $event.target.value
                                               }
                                             }
@@ -55983,11 +55650,11 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              this.open_pop_up == 4
-                                ? _c("div", { staticClass: "signature" }, [
+                              this.open_pop_up == 3
+                                ? _c("div", [
                                     _c("div", { staticClass: "font_content" }, [
                                       _vm._v(
-                                        "\n        \t\t\t\t\t\t\t\t\t\t\tUpload Signature Image\n        \t\t\t\t\t\t\t\t\t\t"
+                                        "\n        \t\t\t\t\t\t\t\t\t\t\tUpload Logo Image\n        \t\t\t\t\t\t\t\t\t\t"
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -56001,8 +55668,7 @@ var render = function() {
                                             staticClass: "row modal_radiobox",
                                             class: {
                                               activeRadio:
-                                                this.selectIfcSignatureValue ==
-                                                "remove"
+                                                this.logoRadioButton == "remove"
                                             }
                                           },
                                           [
@@ -56025,9 +55691,9 @@ var render = function() {
                                                           name: "model",
                                                           rawName: "v-model",
                                                           value:
-                                                            _vm.selectIfcSignatureValue,
+                                                            _vm.logoRadioButton,
                                                           expression:
-                                                            "selectIfcSignatureValue"
+                                                            "logoRadioButton"
                                                         }
                                                       ],
                                                       attrs: {
@@ -56039,26 +55705,22 @@ var render = function() {
                                                       },
                                                       domProps: {
                                                         checked: _vm._q(
-                                                          _vm.selectIfcSignatureValue,
+                                                          _vm.logoRadioButton,
                                                           "remove"
                                                         )
                                                       },
                                                       on: {
                                                         change: [
                                                           function($event) {
-                                                            _vm.selectIfcSignatureValue =
+                                                            _vm.logoRadioButton =
                                                               "remove"
                                                           },
-                                                          function($event) {
-                                                            return _vm.getIfcSignatureInputValue(
-                                                              _vm.selectIfcSignatureValue
-                                                            )
-                                                          }
+                                                          _vm.logoRadioButtonChange
                                                         ]
                                                       }
                                                     }),
                                                     _vm._v(
-                                                      "Remove Signature\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "Remove Logo\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 )
@@ -56073,7 +55735,7 @@ var render = function() {
                                             staticClass: "row modal_radiobox",
                                             class: {
                                               activeRadio:
-                                                this.selectIfcSignatureValue ==
+                                                this.logoRadioButton ==
                                                 "default"
                                             }
                                           },
@@ -56097,9 +55759,9 @@ var render = function() {
                                                           name: "model",
                                                           rawName: "v-model",
                                                           value:
-                                                            _vm.selectIfcSignatureValue,
+                                                            _vm.logoRadioButton,
                                                           expression:
-                                                            "selectIfcSignatureValue"
+                                                            "logoRadioButton"
                                                         }
                                                       ],
                                                       attrs: {
@@ -56111,26 +55773,22 @@ var render = function() {
                                                       },
                                                       domProps: {
                                                         checked: _vm._q(
-                                                          _vm.selectIfcSignatureValue,
+                                                          _vm.logoRadioButton,
                                                           "default"
                                                         )
                                                       },
                                                       on: {
                                                         change: [
                                                           function($event) {
-                                                            _vm.selectIfcSignatureValue =
+                                                            _vm.logoRadioButton =
                                                               "default"
                                                           },
-                                                          function($event) {
-                                                            return _vm.getIfcSignatureInputValue(
-                                                              _vm.selectIfcSignatureValue
-                                                            )
-                                                          }
+                                                          _vm.logoRadioButtonChange
                                                         ]
                                                       }
                                                     }),
                                                     _vm._v(
-                                                      "Use Default Signature\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "Use Default Logo\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 )
@@ -56145,7 +55803,7 @@ var render = function() {
                                             staticClass: "row modal_radiobox",
                                             class: {
                                               activeRadio:
-                                                this.selectIfcSignatureValue ==
+                                                this.logoRadioButton ==
                                                 "addMedia"
                                             }
                                           },
@@ -56169,9 +55827,9 @@ var render = function() {
                                                           name: "model",
                                                           rawName: "v-model",
                                                           value:
-                                                            _vm.selectIfcSignatureValue,
+                                                            _vm.logoRadioButton,
                                                           expression:
-                                                            "selectIfcSignatureValue"
+                                                            "logoRadioButton"
                                                         }
                                                       ],
                                                       attrs: {
@@ -56185,21 +55843,296 @@ var render = function() {
                                                       },
                                                       domProps: {
                                                         checked: _vm._q(
-                                                          _vm.selectIfcSignatureValue,
+                                                          _vm.logoRadioButton,
                                                           "addMedia"
                                                         )
                                                       },
                                                       on: {
                                                         change: [
                                                           function($event) {
-                                                            _vm.selectIfcSignatureValue =
+                                                            _vm.logoRadioButton =
                                                               "addMedia"
                                                           },
+                                                          _vm.logoRadioButtonChange
+                                                        ]
+                                                      }
+                                                    }),
+                                                    _vm._v(
+                                                      "Add Logo\n                                                                "
+                                                    ),
+                                                    _c("toolTipsComponent", {
+                                                      attrs: {
+                                                        title: "500 X 500"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "add_media" }, [
+                                      this.logoRadioButton == "addMedia"
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-block media_btn",
+                                              attrs: {
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal"
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "font_content" },
+                                                [_vm._v("Add Media")]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    this.logoRadioButton == "addMedia"
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "add-media-show",
+                                            attrs: {
+                                              id: "addMedia_id",
+                                              "data-section": "section-1"
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              staticStyle: {
+                                                "margin-bottom": "20px",
+                                                "margin-top": "37px"
+                                              },
+                                              attrs: {
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal",
+                                                src: _vm.logoImage,
+                                                alt: "",
+                                                srcset: ""
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              this.open_pop_up == 4
+                                ? _c("div", { staticClass: "signature" }, [
+                                    _c("div", { staticClass: "font_content" }, [
+                                      _vm._v(
+                                        "\n        \t\t\t\t\t\t\t\t\t\t\tUpload Signature Image\n        \t\t\t\t\t\t\t\t\t\t"
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "Logo_select_option row" },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "row modal_radiobox",
+                                            class: {
+                                              activeRadio:
+                                                this.signatureRadioButton ==
+                                                "remove"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "col-sm-12 text_field"
+                                              },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    attrs: { for: "slideTwo" }
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.signatureRadioButton,
+                                                          expression:
+                                                            "signatureRadioButton"
+                                                        }
+                                                      ],
+                                                      attrs: {
+                                                        type: "radio",
+                                                        value: "remove",
+                                                        id: "slideTwo",
+                                                        name: "check",
+                                                        checked: ""
+                                                      },
+                                                      domProps: {
+                                                        checked: _vm._q(
+                                                          _vm.signatureRadioButton,
+                                                          "remove"
+                                                        )
+                                                      },
+                                                      on: {
+                                                        change: [
                                                           function($event) {
-                                                            return _vm.getIfcSignatureInputValue(
-                                                              _vm.selectIfcSignatureValue
-                                                            )
-                                                          }
+                                                            _vm.signatureRadioButton =
+                                                              "remove"
+                                                          },
+                                                          _vm.signatureRadioButtonChange
+                                                        ]
+                                                      }
+                                                    }),
+                                                    _vm._v(
+                                                      "Remove Signature\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "row modal_radiobox",
+                                            class: {
+                                              activeRadio:
+                                                this.signatureRadioButton ==
+                                                "default"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "col-sm-12 text_field"
+                                              },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    attrs: { for: "UseDefault" }
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.signatureRadioButton,
+                                                          expression:
+                                                            "signatureRadioButton"
+                                                        }
+                                                      ],
+                                                      attrs: {
+                                                        type: "radio",
+                                                        id: "UseDefault",
+                                                        value: "default",
+                                                        name: "check",
+                                                        checked: ""
+                                                      },
+                                                      domProps: {
+                                                        checked: _vm._q(
+                                                          _vm.signatureRadioButton,
+                                                          "default"
+                                                        )
+                                                      },
+                                                      on: {
+                                                        change: [
+                                                          function($event) {
+                                                            _vm.signatureRadioButton =
+                                                              "default"
+                                                          },
+                                                          _vm.signatureRadioButtonChange
+                                                        ]
+                                                      }
+                                                    }),
+                                                    _vm._v(
+                                                      "Use Default Signature\n        \t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "row modal_radiobox",
+                                            class: {
+                                              activeRadio:
+                                                this.signatureRadioButton ==
+                                                "addMedia"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "col-sm-12 text_field"
+                                              },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    attrs: { for: "addMedia" }
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.signatureRadioButton,
+                                                          expression:
+                                                            "signatureRadioButton"
+                                                        }
+                                                      ],
+                                                      attrs: {
+                                                        type: "radio",
+                                                        id: "addMedia",
+                                                        "data-id":
+                                                          "addMedia_id",
+                                                        value: "addMedia",
+                                                        name: "check",
+                                                        checked: ""
+                                                      },
+                                                      domProps: {
+                                                        checked: _vm._q(
+                                                          _vm.signatureRadioButton,
+                                                          "addMedia"
+                                                        )
+                                                      },
+                                                      on: {
+                                                        change: [
+                                                          function($event) {
+                                                            _vm.signatureRadioButton =
+                                                              "addMedia"
+                                                          },
+                                                          _vm.signatureRadioButtonChange
                                                         ]
                                                       }
                                                     }),
@@ -56222,7 +56155,7 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "add_media" }, [
-                                      this.$store.state.displayIfcSignatureMedia
+                                      this.signatureRadioButton == "addMedia"
                                         ? _c(
                                             "button",
                                             {
@@ -56249,7 +56182,7 @@ var render = function() {
                                         : _vm._e()
                                     ]),
                                     _vm._v(" "),
-                                    this.$store.state.displayIfcSignatureMedia
+                                    this.signatureRadioButton == "addMedia"
                                       ? _c(
                                           "div",
                                           {
@@ -56261,45 +56194,17 @@ var render = function() {
                                           },
                                           [
                                             _c("img", {
-                                              directives: [
-                                                {
-                                                  name: "show",
-                                                  rawName: "v-show",
-                                                  value:
-                                                    _vm.imageIfcSignaturePath ==
-                                                    "",
-                                                  expression:
-                                                    "imageIfcSignaturePath == ''"
-                                                }
-                                              ],
                                               staticStyle: {
                                                 "margin-bottom": "20px"
                                               },
                                               attrs: {
-                                                src: "images/avatar_image.jpg",
+                                                src: this.signatureImage,
                                                 alt: "",
                                                 "data-target": "#fileModal",
                                                 "data-toggle": "modal",
                                                 title: ""
                                               }
-                                            }),
-                                            _vm._v(" "),
-                                            _vm.imageIfcSignaturePath != ""
-                                              ? _c("img", {
-                                                  staticStyle: {
-                                                    "margin-bottom": "20px",
-                                                    "margin-top": "37px"
-                                                  },
-                                                  attrs: {
-                                                    "data-target": "#fileModal",
-                                                    "data-toggle": "modal",
-                                                    src:
-                                                      _vm.imageIfcSignaturePath,
-                                                    alt: "",
-                                                    srcset: ""
-                                                  }
-                                                })
-                                              : _vm._e()
+                                            })
                                           ]
                                         )
                                       : _vm._e()
@@ -56318,52 +56223,34 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn bottom_btn",
+                        staticClass: "btn btn_save",
                         attrs: { "data-dismiss": "modal" },
-                        on: { click: _vm.cancelModel }
+                        on: { click: _vm.saveChanges }
                       },
                       [
-                        _c("i", {
-                          staticClass: "ti-close",
-                          attrs: { "aria-hidden": "true" }
-                        })
+                        _vm._v("Save\n\t\t\t\t\t\t\t\t"),
+                        _c("i", { staticClass: "ti-check" })
                       ]
                     ),
                     _vm._v(" "),
                     _c(
                       "button",
                       {
-                        staticClass: "btn bottom_btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.addfont("redo", false, null)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "ti-back-right" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn bottom_btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.addfont("undo", false, null)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "ti-back-left" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn bottom_btn",
+                        staticClass: "btn btn_close",
                         attrs: { "data-dismiss": "modal" },
-                        on: { click: _vm.saveIfcChanges }
+                        on: {
+                          click: function($event) {
+                            return _vm.cancelModal()
+                          }
+                        }
                       },
-                      [_c("i", { staticClass: "ti-check" })]
+                      [
+                        _vm._v("Cancel\n\t\t\t\t\t\t\t\t"),
+                        _c("i", {
+                          staticClass: "ti-close",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
                     )
                   ])
                 ])
@@ -56372,8 +56259,6 @@ var render = function() {
           )
         ]
       ),
-      _vm._v(" "),
-      _c("ifcInputComponent"),
       _vm._v(" "),
       _c("FileModalComponent")
     ],
@@ -58203,24 +58088,28 @@ var staticRenderFns = [
         _c(
           "button",
           {
-            staticClass: "btn bottom_btn width_half",
-            attrs: { "data-dismiss": "modal" }
+            staticClass: "btn btn_save",
+            attrs: { type: "button", "data-dismiss": "modal" }
           },
           [
-            _c("i", {
-              staticClass: "ti-close",
-              attrs: { "aria-hidden": "true" }
-            })
+            _vm._v("Save   \n                                "),
+            _c("i", { staticClass: "ti-check" })
           ]
         ),
         _vm._v(" "),
         _c(
           "button",
           {
-            staticClass: "btn bottom_btn width_half",
-            attrs: { "data-dismiss": "modal" }
+            staticClass: "btn btn_close",
+            attrs: { type: "button", "data-dismiss": "modal" }
           },
-          [_c("i", { staticClass: "ti-check" })]
+          [
+            _vm._v("Cancel   \n                                "),
+            _c("i", {
+              staticClass: "ti-close",
+              attrs: { "aria-hidden": "true" }
+            })
+          ]
         )
       ])
     ])
@@ -61648,7 +61537,7 @@ var render = function() {
               attrs: { src: image.path, "data-dismiss": "modal" },
               on: {
                 click: function($event) {
-                  return _vm.setToImageShow(image.path)
+                  return _vm.setImage(image.path)
                 }
               }
             })
@@ -79790,7 +79679,23 @@ var globalMixin = {
     LoaderComponent: _components_common_loaderComponet__WEBPACK_IMPORTED_MODULE_10__["default"],
     toolTipsComponent: _components_common_toolTipsComponent__WEBPACK_IMPORTED_MODULE_11__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['fcAddMediaShow', 'showFrontCover', 'showFrontInsideCover', 'imagePath', 'imageIfcPath', 'imageIfcSignaturePath', 'imageIbcProfilePath', 'imageIbcMainPath', 'imageIbcLogoPath', 'imageBcLogoPath', 'defaultImagePath', 'defaultIfcImagePath', 'defaultIfcSignaturePath', 'defaultIbcProfilePath', 'defaultIbcMainImagePath', 'defaultIbcLogoImagePath', 'fcLogoText', 'ifcRightTextInputValue', 'textAlign', 'hideFcText', 'displayTextArea', 'displayIfcTextArea', 'fcLogoTextDisplay', 'openModal', 'setIfc_bind', 'setIfcLogo_bind', 'setIfcSignature_bind', 'setIbcProfile_bind', 'setIbcMainImage_bind', 'setIbcLogoImage_bind', 'openIfcModalForLogo', 'openIfcModalForSignature', 'openIbcModal', 'openIfcModalForText', 'defaultIfcLogoPath', 'imageIfcLogoPath', 'ifcTextDisplay', 'ifcRightTextDisplay', 'ifcText', 'ifcRightText', 'displayTextAreaFor', 'displayIbcProfileMedia', 'displayIbcMainMedia', 'displayIbcLogoMedia', 'ifcTitleText', 'ifcCompanyName', 'designation1', 'designation2', 'designation3', 'designationTitle1', 'designationTitle2', 'designationTitle3', 'designationTitle4', 'addressIfc1', 'directPhoneIfc', 'officePhone', 'websiteUrlIfc', 'emailIfc', 'stNumberIfc', 'showTextAreaIfcRight', 'ifcRightTextValue', 'showCover', 'ibcTitleText', 'ibcCompanyNameText', 'ibcAddressText', 'ibcAddressText1', 'ibcPhoneNumberText', 'ibcOfficeNumberText', 'ibcWebsiteText', 'ibcEmailText', 'openHeaderContent', 'openFooterContent', 'bcTitleHeaderText', 'bcAddressHeaderBcText', 'bcAddressHeaderBc1Text', 'bcCityHeaderText', 'bcCountryHeaderText', 'bcTitleText', 'bcCompanyNameText', 'bcAddressText', 'bcAddressText1', 'bcPhoneNumberText', 'bcOfficeNumberText', 'bcWebsiteText', 'bcEmailText', 'previewFc', 'displayBcLogoMedia', 'setBcLogoImage_bind', 'bcLogoChooseCheckBox', 'bcProfileChooseCheckBox', 'fcModalHide', 'defaultBcLogoImagePath', 'fcTextInputValueEditor', 'Savefcloader', 'profileImage', 'defaultBcProfileImagePath', 'displayBcProfileMedia', 'setBcProfileImage_bind', 'imageBcProfilePath', 'fcCheckboxChoose', 'ifcProfileChoose', 'ifcBelowimageChoose', 'ifcSignatureChoose', 'displayIfcLogoMedia', 'displayIfcMedia', 'displayIfcSignatureMedia', 'ibcLogoCheckChoose', 'ibcBannerCheckChoose', 'ibcProfileCheckChoose', 'displayAddressLable', 'addAddressButton', 'ifcCompanyName2', 'designationifc', 'designationifc1', 'designationifc2', 'designationTitle', 'designationTitleset2', 'designationTitleset3', 'designationTitleset4', 'fcTextLogoAlign', 'headingTagFc', 'tempFcAlignValue', 'ImageFcAlignValue', 'tempFcCheckboxChoose', 'imagePathTemp', 'fcTextLogoEditor']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['fcAddMediaShow', 'showFrontCover', 'showFrontInsideCover', 'imagePath', 'imageIfcPath', 'imageIfcSignaturePath', 'imageIbcProfilePath', 'imageIbcMainPath', 'imageIbcLogoPath', 'imageBcLogoPath', 'defaultImagePath', 'defaultIfcImagePath', 'defaultIfcSignaturePath', 'defaultIbcProfilePath', 'defaultIbcMainImagePath', 'defaultIbcLogoImagePath', 'fcLogoText', 'ifcRightTextInputValue', 'textAlign', 'hideFcText', 'displayTextArea', 'displayIfcTextArea', 'fcLogoTextDisplay', 'openModal', 'setIfc_bind', 'setIfcLogo_bind', 'setIfcSignature_bind', 'setIbcProfile_bind', 'setIbcMainImage_bind', 'setIbcLogoImage_bind', 'openIfcModalForLogo', 'openIfcModalForSignature', 'openIbcModal', 'openIfcModalForText', 'defaultIfcLogoPath', 'imageIfcLogoPath', 'ifcTextDisplay', 'ifcRightTextDisplay', 'ifcText', 'ifcRightText', 'displayTextAreaFor', 'displayIbcProfileMedia', 'displayIbcMainMedia', 'displayIbcLogoMedia', // 'ifcTitleText',
+  // 'ifcCompanyName',
+  // 'designation1',
+  // 'designation2',
+  // 'designation3',
+  // 'designationTitle1',
+  // 'designationTitle2',
+  // 'designationTitle3',
+  // 'designationTitle4',
+  // 'addressIfc1',
+  // 'directPhoneIfc',
+  // 'officePhone',
+  // 'websiteUrlIfc',
+  // 'emailIfc',
+  // 'stNumberIfc',
+  'showTextAreaIfcRight', 'ifcRightTextValue', 'showCover', 'ibcTitleText', 'ibcCompanyNameText', 'ibcAddressText', 'ibcAddressText1', 'ibcPhoneNumberText', 'ibcOfficeNumberText', 'ibcWebsiteText', 'ibcEmailText', 'openHeaderContent', 'openFooterContent', 'bcTitleHeaderText', 'bcAddressHeaderBcText', 'bcAddressHeaderBc1Text', 'bcCityHeaderText', 'bcCountryHeaderText', 'bcTitleText', 'bcCompanyNameText', 'bcAddressText', 'bcAddressText1', 'bcPhoneNumberText', 'bcOfficeNumberText', 'bcWebsiteText', 'bcEmailText', 'previewFc', 'displayBcLogoMedia', 'setBcLogoImage_bind', 'bcLogoChooseCheckBox', 'bcProfileChooseCheckBox', 'fcModalHide', 'defaultBcLogoImagePath', 'fcTextInputValueEditor', 'Savefcloader', 'profileImage', 'defaultBcProfileImagePath', 'displayBcProfileMedia', 'setBcProfileImage_bind', 'imageBcProfilePath', 'fcCheckboxChoose', 'ifcProfileChoose', 'ifcBelowimageChoose', 'ifcSignatureChoose', 'displayIfcLogoMedia', 'displayIfcMedia', 'displayIfcSignatureMedia', 'ibcLogoCheckChoose', 'ibcBannerCheckChoose', 'ibcProfileCheckChoose', 'displayAddressLable', // 'addAddressButton',
+  'ifcCompanyName2', 'designationifc', 'designationifc1', 'designationifc2', 'designationTitle', 'designationTitleset2', 'designationTitleset3', 'designationTitleset4', 'fcTextLogoAlign', 'headingTagFc', 'tempFcAlignValue', 'ImageFcAlignValue', 'tempFcCheckboxChoose', 'imagePathTemp', 'fcTextLogoEditor']), {
     tempAlignFc: {
       get: function get() {
         return this.fcTextLogoAlign;
@@ -80062,8 +79967,8 @@ var globalMixin = {
       this.ACTION_CHANGE_STATE(["setIfc_bind", ""]);
       this.ACTION_CHANGE_STATE(["setIfcLogo_bind", ""]);
       this.ACTION_CHANGE_STATE(["setIfcSignature_bind", ""]);
-      this.ACTION_CHANGE_STATE(['displayAddressLable', false]);
-      this.ACTION_CHANGE_STATE(['addAddressButton', true]); //console.log(this.ifcBelowimageChoose,'Rushi')
+      this.ACTION_CHANGE_STATE(['displayAddressLable', false]); // this.ACTION_CHANGE_STATE(['addAddressButton', true])
+      //console.log(this.ifcBelowimageChoose,'Rushi')
 
       this.ACTION_CHANGE_STATE(['tempFcAlignValue', this.tempAlignFc]);
       this.ACTION_CHANGE_STATE(['ImageFcAlignValue', this.tempImageAlignFc]);
@@ -80889,31 +80794,31 @@ var globalMixin = {
           defaultSignatureImage: this.defaultIfcSignaturePath,
           NewAddedSignatureImage: this.imageIfcSignaturePath
         }],
-        profileText: [{
-          ifcTitleText: this.ifcTitleText,
-          ifcCompanyName: this.ifcCompanyName,
-          designation1: this.designation1,
-          designation2: this.designation2,
-          designation3: this.designation3,
-          designationTitle: this.designationTitle,
-          designationTitleset2: this.designationTitleset2,
-          designationTitleset3: this.designationTitleset3,
-          designationTitleset4: this.designationTitleset4,
-          ifcCompanyName2: this.ifcCompanyName2,
-          designationifc: this.designationifc,
-          designationifc1: this.designationifc1,
-          designationifc2: this.designationifc2,
-          designationTitle1: this.designationTitle1,
-          designationTitle2: this.designationTitle2,
-          designationTitle3: this.designationTitle3,
-          designationTitle4: this.designationTitle4,
-          addressIfc1: this.addressIfc1,
-          directPhoneIfc: this.directPhoneIfc,
-          officePhone: this.officePhone,
-          websiteUrlIfc: this.websiteUrlIfc,
-          emailIfc: this.emailIfc,
-          stNumberIfc: this.stNumberIfc
-        }],
+        // profileText: [{
+        //     ifcTitleText: this.ifcTitleText,
+        //     ifcCompanyName: this.ifcCompanyName,
+        //     designation1: this.designation1,
+        //     designation2: this.designation2,
+        //     designation3: this.designation3,
+        //     designationTitle: this.designationTitle,
+        //     designationTitleset2: this.designationTitleset2,
+        //     designationTitleset3: this.designationTitleset3,
+        //     designationTitleset4: this.designationTitleset4,
+        //     ifcCompanyName2: this.ifcCompanyName2,
+        //     designationifc: this.designationifc,
+        //     designationifc1: this.designationifc1,
+        //     designationifc2: this.designationifc2,
+        //     designationTitle1: this.designationTitle1,
+        //     designationTitle2: this.designationTitle2,
+        //     designationTitle3: this.designationTitle3,
+        //     designationTitle4: this.designationTitle4,
+        //     addressIfc1: this.addressIfc1,
+        //     directPhoneIfc: this.directPhoneIfc,
+        //     officePhone: this.officePhone,
+        //     websiteUrlIfc: this.websiteUrlIfc,
+        //     emailIfc: this.emailIfc,
+        //     stNumberIfc: this.stNumberIfc
+        // }],
         right_ifc_content: this.ifcRightTextInputValue != '' ? this.ifcRightTextInputValue : this.inputTextRightIfc
       };
       console.log(data, 'ifc');
@@ -80960,9 +80865,8 @@ var globalMixin = {
                   var ifcCompanyNameData = response.data.data.inside_front_cover.profileText[0].ifcCompanyName2;
 
                   if (ifcCompanyNameData != null) {
-                    _this4.ACTION_CHANGE_STATE(['displayAddressLable', true]);
+                    _this4.ACTION_CHANGE_STATE(['displayAddressLable', true]); // this.ACTION_CHANGE_STATE(['addAddressButton', false])
 
-                    _this4.ACTION_CHANGE_STATE(['addAddressButton', false]);
                   }
 
                   responseDbDataProfileText.map(function (d) {
@@ -81298,8 +81202,7 @@ var globalMixin = {
       };
     },
     showAddAddress: function showAddAddress() {
-      this.ACTION_CHANGE_STATE(['displayAddressLable', true]);
-      this.ACTION_CHANGE_STATE(['addAddressButton', false]);
+      this.ACTION_CHANGE_STATE(['displayAddressLable', true]); // this.ACTION_CHANGE_STATE(['addAddressButton', false])
     },
     getCompanyName2Ifc: function getCompanyName2Ifc(value) {
       this.ACTION_CHANGE_STATE(['ifcCompanyName2', value]);
@@ -81326,7 +81229,7 @@ var globalMixin = {
       this.ACTION_CHANGE_STATE(['designationTitleset4', value]);
     },
     removeAddAddress: function removeAddAddress() {
-      this.ACTION_CHANGE_STATE(['addAddressButton', true]);
+      // this.ACTION_CHANGE_STATE(['addAddressButton', true])
       this.ACTION_CHANGE_STATE(['displayAddressLable', false]);
       this.ACTION_CHANGE_STATE(['ifcCompanyName2', '']);
       this.ACTION_CHANGE_STATE(['designationifc', '']);
@@ -81468,21 +81371,21 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     ifcRightTextDisplay: false,
     displayTextAreaFor: false,
     displayIbcProfileMedia: false,
-    ifcTitleText: 'Kat Nitsous',
-    ifcCompanyName: 'Sotheby’s International Realty, Inc.',
-    designation1: 'ADPAÂ®',
-    designation2: 'ADPAÂ®',
-    designation3: 'C(k)PÂ®',
-    designationTitle1: 'Business Development Director ',
-    designationTitle2: '401(K) Consulting Director ',
-    designationTitle3: 'Alternative Investments Director ',
-    designationTitle4: 'Associate Stock Plan Director',
-    addressIfc1: '16027 VENTURA BLVD, Suite 330 ENCINO, CA, 91436',
-    directPhoneIfc: 'O : 626-396-9400',
-    officePhone: 'M : 323-228-3805',
-    websiteUrlIfc: 'sothebyshomes.com',
-    emailIfc: 'kat.nitsou@sothebyinternational.com',
-    stNumberIfc: 'NMLS#',
+    // ifcTitleText: 'Kat Nitsous',
+    // ifcCompanyName: 'Sotheby’s International Realty, Inc.',
+    // designation1: 'ADPAÂ®',
+    // designation2: 'ADPAÂ®',
+    // designation3: 'C(k)PÂ®',
+    // designationTitle1: 'Business Development Director ',
+    // designationTitle2: '401(K) Consulting Director ',
+    // designationTitle3: 'Alternative Investments Director ',
+    // designationTitle4: 'Associate Stock Plan Director',
+    // addressIfc1: '16027 VENTURA BLVD, Suite 330 ENCINO, CA, 91436',
+    // directPhoneIfc: 'O : 626-396-9400',
+    // officePhone: 'M : 323-228-3805',
+    // websiteUrlIfc: 'sothebyshomes.com',
+    // emailIfc: 'kat.nitsou@sothebyinternational.com',
+    // stNumberIfc: 'NMLS#',
     showTextAreaIfcRight: false,
     ifcRightTextValue: defaultTextIfc,
     showCover: '',
@@ -81524,7 +81427,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     setBcProfileImage_bind: '',
     displayBcProfileMedia: false,
     bcProfileImageCheckboxChoose: ''
-  }, _defineProperty(_state, "setBcProfileImage_bind", ''), _defineProperty(_state, "imageBcProfilePath", ''), _defineProperty(_state, "profileImage", ''), _defineProperty(_state, "fcCheckboxChoose", 'default'), _defineProperty(_state, "ifcSignatureChoose", 'default'), _defineProperty(_state, "ifcProfileChoose", 'default'), _defineProperty(_state, "ifcBelowimageChoose", 'default'), _defineProperty(_state, "ibcLogoCheckChoose", 'default'), _defineProperty(_state, "ibcBannerCheckChoose", 'default'), _defineProperty(_state, "ibcProfileCheckChoose", 'default'), _defineProperty(_state, "hideIconEdit", false), _defineProperty(_state, "displayIfcLogoMedia", false), _defineProperty(_state, "displayIfcMedia", false), _defineProperty(_state, "displayIfcSignatureMedia", false), _defineProperty(_state, "bcLogoChooseCheckBox", 'default'), _defineProperty(_state, "bcProfileChooseCheckBox", 'default'), _defineProperty(_state, "displayAddressLable", false), _defineProperty(_state, "addAddressButton", true), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "designationifc", ''), _defineProperty(_state, "designationifc1", ''), _defineProperty(_state, "designationifc2", ''), _defineProperty(_state, "designationTitle", ''), _defineProperty(_state, "designationTitleset2", ''), _defineProperty(_state, "designationTitleset3", ''), _defineProperty(_state, "designationTitleset4", ''), _defineProperty(_state, "errorMessage", []), _defineProperty(_state, "successMessage", []), _defineProperty(_state, "headingTagFc", ''), _defineProperty(_state, "tempFcAlignValue", 'center'), _defineProperty(_state, "ImageFcAlignValue", 'center'), _defineProperty(_state, "tempFcCheckboxChoose", ''), _defineProperty(_state, "fcModalHide", false), _defineProperty(_state, "fcRadioButton", 'default'), _defineProperty(_state, "fcTextLogoEditor", '<h1></h1>'), _defineProperty(_state, "fcImageAlign", 'center'), _defineProperty(_state, "fcImage", 'images/avatar_image.jpg'), _defineProperty(_state, "fcTextAlign", 'center'), _defineProperty(_state, "fcHeadingText", ''), _state),
+  }, _defineProperty(_state, "setBcProfileImage_bind", ''), _defineProperty(_state, "imageBcProfilePath", ''), _defineProperty(_state, "profileImage", ''), _defineProperty(_state, "fcCheckboxChoose", 'default'), _defineProperty(_state, "ifcSignatureChoose", 'default'), _defineProperty(_state, "ifcProfileChoose", 'default'), _defineProperty(_state, "ifcBelowimageChoose", 'default'), _defineProperty(_state, "ibcLogoCheckChoose", 'default'), _defineProperty(_state, "ibcBannerCheckChoose", 'default'), _defineProperty(_state, "ibcProfileCheckChoose", 'default'), _defineProperty(_state, "hideIconEdit", false), _defineProperty(_state, "displayIfcLogoMedia", false), _defineProperty(_state, "displayIfcMedia", false), _defineProperty(_state, "displayIfcSignatureMedia", false), _defineProperty(_state, "bcLogoChooseCheckBox", 'default'), _defineProperty(_state, "bcProfileChooseCheckBox", 'default'), _defineProperty(_state, "displayAddressLable", false), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "designationifc", ''), _defineProperty(_state, "designationifc1", ''), _defineProperty(_state, "designationifc2", ''), _defineProperty(_state, "designationTitle", ''), _defineProperty(_state, "designationTitleset2", ''), _defineProperty(_state, "designationTitleset3", ''), _defineProperty(_state, "designationTitleset4", ''), _defineProperty(_state, "errorMessage", []), _defineProperty(_state, "successMessage", []), _defineProperty(_state, "headingTagFc", ''), _defineProperty(_state, "tempFcAlignValue", 'center'), _defineProperty(_state, "ImageFcAlignValue", 'center'), _defineProperty(_state, "tempFcCheckboxChoose", ''), _defineProperty(_state, "fcModalHide", false), _defineProperty(_state, "fcRadioButton", 'default'), _defineProperty(_state, "fcTextLogoEditor", '<h1></h1>'), _defineProperty(_state, "fcImageAlign", 'center'), _defineProperty(_state, "fcImage", 'images/avatar_image.jpg'), _defineProperty(_state, "fcTextAlign", 'center'), _defineProperty(_state, "fcHeadingText", ''), _defineProperty(_state, "ifcPhotoRadio", 'default'), _defineProperty(_state, "ifcPhotoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcName", 'Kat Nitsous'), _defineProperty(_state, "ifcCompanyName", 'Sotheby’s International Realty, Inc.'), _defineProperty(_state, "ifcdesignation1", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation2", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation3", 'C(k)PÂ®'), _defineProperty(_state, "ifcTitle1", 'Business Development Director '), _defineProperty(_state, "ifcTitle2", '401(K) Consulting Director '), _defineProperty(_state, "ifcTitle3", 'Alternative Investments Director '), _defineProperty(_state, "ifcTitle4", 'Associate Stock Plan Director'), _defineProperty(_state, "ifcaddress", '16027 VENTURA BLVD, Suite 330 ENCINO, CA, 91436'), _defineProperty(_state, "ifcDirectPhone", 'M : 323-228-3805 '), _defineProperty(_state, "ifcOfficePhone", 'O : 626-396-9400'), _defineProperty(_state, "ifcWebsite", 'sothebyshomes.com'), _defineProperty(_state, "ifcEmail", 'kat.nitsou@sothebyinternational.com'), _defineProperty(_state, "ifcMemberCstNumber", 'NMLS#'), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "ifcdesignation21", ''), _defineProperty(_state, "ifcdesignation22", ''), _defineProperty(_state, "ifcdesignation23", ''), _defineProperty(_state, "ifcTitle21", ''), _defineProperty(_state, "ifcTitle22", ''), _defineProperty(_state, "ifcTitle23", ''), _defineProperty(_state, "ifcTitle24", ''), _defineProperty(_state, "ifcAddSecondAddress", true), _defineProperty(_state, "ifcSecondAddress", false), _defineProperty(_state, "ifcLogoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcLogoRadioButton", 'default'), _defineProperty(_state, "ifcSignatureImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcSignatureRadioButton", 'default'), _state),
   getters: {},
   mutations: {
     CHANGE_STATE: function CHANGE_STATE(state, value) {

@@ -12,6 +12,7 @@
 	.inside_bc .bc_address {padding-left: 6%;margin-top: 27%;}
 	.profile_imge_bc {width: 220px;height: 335px;}
 	.ibc_profile {height: 350px;}
+	.top-title{height: 260px;}
 }
 @media (max-width: 1787px) 
 {
@@ -24,8 +25,10 @@
 }
 @media (max-width: 1708px)
 {
-	.inside_bc .bc_address {padding-left: 6%;margin-top: 18%;}
+	.inside_bc .bc_address {padding-left: 6%;margin-top: 17.9%;}
 	.profile_imge_bc {width: 190px;height: 310px;}
+	.top-title{height: 230px;}
+
 }
 @media (max-width: 1600px) 
 {
@@ -61,9 +64,12 @@
 @media (max-width: 1366px)
 {
 	.profile_photo {height: 380px;}
-	.inside_bc .bc_address {padding-left: 6%;margin-top: 17%;}
+	.inside_bc .bc_address {padding-left: 6%;margin-top: 18%;}
 	.profile_imge_bc {width: 150px; height: 250px;}
 	.ibc_profile {height: 260px;}
+	.top-title{height: 200px;}
+
+
 }
 
 @media (max-width: 1360px) 
@@ -97,6 +103,7 @@
 	.below_title_text.bc_heading_title {height: 250px;}
 	.profile_imge_bc {width: 140px;height: 240px;}
 	.inside_bc .bc_address {margin-top: 15%;}
+	.top-title{height: 175px;}
 }
 @media (max-width: 1152px) 
 {
@@ -110,6 +117,7 @@
 	.inside_bc .bc_address {padding: 0% 0 0% 7%;margin-top: 21.5%;}
 	.profile_imge_bc {width: 120px; height: 195px;}
 	.ibc_profile {height: 230px;}
+	.top-title{height: 145px;}
 }
 @media (max-width: 1067px) 
 {
@@ -120,6 +128,7 @@
 	.profile_text {height: 560px;}
 	.bc_text_inner .text_inner p{font-size:14px}
 	.inside_bc .bc_address { margin-top: 11.5%;}
+	.top-title{height: 160px;}
 }
 @media (max-width: 1028px)
 {
@@ -136,6 +145,7 @@
 	.bc_backCover .ibc_logo img{max-height: 78%;}
 	.bc_backCover .below_title_text.bc_heading_title h2{font-size: 40px;line-height: 45px;} 
 	.bc_backCover .below_title_text.bc_heading_title{height: 190px;}
+	.top-title{height: 130px;}
 }
 @media (max-width: 1024px)
 {
@@ -156,7 +166,7 @@
 	.profile_photo {height: 350px;}
 	.right_side {height: auto;overflow: inherit;}
 	.ibc_profile {height: 260px;}
-	
+	.top-title{height: 165px;}
 }
 @media (max-width:800px)
 {
@@ -178,7 +188,7 @@
 	.top_preview.gjs-pn-buttons { display: none;}
 	.profile_imge_bc {width: 110px;height: 175px;}
 	.right_side {height: auto;padding-top: 30px;}
-	.save_ifc_to_db {top: 6px;}
+	.save_ifc_to_db {top: -23px;right: 15px;}
 	.ifc_signature_image {height: 45px;}
 	.ibc_profile {height: 230px;}
 }
@@ -251,11 +261,13 @@
 	.ibc_profile {margin-left: 20px;}
 	.ibc_profile + .col-md-9 { width: 100%;}
 	.inside_ibc .below_title_text .col-md-6 { width: 100%;}
+	.top-title{height: 95px;}
 }
 @media (max-width:640px)
 {
 	.inside_bc .bc_address {margin-top: 15%;}
 	.profile_imge_bc {height: 150px;width: 95px;}
+	.top-title{height: 125px;}
 }
 @media (max-width:600px)
 {
@@ -271,6 +283,7 @@
 	.bc_text_inner .text_inner p {font-size: 9px;padding: 0px;}
 	.profile_imge_bc {height: 160px;width: 95px;margin-right: 10px;}
 	.bc_backCover .bc_address h2 {font-size: 20px;}
+	.top-title{height: 105px;}
 }
 @media (max-width:568px)
 {
@@ -323,6 +336,7 @@
 {
 	.bc_backCover .below_title_text.bc_heading_title h2 {font-size: 15px;line-height: 15px;}
 	.bc_backCover .below_title_text.bc_heading_title {height: 80px;min-height: 80px;}
+	.save_ifc_to_db , .preview_mag{padding: 6px 13px;font-size: 14px;}
 }	
 @media (max-width:320px)
 {

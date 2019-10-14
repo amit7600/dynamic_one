@@ -19,38 +19,38 @@
                                    
                                     <div class="profile_photo">
                                          <iconHoverComponent class="insidefc_profile" @click.native="openPopUp(1)" />
-                                         <img :src="defaultImage"  v-if="imageIfcPath == ''" title="" >
-                                        <img v-if="imageIfcPath != ''" :src="imageIfcPath" alt="" srcset="" style="margin-bottom:20px;">
+                                         <img :src="defaultPhotoImage"  v-if="photoRadioButton == 'default'" title="" >
+                                        <img v-if="photoRadioButton == 'addMedia'" :src="photoImage" alt="" srcset="" style="margin-bottom:20px;">
                             	
                                     </div>
                                     <div class="profile_text" v-if="!this.ifcTextDisplay">
                                          <iconHoverIfcComponent class="insidefc_profile" @click.native="openPopUp(2)"/>
-                                        <h2>{{this.ifcTitleText}}</h2>
-                                        <p><b>{{this.ifcCompanyName}}</b></p>
-                                        <p>{{this.designation1}}, {{this.designation2}}, {{this.designation3}}</p>
-                                        <p>{{this.designationTitle1}}
-                                            {{this.designationTitle2}}
-                                            {{this.designationTitle3}}
-                                            {{this.designationTitle4}}</p>
+                                        <h2>{{this.name}}</h2>
+                                        <p><b>{{this.company_name}}</b></p>
+                                        <p>{{this.designation1 != '' ? this.designation1 + ' ,' : ''}} {{this.designation2 != '' ? this.designation2 + ' ,' : ''}} {{this.designation3}}</p>
+                                        <p>{{this.title1}}
+                                            {{this.title2}}
+                                            {{this.title3}}
+                                            {{this.title4}}</p>
                                         <p class="mb-3"></p>
-                                        <div v-if="this.displayAddressLable">       
-                                            <p><b>{{this.ifcCompanyName2}}</b></p>  
-                                            <p>{{this.designationifc}}, {{this.designationifc1}} ,{{this.designationifc2}}</p>
-                                            <p>{{this.designationTitle}}
-                                                {{this.designationTitleset2}}
-                                                {{this.designationTitleset3}}
-                                                {{this.designationTitleset4}}
+                                        <div v-if="this.displaySecondAddress">       
+                                            <p><b>{{this.company_name2}}</b></p>  
+                                            <p>{{this.designation21 != '' ? this.designation21 + ' ,' : ''}} {{this.designation22 != '' ? this.designation22 + ' ,' : ''}} {{this.designation23}}</p>
+                                            <p>{{this.title21}}
+                                                {{this.title22}}
+                                                {{this.title23}}
+                                                {{this.title24}}
                                             </p>
                                         </div>
-                                        <p>{{this.addressIfc1}}</p>
+                                        <p>{{this.address}}</p>
                                         <!-- <p>ENCINO, CA, 91436</p> -->
-                                        <p>{{this.directPhoneIfc}}</p>
+                                        <p>{{this.directPhone}}</p>
                                         <p>{{this.officePhone}}</p>
                                         <p class="mb-3"></p>
-                                        <p>{{this.websiteUrlIfc}}</p>
-                                        <p>{{this.emailIfc}}</p>
+                                        <p>{{this.website}}</p>
+                                        <p>{{this.email}}</p>
                                         <p class="mb-3"></p>
-                                        <p>{{this.stNumberIfc}}</p>
+                                        <p>{{this.memberCstNumber}}</p>
                                     </div>
                                     <div class="profile_text" v-if="this.ifcTextDisplay" >
                                       <div v-html="this.ifcText"></div>
@@ -60,8 +60,8 @@
                                         <div class="below_logo">
                                                 <iconHoverIfcComponent class="insidefc_profile" @click.native="openPopUp(3)"/>
                                             <!-- <img src="images/footer_logo.png" alt="" title=""> defaultIfcLogoPath-->
-                                            <img :src="defaultIfcLogoPath" v-if="imageIfcLogoPath == ''"   title="" >
-                                            <img v-if="imageIfcLogoPath != ''" :src="imageIfcLogoPath" alt="" srcset="" style="margin-bottom:20px;">
+                                            <img :src="defaultLogoImage" v-if="this.logoRadioButton == 'default'"   title="" >
+                                            <img v-if="this.logoRadioButton == 'addMedia'" :src="logoImage" alt="" srcset="" style="margin-bottom:20px;">
                                         </div> 
                                     </div>                                
                                 </div>
@@ -85,25 +85,25 @@
                                         <div v-if="this.showTextAreaIfcRight" class="editor_pop_up">
                                             <div class="hoverComponetRemove">
                                                 <div class="inner_plus_data">        
-                                                <a @click="addfont('italic', false, null), (italicBtn = !italicBtn)" :class="{'btn': true, 'active' : italicBtn}" title="Italic" data-toggle="tooltip" data-placement="top">
+                                                <a @click="changeFont('italic', false, null), (italicBtn = !italicBtn)" :class="{'btn': true, 'active' : italicBtn}" title="Italic" data-toggle="tooltip" data-placement="top">
                                                             <i class="ti-Italic"></i>
                                                 </a>
-                                                 <a @click="addfont('bold', false, null), (boldBtn = !boldBtn)" :class="{'btn': true, 'active' : boldBtn}" title="Bold" data-toggle="tooltip" data-placement="top">
+                                                 <a @click="changeFont('bold', false, null), (boldBtn = !boldBtn)" :class="{'btn': true, 'active' : boldBtn}" title="Bold" data-toggle="tooltip" data-placement="top">
                                                             <i class="fas fa-bold"></i>
                                                  </a>
-                                                 <a @click="addfont('underline', false, null), (underlineBtn = !underlineBtn)" :class="{'btn': true, 'active' : underlineBtn}" title="Underline" data-toggle="tooltip" data-placement="top">
+                                                 <a @click="changeFont('underline', false, null), (underlineBtn = !underlineBtn)" :class="{'btn': true, 'active' : underlineBtn}" title="Underline" data-toggle="tooltip" data-placement="top">
                                                             <i class="ti-underline"></i>
                                                  </a>
-                                               <a @click="addfont('justifyLeft' ,false, null), resetActiveOnAlign('textLeft', textLeft)" :class="{'btn': true, 'active' : textLeft}" title="Left" data-toggle="tooltip" data-placement="top">
+                                               <a @click="changeFont('justifyLeft' ,false, null), resetActiveOnAlign('textLeft', textLeft)" :class="{'btn': true, 'active' : textLeft}" title="Left" data-toggle="tooltip" data-placement="top">
                                                             <i class="ti-align-left"></i>
                                                 </a>
-                                               <a @click="addfont('justifyCenter', false, null), resetActiveOnAlign('textCenter', textCenter)" :class="{'btn': true, 'active' : textCenter}" title="Center" data-toggle="tooltip" data-placement="top">
+                                               <a @click="changeFont('justifyCenter', false, null), resetActiveOnAlign('textCenter', textCenter)" :class="{'btn': true, 'active' : textCenter}" title="Center" data-toggle="tooltip" data-placement="top">
                                                             <i class="ti-align-center"></i>
                                                 </a>
-                                                 <a @click="addfont('justifyRight' ,false, null), resetActiveOnAlign('textRight', textRight)" :class="{'btn': true, 'active' : textRight}" title="Right" data-toggle="tooltip" data-placement="top">
+                                                 <a @click="changeFont('justifyRight' ,false, null), resetActiveOnAlign('textRight', textRight)" :class="{'btn': true, 'active' : textRight}" title="Right" data-toggle="tooltip" data-placement="top">
                                                     <i class="ti-align-right"></i>
                                                 </a>
-                                                <a @click="addfont('justifyFull' ,false, null), resetActiveOnAlign('textJustify', textJustify)" :class="{'btn': true, 'active' : textJustify}" title="Justify" data-toggle="tooltip" data-placement="top">
+                                                <a @click="changeFont('justifyFull' ,false, null), resetActiveOnAlign('textJustify', textJustify)" :class="{'btn': true, 'active' : textJustify}" title="Justify" data-toggle="tooltip" data-placement="top">
                                                     <i class="ti-align-justify"></i>
                                                 </a>
                                                 <select name id @change="insertTag(headingTag)" v-model="headingTag">
@@ -204,8 +204,8 @@
                                             </div> -->
                                         </div>
                                         <div class="ifc_signature_image">
-                                            <img v-if="this.imageIfcSignaturePath == ''" :src="defaultIfcSignaturePath" alt="">
-                                            <img v-if="this.imageIfcSignaturePath != ''" :src="imageIfcSignaturePath" alt="">
+                                            <img v-if="this.signatureRadioButton == 'default'" :src="defaultSignatureImage" alt="">
+                                            <img v-if="this.signatureRadioButton == 'addMedia'" :src="signatureImage" alt="">
                                           <iconHoverIfcComponent class="insidefc_profile" @click.native="openPopUp(4)"/>    
                                         </div>
                                     </div>
@@ -222,7 +222,7 @@
         </div> 
         <!-- modal start here -->
         <div class="modal fade show_data" id="ifcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-xl" role="document"  :class="{'custom_address':this.openIfcModalForText == 'ifc-text'}">
+			<div class="modal-dialog modal-xl" role="document"  :class="{'custom_address':this.open_pop_up == 2}">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">IFC input modal
@@ -243,96 +243,57 @@
         											Upload Profile Image
         										</div>
                                                 <div class="Logo_select_option row">
-                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.radioButton == 'default' }">
+                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.photoRadioButton == 'default' }">
                                                         <div class="col-sm-12 text_field">
         													<label for="UseDefault">
-        														<input  type="radio" id="UseDefault" value="default" v-model="radioButton" @change="changeRadio" name="check" />Use Default Profile
+        														<input  type="radio" id="UseDefault" value="default" v-model="photoRadioButton" @change="changePhotoRadio" name="check" />Use Default Profile
         													</label>
         												</div>
                                                     </div>
-                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.radioButton == 'addMedia' }">
+                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.photoRadioButton == 'addMedia' }">
                                                         <div class="col-sm-12 text_field">
         													<label for="addMedia">
-        														<input  type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="radioButton" @change="changeRadio" name="check" />Add Profile Image
+        														<input  type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="photoRadioButton" @change="changePhotoRadio" name="check" />Add Profile Image
                                                                 <toolTipsComponent title="400 X 400"/>
         													</label>
         												</div>                                                        
                                                     </div>
                                                 </div>
                                                 <div class="add_media">
-                                                    <button v-if="this.$store.state.displayIfcMedia" class="btn btn-block media_btn " data-target="#fileModal" data-toggle="modal" @click="check_Value(1)">
+                                                    <button v-if="this.photoRadioButton == 'addMedia'" class="btn btn-block media_btn " data-target="#fileModal" data-toggle="modal" >
                                                         <span class="font_content">Add Media</span>
                                                     </button>
                                                 </div>
-                                                <div v-if="this.$store.state.displayIfcMedia" class="add-media-show" id="addMedia_id" data-section="section-1">
-                                                    <img src="images/avatar_image.jpg" alt="" data-target="#fileModal" data-toggle="modal"  title=""  style="margin-bottom:20px;" v-show="imageIfcPath == ''">
-                                                    <img data-target="#fileModal" data-toggle="modal"  v-if="imageIfcPath != ''" :src="imageIfcPath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;">
+                                                <!-- @click="check_Value(1)" -->
+                                                <div v-if="this.photoRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
+                                                    <img :src="this.photoImage" alt="" data-target="#fileModal" data-toggle="modal"  title=""  style="margin-bottom:20px;" >
+                                                    <!-- <img data-target="#fileModal" data-toggle="modal"  v-if="imageIfcPath != ''" :src="imageIfcPath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;"> -->
                                                 </div>
                                             </div>
                                         <!---End profile image ---->
-                                        <!---for logo ifc ---->
-                                            <div v-if="this.open_pop_up == 3" > 
-                                                <div class="font_content">
-        											Upload Logo Image
-        										</div>
-                                                <div class="Logo_select_option row">
-                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.selectIfcLogoValue == 'remove' }">
-                                                        <div class="col-sm-12 text_field">
-        													<label for="slideTwo">
-        														<input type="radio" value="remove" v-model="selectIfcLogoValue" @change="getIfcLogoInputValue(selectIfcLogoValue)" id="slideTwo" name="check" checked />Remove Logo
-        													</label>
-        												</div>
-                                                    </div>
-                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.selectIfcLogoValue == 'default' }">
-                                                        <div class="col-sm-12 text_field">
-        													<label for="UseDefault">
-        														<input  type="radio" id="UseDefault" value="default" v-model="selectIfcLogoValue" @change="getIfcLogoInputValue(selectIfcLogoValue)" name="check" checked />Use Default Logo
-        													</label>
-        												</div>
-                                                    </div>
-                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.selectIfcLogoValue == 'addMedia' }">
-                                                        <div class="col-sm-12 text_field">
-        													<label for="addMedia">
-        														<input  type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="selectIfcLogoValue" @change="getIfcLogoInputValue(selectIfcLogoValue)" name="check" checked />Add Logo
-                                                                <toolTipsComponent title="500 X 500"/>
-        													</label>
-        												</div>
-                                                    </div>
-                                                </div>
-                                                <div class="add_media">
-                                                    <button v-if="this.$store.state.displayIfcLogoMedia" class="btn btn-block media_btn"  @click="check_Value(2)" data-target="#fileModal" data-toggle="modal">
-                                                        <span class="font_content">Add Media</span>
-                                                    </button>
-                                                </div>
-                                                <div v-if="this.$store.state.displayIfcLogoMedia" class="add-media-show" id="addMedia_id" data-section="section-1">
-                                                    <img src="images/avatar_image.jpg" alt="" data-target="#fileModal" data-toggle="modal"  title=""  style="margin-bottom:20px;" v-show="imageIfcLogoPath == ''">
-                                                    <img data-target="#fileModal" data-toggle="modal"  v-if="imageIfcLogoPath != ''" :src="imageIfcLogoPath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;">
-                                                </div>
-                                            </div>
-                                        <!---End logo ifc ---->
                                         <!---for profile_text IFC ---->
                                             <div  v-if="this.open_pop_up == 2">  
                                                 <div class="ifc_title">
                                                     <label for="usr">Name </label>
-                                                    <input type="text" v-model='titleInputIfc' @keyup="getTitleIfc(titleInputIfc)" class="form-control" id="usr" placeholder="Name">
+                                                    <input type="text" v-model='name' class="form-control" id="usr" placeholder="Name">
                                                 </div>
                                                 <div class="ifc_title">
                                                     <label for="usr">Company Details</label>
-                                                    <input type="text" v-model='companyInputIfc' @keyup="getCompanyNameIfc(companyInputIfc)" class="form-control" id="usr" placeholder="Company Name">
+                                                    <input type="text" v-model='company_name' class="form-control" id="usr" placeholder="Company Name">
                                                 </div>
                                                 <div class="ifc_title">
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <!-- <label for="usr">Designation 1</label> -->
-                                                            <input type="text" v-model='designationInputIfc1' @keyup="getdesignationIfc1(designationInputIfc1)" class="form-control" id="usr" placeholder="Designation 1">
+                                                            <input type="text" v-model='designation1' class="form-control" id="usr" placeholder="Designation 1">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <!-- <label for="usr">Designation 2</label> -->
-                                                            <input type="text" v-model='designationInputIfc2' @keyup="getdesignationIfc2(designationInputIfc2)" class="form-control" id="usr" placeholder="Designation 2">
+                                                            <input type="text" v-model='designation2' class="form-control" id="usr" placeholder="Designation 2">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <!-- <label for="usr">Designation 3</label> -->
-                                                            <input type="text" v-model='designationInputIfc3' @keyup="getdesignationIfc3(designationInputIfc3)" class="form-control" id="usr" placeholder="Designation 3">
+                                                            <input type="text" v-model='designation3'  class="form-control" id="usr" placeholder="Designation 3">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -340,11 +301,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <!-- <label for="usr">Title 1</label> -->
-                                                            <input type="text" v-model='designationTitleInputIfc1' @keyup="getdesignationTitleIfc1(designationTitleInputIfc1)" class="form-control" id="usr" placeholder="Title 1">
+                                                            <input type="text" v-model='title1'  class="form-control" id="usr" placeholder="Title 1">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <!-- <label for="usr">Title 2</label> -->
-                                                            <input type="text" v-model='designationTitleInputIfc2' @keyup="getdesignationTitleIfc2(designationTitleInputIfc2)" class="form-control" id="usr" placeholder="Title 2">
+                                                            <input type="text" v-model='title2'  class="form-control" id="usr" placeholder="Title 2">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -354,17 +315,17 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <!-- <label for="usr">Title 3</label> -->
-                                                            <input type="text" v-model='designationTitleInputIfc3' @keyup="getdesignationTitleIfc3(designationTitleInputIfc3)" class="form-control" id="usr" placeholder="Title 3">
+                                                            <input type="text" v-model='title3' class="form-control" id="usr" placeholder="Title 3">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <!-- <label for="usr">Title 4</label> -->
-                                                            <input type="text" v-model='designationTitleInputIfc4' @keyup="getdesignationTitleIfc4(designationTitleInputIfc4)" class="form-control" id="usr" placeholder="Title 4">
+                                                            <input type="text" v-model='title4'  class="form-control" id="usr" placeholder="Title 4">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="ifc_title" v-if="this.addAddressButton">
+                                                <div class="ifc_title" v-if="this.secondAddress">
                                                     <div class="add_media" style="margin:0px;">
-                                                        <button class="btn btn-block media_btn" style="margin:0px;" @click="showAddAddress()">
+                                                        <button class="btn btn-block media_btn" style="margin:0px;" @click="showAddress()">
                                                             <span class="font_content">Add</span>
                                                         </button>
                                                     </div>
@@ -372,24 +333,24 @@
                                                 <!-- add more company details-->
                                                 <!------------  -------->
                                                 
-                                                <div v-if="this.displayAddressLable">
+                                                <div v-if="this.displaySecondAddress">
                                                     <div class="ifc_title">
                                                         <label for="usr">Company Details 2</label>
-                                                        <input type="text" v-model='company2InputIfc' @keyup="getCompanyName2Ifc(company2InputIfc)" class="form-control" id="usr" placeholder="Company Name">
+                                                        <input type="text" v-model='company_name2' class="form-control" id="usr" placeholder="Company Name">
                                                     </div>
                                                     <div class="ifc_title">
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <!-- <label for="usr">Designation 1</label> -->
-                                                                <input type="text" v-model='designationInput1' @keyup="getdesignation1(designationInput1)" class="form-control" id="usr" placeholder="Designation 1">
+                                                                <input type="text" v-model='designation21' class="form-control" id="usr" placeholder="Designation 1">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 
-                                                                <input type="text" v-model='designationInput2' @keyup="getdesignation2(designationInput2)" class="form-control" id="usr" placeholder="Designation 2">
+                                                                <input type="text" v-model='designation22' class="form-control" id="usr" placeholder="Designation 2">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <!-- <label for="usr">Designation 3</label> -->
-                                                                <input type="text" v-model='designationInput3' @keyup="getdesignation3(designationInput3)" class="form-control" id="usr" placeholder="Designation 3">
+                                                                <input type="text" v-model='designation23'  class="form-control" id="usr" placeholder="Designation 3">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -397,11 +358,11 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <!-- <label for="usr">Title 1</label> -->
-                                                                <input type="text" v-model='designationTitleInput1' @keyup="getdesignationTitle1(designationTitleInput1)" class="form-control" id="usr" placeholder="Title 1">
+                                                                <input type="text" v-model='title21' class="form-control" id="usr" placeholder="Title 1">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <!-- <label for="usr">Title 2</label> -->
-                                                                <input type="text" v-model='designationTitleInput2' @keyup="getdesignationTitle2(designationTitleInput2)" class="form-control" id="usr" placeholder="Title 2">
+                                                                <input type="text" v-model='title22' class="form-control" id="usr" placeholder="Title 2">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -411,18 +372,19 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <!-- <label for="usr">Title 3</label> -->
-                                                                <input type="text" v-model='designationTitleInput3' @keyup="getdesignationTitle3(designationTitleInput3)" class="form-control" id="usr" placeholder="Title 3">
+                                                                <input type="text" v-model='title23' class="form-control" id="usr" placeholder="Title 3">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <!-- <label for="usr">Title 4</label> -->
-                                                                <input type="text" v-model='designationTitleInput4' @keyup="getdesignationTitle4(designationTitleInput4)" class="form-control" id="usr" placeholder="Title 4">
+                                                                <input type="text" v-model='title24' 
+                                                                class="form-control" id="usr" placeholder="Title 4">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="ifc_title">
                                                     <div class="add_media" style="margin:0px;">
-                                                        <button class="btn btn-block media_btn" style="margin:0px;" @click="removeAddAddress()">
-                                                            <span class="font_content">Remoove</span>
+                                                        <button class="btn btn-block media_btn remove_btn" style="margin:0px;" @click="removeAddress()">
+                                                            <span class="font_content ">Remove</span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -431,7 +393,7 @@
                                                 <!------------------>
                                                 <div class="ifc_title">
                                                     <label for="usr">Address</label>
-                                                    <input type="text" v-model='addressInputIfc1' @keyup="getAddressIfc1(addressInputIfc1)" class="form-control" id="usr" placeholder="Address">
+                                                    <input type="text" v-model='address'  class="form-control" id="usr" placeholder="Address">
                                                 </div>
                                                 <!---------------------->
                                                 <!------------------>
@@ -439,11 +401,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <!-- <label for="usr">Direct Phone</label> -->
-                                                            <input type="text" v-model='directPhoneInputIfc' @keyup="getdirectPhoneIfc(directPhoneInputIfc)" class="form-control" id="usr" placeholder="Direct Phone">
+                                                            <input type="text" v-model='directPhone' class="form-control" id="usr" placeholder="Direct Phone">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <!-- <label for="usr">Office Phone</label> -->
-                                                            <input type="text" v-model='officePhoneInputIfc' @keyup="getOfficePhoneIfc(officePhoneInputIfc)" class="form-control" id="usr" placeholder="Office Phone">
+                                                            <input type="text" v-model='officePhone'  class="form-control" id="usr" placeholder="Office Phone">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -451,7 +413,7 @@
                                                 <!------------------>
                                                 <div class="ifc_title">
                                                     <label for="usr">URL</label>
-                                                    <input type="text" v-model='websiteUrlInputIfc' @keyup="getWebsiteUrlIfc(websiteUrlInputIfc)" class="form-control" id="usr">
+                                                    <input type="text" v-model='website' class="form-control" id="usr" placeholder="Website URL">
                                                 </div>
                                                 <!---------------------->
                                                 <!------------------>
@@ -459,15 +421,55 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <label for="usr">Email</label>
-                                                            <input type="text" v-model='emailInputIfc' @keyup="getEmailIfc(emailInputIfc)" class="form-control" id="usr">
+                                                            <input type="text" v-model='email' class="form-control" id="usr">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="usr">ST Number</label>
-                                                            <input type="text" v-model='stNumberInputIfc' @keyup="getstNumberIfc(stNumberInputIfc)" class="form-control" id="usr">
+                                                            <input type="text" v-model='memberCstNumber' class="form-control" id="usr">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        <!---for logo ifc ---->
+                                            <div v-if="this.open_pop_up == 3" > 
+                                                <div class="font_content">
+        											Upload Logo Image
+        										</div>
+                                                <div class="Logo_select_option row">
+                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.logoRadioButton == 'remove' }">
+                                                        <div class="col-sm-12 text_field">
+        													<label for="slideTwo">
+        														<input type="radio" value="remove" v-model="logoRadioButton" @change="logoRadioButtonChange" id="slideTwo" name="check" checked />Remove Logo
+        													</label>
+        												</div>
+                                                    </div>
+                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.logoRadioButton == 'default' }">
+                                                        <div class="col-sm-12 text_field">
+        													<label for="UseDefault">
+        														<input  type="radio" id="UseDefault" value="default" v-model="logoRadioButton" @change="logoRadioButtonChange" name="check" checked />Use Default Logo
+        													</label>
+        												</div>
+                                                    </div>
+                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.logoRadioButton == 'addMedia' }">
+                                                        <div class="col-sm-12 text_field">
+        													<label for="addMedia">
+        														<input  type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="logoRadioButton" @change="logoRadioButtonChange" name="check" checked />Add Logo
+                                                                <toolTipsComponent title="500 X 500"/>
+        													</label>
+        												</div>
+                                                    </div>
+                                                </div>
+                                                <div class="add_media">
+                                                    <button v-if="this.logoRadioButton == 'addMedia'" class="btn btn-block media_btn"  data-target="#fileModal" data-toggle="modal">
+                                                        <span class="font_content">Add Media</span>
+                                                    </button>
+                                                </div>
+                                                <div v-if="this.logoRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
+                                                    <!-- <img src="images/avatar_image.jpg" alt="" data-target="#fileModal" data-toggle="modal"  title=""  style="margin-bottom:20px;" v-show="imageIfcLogoPath == ''"> -->
+                                                    <img data-target="#fileModal" data-toggle="modal"  :src="logoImage" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;">
+                                                </div>
+                                            </div>
+                                        <!---End logo ifc ---->
 
                                         <!--------- For Signature IFC  ---------->                      
                                             <div class="signature" v-if="this.open_pop_up == 4">
@@ -475,37 +477,37 @@
         											Upload Signature Image
         										</div>
                                                 <div class="Logo_select_option row">
-                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.selectIfcSignatureValue == 'remove' }">
+                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.signatureRadioButton == 'remove' }">
                                                         <div class="col-sm-12 text_field">
         													<label for="slideTwo">
-        														<input type="radio" value="remove" v-model="selectIfcSignatureValue" @change="getIfcSignatureInputValue(selectIfcSignatureValue)" id="slideTwo" name="check" checked />Remove Signature
+        														<input type="radio" value="remove" v-model="signatureRadioButton" @change="signatureRadioButtonChange" id="slideTwo" name="check" checked />Remove Signature
         													</label>
         												</div>
                                                     </div>
-                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.selectIfcSignatureValue == 'default' }">
+                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.signatureRadioButton == 'default' }">
                                                         <div class="col-sm-12 text_field">
         													<label for="UseDefault">
-        														<input type="radio" id="UseDefault" value="default" v-model="selectIfcSignatureValue" @change="getIfcSignatureInputValue(selectIfcSignatureValue)" name="check" checked />Use Default Signature
+        														<input type="radio" id="UseDefault" value="default" v-model="signatureRadioButton" @change="signatureRadioButtonChange" name="check" checked />Use Default Signature
         													</label>
         												</div>
                                                     </div>
-                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.selectIfcSignatureValue == 'addMedia' }">
+                                                    <div class="row modal_radiobox" :class="{'activeRadio':this.signatureRadioButton == 'addMedia' }">
                                                         <div class="col-sm-12 text_field">
         													<label for="addMedia">
-        														<input type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="selectIfcSignatureValue" @change="getIfcSignatureInputValue(selectIfcSignatureValue)" name="check" checked />Add Signature
+        														<input type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="signatureRadioButton" @change="signatureRadioButtonChange" name="check" checked />Add Signature
                                                                 <toolTipsComponent title="600 X 600"/>
         													</label>
         												</div>
                                                     </div>
                                                 </div>
                                                 <div class="add_media">
-                                                    <button v-if="this.$store.state.displayIfcSignatureMedia" class="btn btn-block media_btn" @click="check_Value(3)" data-target="#fileModal" data-toggle="modal">
+                                                    <button v-if="this.signatureRadioButton == 'addMedia'" class="btn btn-block media_btn" @click="check_Value(3)" data-target="#fileModal" data-toggle="modal">
                                                         <span class="font_content">Add Media</span>
                                                     </button>
                                                 </div>
-                                                <div v-if="this.$store.state.displayIfcSignatureMedia" class="add-media-show" id="addMedia_id" data-section="section-1">
-                                                    <img src="images/avatar_image.jpg" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;" v-show="imageIfcSignaturePath == ''">
-                                                    <img data-target="#fileModal" data-toggle="modal" v-if="imageIfcSignaturePath != ''" :src="imageIfcSignaturePath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;">
+                                                <div v-if="this.signatureRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
+                                                    <img :src="this.signatureImage" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;" >
+                                                    <!-- <img data-target="#fileModal" data-toggle="modal" v-if="imageIfcSignaturePath != ''" :src="imageIfcSignaturePath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;"> -->
                                                 </div>
                                             </div>
 									</div>
@@ -515,17 +517,11 @@
 					</div>
 					<div class="modal-footer">
 						<div class="inner_footer_content">
-							<button class="btn bottom_btn" data-dismiss="modal" @click="cancelModel">
-								<i class="ti-close" aria-hidden="true"></i>
-							</button>
-							<button class="btn bottom_btn" @click="addfont('redo', false, null)">
-								<i class="ti-back-right"></i>
-							</button>
-							<button class="btn bottom_btn" @click="addfont('undo', false, null)">
-								<i class="ti-back-left"></i>
-							</button>
-							<button class="btn bottom_btn"  data-dismiss="modal" @click="saveIfcChanges">
+							<button class="btn btn_save"  data-dismiss="modal" @click="saveChanges">Save
 								<i class="ti-check" ></i>
+							</button>
+                            <button class="btn btn_close" data-dismiss="modal" @click="cancelModal()">Cancel
+								<i class="ti-close" aria-hidden="true"></i>
 							</button>
 						</div>
 					</div>
@@ -533,7 +529,7 @@
 			</div>
 		</div>
         <!-- modal close here -->
-        <ifcInputComponent/>
+        
         <!-- <ifcTextInputModel/> -->
         <FileModalComponent/>
     </div>
@@ -576,8 +572,45 @@ export default {
 
             //new amit
             open_pop_up : '',
-            defaultImage : 'images/profile_pic.jpg',
-            radioButton : 'default',
+            defaultPhotoImage : 'images/profile_pic.jpg',
+            photoRadioButton : this.$store.state.ifcPhotoRadio,
+            photoImage : this.$store.state.ifcPhotoImage,
+            secondAddress : this.$store.state.ifcAddSecondAddress,
+            displaySecondAddress : this.$store.state.ifcSecondAddress,
+            name : this.$store.state.ifcName,
+            company_name : this.$store.state.ifcCompanyName,
+            designation1: this.$store.state.ifcdesignation1,
+            designation2 : this.$store.state.ifcdesignation2,
+            designation3 : this.$store.state.ifcdesignation3,
+            title1 : this.$store.state.ifcTitle1,
+            title2 : this.$store.state.ifcTitle2,
+            title3 : this.$store.state.ifcTitle3,
+            title4 : this.$store.state.ifcTitle4,
+            company_name2 : this.$store.state.ifcCompanyName2,
+            designation21 : this.$store.state.ifcdesignation21,
+            designation22 : this.$store.state.ifcdesignation22,
+            designation23 : this.$store.state.ifcdesignation23,
+            title21 : this.$store.state.ifcTitle21,
+            title22 : this.$store.state.ifcTitle22,
+            title23 : this.$store.state.ifcTitle23,
+            title24 : this.$store.state.ifcTitle24,
+            address : this.$store.state.ifcaddress,
+            directPhone : this.$store.state.ifcDirectPhone,
+            officePhone : this.$store.state.ifcOfficePhone,
+            website : this.$store.state.ifcWebsite,
+            email : this.$store.state.ifcEmail,
+            memberCstNumber : this.$store.state.ifcMemberCstNumber,
+            // logo section
+            logoImage : this.$store.state.ifcLogoImage,
+            logoRadioButton : this.$store.state.ifcLogoRadioButton,
+            defaultLogoImage : 'images/footer_logo.png',
+            // signature section
+            defaultSignatureImage : 'images/signature.png',
+            signatureImage : this.$store.state.ifcSignatureImage,
+            signatureRadioButton : this.$store.state.ifcSignatureRadioButton,
+
+
+
 
        }
        
@@ -586,16 +619,51 @@ export default {
         ...mapState([
             'ifcPreview',
             'bcPreview',
+            'ifcPhotoRadio',
+            'ifcPhotoImage',
+            'ifcName',
+            'ifcCompanyName',
+            'ifcdesignation1',
+            'ifcdesignation2',
+            'ifcdesignation3',
+            'ifcTitle1',
+            'ifcTitle2',
+            'ifcTitle3',
+            'ifcTitle4',
+            'ifcaddress',
+            'ifcDirectPhone',
+            'ifcOfficePhone',
+            'ifcWebsite',
+            'ifcEmail',
+            'ifcMemberCstNumber',
+            'ifcCompanyName2',
+            'ifcdesignation21',
+            'ifcdesignation22',
+            'ifcdesignation23',
+            'ifcTitle21',
+            'ifcTitle22',
+            'ifcTitle23',
+            'ifcTitle24',
+            'ifcSecondAddress',
+            'ifcAddSecondAddress',
+            'ifcLogoImage',
+            'ifcLogoRadioButton',
+            // signature
+            'ifcSignatureImage',
+            'ifcSignatureRadioButton'
         ])
     },
     mounted(){
         this.saveIFCPreview()
-        this.getifcUserBook()
+        // this.getifcUserBook()
         this.ACTION_CHANGE_STATE(['defaultIfcImagePath', this.preifcimagepath])
         this.ACTION_CHANGE_STATE(['defaultIfcLogoPath', this.preifclogoimagepath])
         this.ACTION_CHANGE_STATE(['defaultIfcSignaturePath', this.preifcSignatureimagepath])
     },
     methods:{
+        ...mapMutations([
+            'CHANGE_STATE'
+        ]),
         resetActiveOnAlign (type, value) {
 			this.textLeft = false
 			this.textRight = false
@@ -603,15 +671,151 @@ export default {
 			this.textJustify = false
 			this[type] = !this[value]
         },
+        cancelModal(){
+            this.photoRadioButton = this.ifcPhotoRadio;
+            this.photoImage = this.ifcPhotoImage ;
+            this.name = this.ifcName;
+            this.company_name = this.ifcCompanyName;
+            this.designation1 = this.ifcdesignation1;
+            this.designation2 = this.ifcdesignation2;
+            this.designation3 = this.ifcdesignation3;
+            this.title1 = this.ifcTitle1;
+            this.title2 = this.ifcTitle2;
+            this.title3 = this.ifcTitle3;
+            this.title4 = this.ifcTitle4;
+            this.company_name2 = this.ifcCompanyName2;
+            this.designation21 = this.ifcdesignation21;
+            this.designation22 = this.ifcdesignation22;
+            this.designation23 = this.ifcdesignation23;
+            this.title21 = this.ifcTitle21;
+            this.title22 = this.ifcTitle22;
+            this.title23 = this.ifcTitle23;
+            this.title24 = this.ifcTitle24;
+            this.address = this.ifcaddress;
+            this.directPhone = this.ifcDirectPhone;
+            this.officePhone = this.ifcOfficePhone;
+            this.website = this.ifcWebsite;
+            this.email = this.ifcEmail;
+            this.memberCstNumber = this.ifcMemberCstNumber;
+            this.displaySecondAddress = this.ifcSecondAddress;
+            this.secondAddress = this.ifcAddSecondAddress;
+            //logo section
+            this.logoRadioButton = this.ifcLogoRadioButton;
+            this.logoImage = this.ifcLogoImage;
+            // signature section
+            this.signatureRadioButton = this.ifcSignatureRadioButton;
+            this.signatureImage = this.ifcSignatureImage;
+        },
+        saveChanges(){
+
+            if(this.company_name2 == ''&& this.designation21 == '' && this.designation22 == '' && this.designation23 == '' && this.title21 == '' && this.title22 == '' && this.title23 == '' &&
+            this.title24 == ''){
+                this.secondAddress = true;
+                this.displaySecondAddress = false;
+            }
+
+            this.CHANGE_STATE(['ifcPhotoRadio',this.photoRadioButton])
+            this.CHANGE_STATE(['ifcPhotoImage',this.photoImage])
+            this.CHANGE_STATE(['ifcName',this.name])
+            this.CHANGE_STATE(['ifcCompanyName',this.company_name])
+            this.CHANGE_STATE(['ifcdesignation1',this.designation1])
+            this.CHANGE_STATE(['ifcdesignation2',this.designation2])
+            this.CHANGE_STATE(['ifcdesignation3',this.designation3])
+            this.CHANGE_STATE(['ifcTitle1',this.title1])
+            this.CHANGE_STATE(['ifcTitle2',this.title2])
+            this.CHANGE_STATE(['ifcTitle3',this.title3])
+            this.CHANGE_STATE(['ifcTitle4',this.title4])
+            this.CHANGE_STATE(['ifcaddress',this.address])
+            this.CHANGE_STATE(['ifcDirectPhone',this.directPhone])
+            this.CHANGE_STATE(['ifcOfficePhone',this.officePhone])
+            this.CHANGE_STATE(['ifcWebsite',this.website])
+            this.CHANGE_STATE(['ifcEmail',this.email])
+            this.CHANGE_STATE(['ifcMemberCstNumber',this.memberCstNumber])
+            this.CHANGE_STATE(['ifcCompanyName2',this.company_name2])
+            this.CHANGE_STATE(['ifcdesignation21',this.designation21])
+            this.CHANGE_STATE(['ifcdesignation22',this.designation22])
+            this.CHANGE_STATE(['ifcdesignation23',this.designation23])
+            this.CHANGE_STATE(['ifcTitle21',this.title21])
+            this.CHANGE_STATE(['ifcTitle22',this.title22])
+            this.CHANGE_STATE(['ifcTitle23',this.title23])
+            this.CHANGE_STATE(['ifcTitle24',this.title24])
+            // this section for address button
+            this.CHANGE_STATE(['ifcSecondAddress',this.displaySecondAddress])
+            this.CHANGE_STATE(['ifcAddSecondAddress',this.secondAddress])
+            // this section for logo image
+            this.CHANGE_STATE(['ifcLogoRadioButton',this.logoRadioButton])
+            this.CHANGE_STATE(['ifcLogoImage',this.logoImage])
+            // this section for signature image
+            this.CHANGE_STATE(['ifcSignatureRadioButton',this.signatureRadioButton])
+            this.CHANGE_STATE(['ifcSignatureImage',this.signatureImage])
+        },
         displayModal() {
                 $('#ifcModal').modal('show');
 		},
         openPopUp(value){
             this.open_pop_up = value
         },
-        changeRadio(e){
-            this.radioButton = e.target.value
+        changePhotoRadio(e){
+            this.photoRadioButton = e.target.value
         },
+        setImage(value){
+            if(this.open_pop_up == 1){
+                this.photoImage = value
+            }else if(this.open_pop_up == 3){
+                this.logoImage = value
+            }else if(this.open_pop_up == 4){
+                this.signatureImage = value
+            }
+        },
+        showAddress(){
+            this.secondAddress = false;
+            this.displaySecondAddress = true;
+        },
+        removeAddress(){
+            this.secondAddress = true;
+            this.displaySecondAddress = false;
+            this.company_name2 = '';
+            this.designation21 = '';
+            this.designation22 = '';
+            this.designation23 = '';
+            this.title21 = '';
+            this.title22 = '';
+            this.title23 = '';
+            this.title24 = '';
+        },
+        logoRadioButtonChange(e){
+            var value = e.target.value
+            this.logoRadioButton = value
+        },
+        signatureRadioButtonChange(e){
+            var value = e.target.value;
+            this.signatureRadioButton = value
+        },
+        changeFont(command, showUI, value){
+            document.execCommand(command, showUI, value);
+        },
+        insertTag(tag){            
+            var sel = window.getSelection()    
+            if(sel.toString() != '') {       
+                for(var i = sel.rangeCount;i--;){
+                    var wrapper = this.htmlToDom('<'+tag+'/>')
+                    var range = sel.getRangeAt(i);
+                    wrapper.appendChild(range.extractContents());
+                    range.insertNode(wrapper);
+                }
+                document.execCommand('heading', false, tag);
+            }else{
+                this.headingTag = ''
+                alert('Please select text!!!')
+            }
+            // document.execCommand('formatblock', false, headingTag)
+        },
+        htmlToDom: function(htmlEl){
+            var elm =  document.createElement('div')
+            elm.innerHTML = htmlEl;
+            return elm.children[0]
+        },
+        
         
     },
 }
