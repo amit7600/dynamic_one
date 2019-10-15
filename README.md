@@ -1,1 +1,1 @@
-# dynamic_one
+#installation guide
