@@ -253,6 +253,9 @@ export default {
 
 		},
 		saveChange(){
+			if(this.fcImage == 'images/avatar_image.jpg' && this.radioButton == 'addMedia'){
+				this.radioButton = this.fcRadioButton;
+			}
 			var text = $('.editable').html();
 			this.ACTION_CHANGE_STATE(['fcRadioButton',this.radioButton])
 			this.ACTION_CHANGE_STATE(['fcTextLogoEditor',text])
@@ -317,20 +320,22 @@ export default {
 			axios.get("api/userBooks/1")
 			.then(response => {
 				const front_cover = response.data.data.front_cover
-				// store into vuex
-				this.ACTION_CHANGE_STATE(['fcImageAlign',front_cover.imageAlign]);
-				this.ACTION_CHANGE_STATE(['fcTextAlign',front_cover.logoTextAlign]);
-				this.ACTION_CHANGE_STATE(['fcHeadingText',front_cover.HeadingTag]);
-				this.ACTION_CHANGE_STATE(['fcRadioButton',front_cover.radioButton!= null ? front_cover.radioButton : 'default']);
-				this.ACTION_CHANGE_STATE(['fcImage',front_cover.fcImage != null ? front_cover.fcImage : this.fcImage]);
-				
-				this.ACTION_CHANGE_STATE(['fcTextLogoEditor',front_cover.fcTextLogoEditor]);
-				this.defaultImage = front_cover.defaultImage != null ? front_cover.defaultImage : this.defaultImage;
-				this.radioButton = front_cover.radioButton != null ? front_cover.radioButton : 'default'
-				this.HeadingTag = front_cover.HeadingTag != null ? front_cover.HeadingTag : '';
-				this.imageAlign = front_cover.imageAlign
-				this.logoTextAlign = front_cover.logoTextAlign
-				this.fcImagePath = front_cover.fcImage
+				if(front_cover){
+					// store into vuex
+					this.ACTION_CHANGE_STATE(['fcImageAlign',front_cover.imageAlign]);
+					this.ACTION_CHANGE_STATE(['fcTextAlign',front_cover.logoTextAlign]);
+					this.ACTION_CHANGE_STATE(['fcHeadingText',front_cover.HeadingTag]);
+					this.ACTION_CHANGE_STATE(['fcRadioButton',front_cover.radioButton!= null ? front_cover.radioButton : 'default']);
+					this.ACTION_CHANGE_STATE(['fcImage',front_cover.fcImage != null ? front_cover.fcImage : this.fcImage]);
+					
+					this.ACTION_CHANGE_STATE(['fcTextLogoEditor',front_cover.fcTextLogoEditor]);
+					this.defaultImage = front_cover.defaultImage != null ? front_cover.defaultImage : this.defaultImage;
+					this.radioButton = front_cover.radioButton != null ? front_cover.radioButton : 'default'
+					this.HeadingTag = front_cover.HeadingTag != null ? front_cover.HeadingTag : '';
+					this.imageAlign = front_cover.imageAlign
+					this.logoTextAlign = front_cover.logoTextAlign
+					this.fcImagePath = front_cover.fcImage
+				}
 			})
 			.catch(error => {
 				// this.PUSH_ERROR_MESSAGE('Internal server error');

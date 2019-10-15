@@ -9163,6 +9163,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.fcImagePath = this.fcImage;
     },
     saveChange: function saveChange() {
+      if (this.fcImage == 'images/avatar_image.jpg' && this.radioButton == 'addMedia') {
+        this.radioButton = this.fcRadioButton;
+      }
+
       var text = $('.editable').html();
       this.ACTION_CHANGE_STATE(['fcRadioButton', this.radioButton]);
       this.ACTION_CHANGE_STATE(['fcTextLogoEditor', text]);
@@ -9235,26 +9239,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       axios.get("api/userBooks/1").then(function (response) {
-        var front_cover = response.data.data.front_cover; // store into vuex
+        var front_cover = response.data.data.front_cover;
 
-        _this2.ACTION_CHANGE_STATE(['fcImageAlign', front_cover.imageAlign]);
+        if (front_cover) {
+          // store into vuex
+          _this2.ACTION_CHANGE_STATE(['fcImageAlign', front_cover.imageAlign]);
 
-        _this2.ACTION_CHANGE_STATE(['fcTextAlign', front_cover.logoTextAlign]);
+          _this2.ACTION_CHANGE_STATE(['fcTextAlign', front_cover.logoTextAlign]);
 
-        _this2.ACTION_CHANGE_STATE(['fcHeadingText', front_cover.HeadingTag]);
+          _this2.ACTION_CHANGE_STATE(['fcHeadingText', front_cover.HeadingTag]);
 
-        _this2.ACTION_CHANGE_STATE(['fcRadioButton', front_cover.radioButton != null ? front_cover.radioButton : 'default']);
+          _this2.ACTION_CHANGE_STATE(['fcRadioButton', front_cover.radioButton != null ? front_cover.radioButton : 'default']);
 
-        _this2.ACTION_CHANGE_STATE(['fcImage', front_cover.fcImage != null ? front_cover.fcImage : _this2.fcImage]);
+          _this2.ACTION_CHANGE_STATE(['fcImage', front_cover.fcImage != null ? front_cover.fcImage : _this2.fcImage]);
 
-        _this2.ACTION_CHANGE_STATE(['fcTextLogoEditor', front_cover.fcTextLogoEditor]);
+          _this2.ACTION_CHANGE_STATE(['fcTextLogoEditor', front_cover.fcTextLogoEditor]);
 
-        _this2.defaultImage = front_cover.defaultImage != null ? front_cover.defaultImage : _this2.defaultImage;
-        _this2.radioButton = front_cover.radioButton != null ? front_cover.radioButton : 'default';
-        _this2.HeadingTag = front_cover.HeadingTag != null ? front_cover.HeadingTag : '';
-        _this2.imageAlign = front_cover.imageAlign;
-        _this2.logoTextAlign = front_cover.logoTextAlign;
-        _this2.fcImagePath = front_cover.fcImage;
+          _this2.defaultImage = front_cover.defaultImage != null ? front_cover.defaultImage : _this2.defaultImage;
+          _this2.radioButton = front_cover.radioButton != null ? front_cover.radioButton : 'default';
+          _this2.HeadingTag = front_cover.HeadingTag != null ? front_cover.HeadingTag : '';
+          _this2.imageAlign = front_cover.imageAlign;
+          _this2.logoTextAlign = front_cover.logoTextAlign;
+          _this2.fcImagePath = front_cover.fcImage;
+        }
       })["catch"](function (error) {// this.PUSH_ERROR_MESSAGE('Internal server error');
       });
     },
@@ -9287,11 +9294,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _model_ifcModelInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./model/ifcModelInput */ "./resources/js/components/model/ifcModelInput.vue");
-/* harmony import */ var _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model/fileModalComponent */ "./resources/js/components/model/fileModalComponent.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-iro-color-picker */ "./node_modules/vue-iro-color-picker/dist/VueIroColorPicker.common.js");
-/* harmony import */ var vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_alertComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/alertComponent */ "./resources/js/components/common/alertComponent.vue");
+/* harmony import */ var _model_ifcModelInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model/ifcModelInput */ "./resources/js/components/model/ifcModelInput.vue");
+/* harmony import */ var _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./model/fileModalComponent */ "./resources/js/components/model/fileModalComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-iro-color-picker */ "./node_modules/vue-iro-color-picker/dist/VueIroColorPicker.common.js");
+/* harmony import */ var vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_4__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -9761,80 +9769,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
  // import ifcTextInputModel from "./model/ifcTextInputModal";
 
 
@@ -9844,14 +9779,16 @@ var br = '<br><br>';
 var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give way to the spontaneous showers of early spring. “Do I need a coat? A jacket? A trench? Umbrella?” Transitional periods can be challenging. The key is to approach each day prepared for as many scenarios as possible. Just as it’s our goal to present financial options to help you reach future goals, this edition of ONE, The Style Issue, offers exclusive essentials perfect for elevating your lifestyle today. ' + br + ' “Dress You Up” provides tips applicable to everyone’s wardrobe and individual aesthetic. Serving as a sartorial assistant, this fashion feature guides you away from trends and toward personalized classic style. Think Katharine Hepburn’s contemporary fashion parade in the 1938 film Holiday and Colin Firth’s impeccably tailored suiting in 2014’s Kingsman: The Secret Service. ' + br + ' And the highly anticipated and fantastically stylish Kentucky Derby is run every year on the first Saturday in May. So, for those who can’t make it to Churchill Downs, the Celebrate section presents everything you need to throw “The Perfect Derby Affair” (fascinators not included).' + br + ' As you embrace this season, remember that we are here to assist you in building your financial foundation, one that will enable you to maintain your life in whatever style you wish.' + br + 'Sincerely,';
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ifcInputComponent: _model_ifcModelInput__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ifcInputComponent: _model_ifcModelInput__WEBPACK_IMPORTED_MODULE_1__["default"],
+    alertComponent: _common_alertComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
     //  ifcTextInputModel,
-    FileModalComponent: _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
-    "color-picker": vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_3___default.a
+    FileModalComponent: _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
+    "color-picker": vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_4___default.a
   },
   data: function data() {
     return {
-      inputTextRightIfc: defaultTextIfc,
+      textEditor: defaultTextIfc,
+      showTextEditor: false,
       headingTag: "",
       color_picker: "",
       code: this.editorTempData,
@@ -9905,11 +9842,17 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
       // signature section
       defaultSignatureImage: 'images/signature.png',
       signatureImage: this.$store.state.ifcSignatureImage,
-      signatureRadioButton: this.$store.state.ifcSignatureRadioButton
+      signatureRadioButton: this.$store.state.ifcSignatureRadioButton,
+      // for temp
+      tempHeading: ''
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(['ifcPreview', 'bcPreview', 'ifcPhotoRadio', 'ifcPhotoImage', 'ifcName', 'ifcCompanyName', 'ifcdesignation1', 'ifcdesignation2', 'ifcdesignation3', 'ifcTitle1', 'ifcTitle2', 'ifcTitle3', 'ifcTitle4', 'ifcaddress', 'ifcDirectPhone', 'ifcOfficePhone', 'ifcWebsite', 'ifcEmail', 'ifcMemberCstNumber', 'ifcCompanyName2', 'ifcdesignation21', 'ifcdesignation22', 'ifcdesignation23', 'ifcTitle21', 'ifcTitle22', 'ifcTitle23', 'ifcTitle24', 'ifcSecondAddress', 'ifcAddSecondAddress', 'ifcLogoImage', 'ifcLogoRadioButton', // signature
-  'ifcSignatureImage', 'ifcSignatureRadioButton'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['ifcPreview', 'bcPreview', 'ifcPhotoRadio', 'ifcPhotoImage', 'ifcName', 'ifcCompanyName', 'ifcdesignation1', 'ifcdesignation2', 'ifcdesignation3', 'ifcTitle1', 'ifcTitle2', 'ifcTitle3', 'ifcTitle4', 'ifcaddress', 'ifcDirectPhone', 'ifcOfficePhone', 'ifcWebsite', 'ifcEmail', 'ifcMemberCstNumber', 'ifcCompanyName2', 'ifcdesignation21', 'ifcdesignation22', 'ifcdesignation23', 'ifcTitle21', 'ifcTitle22', 'ifcTitle23', 'ifcTitle24', 'ifcSecondAddress', 'ifcAddSecondAddress', 'ifcLogoImage', 'ifcLogoRadioButton', // signature
+  'ifcSignatureImage', 'ifcSignatureRadioButton', // text editor
+  'ifcTextEditor'])),
+  created: function created() {
+    this.get_ifc_data();
+  },
   mounted: function mounted() {
     this.saveIFCPreview(); // this.getifcUserBook()
 
@@ -9917,7 +9860,7 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
     this.ACTION_CHANGE_STATE(['defaultIfcLogoPath', this.preifclogoimagepath]);
     this.ACTION_CHANGE_STATE(['defaultIfcSignaturePath', this.preifcSignatureimagepath]);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])(['CHANGE_STATE']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapMutations"])(['CHANGE_STATE']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(['ACTION_CHANGE_STATE']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapMutations"])(['EMPTY_MESSAGE_LIST', 'PUSH_SUCCESS_MESSAGE', 'PUSH_ERROR_MESSAGE']), {
     resetActiveOnAlign: function resetActiveOnAlign(type, value) {
       this.textLeft = false;
       this.textRight = false;
@@ -9966,6 +9909,14 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
         this.displaySecondAddress = false;
       }
 
+      if (this.open_pop_up == 1 && this.photoRadioButton == 'addMedia' && this.photoImage == 'images/avatar_image.jpg') {
+        this.photoRadioButton = this.ifcPhotoRadio;
+      } else if (this.open_pop_up == 3 && this.logoRadioButton == 'addMedia' && this.logoImage == 'images/avatar_image.jpg') {
+        this.logoRadioButton = this.ifcLogoRadioButton;
+      } else if (this.open_pop_up == 4 && this.signatureRadioButton == 'addMedia' && this.signatureImage == 'images/avatar_image.jpg') {
+        this.signatureRadioButton = this.ifcSignatureRadioButton;
+      }
+
       this.CHANGE_STATE(['ifcPhotoRadio', this.photoRadioButton]);
       this.CHANGE_STATE(['ifcPhotoImage', this.photoImage]);
       this.CHANGE_STATE(['ifcName', this.name]);
@@ -10006,6 +9957,7 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
     },
     openPopUp: function openPopUp(value) {
       this.open_pop_up = value;
+      $('#ifcModal').modal('show');
     },
     changePhotoRadio: function changePhotoRadio(e) {
       this.photoRadioButton = e.target.value;
@@ -10049,18 +10001,24 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
     insertTag: function insertTag(tag) {
       var sel = window.getSelection();
 
-      if (sel.toString() != '') {
-        for (var i = sel.rangeCount; i--;) {
-          var wrapper = this.htmlToDom('<' + tag + '/>');
-          var range = sel.getRangeAt(i);
-          wrapper.appendChild(range.extractContents());
-          range.insertNode(wrapper);
-        }
+      if (tag != '') {
+        this.tempHeading = tag;
 
-        document.execCommand('heading', false, tag);
+        if (sel.toString() != '') {
+          for (var i = sel.rangeCount; i--;) {
+            var wrapper = this.htmlToDom('<' + tag + '/>');
+            var range = sel.getRangeAt(i);
+            wrapper.appendChild(range.extractContents());
+            range.insertNode(wrapper);
+          }
+
+          document.execCommand('heading', false, tag);
+        } else {
+          this.headingTag = '';
+          alert('Please select text!!!');
+        }
       } else {
-        this.headingTag = '';
-        alert('Please select text!!!');
+        this.headingTag = this.tempHeading;
       } // document.execCommand('formatblock', false, headingTag)
 
     },
@@ -10068,6 +10026,172 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
       var elm = document.createElement('div');
       elm.innerHTML = htmlEl;
       return elm.children[0];
+    },
+    editTextEditor: function editTextEditor() {
+      this.showTextEditor = true;
+      $('.hoverComponetRemove').addClass('disabled_data');
+    },
+    saveTextEditor: function saveTextEditor() {
+      $('.hoverComponetRemove').removeClass('disabled_data');
+      var text = $('.editable_ifc_text').html();
+
+      if (text == '') {
+        text = defaultTextIfc;
+      }
+
+      this.textEditor = text;
+      this.showTextEditor = false;
+      this.CHANGE_STATE(['ifcTextEditor', text]);
+    },
+    cancelTextEditor: function cancelTextEditor() {
+      $('.hoverComponetRemove').removeClass('disabled_data');
+      this.showTextEditor = false;
+      this.textEditor = this.ifcTextEditor != '' ? this.ifcTextEditor : this.textEditor;
+    },
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      this.EMPTY_MESSAGE_LIST();
+      this.ACTION_CHANGE_STATE(['Savefcloader', true]);
+      var data = {
+        columnName: 'inside_front_cover',
+        textEditor: this.textEditor,
+        photoRadioButton: this.photoRadioButton,
+        photoImage: this.photoImage,
+        name: this.name,
+        company_name: this.company_name,
+        designation1: this.designation1,
+        designation2: this.designation2,
+        designation3: this.designation3,
+        title1: this.title1,
+        title2: this.title2,
+        title3: this.title3,
+        title4: this.title4,
+        company_name2: this.company_name2,
+        designation21: this.designation21,
+        designation22: this.designation22,
+        designation23: this.designation23,
+        title21: this.title21,
+        title22: this.title22,
+        title23: this.title23,
+        title24: this.title24,
+        address: this.address,
+        directPhone: this.directPhone,
+        officePhone: this.officePhone,
+        website: this.website,
+        email: this.email,
+        memberCstNumber: this.memberCstNumber,
+        displaySecondAddress: this.displaySecondAddress,
+        secondAddress: this.secondAddress,
+        //logo section
+        logoRadioButton: this.logoRadioButton,
+        logoImage: this.logoImage,
+        // signature section
+        signatureRadioButton: this.signatureRadioButton,
+        signatureImage: this.signatureImage // text editor
+
+      };
+      axios.post("api/userBooks", data).then(function (response) {
+        var inside_front_cover = response.data.data;
+        _this.photoRadioButton = inside_front_cover.photoRadioButton;
+        _this.photoImage = inside_front_cover.photoImage;
+        _this.name = inside_front_cover.name;
+        _this.company_name = inside_front_cover.company_name != null ? inside_front_cover.company_name : '';
+        _this.designation1 = inside_front_cover.designation1 != null ? inside_front_cover.designation1 : '';
+        _this.designation2 = inside_front_cover.designation2 != null ? inside_front_cover.designation2 : '';
+        _this.designation3 = inside_front_cover.designation3 != null ? inside_front_cover.designation3 : '';
+        _this.title1 = inside_front_cover.title1 != null ? inside_front_cover.title1 : '';
+        _this.title2 = inside_front_cover.title2 != null ? inside_front_cover.title2 : '';
+        _this.title3 = inside_front_cover.title3 != null ? inside_front_cover.title3 : '';
+        _this.title4 = inside_front_cover.title4 != null ? inside_front_cover.title4 : '';
+        _this.company_name2 = inside_front_cover.company_name2 != null ? inside_front_cover.company_name2 : '';
+        _this.designation21 = inside_front_cover.designation21 != null ? inside_front_cover.designation21 : '';
+        _this.designation22 = inside_front_cover.designation22 != null ? inside_front_cover.designation22 : '';
+        _this.designation23 = inside_front_cover.designation23 != null ? inside_front_cover.designation23 : '';
+        _this.title21 = inside_front_cover.title21 != null ? inside_front_cover.title21 : '';
+        _this.title22 = inside_front_cover.title22 != null ? inside_front_cover.title22 : '';
+        _this.title23 = inside_front_cover.title23 != null ? inside_front_cover.title23 : '';
+        _this.title24 = inside_front_cover.title24 != null ? inside_front_cover.title24 : '';
+        _this.address = inside_front_cover.address;
+        _this.directPhone = inside_front_cover.directPhone;
+        _this.officePhone = inside_front_cover.officePhone;
+        _this.website = inside_front_cover.website;
+        _this.email = inside_front_cover.email;
+        _this.memberCstNumber = inside_front_cover.memberCstNumber;
+        _this.displaySecondAddress = inside_front_cover.displaySecondAddress;
+        _this.secondAddress = inside_front_cover.secondAddress; //logo section
+
+        _this.logoRadioButton = inside_front_cover.logoRadioButton;
+        _this.logoImage = inside_front_cover.logoImage; // signature section
+
+        _this.signatureRadioButton = inside_front_cover.signatureRadioButton;
+        _this.signatureImage = inside_front_cover.signatureImage; // text editor
+
+        _this.textEditor = inside_front_cover.textEditor;
+        _this.showTextEditor = false;
+
+        _this.PUSH_SUCCESS_MESSAGE('Inside front cover saved successfully!');
+
+        _this.ACTION_CHANGE_STATE(['Savefcloader', false]);
+      })["catch"](function (error) {
+        _this.PUSH_ERROR_MESSAGE('Internal server error!');
+      });
+    },
+    saveDownload: function saveDownload() {
+      this.onSubmit();
+    },
+    get_ifc_data: function get_ifc_data() {
+      var _this2 = this;
+
+      this.ACTION_CHANGE_STATE(['Savefcloader', true]);
+      axios.get("api/userBooks/1").then(function (response) {
+        var inside_front_cover = response.data.data.inside_front_cover;
+
+        if (inside_front_cover != '') {
+          _this2.photoRadioButton = inside_front_cover.photoRadioButton;
+          _this2.photoImage = inside_front_cover.photoImage;
+          _this2.name = inside_front_cover.name;
+          _this2.company_name = inside_front_cover.company_name != null ? inside_front_cover.company_name : '';
+          _this2.designation1 = inside_front_cover.designation1 != null ? inside_front_cover.designation1 : '';
+          _this2.designation2 = inside_front_cover.designation2 != null ? inside_front_cover.designation2 : '';
+          _this2.designation3 = inside_front_cover.designation3 != null ? inside_front_cover.designation3 : '';
+          _this2.title1 = inside_front_cover.title1 != null ? inside_front_cover.title1 : '';
+          _this2.title2 = inside_front_cover.title2 != null ? inside_front_cover.title2 : '';
+          _this2.title3 = inside_front_cover.title3 != null ? inside_front_cover.title3 : '';
+          _this2.title4 = inside_front_cover.title4 != null ? inside_front_cover.title4 : '';
+          _this2.company_name2 = inside_front_cover.company_name2 != null ? inside_front_cover.company_name2 : '';
+          _this2.designation21 = inside_front_cover.designation21 != null ? inside_front_cover.designation21 : '';
+          _this2.designation22 = inside_front_cover.designation22 != null ? inside_front_cover.designation22 : '';
+          _this2.designation23 = inside_front_cover.designation23 != null ? inside_front_cover.designation23 : '';
+          _this2.title21 = inside_front_cover.title21 != null ? inside_front_cover.title21 : '';
+          _this2.title22 = inside_front_cover.title22 != null ? inside_front_cover.title22 : '';
+          _this2.title23 = inside_front_cover.title23 != null ? inside_front_cover.title23 : '';
+          _this2.title24 = inside_front_cover.title24 != null ? inside_front_cover.title24 : '';
+          _this2.address = inside_front_cover.address;
+          _this2.directPhone = inside_front_cover.directPhone;
+          _this2.officePhone = inside_front_cover.officePhone;
+          _this2.website = inside_front_cover.website;
+          _this2.email = inside_front_cover.email;
+          _this2.memberCstNumber = inside_front_cover.memberCstNumber;
+          _this2.displaySecondAddress = inside_front_cover.displaySecondAddress;
+          _this2.secondAddress = inside_front_cover.secondAddress; //logo section
+
+          _this2.logoRadioButton = inside_front_cover.logoRadioButton;
+          _this2.logoImage = inside_front_cover.logoImage; // signature section
+
+          _this2.signatureRadioButton = inside_front_cover.signatureRadioButton;
+          _this2.signatureImage = inside_front_cover.signatureImage; // text editor
+
+          _this2.textEditor = inside_front_cover.textEditor;
+          _this2.showTextEditor = false; // this is for save data into store
+
+          _this2.saveChanges();
+        }
+
+        _this2.ACTION_CHANGE_STATE(['Savefcloader', false]);
+      })["catch"](function (error) {
+        _this2.PUSH_ERROR_MESSAGE('Internal server error!');
+      });
     }
   })
 });
@@ -10170,6 +10294,211 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10180,20 +10509,52 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     FileModalComponent: _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
     ibcAddressInputComponent: _model_ibcAddressModal__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['ibcPreview'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['ibcPreview', 'ibcLogoRadioButton', 'ibcLogoImage'])),
   data: function data() {
     return {
       ibcContent: '',
       loader: parseInt(100),
       loaderHeight: parseInt(20),
-      loaderColor: '#3949ab'
+      loaderColor: '#3949ab',
+      // start
+      open_pop_up: '',
+      defaultLogo: 'images/ibc_logo.png',
+      logoRadioButton: this.$store.state.ibcLogoRadioButton,
+      logoImage: this.$store.state.ibcLogoImage
     };
   },
   mounted: function mounted() {
     this.saveIBCPreview();
     this.getIbcUserBook();
   },
-  methods: {}
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapMutations"])(['CHANGE_STATE']), {
+    openIbcModal: function openIbcModal(value) {
+      this.open_pop_up = value;
+      $('#ibcModal').modal('show');
+    },
+    setImage: function setImage(value) {
+      if (this.open_pop_up == 1) {
+        this.logoImage = value;
+      }
+    },
+    cancelModal: function cancelModal() {
+      // logo section
+      this.logoImage = this.ibcLogoImage;
+      this.logoRadioButton = this.ibcLogoRadioButton;
+    },
+    saveChanges: function saveChanges() {
+      if (this.open_pop_up == 1 && this.logoImage == 'images/avatar_image.jpg' && this.logoRadioButton == 'addMedia') {
+        this.logoRadioButton = this.ibcLogoRadioButton;
+      }
+
+      this.CHANGE_STATE(['ibcLogoRadioButton', this.logoRadioButton]);
+      this.CHANGE_STATE(['ibcLogoImage', this.logoImage]);
+    },
+    logoRadioButtonChange: function logoRadioButtonChange(e) {
+      var value = e.target.value;
+      this.logoRadioButton = value;
+    }
+  })
 });
 
 /***/ }),
@@ -11347,12 +11708,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -12279,6 +12634,10 @@ __webpack_require__.r(__webpack_exports__);
         _this2.libraryImages = [];
         _this2.libraryImages = response.data.data;
         document.getElementById("uploadImage").value = "";
+
+        _this2.setImage(response.data.uploadImage);
+
+        $('#fileModalClose').click();
       })["catch"](function (errorResponse) {
         console.log(errorResponse, "errorResponse");
       });
@@ -52576,21 +52935,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "hoverComponetRemove" }, [
-    _c("div", { staticClass: "inner_plus_data" }, [
-      _c("i", {
-        staticClass: "ti-pencil",
-        attrs: { title: "Edit" },
-        on: {
-          click: function($event) {
-            return _vm.displayifclogo($event)
-          }
-        }
-      })
-    ])
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "hoverComponetRemove" }, [
+      _c("div", { staticClass: "inner_plus_data" }, [
+        _c("i", { staticClass: "ti-pencil", attrs: { title: "Edit" } })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -53563,6 +53921,8 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("alertComponent"),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "row main_container m-0" },
@@ -53598,17 +53958,14 @@ var render = function() {
                 "button",
                 {
                   staticClass: "save_ifc_to_db",
-                  on: { click: _vm.saveFcValueToDb }
+                  on: { click: _vm.saveDownload }
                 },
                 [_vm._v("Save & download")]
               ),
               _vm._v(" "),
               _c(
                 "button",
-                {
-                  staticClass: "save_ifc_to_db",
-                  on: { click: _vm.saveifcDataToDb }
-                },
+                { staticClass: "save_ifc_to_db", on: { click: _vm.onSubmit } },
                 [_vm._v("Save")]
               ),
               _vm._v(" "),
@@ -53663,148 +54020,118 @@ var render = function() {
                                 1
                               ),
                               _vm._v(" "),
-                              !this.ifcTextDisplay
-                                ? _c(
-                                    "div",
-                                    { staticClass: "profile_text" },
-                                    [
-                                      _c("iconHoverIfcComponent", {
-                                        staticClass: "insidefc_profile",
-                                        nativeOn: {
-                                          click: function($event) {
-                                            return _vm.openPopUp(2)
-                                          }
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("h2", [_vm._v(_vm._s(this.name))]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _c("b", [
-                                          _vm._v(_vm._s(this.company_name))
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(
-                                          _vm._s(
-                                            this.designation1 != ""
-                                              ? this.designation1 + " ,"
-                                              : ""
-                                          ) +
-                                            " " +
+                              _c(
+                                "div",
+                                { staticClass: "profile_text" },
+                                [
+                                  _c("iconHoverIfcComponent", {
+                                    staticClass: "insidefc_profile",
+                                    nativeOn: {
+                                      click: function($event) {
+                                        return _vm.openPopUp(2)
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("h2", [_vm._v(_vm._s(this.name))]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _c("b", [_vm._v(_vm._s(this.company_name))])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _vm._v(
+                                      _vm._s(
+                                        this.designation1 != ""
+                                          ? this.designation1 + " ,"
+                                          : ""
+                                      ) +
+                                        " " +
+                                        _vm._s(
+                                          this.designation2 != ""
+                                            ? this.designation2 + " ,"
+                                            : ""
+                                        ) +
+                                        " " +
+                                        _vm._s(this.designation3)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _vm._v(
+                                      _vm._s(this.title1) +
+                                        "\n                                            " +
+                                        _vm._s(this.title2) +
+                                        "\n                                            " +
+                                        _vm._s(this.title3) +
+                                        "\n                                            " +
+                                        _vm._s(this.title4)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-3" }),
+                                  _vm._v(" "),
+                                  this.displaySecondAddress
+                                    ? _c("div", [
+                                        _c("p", [
+                                          _c("b", [
+                                            _vm._v(_vm._s(this.company_name2))
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
                                             _vm._s(
-                                              this.designation2 != ""
-                                                ? this.designation2 + " ,"
+                                              this.designation21 != ""
+                                                ? this.designation21 + " ,"
                                                 : ""
                                             ) +
-                                            " " +
-                                            _vm._s(this.designation3)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(
-                                          _vm._s(this.title1) +
-                                            "\n                                            " +
-                                            _vm._s(this.title2) +
-                                            "\n                                            " +
-                                            _vm._s(this.title3) +
-                                            "\n                                            " +
-                                            _vm._s(this.title4)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "mb-3" }),
-                                      _vm._v(" "),
-                                      this.displaySecondAddress
-                                        ? _c("div", [
-                                            _c("p", [
-                                              _c("b", [
-                                                _vm._v(
-                                                  _vm._s(this.company_name2)
-                                                )
-                                              ])
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("p", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  this.designation21 != ""
-                                                    ? this.designation21 + " ,"
-                                                    : ""
-                                                ) +
-                                                  " " +
-                                                  _vm._s(
-                                                    this.designation22 != ""
-                                                      ? this.designation22 +
-                                                          " ,"
-                                                      : ""
-                                                  ) +
-                                                  " " +
-                                                  _vm._s(this.designation23)
-                                              )
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("p", [
-                                              _vm._v(
-                                                _vm._s(this.title21) +
-                                                  "\n                                                " +
-                                                  _vm._s(this.title22) +
-                                                  "\n                                                " +
-                                                  _vm._s(this.title23) +
-                                                  "\n                                                " +
-                                                  _vm._s(this.title24) +
-                                                  "\n                                            "
-                                              )
-                                            ])
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _c("p", [_vm._v(_vm._s(this.address))]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(_vm._s(this.directPhone))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(_vm._s(this.officePhone))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "mb-3" }),
-                                      _vm._v(" "),
-                                      _c("p", [_vm._v(_vm._s(this.website))]),
-                                      _vm._v(" "),
-                                      _c("p", [_vm._v(_vm._s(this.email))]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "mb-3" }),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(_vm._s(this.memberCstNumber))
+                                              " " +
+                                              _vm._s(
+                                                this.designation22 != ""
+                                                  ? this.designation22 + " ,"
+                                                  : ""
+                                              ) +
+                                              " " +
+                                              _vm._s(this.designation23)
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            _vm._s(this.title21) +
+                                              "\n                                                " +
+                                              _vm._s(this.title22) +
+                                              "\n                                                " +
+                                              _vm._s(this.title23) +
+                                              "\n                                                " +
+                                              _vm._s(this.title24) +
+                                              "\n                                            "
+                                          )
+                                        ])
                                       ])
-                                    ],
-                                    1
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              this.ifcTextDisplay
-                                ? _c(
-                                    "div",
-                                    { staticClass: "profile_text" },
-                                    [
-                                      _c("div", {
-                                        domProps: {
-                                          innerHTML: _vm._s(this.ifcText)
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("iconHoverIfcComponent", {
-                                        staticClass: "insidefc_profile"
-                                      })
-                                    ],
-                                    1
-                                  )
-                                : _vm._e(),
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v(_vm._s(this.address))]),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v(_vm._s(this.directPhone))]),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v(_vm._s(this.officePhone))]),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-3" }),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v(_vm._s(this.website))]),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v(_vm._s(this.email))]),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-3" }),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _vm._v(_vm._s(this.memberCstNumber))
+                                  ])
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
                               _c("div", { staticClass: "logo_middle" }, [
                                 _c(
@@ -53848,593 +54175,524 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-8" }, [
-                              !this.ifcRightTextDisplay
-                                ? _c(
+                              _c(
+                                "div",
+                                { staticClass: "right_ifc_content mt-6" },
+                                [
+                                  _c(
                                     "div",
-                                    { staticClass: "right_ifc_content" },
+                                    { staticClass: "hoverComponetRemove" },
                                     [
                                       _c(
                                         "div",
-                                        { staticClass: "hoverComponetRemove" },
+                                        { staticClass: "inner_plus_data" },
+                                        [
+                                          _c("i", {
+                                            staticClass: "ti-pencil",
+                                            attrs: { title: "Edit" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.editTextEditor()
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  !this.showTextEditor
+                                    ? _c("div", [
+                                        _c("p", {
+                                          domProps: {
+                                            innerHTML: _vm._s(this.textEditor)
+                                          }
+                                        })
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  this.showTextEditor
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "editor_pop_up" },
                                         [
                                           _c(
                                             "div",
-                                            { staticClass: "inner_plus_data" },
-                                            [
-                                              _c("i", {
-                                                staticClass: "ti-pencil",
-                                                attrs: { title: "Edit" },
-                                                on: {
-                                                  click: function($event) {
-                                                    return _vm.editIfcRight()
-                                                  }
-                                                }
-                                              })
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      !this.showTextAreaIfcRight
-                                        ? _c("div", [
-                                            this.ifcRightTextInputValue == ""
-                                              ? _c("p", {
-                                                  domProps: {
-                                                    innerHTML: _vm._s(
-                                                      this.inputTextRightIfc
-                                                    )
-                                                  }
-                                                })
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            this.ifcRightTextInputValue != ""
-                                              ? _c("p", {
-                                                  staticClass: "value",
-                                                  domProps: {
-                                                    innerHTML: _vm._s(
-                                                      this
-                                                        .ifcRightTextInputValue
-                                                    )
-                                                  }
-                                                })
-                                              : _vm._e()
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      this.showTextAreaIfcRight
-                                        ? _c(
-                                            "div",
-                                            { staticClass: "editor_pop_up" },
+                                            {
+                                              staticClass: "hoverComponetRemove"
+                                            },
                                             [
                                               _c(
                                                 "div",
                                                 {
-                                                  staticClass:
-                                                    "hoverComponetRemove"
+                                                  staticClass: "inner_plus_data"
                                                 },
                                                 [
                                                   _c(
-                                                    "div",
+                                                    "a",
                                                     {
-                                                      staticClass:
-                                                        "inner_plus_data"
+                                                      class: {
+                                                        btn: true,
+                                                        active: _vm.italicBtn
+                                                      },
+                                                      attrs: {
+                                                        title: "Italic",
+                                                        "data-toggle":
+                                                          "tooltip",
+                                                        "data-placement": "top"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.changeFont(
+                                                            "italic",
+                                                            false,
+                                                            null
+                                                          ),
+                                                            (_vm.italicBtn = !_vm.italicBtn)
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass: "ti-Italic"
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      class: {
+                                                        btn: true,
+                                                        active: _vm.boldBtn
+                                                      },
+                                                      attrs: {
+                                                        title: "Bold",
+                                                        "data-toggle":
+                                                          "tooltip",
+                                                        "data-placement": "top"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.changeFont(
+                                                            "bold",
+                                                            false,
+                                                            null
+                                                          ),
+                                                            (_vm.boldBtn = !_vm.boldBtn)
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-bold"
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      class: {
+                                                        btn: true,
+                                                        active: _vm.underlineBtn
+                                                      },
+                                                      attrs: {
+                                                        title: "Underline",
+                                                        "data-toggle":
+                                                          "tooltip",
+                                                        "data-placement": "top"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.changeFont(
+                                                            "underline",
+                                                            false,
+                                                            null
+                                                          ),
+                                                            (_vm.underlineBtn = !_vm.underlineBtn)
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "ti-underline"
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      class: {
+                                                        btn: true,
+                                                        active: _vm.textLeft
+                                                      },
+                                                      attrs: {
+                                                        title: "Left",
+                                                        "data-toggle":
+                                                          "tooltip",
+                                                        "data-placement": "top"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.changeFont(
+                                                            "justifyLeft",
+                                                            false,
+                                                            null
+                                                          ),
+                                                            _vm.resetActiveOnAlign(
+                                                              "textLeft",
+                                                              _vm.textLeft
+                                                            )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "ti-align-left"
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      class: {
+                                                        btn: true,
+                                                        active: _vm.textCenter
+                                                      },
+                                                      attrs: {
+                                                        title: "Center",
+                                                        "data-toggle":
+                                                          "tooltip",
+                                                        "data-placement": "top"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.changeFont(
+                                                            "justifyCenter",
+                                                            false,
+                                                            null
+                                                          ),
+                                                            _vm.resetActiveOnAlign(
+                                                              "textCenter",
+                                                              _vm.textCenter
+                                                            )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "ti-align-center"
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      class: {
+                                                        btn: true,
+                                                        active: _vm.textRight
+                                                      },
+                                                      attrs: {
+                                                        title: "Right",
+                                                        "data-toggle":
+                                                          "tooltip",
+                                                        "data-placement": "top"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.changeFont(
+                                                            "justifyRight",
+                                                            false,
+                                                            null
+                                                          ),
+                                                            _vm.resetActiveOnAlign(
+                                                              "textRight",
+                                                              _vm.textRight
+                                                            )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "ti-align-right"
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      class: {
+                                                        btn: true,
+                                                        active: _vm.textJustify
+                                                      },
+                                                      attrs: {
+                                                        title: "Justify",
+                                                        "data-toggle":
+                                                          "tooltip",
+                                                        "data-placement": "top"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.changeFont(
+                                                            "justifyFull",
+                                                            false,
+                                                            null
+                                                          ),
+                                                            _vm.resetActiveOnAlign(
+                                                              "textJustify",
+                                                              _vm.textJustify
+                                                            )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "ti-align-justify"
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "select",
+                                                    {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value: _vm.headingTag,
+                                                          expression:
+                                                            "headingTag"
+                                                        }
+                                                      ],
+                                                      attrs: {
+                                                        name: "",
+                                                        id: ""
+                                                      },
+                                                      on: {
+                                                        change: [
+                                                          function($event) {
+                                                            var $$selectedVal = Array.prototype.filter
+                                                              .call(
+                                                                $event.target
+                                                                  .options,
+                                                                function(o) {
+                                                                  return o.selected
+                                                                }
+                                                              )
+                                                              .map(function(o) {
+                                                                var val =
+                                                                  "_value" in o
+                                                                    ? o._value
+                                                                    : o.value
+                                                                return val
+                                                              })
+                                                            _vm.headingTag = $event
+                                                              .target.multiple
+                                                              ? $$selectedVal
+                                                              : $$selectedVal[0]
+                                                          },
+                                                          function($event) {
+                                                            return _vm.insertTag(
+                                                              _vm.headingTag
+                                                            )
+                                                          }
+                                                        ]
+                                                      }
                                                     },
                                                     [
                                                       _c(
-                                                        "a",
+                                                        "option",
                                                         {
-                                                          class: {
-                                                            btn: true,
-                                                            active:
-                                                              _vm.italicBtn
-                                                          },
-                                                          attrs: {
-                                                            title: "Italic",
-                                                            "data-toggle":
-                                                              "tooltip",
-                                                            "data-placement":
-                                                              "top"
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              _vm.changeFont(
-                                                                "italic",
-                                                                false,
-                                                                null
-                                                              ),
-                                                                (_vm.italicBtn = !_vm.italicBtn)
-                                                            }
-                                                          }
+                                                          attrs: { value: "" }
                                                         },
-                                                        [
-                                                          _c("i", {
-                                                            staticClass:
-                                                              "ti-Italic"
-                                                          })
-                                                        ]
+                                                        [_vm._v(" Heading ")]
                                                       ),
                                                       _vm._v(" "),
                                                       _c(
-                                                        "a",
+                                                        "option",
                                                         {
-                                                          class: {
-                                                            btn: true,
-                                                            active: _vm.boldBtn
-                                                          },
-                                                          attrs: {
-                                                            title: "Bold",
-                                                            "data-toggle":
-                                                              "tooltip",
-                                                            "data-placement":
-                                                              "top"
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              _vm.changeFont(
-                                                                "bold",
-                                                                false,
-                                                                null
-                                                              ),
-                                                                (_vm.boldBtn = !_vm.boldBtn)
-                                                            }
-                                                          }
+                                                          attrs: { value: "h1" }
                                                         },
-                                                        [
-                                                          _c("i", {
-                                                            staticClass:
-                                                              "fas fa-bold"
-                                                          })
-                                                        ]
+                                                        [_vm._v("H1")]
                                                       ),
                                                       _vm._v(" "),
                                                       _c(
-                                                        "a",
+                                                        "option",
                                                         {
-                                                          class: {
-                                                            btn: true,
-                                                            active:
-                                                              _vm.underlineBtn
-                                                          },
-                                                          attrs: {
-                                                            title: "Underline",
-                                                            "data-toggle":
-                                                              "tooltip",
-                                                            "data-placement":
-                                                              "top"
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              _vm.changeFont(
-                                                                "underline",
-                                                                false,
-                                                                null
-                                                              ),
-                                                                (_vm.underlineBtn = !_vm.underlineBtn)
-                                                            }
-                                                          }
+                                                          attrs: { value: "h2" }
                                                         },
-                                                        [
-                                                          _c("i", {
-                                                            staticClass:
-                                                              "ti-underline"
-                                                          })
-                                                        ]
+                                                        [_vm._v("H2")]
                                                       ),
                                                       _vm._v(" "),
                                                       _c(
-                                                        "a",
+                                                        "option",
                                                         {
-                                                          class: {
-                                                            btn: true,
-                                                            active: _vm.textLeft
-                                                          },
-                                                          attrs: {
-                                                            title: "Left",
-                                                            "data-toggle":
-                                                              "tooltip",
-                                                            "data-placement":
-                                                              "top"
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              _vm.changeFont(
-                                                                "justifyLeft",
-                                                                false,
-                                                                null
-                                                              ),
-                                                                _vm.resetActiveOnAlign(
-                                                                  "textLeft",
-                                                                  _vm.textLeft
-                                                                )
-                                                            }
-                                                          }
+                                                          attrs: { value: "h3" }
                                                         },
-                                                        [
-                                                          _c("i", {
-                                                            staticClass:
-                                                              "ti-align-left"
-                                                          })
-                                                        ]
+                                                        [_vm._v("H3")]
                                                       ),
                                                       _vm._v(" "),
                                                       _c(
-                                                        "a",
+                                                        "option",
                                                         {
-                                                          class: {
-                                                            btn: true,
-                                                            active:
-                                                              _vm.textCenter
-                                                          },
-                                                          attrs: {
-                                                            title: "Center",
-                                                            "data-toggle":
-                                                              "tooltip",
-                                                            "data-placement":
-                                                              "top"
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              _vm.changeFont(
-                                                                "justifyCenter",
-                                                                false,
-                                                                null
-                                                              ),
-                                                                _vm.resetActiveOnAlign(
-                                                                  "textCenter",
-                                                                  _vm.textCenter
-                                                                )
-                                                            }
-                                                          }
+                                                          attrs: { value: "h4" }
                                                         },
-                                                        [
-                                                          _c("i", {
-                                                            staticClass:
-                                                              "ti-align-center"
-                                                          })
-                                                        ]
+                                                        [_vm._v("H4")]
                                                       ),
                                                       _vm._v(" "),
                                                       _c(
-                                                        "a",
+                                                        "option",
                                                         {
-                                                          class: {
-                                                            btn: true,
-                                                            active:
-                                                              _vm.textRight
-                                                          },
-                                                          attrs: {
-                                                            title: "Right",
-                                                            "data-toggle":
-                                                              "tooltip",
-                                                            "data-placement":
-                                                              "top"
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              _vm.changeFont(
-                                                                "justifyRight",
-                                                                false,
-                                                                null
-                                                              ),
-                                                                _vm.resetActiveOnAlign(
-                                                                  "textRight",
-                                                                  _vm.textRight
-                                                                )
-                                                            }
-                                                          }
+                                                          attrs: { value: "h5" }
                                                         },
-                                                        [
-                                                          _c("i", {
-                                                            staticClass:
-                                                              "ti-align-right"
-                                                          })
-                                                        ]
+                                                        [_vm._v("H5")]
                                                       ),
                                                       _vm._v(" "),
                                                       _c(
-                                                        "a",
+                                                        "option",
                                                         {
-                                                          class: {
-                                                            btn: true,
-                                                            active:
-                                                              _vm.textJustify
-                                                          },
-                                                          attrs: {
-                                                            title: "Justify",
-                                                            "data-toggle":
-                                                              "tooltip",
-                                                            "data-placement":
-                                                              "top"
-                                                          },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              _vm.changeFont(
-                                                                "justifyFull",
-                                                                false,
-                                                                null
-                                                              ),
-                                                                _vm.resetActiveOnAlign(
-                                                                  "textJustify",
-                                                                  _vm.textJustify
-                                                                )
-                                                            }
-                                                          }
+                                                          attrs: { value: "h6" }
                                                         },
-                                                        [
-                                                          _c("i", {
-                                                            staticClass:
-                                                              "ti-align-justify"
-                                                          })
-                                                        ]
+                                                        [_vm._v("H6")]
                                                       ),
                                                       _vm._v(" "),
                                                       _c(
-                                                        "select",
+                                                        "option",
                                                         {
-                                                          directives: [
-                                                            {
-                                                              name: "model",
-                                                              rawName:
-                                                                "v-model",
-                                                              value:
-                                                                _vm.headingTag,
-                                                              expression:
-                                                                "headingTag"
-                                                            }
-                                                          ],
-                                                          attrs: {
-                                                            name: "",
-                                                            id: ""
-                                                          },
-                                                          on: {
-                                                            change: [
-                                                              function($event) {
-                                                                var $$selectedVal = Array.prototype.filter
-                                                                  .call(
-                                                                    $event
-                                                                      .target
-                                                                      .options,
-                                                                    function(
-                                                                      o
-                                                                    ) {
-                                                                      return o.selected
-                                                                    }
-                                                                  )
-                                                                  .map(function(
-                                                                    o
-                                                                  ) {
-                                                                    var val =
-                                                                      "_value" in
-                                                                      o
-                                                                        ? o._value
-                                                                        : o.value
-                                                                    return val
-                                                                  })
-                                                                _vm.headingTag = $event
-                                                                  .target
-                                                                  .multiple
-                                                                  ? $$selectedVal
-                                                                  : $$selectedVal[0]
-                                                              },
-                                                              function($event) {
-                                                                return _vm.insertTag(
-                                                                  _vm.headingTag
-                                                                )
-                                                              }
-                                                            ]
-                                                          }
+                                                          attrs: { value: "p" }
                                                         },
-                                                        [
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: ""
-                                                              }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                " Heading "
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "h1"
-                                                              }
-                                                            },
-                                                            [_vm._v("H1")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "h2"
-                                                              }
-                                                            },
-                                                            [_vm._v("H2")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "h3"
-                                                              }
-                                                            },
-                                                            [_vm._v("H3")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "h4"
-                                                              }
-                                                            },
-                                                            [_vm._v("H4")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "h5"
-                                                              }
-                                                            },
-                                                            [_vm._v("H5")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "h6"
-                                                              }
-                                                            },
-                                                            [_vm._v("H6")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                value: "p"
-                                                              }
-                                                            },
-                                                            [_vm._v("P")]
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "a",
-                                                        {
-                                                          class: { btn: true },
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.saveIfcRight()
-                                                            }
-                                                          }
-                                                        },
-                                                        [
-                                                          _c("i", {
-                                                            staticClass:
-                                                              "ti-check",
-                                                            attrs: {
-                                                              title: "Edit"
-                                                            }
-                                                          })
-                                                        ]
+                                                        [_vm._v("P")]
                                                       )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      class: { btn: true },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.saveTextEditor()
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass: "ti-check",
+                                                        attrs: { title: "Edit" }
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      class: { btn: true },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.cancelTextEditor()
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass: "ti-close",
+                                                        attrs: {
+                                                          title: "Close"
+                                                        }
+                                                      })
                                                     ]
                                                   )
                                                 ]
                                               )
                                             ]
                                           )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      this.showTextAreaIfcRight
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "content_area Edit_data"
-                                            },
-                                            [
-                                              this.ifcRightTextInputValue == ""
-                                                ? _c("div", {
-                                                    staticClass:
-                                                      "editable_ifc_text",
-                                                    attrs: {
-                                                      contenteditable: "true"
-                                                    },
-                                                    domProps: {
-                                                      innerHTML: _vm._s(
-                                                        this.inputTextRightIfc
-                                                      )
-                                                    }
-                                                  })
-                                                : _vm._e(),
-                                              _vm._v(" "),
-                                              this.ifcRightTextInputValue != ""
-                                                ? _c("div", {
-                                                    staticClass:
-                                                      "editable_ifc_text",
-                                                    attrs: {
-                                                      contenteditable: "true"
-                                                    },
-                                                    domProps: {
-                                                      innerHTML: _vm._s(
-                                                        this
-                                                          .ifcRightTextInputValue
-                                                      )
-                                                    }
-                                                  })
-                                                : _vm._e()
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _c(
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  this.showTextEditor
+                                    ? _c(
                                         "div",
-                                        { staticClass: "ifc_signature_image" },
+                                        {
+                                          staticClass: "content_area Edit_data"
+                                        },
                                         [
-                                          this.signatureRadioButton == "default"
-                                            ? _c("img", {
-                                                attrs: {
-                                                  src:
-                                                    _vm.defaultSignatureImage,
-                                                  alt: ""
-                                                }
-                                              })
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          this.signatureRadioButton ==
-                                          "addMedia"
-                                            ? _c("img", {
-                                                attrs: {
-                                                  src: _vm.signatureImage,
-                                                  alt: ""
-                                                }
-                                              })
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          _c("iconHoverIfcComponent", {
-                                            staticClass: "insidefc_profile",
-                                            nativeOn: {
-                                              click: function($event) {
-                                                return _vm.openPopUp(4)
-                                              }
+                                          _c("div", {
+                                            staticClass: "editable_ifc_text",
+                                            attrs: { contenteditable: "true" },
+                                            domProps: {
+                                              innerHTML: _vm._s(this.textEditor)
                                             }
                                           })
-                                        ],
-                                        1
+                                        ]
                                       )
-                                    ]
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "ifc_signature_image" },
+                                    [
+                                      this.signatureRadioButton == "default"
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: _vm.defaultSignatureImage,
+                                              alt: ""
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      this.signatureRadioButton == "addMedia"
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: _vm.signatureImage,
+                                              alt: ""
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c("iconHoverIfcComponent", {
+                                        staticClass: "insidefc_profile",
+                                        nativeOn: {
+                                          click: function($event) {
+                                            return _vm.openPopUp(4)
+                                          }
+                                        }
+                                      })
+                                    ],
+                                    1
                                   )
-                                : _vm._e()
+                                ]
+                              )
                             ])
                           ])
                         ])
@@ -55600,7 +55858,11 @@ var render = function() {
                                               }
                                             ],
                                             staticClass: "form-control",
-                                            attrs: { type: "text", id: "usr" },
+                                            attrs: {
+                                              type: "text",
+                                              placeholder: "Email",
+                                              id: "usr"
+                                            },
                                             domProps: { value: _vm.email },
                                             on: {
                                               input: function($event) {
@@ -55617,7 +55879,7 @@ var render = function() {
                                           _c(
                                             "label",
                                             { attrs: { for: "usr" } },
-                                            [_vm._v("ST Number")]
+                                            [_vm._v("CST Number")]
                                           ),
                                           _vm._v(" "),
                                           _c("input", {
@@ -55630,7 +55892,11 @@ var render = function() {
                                               }
                                             ],
                                             staticClass: "form-control",
-                                            attrs: { type: "text", id: "usr" },
+                                            attrs: {
+                                              type: "text",
+                                              placeholder: "CST number",
+                                              id: "usr"
+                                            },
                                             domProps: {
                                               value: _vm.memberCstNumber
                                             },
@@ -56283,7 +56549,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("h5", { staticClass: "modal-title" }, [
-        _vm._v("IFC input modal\n\t\t\t\t\t\t\t")
+        _vm._v("IFC input modal\n\t\t\t\t\t\t")
       ])
     ])
   }
@@ -56368,25 +56634,27 @@ var render = function() {
                             { staticClass: "col-md-12 ibc_logo p-0" },
                             [
                               _c("iconHoverIfcComponent", {
-                                staticClass: "insidefc_profile"
+                                staticClass: "insidefc_profile",
+                                nativeOn: {
+                                  click: function($event) {
+                                    return _vm.openIbcModal(1)
+                                  }
+                                }
                               }),
                               _vm._v(" "),
-                              this.imageIbcLogoPath == ""
+                              this.logoRadioButton == "default"
                                 ? _c("img", {
                                     attrs: {
-                                      src: this.defaultIbcLogoImagePath,
+                                      src: this.defaultLogo,
                                       alt: "",
                                       title: ""
                                     }
                                   })
                                 : _vm._e(),
                               _vm._v(" "),
-                              this.imageIbcLogoPath != ""
+                              this.logoRadioButton == "addMedia"
                                 ? _c("img", {
-                                    attrs: {
-                                      src: this.imageIbcLogoPath,
-                                      alt: ""
-                                    }
+                                    attrs: { src: this.logoImage, alt: "" }
                                   })
                                 : _vm._e()
                             ],
@@ -56398,7 +56666,12 @@ var render = function() {
                             { staticClass: "col-sm-12 p-0 inside_bc_img" },
                             [
                               _c("iconHoverIfcComponent", {
-                                staticClass: "insidefc_profile"
+                                staticClass: "insidefc_profile",
+                                nativeOn: {
+                                  click: function($event) {
+                                    return _vm.openIbcModal(2)
+                                  }
+                                }
                               }),
                               _vm._v(" "),
                               this.imageIbcMainPath == ""
@@ -56442,7 +56715,12 @@ var render = function() {
                                   { staticClass: "col-md-3 p-0 ibc_profile" },
                                   [
                                     _c("iconHoverIfcComponent", {
-                                      staticClass: "insidefc_profile"
+                                      staticClass: "insidefc_profile",
+                                      nativeOn: {
+                                        click: function($event) {
+                                          return _vm.openIbcModal(3)
+                                        }
+                                      }
                                     }),
                                     _vm._v(" "),
                                     this.imageIbcProfilePath == ""
@@ -56474,7 +56752,12 @@ var render = function() {
                                     { staticClass: "profile_text pl-3" },
                                     [
                                       _c("iconHoverIfcComponent", {
-                                        staticClass: "insidefc_profile"
+                                        staticClass: "insidefc_profile",
+                                        nativeOn: {
+                                          click: function($event) {
+                                            return _vm.openIbcModal(4)
+                                          }
+                                        }
                                       }),
                                       _vm._v(" "),
                                       _c("h2", [
@@ -56533,11 +56816,1129 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("ibcImageModelComponent"),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade show_data",
+          attrs: {
+            id: "ibcModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-xl",
+              class: this.open_pop_up == 4 ? "custom_address" : "",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "tab-content" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "side_bar_content tab-pane active",
+                        attrs: { id: "content" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "tab-pane", attrs: { id: "design" } },
+                          [
+                            _c("div", { staticClass: "content_area" }, [
+                              this.open_pop_up == 1
+                                ? _c("div", [
+                                    _c("div", { staticClass: "font_content" }, [
+                                      _vm._v(
+                                        "\n                                                Upload Logo Image\n                                            "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "row modal_radiobox",
+                                        class: {
+                                          activeRadio:
+                                            this.logoRadioButton == "default"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "col-sm-12 text_field"
+                                          },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                attrs: { for: "UseTextDefault" }
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.logoRadioButton,
+                                                      expression:
+                                                        "logoRadioButton"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "radio",
+                                                    id: "UseTextDefault",
+                                                    value: "default",
+                                                    name: "checkifcright",
+                                                    checked: ""
+                                                  },
+                                                  domProps: {
+                                                    checked: _vm._q(
+                                                      _vm.logoRadioButton,
+                                                      "default"
+                                                    )
+                                                  },
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        _vm.logoRadioButton =
+                                                          "default"
+                                                      },
+                                                      _vm.logoRadioButtonChange
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  " Use Default Logo\n                                                        \n\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "row modal_radiobox",
+                                        class: {
+                                          activeRadio:
+                                            this.logoRadioButton == "remove"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "col-sm-12 text_field"
+                                          },
+                                          [
+                                            _c(
+                                              "label",
+                                              { attrs: { for: "remove" } },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.logoRadioButton,
+                                                      expression:
+                                                        "logoRadioButton"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "radio",
+                                                    value: "remove",
+                                                    id: "remove",
+                                                    name: "checkifcright",
+                                                    checked: ""
+                                                  },
+                                                  domProps: {
+                                                    checked: _vm._q(
+                                                      _vm.logoRadioButton,
+                                                      "remove"
+                                                    )
+                                                  },
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        _vm.logoRadioButton =
+                                                          "remove"
+                                                      },
+                                                      _vm.logoRadioButtonChange
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  " Remove Logo Image\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "row modal_radiobox",
+                                        class: {
+                                          activeRadio:
+                                            this.logoRadioButton == "addMedia"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "col-sm-12 text_field"
+                                          },
+                                          [
+                                            _c(
+                                              "label",
+                                              { attrs: { for: "addMediaIbc" } },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.logoRadioButton,
+                                                      expression:
+                                                        "logoRadioButton"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "radio",
+                                                    id: "addMediaIbc",
+                                                    value: "addMedia",
+                                                    name: "checkifcright",
+                                                    checked: ""
+                                                  },
+                                                  domProps: {
+                                                    checked: _vm._q(
+                                                      _vm.logoRadioButton,
+                                                      "addMedia"
+                                                    )
+                                                  },
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        _vm.logoRadioButton =
+                                                          "addMedia"
+                                                      },
+                                                      _vm.logoRadioButtonChange
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  " Add Logo Image\n                                                        "
+                                                ),
+                                                _c("toolTipsComponent", {
+                                                  attrs: { title: "900 X 900" }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "add_media" }, [
+                                      this.logoRadioButton == "addMedia"
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-block media_btn",
+                                              attrs: {
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.check_Value(
+                                                    "ibcLogoImage"
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "font_content" },
+                                                [_vm._v("Add Media")]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    this.logoRadioButton == "addMedia"
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "add-media-show",
+                                            attrs: {
+                                              id: "addMedia_id",
+                                              "data-section": "section-1"
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              staticStyle: {
+                                                "margin-bottom": "20px"
+                                              },
+                                              attrs: {
+                                                src: _vm.logoImage,
+                                                alt: "",
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal",
+                                                title: ""
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              this.open_pop_up == 2
+                                ? _c("div", [
+                                    _c("div", { staticClass: "font_content" }, [
+                                      _vm._v(
+                                        "\n                                                Upload Banner Image\n                                            "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "row modal_radiobox",
+                                        class: {
+                                          activeRadio:
+                                            this.IbcMainImage == "default"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "col-sm-12 text_field"
+                                          },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                attrs: { for: "UseTextDefault" }
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.IbcMainImage,
+                                                      expression: "IbcMainImage"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "radio",
+                                                    id: "UseTextDefault",
+                                                    value: "default",
+                                                    name: "checkifcright",
+                                                    checked: ""
+                                                  },
+                                                  domProps: {
+                                                    checked: _vm._q(
+                                                      _vm.IbcMainImage,
+                                                      "default"
+                                                    )
+                                                  },
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        _vm.IbcMainImage =
+                                                          "default"
+                                                      },
+                                                      function($event) {
+                                                        return _vm.getIbcMainImageInputValue(
+                                                          _vm.IbcMainImage
+                                                        )
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  " Use Default Banner Image\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "row modal_radiobox",
+                                        class: {
+                                          activeRadio:
+                                            this.IbcMainImage == "addMedia"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "col-sm-12 text_field"
+                                          },
+                                          [
+                                            _c(
+                                              "label",
+                                              { attrs: { for: "addMediaIbc" } },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.IbcMainImage,
+                                                      expression: "IbcMainImage"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "radio",
+                                                    id: "addMediaIbc",
+                                                    value: "addMedia",
+                                                    name: "checkifcright",
+                                                    checked: ""
+                                                  },
+                                                  domProps: {
+                                                    checked: _vm._q(
+                                                      _vm.IbcMainImage,
+                                                      "addMedia"
+                                                    )
+                                                  },
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        _vm.IbcMainImage =
+                                                          "addMedia"
+                                                      },
+                                                      function($event) {
+                                                        return _vm.getIbcMainImageInputValue(
+                                                          _vm.IbcMainImage
+                                                        )
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  " Add Banner Images\n                                                        "
+                                                ),
+                                                _c("toolTipsComponent", {
+                                                  attrs: { title: "800 X 800" }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "add_media" }, [
+                                      this.displayIbcMainMedia
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-block media_btn",
+                                              attrs: {
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.check_Value(
+                                                    "ibcMainImage"
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "font_content" },
+                                                [_vm._v("Add Media")]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    this.displayIbcMainMedia
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "add-media-show",
+                                            attrs: {
+                                              id: "addMedia_id",
+                                              "data-section": "section-1"
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              directives: [
+                                                {
+                                                  name: "show",
+                                                  rawName: "v-show",
+                                                  value:
+                                                    _vm.imageIbcMainPath == "",
+                                                  expression:
+                                                    "imageIbcMainPath == ''"
+                                                }
+                                              ],
+                                              staticStyle: {
+                                                "margin-bottom": "20px"
+                                              },
+                                              attrs: {
+                                                src: "images/avatar_image.jpg",
+                                                alt: "",
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal",
+                                                title: ""
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.imageIbcMainPath != ""
+                                              ? _c("img", {
+                                                  staticStyle: {
+                                                    "margin-bottom": "20px",
+                                                    "margin-top": "37px"
+                                                  },
+                                                  attrs: {
+                                                    "data-target": "#fileModal",
+                                                    "data-toggle": "modal",
+                                                    src: _vm.imageIbcMainPath,
+                                                    alt: "",
+                                                    srcset: ""
+                                                  }
+                                                })
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              this.open_pop_up == 3
+                                ? _c("div", [
+                                    _c("div", { staticClass: "font_content" }, [
+                                      _vm._v(
+                                        "\n                                                Upload Profile Image\n                                            "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "row modal_radiobox",
+                                        class: {
+                                          activeRadio:
+                                            this.IbcImageModal == "default"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "col-sm-12 text_field"
+                                          },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                attrs: { for: "UseTextDefault" }
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.IbcImageModal,
+                                                      expression:
+                                                        "IbcImageModal"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "radio",
+                                                    id: "UseTextDefault",
+                                                    value: "default",
+                                                    name: "checkifcright",
+                                                    checked: ""
+                                                  },
+                                                  domProps: {
+                                                    checked: _vm._q(
+                                                      _vm.IbcImageModal,
+                                                      "default"
+                                                    )
+                                                  },
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        _vm.IbcImageModal =
+                                                          "default"
+                                                      },
+                                                      function($event) {
+                                                        return _vm.getIbcInputValue(
+                                                          _vm.IbcImageModal
+                                                        )
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  " Use Default Profile\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "row modal_radiobox",
+                                        class: {
+                                          activeRadio:
+                                            this.IbcImageModal == "addMedia"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "col-sm-12 text_field"
+                                          },
+                                          [
+                                            _c(
+                                              "label",
+                                              { attrs: { for: "slideTwo" } },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.IbcImageModal,
+                                                      expression:
+                                                        "IbcImageModal"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "radio",
+                                                    id: "addMediaIbc",
+                                                    value: "addMedia",
+                                                    name: "checkifcright",
+                                                    checked: ""
+                                                  },
+                                                  domProps: {
+                                                    checked: _vm._q(
+                                                      _vm.IbcImageModal,
+                                                      "addMedia"
+                                                    )
+                                                  },
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        _vm.IbcImageModal =
+                                                          "addMedia"
+                                                      },
+                                                      function($event) {
+                                                        return _vm.getIbcInputValue(
+                                                          _vm.IbcImageModal
+                                                        )
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  " Add Profile Image\n                                                        "
+                                                ),
+                                                _c("toolTipsComponent", {
+                                                  attrs: { title: "700 X 700" }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "add_media" }, [
+                                      _vm.displayIbcProfileMedia
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-block media_btn",
+                                              attrs: {
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.check_Value(
+                                                    "ibcProfile"
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "font_content" },
+                                                [_vm._v("Add Media")]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm.displayIbcProfileMedia
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "add-media-show",
+                                            attrs: {
+                                              id: "addMedia_id",
+                                              "data-section": "section-1"
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              directives: [
+                                                {
+                                                  name: "show",
+                                                  rawName: "v-show",
+                                                  value:
+                                                    _vm.imageIbcProfilePath ==
+                                                    "",
+                                                  expression:
+                                                    "imageIbcProfilePath == ''"
+                                                }
+                                              ],
+                                              staticStyle: {
+                                                "margin-bottom": "20px"
+                                              },
+                                              attrs: {
+                                                src: "images/avatar_image.jpg",
+                                                alt: "",
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal",
+                                                title: ""
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.imageIbcProfilePath != ""
+                                              ? _c("img", {
+                                                  staticStyle: {
+                                                    "margin-bottom": "20px",
+                                                    "margin-top": "37px"
+                                                  },
+                                                  attrs: {
+                                                    "data-target": "#fileModal",
+                                                    "data-toggle": "modal",
+                                                    src:
+                                                      _vm.imageIbcProfilePath,
+                                                    alt: "",
+                                                    srcset: ""
+                                                  }
+                                                })
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              this.open_pop_up == 4
+                                ? _c("div", [
+                                    _c("div", { staticClass: "ifc_title" }, [
+                                      _c("label", { attrs: { for: "usr" } }, [
+                                        _vm._v("Title")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.titleInputIbc,
+                                            expression: "titleInputIbc"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: { type: "text", id: "usr" },
+                                        domProps: { value: _vm.titleInputIbc },
+                                        on: {
+                                          keyup: function($event) {
+                                            return _vm.getTitleIbc(
+                                              _vm.titleInputIbc
+                                            )
+                                          },
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.titleInputIbc =
+                                              $event.target.value
+                                          }
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "ifc_title" }, [
+                                      _c("label", { attrs: { for: "usr" } }, [
+                                        _vm._v("Company Name")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.companyInputIbc,
+                                            expression: "companyInputIbc"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: { type: "text", id: "usr" },
+                                        domProps: {
+                                          value: _vm.companyInputIbc
+                                        },
+                                        on: {
+                                          keyup: function($event) {
+                                            return _vm.getCompanyNameIbc(
+                                              _vm.companyInputIbc
+                                            )
+                                          },
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.companyInputIbc =
+                                              $event.target.value
+                                          }
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "ifc_title" }, [
+                                      _c("label", { attrs: { for: "usr" } }, [
+                                        _vm._v("Address 1")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.addressInputIbc,
+                                            expression: "addressInputIbc"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: { type: "text", id: "usr" },
+                                        domProps: {
+                                          value: _vm.addressInputIbc
+                                        },
+                                        on: {
+                                          keyup: function($event) {
+                                            return _vm.getAddressIbc(
+                                              _vm.addressInputIbc
+                                            )
+                                          },
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.addressInputIbc =
+                                              $event.target.value
+                                          }
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "ifc_title" }, [
+                                      _c("label", { attrs: { for: "usr" } }, [
+                                        _vm._v("Address 2")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.addressInputIbc1,
+                                            expression: "addressInputIbc1"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: { type: "text", id: "usr" },
+                                        domProps: {
+                                          value: _vm.addressInputIbc1
+                                        },
+                                        on: {
+                                          keyup: function($event) {
+                                            return _vm.getAddressIbc1(
+                                              _vm.addressInputIbc1
+                                            )
+                                          },
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.addressInputIbc1 =
+                                              $event.target.value
+                                          }
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "ifc_title" }, [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c("div", { staticClass: "col-md-6" }, [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "usr" } },
+                                            [_vm._v("Office Phone")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.officePhoneInputIbc,
+                                                expression:
+                                                  "officePhoneInputIbc"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { type: "text", id: "usr" },
+                                            domProps: {
+                                              value: _vm.officePhoneInputIbc
+                                            },
+                                            on: {
+                                              keyup: function($event) {
+                                                return _vm.getOfficePhoneIbc(
+                                                  _vm.officePhoneInputIbc
+                                                )
+                                              },
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.officePhoneInputIbc =
+                                                  $event.target.value
+                                              }
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-6" }, [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "usr" } },
+                                            [_vm._v("Direct Phone")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.directPhoneInputIbc,
+                                                expression:
+                                                  "directPhoneInputIbc"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { type: "text", id: "usr" },
+                                            domProps: {
+                                              value: _vm.directPhoneInputIbc
+                                            },
+                                            on: {
+                                              keyup: function($event) {
+                                                return _vm.getdirectPhoneIbc(
+                                                  _vm.directPhoneInputIbc
+                                                )
+                                              },
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.directPhoneInputIbc =
+                                                  $event.target.value
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "ifc_title" }, [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c("div", { staticClass: "col-md-6" }, [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "usr" } },
+                                            [_vm._v("Website URL")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.websiteUrlInputIbc,
+                                                expression: "websiteUrlInputIbc"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { type: "text", id: "usr" },
+                                            domProps: {
+                                              value: _vm.websiteUrlInputIbc
+                                            },
+                                            on: {
+                                              keyup: function($event) {
+                                                return _vm.getWebsiteUrlIbc(
+                                                  _vm.websiteUrlInputIbc
+                                                )
+                                              },
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.websiteUrlInputIbc =
+                                                  $event.target.value
+                                              }
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-6" }, [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "usr" } },
+                                            [_vm._v("Email")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.emailInputIbc,
+                                                expression: "emailInputIbc"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { type: "text", id: "usr" },
+                                            domProps: {
+                                              value: _vm.emailInputIbc
+                                            },
+                                            on: {
+                                              keyup: function($event) {
+                                                return _vm.getEmailIbc(
+                                                  _vm.emailInputIbc
+                                                )
+                                              },
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.emailInputIbc =
+                                                  $event.target.value
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ])
+                                    ])
+                                  ])
+                                : _vm._e()
+                            ])
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c("div", { staticClass: "inner_footer_content" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn_save",
+                        attrs: { "data-dismiss": "modal" },
+                        on: { click: _vm.saveChanges }
+                      },
+                      [
+                        _vm._v("\n                                Save "),
+                        _c("i", { staticClass: "ti-check" })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn_close",
+                        attrs: { "data-dismiss": "modal" },
+                        on: { click: _vm.cancelModal }
+                      },
+                      [
+                        _vm._v("\n                                Close"),
+                        _c("i", {
+                          staticClass: "ti-close",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
-      _c("FileModalComponent"),
-      _vm._v(" "),
-      _c("ibcAddressInputComponent")
+      _c("FileModalComponent")
     ],
     1
   )
@@ -56574,10 +57975,20 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-md-6" }, [
         _c("p", { staticClass: "right_content_text" }, [
           _vm._v(
-            "The sale of a significant home is truly noteworthy. To\n                                    represent a home of distinction requires highlyqualified real estate professionals with\n                                    global reach and local expertise. "
+            "The sale of a significant home is truly noteworthy. To\n                                        represent a home of distinction requires highlyqualified real estate professionals with\n                                        global reach and local expertise. "
           ),
           _c("b", [_vm._v("Sell your home with us.")])
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Insert New Module \n\t\t\t\t\t\t\t")
       ])
     ])
   }
@@ -58088,23 +59499,15 @@ var staticRenderFns = [
         _c(
           "button",
           {
-            staticClass: "btn btn_save",
-            attrs: { type: "button", "data-dismiss": "modal" }
-          },
-          [
-            _vm._v("Save   \n                                "),
-            _c("i", { staticClass: "ti-check" })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
             staticClass: "btn btn_close",
-            attrs: { type: "button", "data-dismiss": "modal" }
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              id: "fileModalClose"
+            }
           },
           [
-            _vm._v("Cancel   \n                                "),
+            _vm._v("Close   \n                                "),
             _c("i", {
               staticClass: "ti-close",
               attrs: { "aria-hidden": "true" }
@@ -59347,52 +60750,30 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn bottom_btn",
+                      staticClass: "btn btn_save",
                       attrs: { "data-dismiss": "modal" },
-                      on: { click: _vm.cancelModel }
+                      on: { click: _vm.saveIbcChanges }
                     },
                     [
-                      _c("i", {
-                        staticClass: "ti-close",
-                        attrs: { "aria-hidden": "true" }
-                      })
+                      _vm._v("\n                                Save "),
+                      _c("i", { staticClass: "ti-check" })
                     ]
                   ),
                   _vm._v(" "),
                   _c(
                     "button",
                     {
-                      staticClass: "btn bottom_btn",
-                      on: {
-                        click: function($event) {
-                          return _vm.addfont("redo", false, null)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "ti-back-right" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn bottom_btn",
-                      on: {
-                        click: function($event) {
-                          return _vm.addfont("undo", false, null)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "ti-back-left" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn bottom_btn",
+                      staticClass: "btn btn_close",
                       attrs: { "data-dismiss": "modal" },
-                      on: { click: _vm.saveIbcChanges }
+                      on: { click: _vm.cancelModel }
                     },
-                    [_c("i", { staticClass: "ti-check" })]
+                    [
+                      _vm._v("\n                                Close"),
+                      _c("i", {
+                        staticClass: "ti-close",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
                   )
                 ])
               ])
@@ -79679,7 +81060,8 @@ var globalMixin = {
     LoaderComponent: _components_common_loaderComponet__WEBPACK_IMPORTED_MODULE_10__["default"],
     toolTipsComponent: _components_common_toolTipsComponent__WEBPACK_IMPORTED_MODULE_11__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['fcAddMediaShow', 'showFrontCover', 'showFrontInsideCover', 'imagePath', 'imageIfcPath', 'imageIfcSignaturePath', 'imageIbcProfilePath', 'imageIbcMainPath', 'imageIbcLogoPath', 'imageBcLogoPath', 'defaultImagePath', 'defaultIfcImagePath', 'defaultIfcSignaturePath', 'defaultIbcProfilePath', 'defaultIbcMainImagePath', 'defaultIbcLogoImagePath', 'fcLogoText', 'ifcRightTextInputValue', 'textAlign', 'hideFcText', 'displayTextArea', 'displayIfcTextArea', 'fcLogoTextDisplay', 'openModal', 'setIfc_bind', 'setIfcLogo_bind', 'setIfcSignature_bind', 'setIbcProfile_bind', 'setIbcMainImage_bind', 'setIbcLogoImage_bind', 'openIfcModalForLogo', 'openIfcModalForSignature', 'openIbcModal', 'openIfcModalForText', 'defaultIfcLogoPath', 'imageIfcLogoPath', 'ifcTextDisplay', 'ifcRightTextDisplay', 'ifcText', 'ifcRightText', 'displayTextAreaFor', 'displayIbcProfileMedia', 'displayIbcMainMedia', 'displayIbcLogoMedia', // 'ifcTitleText',
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['fcAddMediaShow', 'showFrontCover', 'showFrontInsideCover', 'imagePath', 'imageIfcPath', 'imageIfcSignaturePath', 'imageIbcProfilePath', 'imageIbcMainPath', 'imageIbcLogoPath', 'imageBcLogoPath', 'defaultImagePath', 'defaultIfcImagePath', 'defaultIfcSignaturePath', 'defaultIbcProfilePath', 'defaultIbcMainImagePath', 'defaultIbcLogoImagePath', 'fcLogoText', 'ifcRightTextInputValue', 'textAlign', 'hideFcText', 'displayTextArea', 'displayIfcTextArea', 'fcLogoTextDisplay', 'openModal', 'setIfc_bind', 'setIfcLogo_bind', 'setIfcSignature_bind', 'setIbcProfile_bind', 'setIbcMainImage_bind', 'setIbcLogoImage_bind', 'openIfcModalForLogo', 'openIfcModalForSignature', // 'openIbcModal',
+  'openIfcModalForText', 'defaultIfcLogoPath', 'imageIfcLogoPath', 'ifcTextDisplay', 'ifcRightTextDisplay', 'ifcText', 'ifcRightText', 'displayTextAreaFor', 'displayIbcProfileMedia', 'displayIbcMainMedia', 'displayIbcLogoMedia', // 'ifcTitleText',
   // 'ifcCompanyName',
   // 'designation1',
   // 'designation2',
@@ -80376,14 +81758,14 @@ var globalMixin = {
 
 
       if (classPresentIbcProfileImage == true) {
-        this.ACTION_CHANGE_STATE(['openIbcModal', 'profile']);
+        // this.ACTION_CHANGE_STATE(['openIbcModal', 'profile'])
         $('#ifcTextModal').modal('show');
       } else if (classPresentIbcLogo == true) {
-        this.ACTION_CHANGE_STATE(['openIbcModal', 'logoImage']);
+        // this.ACTION_CHANGE_STATE(['openIbcModal', 'logoImage'])
         this.ACTION_CHANGE_STATE(['profileImage', '']);
         $('#ifcTextModal').modal('show');
       } else if (classPresentIbcImage == true) {
-        this.ACTION_CHANGE_STATE(['openIbcModal', 'mainImage']);
+        // this.ACTION_CHANGE_STATE(['openIbcModal', 'mainImage'])
         $('#ifcTextModal').modal('show');
       } else if (classPresentIbcProfile_text == true) {
         $('#ibcAddressModal').modal('show');
@@ -80394,8 +81776,8 @@ var globalMixin = {
         this.ACTION_CHANGE_STATE(['openIfcModalForLogo', '']);
         $('#bcAddressModal').modal('show');
       } else if (classPresentbcProfile == true) {
-        this.ACTION_CHANGE_STATE(['profileImage', 'bottom_image']);
-        this.ACTION_CHANGE_STATE(['openIbcModal', '']);
+        this.ACTION_CHANGE_STATE(['profileImage', 'bottom_image']); // this.ACTION_CHANGE_STATE(['openIbcModal', ''])
+
         $('#ifcTextModal1').modal('show');
       } else if (classPresentbcHeader == true) {
         this.ACTION_CHANGE_STATE(['openHeaderContent', 'header-text']);
@@ -81363,7 +82745,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     setIbcMainImage_bind: '',
     openIfcModalForLogo: '',
     openIfcModalForSignature: '',
-    openIbcModal: '',
+    // openIbcModal: '',
     openIfcModalForText: '',
     ifcText: '',
     ifcRightText: '',
@@ -81427,7 +82809,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     setBcProfileImage_bind: '',
     displayBcProfileMedia: false,
     bcProfileImageCheckboxChoose: ''
-  }, _defineProperty(_state, "setBcProfileImage_bind", ''), _defineProperty(_state, "imageBcProfilePath", ''), _defineProperty(_state, "profileImage", ''), _defineProperty(_state, "fcCheckboxChoose", 'default'), _defineProperty(_state, "ifcSignatureChoose", 'default'), _defineProperty(_state, "ifcProfileChoose", 'default'), _defineProperty(_state, "ifcBelowimageChoose", 'default'), _defineProperty(_state, "ibcLogoCheckChoose", 'default'), _defineProperty(_state, "ibcBannerCheckChoose", 'default'), _defineProperty(_state, "ibcProfileCheckChoose", 'default'), _defineProperty(_state, "hideIconEdit", false), _defineProperty(_state, "displayIfcLogoMedia", false), _defineProperty(_state, "displayIfcMedia", false), _defineProperty(_state, "displayIfcSignatureMedia", false), _defineProperty(_state, "bcLogoChooseCheckBox", 'default'), _defineProperty(_state, "bcProfileChooseCheckBox", 'default'), _defineProperty(_state, "displayAddressLable", false), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "designationifc", ''), _defineProperty(_state, "designationifc1", ''), _defineProperty(_state, "designationifc2", ''), _defineProperty(_state, "designationTitle", ''), _defineProperty(_state, "designationTitleset2", ''), _defineProperty(_state, "designationTitleset3", ''), _defineProperty(_state, "designationTitleset4", ''), _defineProperty(_state, "errorMessage", []), _defineProperty(_state, "successMessage", []), _defineProperty(_state, "headingTagFc", ''), _defineProperty(_state, "tempFcAlignValue", 'center'), _defineProperty(_state, "ImageFcAlignValue", 'center'), _defineProperty(_state, "tempFcCheckboxChoose", ''), _defineProperty(_state, "fcModalHide", false), _defineProperty(_state, "fcRadioButton", 'default'), _defineProperty(_state, "fcTextLogoEditor", '<h1></h1>'), _defineProperty(_state, "fcImageAlign", 'center'), _defineProperty(_state, "fcImage", 'images/avatar_image.jpg'), _defineProperty(_state, "fcTextAlign", 'center'), _defineProperty(_state, "fcHeadingText", ''), _defineProperty(_state, "ifcPhotoRadio", 'default'), _defineProperty(_state, "ifcPhotoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcName", 'Kat Nitsous'), _defineProperty(_state, "ifcCompanyName", 'Sotheby’s International Realty, Inc.'), _defineProperty(_state, "ifcdesignation1", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation2", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation3", 'C(k)PÂ®'), _defineProperty(_state, "ifcTitle1", 'Business Development Director '), _defineProperty(_state, "ifcTitle2", '401(K) Consulting Director '), _defineProperty(_state, "ifcTitle3", 'Alternative Investments Director '), _defineProperty(_state, "ifcTitle4", 'Associate Stock Plan Director'), _defineProperty(_state, "ifcaddress", '16027 VENTURA BLVD, Suite 330 ENCINO, CA, 91436'), _defineProperty(_state, "ifcDirectPhone", 'M : 323-228-3805 '), _defineProperty(_state, "ifcOfficePhone", 'O : 626-396-9400'), _defineProperty(_state, "ifcWebsite", 'sothebyshomes.com'), _defineProperty(_state, "ifcEmail", 'kat.nitsou@sothebyinternational.com'), _defineProperty(_state, "ifcMemberCstNumber", 'NMLS#'), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "ifcdesignation21", ''), _defineProperty(_state, "ifcdesignation22", ''), _defineProperty(_state, "ifcdesignation23", ''), _defineProperty(_state, "ifcTitle21", ''), _defineProperty(_state, "ifcTitle22", ''), _defineProperty(_state, "ifcTitle23", ''), _defineProperty(_state, "ifcTitle24", ''), _defineProperty(_state, "ifcAddSecondAddress", true), _defineProperty(_state, "ifcSecondAddress", false), _defineProperty(_state, "ifcLogoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcLogoRadioButton", 'default'), _defineProperty(_state, "ifcSignatureImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcSignatureRadioButton", 'default'), _state),
+  }, _defineProperty(_state, "setBcProfileImage_bind", ''), _defineProperty(_state, "imageBcProfilePath", ''), _defineProperty(_state, "profileImage", ''), _defineProperty(_state, "fcCheckboxChoose", 'default'), _defineProperty(_state, "ifcSignatureChoose", 'default'), _defineProperty(_state, "ifcProfileChoose", 'default'), _defineProperty(_state, "ifcBelowimageChoose", 'default'), _defineProperty(_state, "ibcLogoCheckChoose", 'default'), _defineProperty(_state, "ibcBannerCheckChoose", 'default'), _defineProperty(_state, "ibcProfileCheckChoose", 'default'), _defineProperty(_state, "hideIconEdit", false), _defineProperty(_state, "displayIfcLogoMedia", false), _defineProperty(_state, "displayIfcMedia", false), _defineProperty(_state, "displayIfcSignatureMedia", false), _defineProperty(_state, "bcLogoChooseCheckBox", 'default'), _defineProperty(_state, "bcProfileChooseCheckBox", 'default'), _defineProperty(_state, "displayAddressLable", false), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "designationifc", ''), _defineProperty(_state, "designationifc1", ''), _defineProperty(_state, "designationifc2", ''), _defineProperty(_state, "designationTitle", ''), _defineProperty(_state, "designationTitleset2", ''), _defineProperty(_state, "designationTitleset3", ''), _defineProperty(_state, "designationTitleset4", ''), _defineProperty(_state, "errorMessage", []), _defineProperty(_state, "successMessage", []), _defineProperty(_state, "headingTagFc", ''), _defineProperty(_state, "tempFcAlignValue", 'center'), _defineProperty(_state, "ImageFcAlignValue", 'center'), _defineProperty(_state, "tempFcCheckboxChoose", ''), _defineProperty(_state, "fcModalHide", false), _defineProperty(_state, "fcRadioButton", 'default'), _defineProperty(_state, "fcTextLogoEditor", '<h1></h1>'), _defineProperty(_state, "fcImageAlign", 'center'), _defineProperty(_state, "fcImage", 'images/avatar_image.jpg'), _defineProperty(_state, "fcTextAlign", 'center'), _defineProperty(_state, "fcHeadingText", ''), _defineProperty(_state, "ifcPhotoRadio", 'default'), _defineProperty(_state, "ifcPhotoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcName", 'Kat Nitsous'), _defineProperty(_state, "ifcCompanyName", 'Sotheby’s International Realty, Inc.'), _defineProperty(_state, "ifcdesignation1", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation2", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation3", 'C(k)PÂ®'), _defineProperty(_state, "ifcTitle1", 'Business Development Director '), _defineProperty(_state, "ifcTitle2", '401(K) Consulting Director '), _defineProperty(_state, "ifcTitle3", 'Alternative Investments Director '), _defineProperty(_state, "ifcTitle4", 'Associate Stock Plan Director'), _defineProperty(_state, "ifcaddress", '16027 VENTURA BLVD, Suite 330 ENCINO, CA, 91436'), _defineProperty(_state, "ifcDirectPhone", 'M : 323-228-3805 '), _defineProperty(_state, "ifcOfficePhone", 'O : 626-396-9400'), _defineProperty(_state, "ifcWebsite", 'sothebyshomes.com'), _defineProperty(_state, "ifcEmail", 'kat.nitsou@sothebyinternational.com'), _defineProperty(_state, "ifcMemberCstNumber", 'NMLS#'), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "ifcdesignation21", ''), _defineProperty(_state, "ifcdesignation22", ''), _defineProperty(_state, "ifcdesignation23", ''), _defineProperty(_state, "ifcTitle21", ''), _defineProperty(_state, "ifcTitle22", ''), _defineProperty(_state, "ifcTitle23", ''), _defineProperty(_state, "ifcTitle24", ''), _defineProperty(_state, "ifcAddSecondAddress", true), _defineProperty(_state, "ifcSecondAddress", false), _defineProperty(_state, "ifcLogoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcLogoRadioButton", 'default'), _defineProperty(_state, "ifcSignatureImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcSignatureRadioButton", 'default'), _defineProperty(_state, "ifcTextEditor", ''), _defineProperty(_state, "ibcLogoRadioButton", 'default'), _defineProperty(_state, "ibcLogoImage", 'images/avatar_image.jpg'), _state),
   getters: {},
   mutations: {
     CHANGE_STATE: function CHANGE_STATE(state, value) {

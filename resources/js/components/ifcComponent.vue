@@ -1,12 +1,13 @@
 <template>
     <div>
+        <alertComponent></alertComponent>
         <div class="row main_container m-0">
 			<LeftSideComponent />
             <div class="col-sm-10 right_side">
             <div class="gjs-pn-buttons top_preview"></div>
             <router-link to="/preview" target="_blank"><button class="preview_mag" @click="preiviewTab()">Preview</button></router-link>
-            <button class="save_ifc_to_db" @click="saveFcValueToDb">Save & download</button>
-            <button class="save_ifc_to_db" @click="saveifcDataToDb">Save</button>
+            <button class="save_ifc_to_db" @click="saveDownload">Save & download</button>
+            <button class="save_ifc_to_db" @click="onSubmit">Save</button>
             <LoaderComponent/>
                 <div class="preview_responsive" v-if="!this.$store.state.Savefcloader">
                     <div class="inner_right_side preview_content">
@@ -16,14 +17,16 @@
                         <div class="inside_ifc">
                             <div class="row">
                                 <div class="col-md-4">
-                                   
+                                   <!-- profile image section -->
                                     <div class="profile_photo">
                                          <iconHoverComponent class="insidefc_profile" @click.native="openPopUp(1)" />
                                          <img :src="defaultPhotoImage"  v-if="photoRadioButton == 'default'" title="" >
                                         <img v-if="photoRadioButton == 'addMedia'" :src="photoImage" alt="" srcset="" style="margin-bottom:20px;">
                             	
                                     </div>
-                                    <div class="profile_text" v-if="!this.ifcTextDisplay">
+                                    <!-- profile image section end here -->
+                                    <!-- profile text section -->
+                                    <div class="profile_text" >
                                          <iconHoverIfcComponent class="insidefc_profile" @click.native="openPopUp(2)"/>
                                         <h2>{{this.name}}</h2>
                                         <p><b>{{this.company_name}}</b></p>
@@ -52,10 +55,8 @@
                                         <p class="mb-3"></p>
                                         <p>{{this.memberCstNumber}}</p>
                                     </div>
-                                    <div class="profile_text" v-if="this.ifcTextDisplay" >
-                                      <div v-html="this.ifcText"></div>
-                                       <iconHoverIfcComponent class="insidefc_profile" />
-                                    </div>
+                                    <!-- profile text section end here -->
+                                    <!-- logo section start here -->
                                     <div class="logo_middle">
                                         <div class="below_logo">
                                                 <iconHoverIfcComponent class="insidefc_profile" @click.native="openPopUp(3)"/>
@@ -63,26 +64,23 @@
                                             <img :src="defaultLogoImage" v-if="this.logoRadioButton == 'default'"   title="" >
                                             <img v-if="this.logoRadioButton == 'addMedia'" :src="logoImage" alt="" srcset="" style="margin-bottom:20px;">
                                         </div> 
-                                    </div>                                
+                                    </div>
+                                    <!-- logo section end here -->
                                 </div>
+                                <!-- personal detail section start here -->
                                 <div class="col-md-8">
-                                    <div class="right_ifc_content" v-if="!this.ifcRightTextDisplay">
+                                    <div class="right_ifc_content mt-6">
                                         
-                                          <div class="hoverComponetRemove">
+                                            <div class="hoverComponetRemove">
                                                 <div class="inner_plus_data">        
-                                                <i class="ti-pencil" title="Edit" @click="editIfcRight()"></i>
+                                                    <i class="ti-pencil" title="Edit" @click="editTextEditor()"></i>
                                                 </div>
                                             </div>
-                                         
-                                            <div v-if="!this.showTextAreaIfcRight" >
-                                               <p  v-if="this.ifcRightTextInputValue == ''" v-html="this.inputTextRightIfc"></p>
-                                                <p  class="value" v-if="this.ifcRightTextInputValue!= ''" v-html="this.ifcRightTextInputValue"></p>
+                                            <div v-if="!this.showTextEditor" >
+                                               <p v-html="this.textEditor"></p>
+                                                <!-- <p  class="value" v-if="this.ifcRightTextInputValue!= ''" v-html="this.ifcRightTextInputValue"></p> -->
                                             </div>
-                                         
-                                         <!-- <p v-if="!this.showTextAreaIfcRight && this.ifcRightTextInputValue != ''" v-html="this.inputTextRightIfc"></p>    -->
-                                        <!-- <textarea  v-if= this.showTextAreaIfcRight name="" id="" cols="30" rows="10" v-model="inputTextRightIfc">    
-                                        </textarea> -->
-                                        <div v-if="this.showTextAreaIfcRight" class="editor_pop_up">
+                                        <div v-if="this.showTextEditor" class="editor_pop_up">
                                             <div class="hoverComponetRemove">
                                                 <div class="inner_plus_data">        
                                                 <a @click="changeFont('italic', false, null), (italicBtn = !italicBtn)" :class="{'btn': true, 'active' : italicBtn}" title="Italic" data-toggle="tooltip" data-placement="top">
@@ -116,92 +114,21 @@
                                                     <option value="h6">H6</option>
                                                     <option value="p">P</option>
                                                 </select>
-                                                <a @click="saveIfcRight()" :class="{'btn': true,}">
+                                                <a @click="saveTextEditor()" :class="{'btn': true,}">
                                                   <i class="ti-check" title="Edit" ></i>
+                                                </a>
+                                                <a @click="cancelTextEditor()" :class="{'btn': true,}">
+                                                  <i class="ti-close" title="Close" ></i>
                                                 </a>
                                                 </div>
                                             </div>
                                            
                                         </div>
-                                        <div class="content_area Edit_data" v-if="this.showTextAreaIfcRight">
+                                        <div class="content_area Edit_data" v-if="this.showTextEditor">
 
                                             <!-- <div class="font_content">Body Content</div> -->
-                                            <div v-if="this.ifcRightTextInputValue == ''"  class="editable_ifc_text" contenteditable="true" v-html="this.inputTextRightIfc"></div>
-                                            <div v-if="this.ifcRightTextInputValue != ''"  class="editable_ifc_text" contenteditable="true" v-html="this.ifcRightTextInputValue"></div>
-                                          
-                                            <!-- <div class="font_content">Font Style</div>
-                                            <div class="font_body">
-                                                <ul>
-                                                    <li>
-                                                        <a @click="addfont('italic', false, null), (italicBtn = !italicBtn)" :class="{'btn': true, 'active' : italicBtn}" title="Italic" data-toggle="tooltip" data-placement="top">
-                                                            <i class="ti-Italic"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a @click="addfont('bold', false, null), (boldBtn = !boldBtn)" :class="{'btn': true, 'active' : boldBtn}" title="Bold" data-toggle="tooltip" data-placement="top">
-                                                            <i class="fas fa-bold"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a @click="addfont('underline', false, null), (underlineBtn = !underlineBtn)" :class="{'btn': true, 'active' : underlineBtn}" title="Underline" data-toggle="tooltip" data-placement="top">
-                                                            <i class="ti-underline"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a @click="getvalue()" :class="{'btn': true, 'active' : codeBtn}" title="Code Format" data-toggle="tooltip" data-placement="top">
-                                                            <i class="ti-split-v-alt"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="font_content">Font Heading Tag</div>
-                                            <div class="heading_tag">
-                                                <select name id @change="insertTag(headingTag)" v-model="headingTag">
-                                                    <option value>Select Heading Tag</option>
-                                                    <option value="h1">Heading &lt;h1&gt;</option>
-                                                    <option value="h2">Heading &lt;h2&gt;</option>
-                                                    <option value="h3">Heading &lt;h3&gt;</option>
-                                                    <option value="h4">Heading&lt;h4&gt;</option>
-                                                    <option value="h5">Heading &lt;h5&gt;</option>
-                                                    <option value="h6">Heading &lt;h6&gt;</option>
-                                                    <option value="p">Paragraph &lt;p&gt;</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="font_content">Text Alignment</div>
-                                            <div class="font_body">
-                                                <ul>
-                                                    <li>
-                                                        <a @click="addfont('justifyLeft' ,false, null), resetActiveOnAlign('textLeft', textLeft)" :class="{'btn': true, 'active' : textLeft}" title="Left" data-toggle="tooltip" data-placement="top">
-                                                            <i class="ti-align-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a @click="addfont('justifyCenter', false, null), resetActiveOnAlign('textCenter', textCenter)" :class="{'btn': true, 'active' : textCenter}" title="Center" data-toggle="tooltip" data-placement="top">
-                                                            <i class="ti-align-center"></i>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a @click="addfont('justifyRight' ,false, null), resetActiveOnAlign('textRight', textRight)" :class="{'btn': true, 'active' : textRight}" title="Right" data-toggle="tooltip" data-placement="top">
-                                                            <i class="ti-align-right"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a @click="addfont('justifyFull' ,false, null), resetActiveOnAlign('textJustify', textJustify)" :class="{'btn': true, 'active' : textJustify}" title="Justify" data-toggle="tooltip" data-placement="top">
-                                                            <i class="ti-align-justify"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="font_content">Text Color</div>
-                                            <div class="font_body">
-                                                <div class="col-sm-12">
-                                                    <color-picker v-model="color_picker" @input="changeFontColor"></color-picker>
-                                                </div>
-                                            </div> -->
+                                            <div class="editable_ifc_text" contenteditable="true" v-html="this.textEditor"></div>
+                                            <!-- <div v-if="this.ifcRightTextInputValue != ''"  class="editable_ifc_text" contenteditable="true" v-html="this.ifcRightTextInputValue"></div> -->
                                         </div>
                                         <div class="ifc_signature_image">
                                             <img v-if="this.signatureRadioButton == 'default'" :src="defaultSignatureImage" alt="">
@@ -214,6 +141,7 @@
                                         <iconHoverIfcComponent class="insidefc_profile"/>
                                     </div> -->
                                 </div>
+                                <!-- personal detail section end here -->
                             </div>
                         </div>
                     </div>
@@ -226,9 +154,6 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">IFC input modal
-							<!-- <a  class="float-left" style="cursor: pointer;">
-								<i class="ti-arrow-left"></i>
-							</a> -->
 						</h5>
 					</div>
 					<div class="modal-body">
@@ -421,11 +346,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <label for="usr">Email</label>
-                                                            <input type="text" v-model='email' class="form-control" id="usr">
+                                                            <input type="text" v-model='email' class="form-control" placeholder="Email" id="usr">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <label for="usr">ST Number</label>
-                                                            <input type="text" v-model='memberCstNumber' class="form-control" id="usr">
+                                                            <label for="usr">CST Number</label>
+                                                            <input type="text" v-model='memberCstNumber' class="form-control" placeholder="CST number" id="usr">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -510,6 +435,7 @@
                                                     <!-- <img data-target="#fileModal" data-toggle="modal" v-if="imageIfcSignaturePath != ''" :src="imageIfcSignaturePath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;"> -->
                                                 </div>
                                             </div>
+                                        <!--  end signature section here -->
 									</div>
 								</div>
 							</div>
@@ -536,6 +462,7 @@
 </template>
 
 <script>
+import alertComponent from './common/alertComponent';
 import ifcInputComponent from "./model/ifcModelInput";
 // import ifcTextInputModel from "./model/ifcTextInputModal";
 import FileModalComponent from "./model/fileModalComponent";
@@ -546,13 +473,15 @@ var defaultTextIfc= 'Greetings '+br+'The chill in the air will soon give way to 
 export default {
     components:{
          ifcInputComponent,
+         alertComponent,
         //  ifcTextInputModel,
          FileModalComponent,
          "color-picker": ColorPicker
     },
     data(){
        return{
-           inputTextRightIfc:defaultTextIfc,
+            textEditor : defaultTextIfc,
+            showTextEditor : false,
            	headingTag: "",
 			color_picker: "",
 			code: this.editorTempData,
@@ -608,6 +537,8 @@ export default {
             defaultSignatureImage : 'images/signature.png',
             signatureImage : this.$store.state.ifcSignatureImage,
             signatureRadioButton : this.$store.state.ifcSignatureRadioButton,
+            // for temp
+            tempHeading : ''
 
 
 
@@ -650,8 +581,13 @@ export default {
             'ifcLogoRadioButton',
             // signature
             'ifcSignatureImage',
-            'ifcSignatureRadioButton'
+            'ifcSignatureRadioButton',
+            // text editor
+            'ifcTextEditor',
         ])
+    },
+    created(){
+        this.get_ifc_data()
     },
     mounted(){
         this.saveIFCPreview()
@@ -664,6 +600,14 @@ export default {
         ...mapMutations([
             'CHANGE_STATE'
         ]),
+        ...mapActions([
+			'ACTION_CHANGE_STATE'
+		]),
+		...mapMutations([
+			'EMPTY_MESSAGE_LIST',
+			'PUSH_SUCCESS_MESSAGE',
+			'PUSH_ERROR_MESSAGE'
+		]),
         resetActiveOnAlign (type, value) {
 			this.textLeft = false
 			this.textRight = false
@@ -706,12 +650,18 @@ export default {
             this.signatureRadioButton = this.ifcSignatureRadioButton;
             this.signatureImage = this.ifcSignatureImage;
         },
-        saveChanges(){
-
+        saveChanges(){  
             if(this.company_name2 == ''&& this.designation21 == '' && this.designation22 == '' && this.designation23 == '' && this.title21 == '' && this.title22 == '' && this.title23 == '' &&
             this.title24 == ''){
                 this.secondAddress = true;
                 this.displaySecondAddress = false;
+            }
+            if(this.open_pop_up == 1 && this.photoRadioButton == 'addMedia' && this.photoImage == 'images/avatar_image.jpg' ){
+                this.photoRadioButton = this.ifcPhotoRadio
+            }else if(this.open_pop_up == 3 && this.logoRadioButton == 'addMedia' && this.logoImage == 'images/avatar_image.jpg'){
+                this.logoRadioButton = this.ifcLogoRadioButton
+            }else if(this.open_pop_up == 4 && this.signatureRadioButton == 'addMedia' && this.signatureImage == 'images/avatar_image.jpg'){
+                this.signatureRadioButton = this.ifcSignatureRadioButton
             }
 
             this.CHANGE_STATE(['ifcPhotoRadio',this.photoRadioButton])
@@ -754,6 +704,7 @@ export default {
 		},
         openPopUp(value){
             this.open_pop_up = value
+            $('#ifcModal').modal('show');
         },
         changePhotoRadio(e){
             this.photoRadioButton = e.target.value
@@ -795,19 +746,25 @@ export default {
             document.execCommand(command, showUI, value);
         },
         insertTag(tag){            
-            var sel = window.getSelection()    
-            if(sel.toString() != '') {       
-                for(var i = sel.rangeCount;i--;){
-                    var wrapper = this.htmlToDom('<'+tag+'/>')
-                    var range = sel.getRangeAt(i);
-                    wrapper.appendChild(range.extractContents());
-                    range.insertNode(wrapper);
+            var sel = window.getSelection()
+            if(tag != ''){
+                this.tempHeading = tag
+                if(sel.toString() != '') {       
+                    for(var i = sel.rangeCount;i--;){
+                        var wrapper = this.htmlToDom('<'+tag+'/>')
+                        var range = sel.getRangeAt(i);
+                        wrapper.appendChild(range.extractContents());
+                        range.insertNode(wrapper);
+                    }
+                    document.execCommand('heading', false, tag);
+                }else{
+                    this.headingTag = ''
+                    alert('Please select text!!!')
                 }
-                document.execCommand('heading', false, tag);
             }else{
-                this.headingTag = ''
-                alert('Please select text!!!')
+                this.headingTag = this.tempHeading
             }
+            
             // document.execCommand('formatblock', false, headingTag)
         },
         htmlToDom: function(htmlEl){
@@ -815,6 +772,173 @@ export default {
             elm.innerHTML = htmlEl;
             return elm.children[0]
         },
+        editTextEditor(){
+            this.showTextEditor = true
+            $('.hoverComponetRemove').addClass('disabled_data')
+        },
+        saveTextEditor(){
+            $('.hoverComponetRemove').removeClass('disabled_data')
+            var text = $('.editable_ifc_text').html()
+            if(text == ''){
+                text = defaultTextIfc;
+            }
+            this.textEditor = text;
+            this.showTextEditor = false;
+            this.CHANGE_STATE(['ifcTextEditor',text]);
+        },
+        cancelTextEditor(){
+            $('.hoverComponetRemove').removeClass('disabled_data')
+            this.showTextEditor = false;
+            this.textEditor = this.ifcTextEditor != '' ? this.ifcTextEditor : this.textEditor;
+        },
+        onSubmit(){
+            this.EMPTY_MESSAGE_LIST()
+            this.ACTION_CHANGE_STATE(['Savefcloader', true])
+            var data = {
+                columnName: 'inside_front_cover',
+                textEditor : this.textEditor,
+                photoRadioButton : this.photoRadioButton,
+                photoImage : this.photoImage ,
+                name : this.name,
+                company_name : this.company_name,
+                designation1 : this.designation1,
+                designation2 : this.designation2,
+                designation3 : this.designation3,
+                title1 : this.title1,
+                title2 : this.title2,
+                title3 : this.title3,
+                title4 : this.title4,
+                company_name2 : this.company_name2,
+                designation21 : this.designation21,
+                designation22 : this.designation22,
+                designation23 : this.designation23,
+                title21 : this.title21,
+                title22 : this.title22,
+                title23 : this.title23,
+                title24 : this.title24,
+                address : this.address,
+                directPhone : this.directPhone,
+                officePhone : this.officePhone,
+                website : this.website,
+                email : this.email,
+                memberCstNumber : this.memberCstNumber,
+                displaySecondAddress : this.displaySecondAddress,
+                secondAddress : this.secondAddress,
+                //logo section
+                logoRadioButton : this.logoRadioButton,
+                logoImage : this.logoImage,
+                // signature section
+                signatureRadioButton : this.signatureRadioButton,
+                signatureImage : this.signatureImage,
+                // text editor
+            }
+            axios.post("api/userBooks", data)
+			.then(response => {
+                const inside_front_cover = response.data.data;
+
+                this.photoRadioButton = inside_front_cover.photoRadioButton;
+                this.photoImage = inside_front_cover.photoImage ;
+                this.name = inside_front_cover.name;
+                this.company_name = inside_front_cover.company_name != null ? inside_front_cover.company_name : '' ;
+                this.designation1 = inside_front_cover.designation1 != null ? inside_front_cover.designation1 : '';
+                this.designation2 = inside_front_cover.designation2 != null ? inside_front_cover.designation2 : '';
+                this.designation3 = inside_front_cover.designation3 != null ? inside_front_cover.designation3 : '';
+                this.title1 = inside_front_cover.title1 != null ? inside_front_cover.title1 : '';
+                this.title2 = inside_front_cover.title2 != null ? inside_front_cover.title2 : '';
+                this.title3 = inside_front_cover.title3 != null ?inside_front_cover.title3 : '';
+                this.title4 = inside_front_cover.title4 != null ? inside_front_cover.title4 : '';
+                this.company_name2 = inside_front_cover.company_name2 != null ? inside_front_cover.company_name2 : '';
+                this.designation21 = inside_front_cover.designation21 != null ? inside_front_cover.designation21 : '';
+
+                this.designation22 = inside_front_cover.designation22 != null ? inside_front_cover.designation22 : '';
+
+                this.designation23 = inside_front_cover.designation23 != null ? inside_front_cover.designation23 : '';
+                this.title21 = inside_front_cover.title21 != null ? inside_front_cover.title21 : '';
+                this.title22 = inside_front_cover.title22 != null ? inside_front_cover.title22 : '';
+                this.title23 = inside_front_cover.title23 != null ? inside_front_cover.title23 : '';
+                this.title24 = inside_front_cover.title24 != null ? inside_front_cover.title24 : '';
+                this.address = inside_front_cover.address;
+                this.directPhone = inside_front_cover.directPhone;
+                this.officePhone = inside_front_cover.officePhone;
+                this.website = inside_front_cover.website;
+                this.email = inside_front_cover.email;
+                this.memberCstNumber = inside_front_cover.memberCstNumber;
+                this.displaySecondAddress = inside_front_cover.displaySecondAddress;
+                this.secondAddress = inside_front_cover.secondAddress;
+                //logo section
+                this.logoRadioButton = inside_front_cover.logoRadioButton;
+                this.logoImage = inside_front_cover.logoImage;
+                // signature section
+                this.signatureRadioButton = inside_front_cover.signatureRadioButton;
+                this.signatureImage = inside_front_cover.signatureImage;
+                // text editor
+                this.textEditor = inside_front_cover.textEditor
+                this.showTextEditor = false;
+                this.PUSH_SUCCESS_MESSAGE('Inside front cover saved successfully!');
+                this.ACTION_CHANGE_STATE(['Savefcloader', false])
+            })
+            .catch(error => {
+                this.PUSH_ERROR_MESSAGE('Internal server error!');
+            })
+        },
+        saveDownload(){
+            this.onSubmit();
+        },
+        get_ifc_data(){
+            this.ACTION_CHANGE_STATE(['Savefcloader', true])
+            axios.get("api/userBooks/1")
+            .then(response => {
+                const inside_front_cover = response.data.data.inside_front_cover;
+                if(inside_front_cover != '' ){
+                    this.photoRadioButton = inside_front_cover.photoRadioButton;
+                    this.photoImage = inside_front_cover.photoImage ;
+                    this.name = inside_front_cover.name;
+                    this.company_name = inside_front_cover.company_name != null ? inside_front_cover.company_name : '' ;
+                    this.designation1 = inside_front_cover.designation1 != null ? inside_front_cover.designation1 : '';
+                    this.designation2 = inside_front_cover.designation2 != null ? inside_front_cover.designation2 : '';
+                    this.designation3 = inside_front_cover.designation3 != null ? inside_front_cover.designation3 : '';
+                    this.title1 = inside_front_cover.title1 != null ? inside_front_cover.title1 : '';
+                    this.title2 = inside_front_cover.title2 != null ? inside_front_cover.title2 : '';
+                    this.title3 = inside_front_cover.title3 != null ?inside_front_cover.title3 : '';
+                    this.title4 = inside_front_cover.title4 != null ? inside_front_cover.title4 : '';
+                    this.company_name2 = inside_front_cover.company_name2 != null ? inside_front_cover.company_name2 : '';
+                    this.designation21 = inside_front_cover.designation21 != null ? inside_front_cover.designation21 : '';
+
+                    this.designation22 = inside_front_cover.designation22 != null ? inside_front_cover.designation22 : '';
+
+                    this.designation23 = inside_front_cover.designation23 != null ? inside_front_cover.designation23 : '';
+                    this.title21 = inside_front_cover.title21 != null ? inside_front_cover.title21 : '';
+                    this.title22 = inside_front_cover.title22 != null ? inside_front_cover.title22 : '';
+                    this.title23 = inside_front_cover.title23 != null ? inside_front_cover.title23 : '';
+                    this.title24 = inside_front_cover.title24 != null ? inside_front_cover.title24 : '';
+                    this.address = inside_front_cover.address;
+                    this.directPhone = inside_front_cover.directPhone;
+                    this.officePhone = inside_front_cover.officePhone;
+                    this.website = inside_front_cover.website;
+                    this.email = inside_front_cover.email;
+                    this.memberCstNumber = inside_front_cover.memberCstNumber;
+                    this.displaySecondAddress = inside_front_cover.displaySecondAddress;
+                    this.secondAddress = inside_front_cover.secondAddress;
+                    //logo section
+                    this.logoRadioButton = inside_front_cover.logoRadioButton;
+                    this.logoImage = inside_front_cover.logoImage;
+                    // signature section
+                    this.signatureRadioButton = inside_front_cover.signatureRadioButton;
+                    this.signatureImage = inside_front_cover.signatureImage;
+                    // text editor
+                    this.textEditor = inside_front_cover.textEditor;
+                    this.showTextEditor = false;
+
+                    // this is for save data into store
+                    this.saveChanges()
+                }
+                this.ACTION_CHANGE_STATE(['Savefcloader', false])
+            })
+            .catch(error => {
+                this.PUSH_ERROR_MESSAGE('Internal server error!');
+            })
+        }
+
         
         
     },

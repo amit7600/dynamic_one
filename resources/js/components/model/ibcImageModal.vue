@@ -139,17 +139,11 @@
                     </div>
                     <div class="modal-footer">
                         <div class="inner_footer_content">
-                            <button class="btn bottom_btn" data-dismiss="modal" @click="cancelModel">
-                                <i class="ti-close" aria-hidden="true"></i>
+                            <button class="btn btn_save" data-dismiss="modal" @click="saveIbcChanges">
+                                Save <i class="ti-check"></i>
                             </button>
-                            <button class="btn bottom_btn" @click="addfont('redo', false, null)">
-                                <i class="ti-back-right"></i>
-                            </button>
-                            <button class="btn bottom_btn" @click="addfont('undo', false, null)">
-                                <i class="ti-back-left"></i>
-                            </button>
-                            <button class="btn bottom_btn" data-dismiss="modal" @click="saveIbcChanges">
-                                <i class="ti-check"></i>
+                            <button class="btn btn_close" data-dismiss="modal" @click="cancelModel">
+                                Close<i class="ti-close" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>

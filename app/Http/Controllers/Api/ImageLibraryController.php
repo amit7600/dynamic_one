@@ -84,6 +84,7 @@ class ImageLibraryController extends Controller
                 'message'     => 'Created!',
                 // 'data'      => MyLibrary::where('user_id', Auth::user()->id)->get(),
                 'data'      => $image,
+                'uploadImage' => $path.'/'.$name,
                 'success'   => true,
             ], 200);
         } catch (\Exception $e) {

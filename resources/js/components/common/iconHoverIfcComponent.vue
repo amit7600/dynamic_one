@@ -1,7 +1,7 @@
 <template>
   <div class="hoverComponetRemove">
     <div class="inner_plus_data">
-      <i class="ti-pencil" title="Edit" @click="displayifclogo($event)"></i>
+      <i class="ti-pencil" title="Edit" ></i>
       <!-- <i class="ti-trash" title="Delete"  data-toggle="tooltip" @click="deleteLogo"></i> -->
     </div>
   </div>

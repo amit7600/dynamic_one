@@ -11,10 +11,10 @@
                     </div>
                     <div class="modal-footer">
                         <div class="inner_footer_content">
-                            <button type="button" class="btn btn_save" data-dismiss="modal" >Save &nbsp; 
+                            <!-- <button type="button" class="btn btn_save" data-dismiss="modal" >Save &nbsp; 
                                 <i class="ti-check" ></i>
-                            </button>
-                            <button type="button" class="btn btn_close" data-dismiss="modal">Cancel &nbsp; 
+                            </button> -->
+                            <button type="button" class="btn btn_close" data-dismiss="modal" id="fileModalClose">Close &nbsp; 
                                 <i class="ti-close" aria-hidden="true"></i>
                             </button>
                             <!-- <button class="btn bottom_btn width_half" data-dismiss="modal">

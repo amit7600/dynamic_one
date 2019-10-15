@@ -48,7 +48,7 @@ export const store = new Vuex.Store({
         setIbcMainImage_bind: '',
         openIfcModalForLogo: '',
         openIfcModalForSignature: '',
-        openIbcModal: '',
+        // openIbcModal: '',
         openIfcModalForText: '',
         ifcText: '',
         ifcRightText: '',
@@ -200,8 +200,15 @@ export const store = new Vuex.Store({
         ifcLogoImage: 'images/avatar_image.jpg',
         ifcLogoRadioButton: 'default',
         // ifc signature image
-        ifcSignatureImage : 'images/avatar_image.jpg',
-        ifcSignatureRadioButton : 'default'
+        ifcSignatureImage: 'images/avatar_image.jpg',
+        ifcSignatureRadioButton: 'default',
+        // for text editor
+        ifcTextEditor: '',
+        // ibc section start
+        ibcLogoRadioButton: 'default',
+        ibcLogoImage: 'images/avatar_image.jpg',
+        
+
 
 
 

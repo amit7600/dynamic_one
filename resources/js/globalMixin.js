@@ -86,7 +86,7 @@ export const globalMixin = {
             'setIbcLogoImage_bind',
             'openIfcModalForLogo',
             'openIfcModalForSignature',
-            'openIbcModal',
+            // 'openIbcModal',
             'openIfcModalForText',
             'defaultIfcLogoPath',
             'imageIfcLogoPath',
@@ -904,14 +904,14 @@ export const globalMixin = {
 
             /** For IBC images    **/
             if (classPresentIbcProfileImage == true) {
-                this.ACTION_CHANGE_STATE(['openIbcModal', 'profile'])
+                // this.ACTION_CHANGE_STATE(['openIbcModal', 'profile'])
                 $('#ifcTextModal').modal('show')
             } else if (classPresentIbcLogo == true) {
-                this.ACTION_CHANGE_STATE(['openIbcModal', 'logoImage'])
+                // this.ACTION_CHANGE_STATE(['openIbcModal', 'logoImage'])
                 this.ACTION_CHANGE_STATE(['profileImage', ''])
                 $('#ifcTextModal').modal('show');
             } else if (classPresentIbcImage == true) {
-                this.ACTION_CHANGE_STATE(['openIbcModal', 'mainImage'])
+                // this.ACTION_CHANGE_STATE(['openIbcModal', 'mainImage'])
                 $('#ifcTextModal').modal('show')
             } else if (classPresentIbcProfile_text == true) {
                 $('#ibcAddressModal').modal('show')
@@ -923,7 +923,7 @@ export const globalMixin = {
                 $('#bcAddressModal').modal('show')
             } else if (classPresentbcProfile == true) {
                 this.ACTION_CHANGE_STATE(['profileImage', 'bottom_image'])
-                this.ACTION_CHANGE_STATE(['openIbcModal', ''])
+                // this.ACTION_CHANGE_STATE(['openIbcModal', ''])
                 $('#ifcTextModal1').modal('show')
             } else if (classPresentbcHeader == true) {
                 this.ACTION_CHANGE_STATE(['openHeaderContent', 'header-text'])

@@ -138,7 +138,7 @@ class saveAllController extends Controller
             $columnName = $request->get('columnName');
             $data = userBook::where('user_id',1)->first();
             $userBook = $data->$columnName;
-
+            
             return response()->json([
                 'message'     => 'Created.',
                 'data'      => unserialize($userBook),

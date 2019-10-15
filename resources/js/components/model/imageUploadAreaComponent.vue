@@ -42,6 +42,8 @@ export default {
                 this.libraryImages = []
                 this.libraryImages = response.data.data;
                 document.getElementById("uploadImage").value = "";
+                this.setImage(response.data.uploadImage)
+                $('#fileModalClose').click()
             })
             .catch(errorResponse => {
                 console.log(errorResponse, "errorResponse");
