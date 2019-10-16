@@ -205,8 +205,10 @@ export default {
 	},
 	created(){
 		this.getUserData()
+		this.ACTION_CHANGE_STATE(['showCover',1])
 	},
    mounted(){
+
 	   this.textLogo = $('.editable').html();
        $("#exampleModal").modal({
 			focus: false,

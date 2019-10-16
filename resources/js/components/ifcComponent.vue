@@ -584,10 +584,11 @@ export default {
             'ifcSignatureRadioButton',
             // text editor
             'ifcTextEditor',
+            'showCover'
         ])
     },
     created(){
-        this.get_ifc_data()
+        this.get_ifc_data()        
     },
     mounted(){
         this.saveIFCPreview()
@@ -595,6 +596,8 @@ export default {
         this.ACTION_CHANGE_STATE(['defaultIfcImagePath', this.preifcimagepath])
         this.ACTION_CHANGE_STATE(['defaultIfcLogoPath', this.preifclogoimagepath])
         this.ACTION_CHANGE_STATE(['defaultIfcSignaturePath', this.preifcSignatureimagepath])
+        this.ACTION_CHANGE_STATE(['showCover',2])
+        
     },
     methods:{
         ...mapMutations([
@@ -835,45 +838,8 @@ export default {
             axios.post("api/userBooks", data)
 			.then(response => {
                 const inside_front_cover = response.data.data;
-
-                this.photoRadioButton = inside_front_cover.photoRadioButton;
-                this.photoImage = inside_front_cover.photoImage ;
-                this.name = inside_front_cover.name;
-                this.company_name = inside_front_cover.company_name != null ? inside_front_cover.company_name : '' ;
-                this.designation1 = inside_front_cover.designation1 != null ? inside_front_cover.designation1 : '';
-                this.designation2 = inside_front_cover.designation2 != null ? inside_front_cover.designation2 : '';
-                this.designation3 = inside_front_cover.designation3 != null ? inside_front_cover.designation3 : '';
-                this.title1 = inside_front_cover.title1 != null ? inside_front_cover.title1 : '';
-                this.title2 = inside_front_cover.title2 != null ? inside_front_cover.title2 : '';
-                this.title3 = inside_front_cover.title3 != null ?inside_front_cover.title3 : '';
-                this.title4 = inside_front_cover.title4 != null ? inside_front_cover.title4 : '';
-                this.company_name2 = inside_front_cover.company_name2 != null ? inside_front_cover.company_name2 : '';
-                this.designation21 = inside_front_cover.designation21 != null ? inside_front_cover.designation21 : '';
-
-                this.designation22 = inside_front_cover.designation22 != null ? inside_front_cover.designation22 : '';
-
-                this.designation23 = inside_front_cover.designation23 != null ? inside_front_cover.designation23 : '';
-                this.title21 = inside_front_cover.title21 != null ? inside_front_cover.title21 : '';
-                this.title22 = inside_front_cover.title22 != null ? inside_front_cover.title22 : '';
-                this.title23 = inside_front_cover.title23 != null ? inside_front_cover.title23 : '';
-                this.title24 = inside_front_cover.title24 != null ? inside_front_cover.title24 : '';
-                this.address = inside_front_cover.address;
-                this.directPhone = inside_front_cover.directPhone;
-                this.officePhone = inside_front_cover.officePhone;
-                this.website = inside_front_cover.website;
-                this.email = inside_front_cover.email;
-                this.memberCstNumber = inside_front_cover.memberCstNumber;
-                this.displaySecondAddress = inside_front_cover.displaySecondAddress;
-                this.secondAddress = inside_front_cover.secondAddress;
-                //logo section
-                this.logoRadioButton = inside_front_cover.logoRadioButton;
-                this.logoImage = inside_front_cover.logoImage;
-                // signature section
-                this.signatureRadioButton = inside_front_cover.signatureRadioButton;
-                this.signatureImage = inside_front_cover.signatureImage;
-                // text editor
-                this.textEditor = inside_front_cover.textEditor
-                this.showTextEditor = false;
+                
+                this.setIfcData(inside_front_cover)                
                 this.PUSH_SUCCESS_MESSAGE('Inside front cover saved successfully!');
                 this.ACTION_CHANGE_STATE(['Savefcloader', false])
             })
@@ -889,7 +855,16 @@ export default {
             axios.get("api/userBooks/1")
             .then(response => {
                 const inside_front_cover = response.data.data.inside_front_cover;
-                if(inside_front_cover != '' ){
+                this.setIfcData(inside_front_cover)
+                
+                this.ACTION_CHANGE_STATE(['Savefcloader', false])
+            })
+            .catch(error => {
+                this.PUSH_ERROR_MESSAGE('Internal server error!');
+            })
+        },
+        setIfcData(inside_front_cover){
+            if(inside_front_cover && inside_front_cover != '' ){
                     this.photoRadioButton = inside_front_cover.photoRadioButton;
                     this.photoImage = inside_front_cover.photoImage ;
                     this.name = inside_front_cover.name;
@@ -932,15 +907,7 @@ export default {
                     // this is for save data into store
                     this.saveChanges()
                 }
-                this.ACTION_CHANGE_STATE(['Savefcloader', false])
-            })
-            .catch(error => {
-                this.PUSH_ERROR_MESSAGE('Internal server error!');
-            })
-        }
-
-        
-        
+        }        
     },
 }
 </script>

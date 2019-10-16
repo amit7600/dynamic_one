@@ -86,18 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/@babel/runtime/regenerator/index.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
-
-
-/***/ }),
-
 /***/ "./node_modules/@saeris/vue-spinners/lib/@saeris/vue-spinners.common.js":
 /*!******************************************************************************!*\
   !*** ./node_modules/@saeris/vue-spinners/lib/@saeris/vue-spinners.common.js ***!
@@ -9124,6 +9112,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(['fcRadioButton', 'fcTextLogoEditor', 'fcImageAlign', 'fcImage', 'fcTextAlign', 'fcHeadingText', 'fcPreview'])),
   created: function created() {
     this.getUserData();
+    this.ACTION_CHANGE_STATE(['showCover', 1]);
   },
   mounted: function mounted() {
     this.textLogo = $('.editable').html();
@@ -9849,7 +9838,7 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['ifcPreview', 'bcPreview', 'ifcPhotoRadio', 'ifcPhotoImage', 'ifcName', 'ifcCompanyName', 'ifcdesignation1', 'ifcdesignation2', 'ifcdesignation3', 'ifcTitle1', 'ifcTitle2', 'ifcTitle3', 'ifcTitle4', 'ifcaddress', 'ifcDirectPhone', 'ifcOfficePhone', 'ifcWebsite', 'ifcEmail', 'ifcMemberCstNumber', 'ifcCompanyName2', 'ifcdesignation21', 'ifcdesignation22', 'ifcdesignation23', 'ifcTitle21', 'ifcTitle22', 'ifcTitle23', 'ifcTitle24', 'ifcSecondAddress', 'ifcAddSecondAddress', 'ifcLogoImage', 'ifcLogoRadioButton', // signature
   'ifcSignatureImage', 'ifcSignatureRadioButton', // text editor
-  'ifcTextEditor'])),
+  'ifcTextEditor', 'showCover'])),
   created: function created() {
     this.get_ifc_data();
   },
@@ -9859,6 +9848,7 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
     this.ACTION_CHANGE_STATE(['defaultIfcImagePath', this.preifcimagepath]);
     this.ACTION_CHANGE_STATE(['defaultIfcLogoPath', this.preifclogoimagepath]);
     this.ACTION_CHANGE_STATE(['defaultIfcSignaturePath', this.preifcSignatureimagepath]);
+    this.ACTION_CHANGE_STATE(['showCover', 2]);
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapMutations"])(['CHANGE_STATE']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(['ACTION_CHANGE_STATE']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapMutations"])(['EMPTY_MESSAGE_LIST', 'PUSH_SUCCESS_MESSAGE', 'PUSH_ERROR_MESSAGE']), {
     resetActiveOnAlign: function resetActiveOnAlign(type, value) {
@@ -10093,42 +10083,8 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
       };
       axios.post("api/userBooks", data).then(function (response) {
         var inside_front_cover = response.data.data;
-        _this.photoRadioButton = inside_front_cover.photoRadioButton;
-        _this.photoImage = inside_front_cover.photoImage;
-        _this.name = inside_front_cover.name;
-        _this.company_name = inside_front_cover.company_name != null ? inside_front_cover.company_name : '';
-        _this.designation1 = inside_front_cover.designation1 != null ? inside_front_cover.designation1 : '';
-        _this.designation2 = inside_front_cover.designation2 != null ? inside_front_cover.designation2 : '';
-        _this.designation3 = inside_front_cover.designation3 != null ? inside_front_cover.designation3 : '';
-        _this.title1 = inside_front_cover.title1 != null ? inside_front_cover.title1 : '';
-        _this.title2 = inside_front_cover.title2 != null ? inside_front_cover.title2 : '';
-        _this.title3 = inside_front_cover.title3 != null ? inside_front_cover.title3 : '';
-        _this.title4 = inside_front_cover.title4 != null ? inside_front_cover.title4 : '';
-        _this.company_name2 = inside_front_cover.company_name2 != null ? inside_front_cover.company_name2 : '';
-        _this.designation21 = inside_front_cover.designation21 != null ? inside_front_cover.designation21 : '';
-        _this.designation22 = inside_front_cover.designation22 != null ? inside_front_cover.designation22 : '';
-        _this.designation23 = inside_front_cover.designation23 != null ? inside_front_cover.designation23 : '';
-        _this.title21 = inside_front_cover.title21 != null ? inside_front_cover.title21 : '';
-        _this.title22 = inside_front_cover.title22 != null ? inside_front_cover.title22 : '';
-        _this.title23 = inside_front_cover.title23 != null ? inside_front_cover.title23 : '';
-        _this.title24 = inside_front_cover.title24 != null ? inside_front_cover.title24 : '';
-        _this.address = inside_front_cover.address;
-        _this.directPhone = inside_front_cover.directPhone;
-        _this.officePhone = inside_front_cover.officePhone;
-        _this.website = inside_front_cover.website;
-        _this.email = inside_front_cover.email;
-        _this.memberCstNumber = inside_front_cover.memberCstNumber;
-        _this.displaySecondAddress = inside_front_cover.displaySecondAddress;
-        _this.secondAddress = inside_front_cover.secondAddress; //logo section
 
-        _this.logoRadioButton = inside_front_cover.logoRadioButton;
-        _this.logoImage = inside_front_cover.logoImage; // signature section
-
-        _this.signatureRadioButton = inside_front_cover.signatureRadioButton;
-        _this.signatureImage = inside_front_cover.signatureImage; // text editor
-
-        _this.textEditor = inside_front_cover.textEditor;
-        _this.showTextEditor = false;
+        _this.setIfcData(inside_front_cover);
 
         _this.PUSH_SUCCESS_MESSAGE('Inside front cover saved successfully!');
 
@@ -10147,51 +10103,54 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
       axios.get("api/userBooks/1").then(function (response) {
         var inside_front_cover = response.data.data.inside_front_cover;
 
-        if (inside_front_cover != '') {
-          _this2.photoRadioButton = inside_front_cover.photoRadioButton;
-          _this2.photoImage = inside_front_cover.photoImage;
-          _this2.name = inside_front_cover.name;
-          _this2.company_name = inside_front_cover.company_name != null ? inside_front_cover.company_name : '';
-          _this2.designation1 = inside_front_cover.designation1 != null ? inside_front_cover.designation1 : '';
-          _this2.designation2 = inside_front_cover.designation2 != null ? inside_front_cover.designation2 : '';
-          _this2.designation3 = inside_front_cover.designation3 != null ? inside_front_cover.designation3 : '';
-          _this2.title1 = inside_front_cover.title1 != null ? inside_front_cover.title1 : '';
-          _this2.title2 = inside_front_cover.title2 != null ? inside_front_cover.title2 : '';
-          _this2.title3 = inside_front_cover.title3 != null ? inside_front_cover.title3 : '';
-          _this2.title4 = inside_front_cover.title4 != null ? inside_front_cover.title4 : '';
-          _this2.company_name2 = inside_front_cover.company_name2 != null ? inside_front_cover.company_name2 : '';
-          _this2.designation21 = inside_front_cover.designation21 != null ? inside_front_cover.designation21 : '';
-          _this2.designation22 = inside_front_cover.designation22 != null ? inside_front_cover.designation22 : '';
-          _this2.designation23 = inside_front_cover.designation23 != null ? inside_front_cover.designation23 : '';
-          _this2.title21 = inside_front_cover.title21 != null ? inside_front_cover.title21 : '';
-          _this2.title22 = inside_front_cover.title22 != null ? inside_front_cover.title22 : '';
-          _this2.title23 = inside_front_cover.title23 != null ? inside_front_cover.title23 : '';
-          _this2.title24 = inside_front_cover.title24 != null ? inside_front_cover.title24 : '';
-          _this2.address = inside_front_cover.address;
-          _this2.directPhone = inside_front_cover.directPhone;
-          _this2.officePhone = inside_front_cover.officePhone;
-          _this2.website = inside_front_cover.website;
-          _this2.email = inside_front_cover.email;
-          _this2.memberCstNumber = inside_front_cover.memberCstNumber;
-          _this2.displaySecondAddress = inside_front_cover.displaySecondAddress;
-          _this2.secondAddress = inside_front_cover.secondAddress; //logo section
-
-          _this2.logoRadioButton = inside_front_cover.logoRadioButton;
-          _this2.logoImage = inside_front_cover.logoImage; // signature section
-
-          _this2.signatureRadioButton = inside_front_cover.signatureRadioButton;
-          _this2.signatureImage = inside_front_cover.signatureImage; // text editor
-
-          _this2.textEditor = inside_front_cover.textEditor;
-          _this2.showTextEditor = false; // this is for save data into store
-
-          _this2.saveChanges();
-        }
+        _this2.setIfcData(inside_front_cover);
 
         _this2.ACTION_CHANGE_STATE(['Savefcloader', false]);
       })["catch"](function (error) {
         _this2.PUSH_ERROR_MESSAGE('Internal server error!');
       });
+    },
+    setIfcData: function setIfcData(inside_front_cover) {
+      if (inside_front_cover && inside_front_cover != '') {
+        this.photoRadioButton = inside_front_cover.photoRadioButton;
+        this.photoImage = inside_front_cover.photoImage;
+        this.name = inside_front_cover.name;
+        this.company_name = inside_front_cover.company_name != null ? inside_front_cover.company_name : '';
+        this.designation1 = inside_front_cover.designation1 != null ? inside_front_cover.designation1 : '';
+        this.designation2 = inside_front_cover.designation2 != null ? inside_front_cover.designation2 : '';
+        this.designation3 = inside_front_cover.designation3 != null ? inside_front_cover.designation3 : '';
+        this.title1 = inside_front_cover.title1 != null ? inside_front_cover.title1 : '';
+        this.title2 = inside_front_cover.title2 != null ? inside_front_cover.title2 : '';
+        this.title3 = inside_front_cover.title3 != null ? inside_front_cover.title3 : '';
+        this.title4 = inside_front_cover.title4 != null ? inside_front_cover.title4 : '';
+        this.company_name2 = inside_front_cover.company_name2 != null ? inside_front_cover.company_name2 : '';
+        this.designation21 = inside_front_cover.designation21 != null ? inside_front_cover.designation21 : '';
+        this.designation22 = inside_front_cover.designation22 != null ? inside_front_cover.designation22 : '';
+        this.designation23 = inside_front_cover.designation23 != null ? inside_front_cover.designation23 : '';
+        this.title21 = inside_front_cover.title21 != null ? inside_front_cover.title21 : '';
+        this.title22 = inside_front_cover.title22 != null ? inside_front_cover.title22 : '';
+        this.title23 = inside_front_cover.title23 != null ? inside_front_cover.title23 : '';
+        this.title24 = inside_front_cover.title24 != null ? inside_front_cover.title24 : '';
+        this.address = inside_front_cover.address;
+        this.directPhone = inside_front_cover.directPhone;
+        this.officePhone = inside_front_cover.officePhone;
+        this.website = inside_front_cover.website;
+        this.email = inside_front_cover.email;
+        this.memberCstNumber = inside_front_cover.memberCstNumber;
+        this.displaySecondAddress = inside_front_cover.displaySecondAddress;
+        this.secondAddress = inside_front_cover.secondAddress; //logo section
+
+        this.logoRadioButton = inside_front_cover.logoRadioButton;
+        this.logoImage = inside_front_cover.logoImage; // signature section
+
+        this.signatureRadioButton = inside_front_cover.signatureRadioButton;
+        this.signatureImage = inside_front_cover.signatureImage; // text editor
+
+        this.textEditor = inside_front_cover.textEditor;
+        this.showTextEditor = false; // this is for save data into store
+
+        this.saveChanges();
+      }
     }
   })
 });
@@ -10207,10 +10166,9 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _model_ibcImageModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./model/ibcImageModal */ "./resources/js/components/model/ibcImageModal.vue");
-/* harmony import */ var _model_ibcAddressModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model/ibcAddressModal */ "./resources/js/components/model/ibcAddressModal.vue");
-/* harmony import */ var _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./model/fileModalComponent */ "./resources/js/components/model/fileModalComponent.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _common_alertComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/alertComponent */ "./resources/js/components/common/alertComponent.vue");
+/* harmony import */ var _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model/fileModalComponent */ "./resources/js/components/model/fileModalComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -10490,26 +10448,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ibcImageModelComponent: _model_ibcImageModal__WEBPACK_IMPORTED_MODULE_0__["default"],
-    FileModalComponent: _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
-    ibcAddressInputComponent: _model_ibcAddressModal__WEBPACK_IMPORTED_MODULE_1__["default"]
+    alertComponent: _common_alertComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+    FileModalComponent: _model_fileModalComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['ibcPreview', 'ibcLogoRadioButton', 'ibcLogoImage'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(['ibcPreview', 'ibcLogoRadioButton', 'ibcLogoImage', 'ibcMainImage', 'ibcMainRadioButton', 'ibcPhotoRadioButton', 'ibcPhotoImage', 'ibcTitle', 'ibcCompanyName', 'ibcAddress1', 'ibcAddress2', 'ibcOfficePhone', 'ibcDirectPhone', 'ibcWebsite', 'ibcEmail'])),
   data: function data() {
     return {
       ibcContent: '',
@@ -10520,14 +10467,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       open_pop_up: '',
       defaultLogo: 'images/ibc_logo.png',
       logoRadioButton: this.$store.state.ibcLogoRadioButton,
-      logoImage: this.$store.state.ibcLogoImage
+      logoImage: this.$store.state.ibcLogoImage,
+      // main image 
+      defaultMainImage: 'images/ibc_img.jpg',
+      mainImage: this.$store.state.ibcMainImage,
+      mainRadioButton: this.$store.state.ibcMainRadioButton,
+      // photo section
+      photoRadioButton: this.$store.state.ibcPhotoRadioButton,
+      defaultPhotoImage: 'images/profile_pic.jpg',
+      photoImage: this.$store.state.ibcPhotoImage,
+      // address section 
+      title: this.$store.state.ibcTitle,
+      company_name: this.$store.state.ibcCompanyName,
+      address1: this.$store.state.ibcAddress1,
+      address2: this.$store.state.ibcAddress2,
+      office_phone: this.$store.state.ibcOfficePhone,
+      direct_phone: this.$store.state.ibcDirectPhone,
+      website: this.$store.state.ibcWebsite,
+      email: this.$store.state.ibcEmail
     };
+  },
+  created: function created() {
+    this.get_ibc_data();
   },
   mounted: function mounted() {
     this.saveIBCPreview();
-    this.getIbcUserBook();
+    this.ACTION_CHANGE_STATE(['showCover', 3]);
+    var container = this.$el.querySelector(".border_full");
+    container.scrollTop = container.scrollHeight;
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapMutations"])(['CHANGE_STATE']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])(['CHANGE_STATE']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['ACTION_CHANGE_STATE']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])(['EMPTY_MESSAGE_LIST', 'PUSH_SUCCESS_MESSAGE', 'PUSH_ERROR_MESSAGE']), {
     openIbcModal: function openIbcModal(value) {
       this.open_pop_up = value;
       $('#ibcModal').modal('show');
@@ -10535,24 +10504,140 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setImage: function setImage(value) {
       if (this.open_pop_up == 1) {
         this.logoImage = value;
+      } else if (this.open_pop_up == 2) {
+        this.mainImage = value;
+      } else if (this.open_pop_up == 3) {
+        this.photoImage = value;
       }
     },
     cancelModal: function cancelModal() {
       // logo section
       this.logoImage = this.ibcLogoImage;
-      this.logoRadioButton = this.ibcLogoRadioButton;
+      this.logoRadioButton = this.ibcLogoRadioButton; // main image section
+
+      this.mainRadioButton = this.ibcMainRadioButton;
+      this.mainImage = this.ibcMainImage; // photo image
+
+      this.photoRadioButton = this.ibcPhotoRadioButton;
+      this.photoImage = this.ibcPhotoImage; // address section
+
+      this.title = this.ibcTitle;
+      this.company_name = this.ibcCompanyName;
+      this.address1 = this.ibcAddress1;
+      this.address2 = this.ibcAddress2;
+      this.office_phone = this.ibcOfficePhone;
+      this.direct_phone = this.ibcDirectPhone;
+      this.website = this.ibcWebsite;
+      this.email = this.ibcEmail;
     },
     saveChanges: function saveChanges() {
       if (this.open_pop_up == 1 && this.logoImage == 'images/avatar_image.jpg' && this.logoRadioButton == 'addMedia') {
         this.logoRadioButton = this.ibcLogoRadioButton;
+      } else if (this.open_pop_up == 2 && this.mainImage == 'images/avatar_image.jpg' && this.mainRadioButton == 'addMedia') {
+        this.mainRadioButton = this.ibcMainRadioButton;
+      } else if (this.open_pop_up == 3 && this.photoImage == 'images/avatar_image.jpg' && this.photoRadioButton == 'addMedia') {
+        this.photoRadioButton = this.ibcPhotoRadioButton;
       }
 
       this.CHANGE_STATE(['ibcLogoRadioButton', this.logoRadioButton]);
-      this.CHANGE_STATE(['ibcLogoImage', this.logoImage]);
+      this.CHANGE_STATE(['ibcLogoImage', this.logoImage]); // main image section
+
+      this.CHANGE_STATE(['ibcMainRadioButton', this.mainRadioButton]);
+      this.CHANGE_STATE(['ibcMainImage', this.mainImage]); // photo image
+
+      this.CHANGE_STATE(['ibcPhotoRadioButton', this.photoRadioButton]);
+      this.CHANGE_STATE(['ibcPhotoImage', this.photoImage]); // address section
+
+      this.CHANGE_STATE(['ibcTitle', this.title]);
+      this.CHANGE_STATE(['ibcCompanyName', this.company_name]);
+      this.CHANGE_STATE(['ibcAddress1', this.address1]);
+      this.CHANGE_STATE(['ibcAddress2', this.address2]);
+      this.CHANGE_STATE(['ibcOfficePhone', this.office_phone]);
+      this.CHANGE_STATE(['ibcDirectPhone', this.direct_phone]);
+      this.CHANGE_STATE(['ibcWebsite', this.website]);
+      this.CHANGE_STATE(['ibcEmail', this.email]);
     },
     logoRadioButtonChange: function logoRadioButtonChange(e) {
       var value = e.target.value;
       this.logoRadioButton = value;
+    },
+    mainRadioButtonChange: function mainRadioButtonChange(e) {
+      var value = e.target.value;
+      this.mainRadioButton = value;
+    },
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      this.EMPTY_MESSAGE_LIST();
+      var data = {
+        columnName: 'inside_back_cover',
+        logoRadioButton: this.logoRadioButton,
+        logoImage: this.logoImage,
+        // main image 
+        mainImage: this.mainImage,
+        mainRadioButton: this.mainRadioButton,
+        // photo section
+        photoRadioButton: this.photoRadioButton,
+        photoImage: this.photoImage,
+        // address section 
+        title: this.title,
+        company_name: this.company_name,
+        address1: this.address1,
+        address2: this.address2,
+        office_phone: this.office_phone,
+        direct_phone: this.direct_phone,
+        website: this.website,
+        email: this.email
+      };
+      axios.post("api/userBooks", data).then(function (response) {
+        var inside_back_cover = response.data.data;
+
+        _this.setIbcData(inside_back_cover);
+
+        _this.PUSH_SUCCESS_MESSAGE('Inside back cover saved successfully!');
+      })["catch"](function (error) {
+        _this.PUSH_ERROR_MESSAGE('Internal server error');
+      });
+    },
+    saveDownload: function saveDownload() {
+      this.onSubmit();
+    },
+    setIbcData: function setIbcData(data) {
+      console.log(data);
+
+      if (data) {
+        // save into data property
+        // logo section
+        this.logoImage = data.logoImage;
+        this.logoRadioButton = data.logoRadioButton; // main image section
+
+        this.mainRadioButton = data.mainRadioButton;
+        this.mainImage = data.mainImage; // photo image
+
+        this.photoRadioButton = data.photoRadioButton;
+        this.photoImage = data.photoImage; // address section
+
+        this.title = data.title;
+        this.company_name = data.company_name;
+        this.address1 = data.address1;
+        this.address2 = data.address2;
+        this.office_phone = data.office_phone;
+        this.direct_phone = data.direct_phone;
+        this.website = data.website;
+        this.email = data.email;
+        this.saveChanges();
+      }
+    },
+    get_ibc_data: function get_ibc_data() {
+      var _this2 = this;
+
+      axios.get("api/userBooks/1").then(function (response) {
+        var inside_back_cover = response.data.data.inside_back_cover;
+
+        _this2.setIbcData(inside_back_cover);
+      })["catch"](function (error) {
+        _this2.PUSH_ERROR_MESSAGE('Problem in geting data!');
+      });
     }
   })
 });
@@ -10568,6 +10653,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -10615,6 +10707,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10624,6 +10717,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.showOne = this.showFrontCover;
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['showCover'])),
   methods: {
     newData: function newData() {
       alert(this.showOne);
@@ -11300,514 +11394,6 @@ __webpack_require__.r(__webpack_exports__);
     // },
     selectedImage: function selectedImage(value) {
       this.$parent.setImage(value);
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/model/ibcAddressModal.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/model/ibcAddressModal.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {// titleInputIbc: 'Kat Nitsou',
-      // companyInputIbc: 'Sotheby’s International Realty, Inc.',
-      // addressInputIbc: '16027 VENTURA BLVD, Suite 330 ',
-      // addressInputIbc1:'ENCINO, CA, 91436',
-      // emailInputIbc: 'kat.nitsou@sothebyinternational.com',
-      // websiteUrlInputIbc: 'sothebyshomes.com',
-      // officePhoneInputIbc: 'M : 323-228-3805',
-      // directPhoneInputIbc: 'O : 626-396-9400',
-    };
-  },
-  components: {},
-  computed: {
-    titleInputIbc: {
-      get: function get() {
-        return this.$store.state.ibcTitleText;
-      },
-      set: function set(newValue) {
-        this.$store.state.ibcTitleText = newValue;
-      }
-    },
-    companyInputIbc: {
-      get: function get() {
-        return this.$store.state.ibcCompanyNameText;
-      },
-      set: function set(newValue) {
-        this.$store.state.ibcCompanyNameText = newValue;
-      }
-    },
-    addressInputIbc: {
-      get: function get() {
-        return this.$store.state.ibcAddressText;
-      },
-      set: function set(newValue) {
-        this.$store.state.ibcAddressText = newValue;
-      }
-    },
-    addressInputIbc1: {
-      get: function get() {
-        return this.$store.state.ibcAddressText1;
-      },
-      set: function set(newValue) {
-        this.$store.state.ibcAddressText1 = newValue;
-      }
-    },
-    emailInputIbc: {
-      get: function get() {
-        return this.$store.state.ibcEmailText;
-      },
-      set: function set(newValue) {
-        this.$store.state.ibcEmailText = newValue;
-      }
-    },
-    websiteUrlInputIbc: {
-      get: function get() {
-        return this.$store.state.ibcWebsiteText;
-      },
-      set: function set(newValue) {
-        this.$store.state.ibcWebsiteText = newValue;
-      }
-    },
-    officePhoneInputIbc: {
-      get: function get() {
-        return this.$store.state.ibcOfficeNumberText;
-      },
-      set: function set(newValue) {
-        this.$store.state.ibcOfficeNumberText = newValue;
-      }
-    },
-    directPhoneInputIbc: {
-      get: function get() {
-        return this.$store.state.ibcPhoneNumberText;
-      },
-      set: function set(newValue) {
-        this.$store.state.ibcPhoneNumberText = newValue;
-      }
-    }
-  },
-  created: function created() {},
-  mounted: function mounted() {
-    $("#ifcModal").modal({
-      focus: false,
-      // Do not show modal when innitialized.
-      show: false,
-      backdrop: 'static',
-      // For static modal
-      keyboard: false // prevent click outside of the modal
-
-    });
-  },
-  methods: {
-    // showCodeMap () {
-    // this.showCodeEditor = !this.showCodeEditor
-    // this.codeBtn = !this.codeBtn
-    // if (this.showCodeEditor) {
-    // 	this.editorCodeTemplate = $('.editable').html();
-    // } else {
-    // 	console.log(this.editorCodeTemplate)
-    // 	$('.editable').empty()
-    // 	$('.editable').html(this.editorCodeTemplate);
-    // }
-    // },
-    // onCmReady(cm) {
-    // console.log('the editor is readied!', cm)
-    // },
-    // onCmFocus(cm) {
-    // console.log('the editor is focus!', cm)
-    // },
-    // onCmCodeChange(newCode) {
-    // console.log('this is new code', newCode)
-    // this.code = newCode
-    // },
-    resetActiveOnAlign: function resetActiveOnAlign(type, value) {
-      this.textLeft = false;
-      this.textRight = false;
-      this.textCenter = false;
-      this.textJustify = false;
-      this[type] = !this[value];
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/model/ibcImageModal.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/model/ibcImageModal.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-iro-color-picker */ "./node_modules/vue-iro-color-picker/dist/VueIroColorPicker.common.js");
-/* harmony import */ var vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      fileModel: "",
-      inside: 'inner',
-      showCodeEditor: false,
-      headingTag: "",
-      color_picker: "",
-      code: this.editorTempData,
-      width: '',
-      height: '',
-      italicBtn: false,
-      boldBtn: false,
-      underlineBtn: false,
-      unorderlistBtn: false,
-      orderlistBtn: false,
-      codeBtn: false,
-      textLeft: false,
-      textCenter: false,
-      textRight: false,
-      textJustify: false // IbcImageModal: 'default',
-      // IbcMainImage :'default',
-      // IbcLogoImage :'default',
-
-    };
-  },
-  components: {
-    "color-picker": vue_iro_color_picker__WEBPACK_IMPORTED_MODULE_1___default.a
-  },
-  computed: {
-    IbcLogoImage: {
-      get: function get() {
-        return this.$store.state.ibcLogoCheckChoose;
-      },
-      set: function set(newValue) {
-        console.log(newValue);
-        return this.$store.state.ibcLogoCheckChoose = newValue;
-      }
-    },
-    IbcMainImage: {
-      get: function get() {
-        return this.$store.state.ibcBannerCheckChoose;
-      },
-      set: function set(newValue) {
-        console.log(newValue);
-        return this.$store.state.ibcBannerCheckChoose = newValue;
-      }
-    },
-    IbcImageModal: {
-      get: function get() {
-        return this.$store.state.ibcProfileCheckChoose;
-      },
-      set: function set(newValue) {
-        console.log(newValue);
-        return this.$store.state.ibcProfileCheckChoose = newValue;
-      }
-    }
-  },
-  created: function created() {},
-  mounted: function mounted() {
-    $("#ifcModal").modal({
-      focus: false,
-      // Do not show modal when innitialized.
-      show: false,
-      backdrop: 'static',
-      // For static modal
-      keyboard: false // prevent click outside of the modal
-
-    });
-  },
-  methods: {
-    // showCodeMap () {
-    // this.showCodeEditor = !this.showCodeEditor
-    // this.codeBtn = !this.codeBtn
-    // if (this.showCodeEditor) {
-    // 	this.editorCodeTemplate = $('.editable').html();
-    // } else {
-    // 	console.log(this.editorCodeTemplate)
-    // 	$('.editable').empty()
-    // 	$('.editable').html(this.editorCodeTemplate);
-    // }
-    // },
-    // onCmReady(cm) {
-    // console.log('the editor is readied!', cm)
-    // },
-    // onCmFocus(cm) {
-    // console.log('the editor is focus!', cm)
-    // },
-    // onCmCodeChange(newCode) {
-    // console.log('this is new code', newCode)
-    // this.code = newCode
-    // },
-    resetActiveOnAlign: function resetActiveOnAlign(type, value) {
-      this.textLeft = false;
-      this.textRight = false;
-      this.textCenter = false;
-      this.textJustify = false;
-      this[type] = !this[value];
     }
   }
 });
@@ -48099,743 +47685,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/regenerator-runtime/runtime.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var runtime = (function (exports) {
-  "use strict";
-
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []);
-
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-
-    return generator;
-  }
-  exports.wrap = wrap;
-
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
-
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
-
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-
-  // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-  var IteratorPrototype = {};
-  IteratorPrototype[iteratorSymbol] = function () {
-    return this;
-  };
-
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  if (NativeIteratorPrototype &&
-      NativeIteratorPrototype !== Op &&
-      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype =
-    Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
-  GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] =
-    GeneratorFunction.displayName = "GeneratorFunction";
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      prototype[method] = function(arg) {
-        return this._invoke(method, arg);
-      };
-    });
-  }
-
-  exports.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  exports.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      if (!(toStringTagSymbol in genFun)) {
-        genFun[toStringTagSymbol] = "GeneratorFunction";
-      }
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
-
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-  exports.awrap = function(arg) {
-    return { __await: arg };
-  };
-
-  function AsyncIterator(generator) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value &&
-            typeof value === "object" &&
-            hasOwn.call(value, "__await")) {
-          return Promise.resolve(value.__await).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return Promise.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration.
-          result.value = unwrapped;
-          resolve(result);
-        }, function(error) {
-          // If a rejected Promise was yielded, throw the rejection back
-          // into the async generator function so it can be handled there.
-          return invoke("throw", error, resolve, reject);
-        });
-      }
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new Promise(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
-    return this;
-  };
-  exports.AsyncIterator = AsyncIterator;
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  exports.async = function(innerFn, outerFn, self, tryLocsList) {
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList)
-    );
-
-    return exports.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
-    };
-  }
-
-  // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-    if (method === undefined) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
-
-      if (context.method === "throw") {
-        // Note: ["return"] must be used for ES3 parsing compatibility.
-        if (delegate.iterator["return"]) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
-
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
-        }
-
-        context.method = "throw";
-        context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
-      }
-
-      return ContinueSentinel;
-    }
-
-    var record = tryCatch(method, delegate.iterator, context.arg);
-
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    var info = record.arg;
-
-    if (! info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value;
-
-      // Resume execution at the desired location (see delegateYield).
-      context.next = delegate.nextLoc;
-
-      // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined;
-      }
-
-    } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    }
-
-    // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-    context.delegate = null;
-    return ContinueSentinel;
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  Gp[toStringTagSymbol] = "Generator";
-
-  // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-  Gp[iteratorSymbol] = function() {
-    return this;
-  };
-
-  Gp.toString = function() {
-    return "[object Generator]";
-  };
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  exports.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  exports.values = values;
-
-  function doneResult() {
-    return { value: undefined, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-
-      this.method = "next";
-      this.arg = undefined;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined;
-        }
-
-        return !! caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined;
-      }
-
-      return ContinueSentinel;
-    }
-  };
-
-  // Regardless of whether this script is executing as a CommonJS module
-  // or not, return the runtime object so that we can declare the variable
-  // regeneratorRuntime in the outer scope, which allows this module to be
-  // injected easily by `bin/regenerator --include-runtime script.js`.
-  return exports;
-
-}(
-  // If this script is executing as a CommonJS module, use module.exports
-  // as the regeneratorRuntime namespace. Otherwise create a new empty
-  // object. Either way, the resulting object will be used to initialize
-  // the regeneratorRuntime variable at the top of this file.
-   true ? module.exports : undefined
-));
-
-try {
-  regeneratorRuntime = runtime;
-} catch (accidentalStrictMode) {
-  // This module should not be running in strict mode, so the above
-  // assignment should always work unless something is misconfigured. Just
-  // in case runtime.js accidentally runs in strict mode, we can escape
-  // strict mode using a global Function call. This could conceivably fail
-  // if a Content Security Policy forbids using Function, but in that case
-  // the proper solution is to fix the accidental strict mode problem. If
-  // you've misconfigured your bundler to force strict mode and applied a
-  // CSP to forbid Function, and you're not willing to fix either of those
-  // problems, please detail your unique predicament in a GitHub issue.
-  Function("r", "regeneratorRuntime = r")(runtime);
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/setimmediate/setImmediate.js":
 /*!***************************************************!*\
   !*** ./node_modules/setimmediate/setImmediate.js ***!
@@ -56578,6 +55427,8 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("alertComponent"),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "row main_container m-0" },
@@ -56613,9 +55464,15 @@ var render = function() {
                 "button",
                 {
                   staticClass: "save_ifc_to_db",
-                  on: { click: _vm.saveibcDataToDb }
+                  on: { click: _vm.saveDownload }
                 },
-                [_vm._v("Save Preview")]
+                [_vm._v("Save & download")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "save_ifc_to_db", on: { click: _vm.onSubmit } },
+                [_vm._v("Save")]
               ),
               _vm._v(" "),
               _c("LoaderComponent"),
@@ -56674,28 +55531,26 @@ var render = function() {
                                 }
                               }),
                               _vm._v(" "),
-                              this.imageIbcMainPath == ""
+                              this.mainRadioButton == "default"
                                 ? _c("div", {
                                     style: {
                                       height: "100%",
                                       backgroundPosition: "center center",
                                       backgroundSize: "cover",
                                       backgroundImage:
-                                        "url(" +
-                                        this.defaultIbcMainImagePath +
-                                        ")"
+                                        "url(" + this.defaultMainImage + ")"
                                     }
                                   })
                                 : _vm._e(),
                               _vm._v(" "),
-                              this.imageIbcMainPath != ""
+                              this.mainRadioButton != ""
                                 ? _c("div", {
                                     style: {
                                       height: "100%",
                                       backgroundPosition: "center center",
                                       backgroundSize: "cover",
                                       backgroundImage:
-                                        "url(" + this.imageIbcMainPath + ")"
+                                        "url(" + this.mainImage + ")"
                                     }
                                   })
                                 : _vm._e()
@@ -56723,20 +55578,20 @@ var render = function() {
                                       }
                                     }),
                                     _vm._v(" "),
-                                    this.imageIbcProfilePath == ""
+                                    this.photoRadioButton == "default"
                                       ? _c("img", {
                                           attrs: {
-                                            src: _vm.defaultIbcProfilePath,
+                                            src: this.defaultPhotoImage,
                                             alt: "",
                                             title: ""
                                           }
                                         })
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    this.imageIbcProfilePath != ""
+                                    this.photoRadioButton == "addMedia"
                                       ? _c("img", {
                                           attrs: {
-                                            src: _vm.imageIbcProfilePath,
+                                            src: _vm.photoImage,
                                             alt: "",
                                             title: ""
                                           }
@@ -56760,43 +55615,31 @@ var render = function() {
                                         }
                                       }),
                                       _vm._v(" "),
-                                      _c("h2", [
-                                        _vm._v(_vm._s(this.ibcTitleText))
-                                      ]),
+                                      _c("h2", [_vm._v(_vm._s(this.title))]),
                                       _vm._v(" "),
                                       _c("p", [
                                         _c("b", [
-                                          _vm._v(
-                                            _vm._s(this.ibcCompanyNameText)
-                                          )
+                                          _vm._v(_vm._s(this.company_name))
                                         ])
                                       ]),
                                       _vm._v(" "),
+                                      _c("p", [_vm._v(_vm._s(this.address1))]),
+                                      _vm._v(" "),
+                                      _c("p", [_vm._v(_vm._s(this.address2))]),
+                                      _vm._v(" "),
                                       _c("p", [
-                                        _vm._v(_vm._s(this.ibcAddressText))
+                                        _vm._v(_vm._s(this.direct_phone))
                                       ]),
                                       _vm._v(" "),
                                       _c("p", [
-                                        _vm._v(_vm._s(this.ibcAddressText1))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(_vm._s(this.ibcOfficeNumberText))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(_vm._s(this.ibcPhoneNumberText))
+                                        _vm._v(_vm._s(this.office_phone))
                                       ]),
                                       _vm._v(" "),
                                       _c("p", { staticClass: "mb-3" }),
                                       _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(_vm._s(this.ibcWebsiteText))
-                                      ]),
+                                      _c("p", [_vm._v(_vm._s(this.website))]),
                                       _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(_vm._s(this.ibcEmailText))
-                                      ])
+                                      _c("p", [_vm._v(_vm._s(this.email))])
                                     ],
                                     1
                                   )
@@ -57050,7 +55893,7 @@ var render = function() {
                                                   " Add Logo Image\n                                                        "
                                                 ),
                                                 _c("toolTipsComponent", {
-                                                  attrs: { title: "900 X 900" }
+                                                  attrs: { title: "300 X 150" }
                                                 })
                                               ],
                                               1
@@ -57133,7 +55976,7 @@ var render = function() {
                                         staticClass: "row modal_radiobox",
                                         class: {
                                           activeRadio:
-                                            this.IbcMainImage == "default"
+                                            this.mainRadioButton == "default"
                                         }
                                       },
                                       [
@@ -57154,34 +55997,31 @@ var render = function() {
                                                     {
                                                       name: "model",
                                                       rawName: "v-model",
-                                                      value: _vm.IbcMainImage,
-                                                      expression: "IbcMainImage"
+                                                      value:
+                                                        _vm.mainRadioButton,
+                                                      expression:
+                                                        "mainRadioButton"
                                                     }
                                                   ],
                                                   attrs: {
                                                     type: "radio",
                                                     id: "UseTextDefault",
                                                     value: "default",
-                                                    name: "checkifcright",
-                                                    checked: ""
+                                                    name: "checkifcright"
                                                   },
                                                   domProps: {
                                                     checked: _vm._q(
-                                                      _vm.IbcMainImage,
+                                                      _vm.mainRadioButton,
                                                       "default"
                                                     )
                                                   },
                                                   on: {
                                                     change: [
                                                       function($event) {
-                                                        _vm.IbcMainImage =
+                                                        _vm.mainRadioButton =
                                                           "default"
                                                       },
-                                                      function($event) {
-                                                        return _vm.getIbcMainImageInputValue(
-                                                          _vm.IbcMainImage
-                                                        )
-                                                      }
+                                                      _vm.mainRadioButtonChange
                                                     ]
                                                   }
                                                 }),
@@ -57201,7 +56041,7 @@ var render = function() {
                                         staticClass: "row modal_radiobox",
                                         class: {
                                           activeRadio:
-                                            this.IbcMainImage == "addMedia"
+                                            this.mainRadioButton == "addMedia"
                                         }
                                       },
                                       [
@@ -57220,34 +56060,31 @@ var render = function() {
                                                     {
                                                       name: "model",
                                                       rawName: "v-model",
-                                                      value: _vm.IbcMainImage,
-                                                      expression: "IbcMainImage"
+                                                      value:
+                                                        _vm.mainRadioButton,
+                                                      expression:
+                                                        "mainRadioButton"
                                                     }
                                                   ],
                                                   attrs: {
                                                     type: "radio",
                                                     id: "addMediaIbc",
                                                     value: "addMedia",
-                                                    name: "checkifcright",
-                                                    checked: ""
+                                                    name: "checkifcright"
                                                   },
                                                   domProps: {
                                                     checked: _vm._q(
-                                                      _vm.IbcMainImage,
+                                                      _vm.mainRadioButton,
                                                       "addMedia"
                                                     )
                                                   },
                                                   on: {
                                                     change: [
                                                       function($event) {
-                                                        _vm.IbcMainImage =
+                                                        _vm.mainRadioButton =
                                                           "addMedia"
                                                       },
-                                                      function($event) {
-                                                        return _vm.getIbcMainImageInputValue(
-                                                          _vm.IbcMainImage
-                                                        )
-                                                      }
+                                                      _vm.mainRadioButtonChange
                                                     ]
                                                   }
                                                 }),
@@ -57255,7 +56092,7 @@ var render = function() {
                                                   " Add Banner Images\n                                                        "
                                                 ),
                                                 _c("toolTipsComponent", {
-                                                  attrs: { title: "800 X 800" }
+                                                  attrs: { title: "1200 x 500" }
                                                 })
                                               ],
                                               1
@@ -57266,7 +56103,7 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "add_media" }, [
-                                      this.displayIbcMainMedia
+                                      this.mainRadioButton == "addMedia"
                                         ? _c(
                                             "button",
                                             {
@@ -57275,13 +56112,6 @@ var render = function() {
                                               attrs: {
                                                 "data-target": "#fileModal",
                                                 "data-toggle": "modal"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.check_Value(
-                                                    "ibcMainImage"
-                                                  )
-                                                }
                                               }
                                             },
                                             [
@@ -57295,7 +56125,7 @@ var render = function() {
                                         : _vm._e()
                                     ]),
                                     _vm._v(" "),
-                                    this.displayIbcMainMedia
+                                    this.mainRadioButton == "default"
                                       ? _c(
                                           "div",
                                           {
@@ -57307,43 +56137,42 @@ var render = function() {
                                           },
                                           [
                                             _c("img", {
-                                              directives: [
-                                                {
-                                                  name: "show",
-                                                  rawName: "v-show",
-                                                  value:
-                                                    _vm.imageIbcMainPath == "",
-                                                  expression:
-                                                    "imageIbcMainPath == ''"
-                                                }
-                                              ],
                                               staticStyle: {
                                                 "margin-bottom": "20px"
                                               },
                                               attrs: {
-                                                src: "images/avatar_image.jpg",
+                                                src: this.defaultMainImage,
+                                                alt: "",
+                                                title: ""
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    this.mainRadioButton == "addMedia"
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "add-media-show",
+                                            attrs: {
+                                              id: "addMedia_id",
+                                              "data-section": "section-1"
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              staticStyle: {
+                                                "margin-bottom": "20px"
+                                              },
+                                              attrs: {
+                                                src: this.mainImage,
                                                 alt: "",
                                                 "data-target": "#fileModal",
                                                 "data-toggle": "modal",
                                                 title: ""
                                               }
-                                            }),
-                                            _vm._v(" "),
-                                            _vm.imageIbcMainPath != ""
-                                              ? _c("img", {
-                                                  staticStyle: {
-                                                    "margin-bottom": "20px",
-                                                    "margin-top": "37px"
-                                                  },
-                                                  attrs: {
-                                                    "data-target": "#fileModal",
-                                                    "data-toggle": "modal",
-                                                    src: _vm.imageIbcMainPath,
-                                                    alt: "",
-                                                    srcset: ""
-                                                  }
-                                                })
-                                              : _vm._e()
+                                            })
                                           ]
                                         )
                                       : _vm._e()
@@ -57364,7 +56193,7 @@ var render = function() {
                                         staticClass: "row modal_radiobox",
                                         class: {
                                           activeRadio:
-                                            this.IbcImageModal == "default"
+                                            this.photoRadioButton == "default"
                                         }
                                       },
                                       [
@@ -57385,36 +56214,29 @@ var render = function() {
                                                     {
                                                       name: "model",
                                                       rawName: "v-model",
-                                                      value: _vm.IbcImageModal,
+                                                      value:
+                                                        _vm.photoRadioButton,
                                                       expression:
-                                                        "IbcImageModal"
+                                                        "photoRadioButton"
                                                     }
                                                   ],
                                                   attrs: {
                                                     type: "radio",
                                                     id: "UseTextDefault",
                                                     value: "default",
-                                                    name: "checkifcright",
-                                                    checked: ""
+                                                    name: "checkifcright"
                                                   },
                                                   domProps: {
                                                     checked: _vm._q(
-                                                      _vm.IbcImageModal,
+                                                      _vm.photoRadioButton,
                                                       "default"
                                                     )
                                                   },
                                                   on: {
-                                                    change: [
-                                                      function($event) {
-                                                        _vm.IbcImageModal =
-                                                          "default"
-                                                      },
-                                                      function($event) {
-                                                        return _vm.getIbcInputValue(
-                                                          _vm.IbcImageModal
-                                                        )
-                                                      }
-                                                    ]
+                                                    change: function($event) {
+                                                      _vm.photoRadioButton =
+                                                        "default"
+                                                    }
                                                   }
                                                 }),
                                                 _vm._v(
@@ -57433,7 +56255,7 @@ var render = function() {
                                         staticClass: "row modal_radiobox",
                                         class: {
                                           activeRadio:
-                                            this.IbcImageModal == "addMedia"
+                                            this.photoRadioButton == "addMedia"
                                         }
                                       },
                                       [
@@ -57445,50 +56267,43 @@ var render = function() {
                                           [
                                             _c(
                                               "label",
-                                              { attrs: { for: "slideTwo" } },
+                                              { attrs: { for: "addMediaIbc" } },
                                               [
                                                 _c("input", {
                                                   directives: [
                                                     {
                                                       name: "model",
                                                       rawName: "v-model",
-                                                      value: _vm.IbcImageModal,
+                                                      value:
+                                                        _vm.photoRadioButton,
                                                       expression:
-                                                        "IbcImageModal"
+                                                        "photoRadioButton"
                                                     }
                                                   ],
                                                   attrs: {
                                                     type: "radio",
                                                     id: "addMediaIbc",
                                                     value: "addMedia",
-                                                    name: "checkifcright",
-                                                    checked: ""
+                                                    name: "checkifcright"
                                                   },
                                                   domProps: {
                                                     checked: _vm._q(
-                                                      _vm.IbcImageModal,
+                                                      _vm.photoRadioButton,
                                                       "addMedia"
                                                     )
                                                   },
                                                   on: {
-                                                    change: [
-                                                      function($event) {
-                                                        _vm.IbcImageModal =
-                                                          "addMedia"
-                                                      },
-                                                      function($event) {
-                                                        return _vm.getIbcInputValue(
-                                                          _vm.IbcImageModal
-                                                        )
-                                                      }
-                                                    ]
+                                                    change: function($event) {
+                                                      _vm.photoRadioButton =
+                                                        "addMedia"
+                                                    }
                                                   }
                                                 }),
                                                 _vm._v(
                                                   " Add Profile Image\n                                                        "
                                                 ),
                                                 _c("toolTipsComponent", {
-                                                  attrs: { title: "700 X 700" }
+                                                  attrs: { title: "320 X 500" }
                                                 })
                                               ],
                                               1
@@ -57498,8 +56313,33 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
+                                    _vm.photoRadioButton == "default"
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "add-media-show",
+                                            attrs: {
+                                              id: "addMedia_id",
+                                              "data-section": "section-1"
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              staticStyle: {
+                                                "margin-bottom": "20px"
+                                              },
+                                              attrs: {
+                                                src: this.defaultPhotoImage,
+                                                alt: "",
+                                                title: ""
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
                                     _c("div", { staticClass: "add_media" }, [
-                                      _vm.displayIbcProfileMedia
+                                      _vm.photoRadioButton == "addMedia"
                                         ? _c(
                                             "button",
                                             {
@@ -57528,7 +56368,7 @@ var render = function() {
                                         : _vm._e()
                                     ]),
                                     _vm._v(" "),
-                                    _vm.displayIbcProfileMedia
+                                    _vm.photoRadioButton == "addMedia"
                                       ? _c(
                                           "div",
                                           {
@@ -57540,45 +56380,17 @@ var render = function() {
                                           },
                                           [
                                             _c("img", {
-                                              directives: [
-                                                {
-                                                  name: "show",
-                                                  rawName: "v-show",
-                                                  value:
-                                                    _vm.imageIbcProfilePath ==
-                                                    "",
-                                                  expression:
-                                                    "imageIbcProfilePath == ''"
-                                                }
-                                              ],
                                               staticStyle: {
                                                 "margin-bottom": "20px"
                                               },
                                               attrs: {
-                                                src: "images/avatar_image.jpg",
+                                                src: this.photoImage,
                                                 alt: "",
                                                 "data-target": "#fileModal",
                                                 "data-toggle": "modal",
                                                 title: ""
                                               }
-                                            }),
-                                            _vm._v(" "),
-                                            _vm.imageIbcProfilePath != ""
-                                              ? _c("img", {
-                                                  staticStyle: {
-                                                    "margin-bottom": "20px",
-                                                    "margin-top": "37px"
-                                                  },
-                                                  attrs: {
-                                                    "data-target": "#fileModal",
-                                                    "data-toggle": "modal",
-                                                    src:
-                                                      _vm.imageIbcProfilePath,
-                                                    alt: "",
-                                                    srcset: ""
-                                                  }
-                                                })
-                                              : _vm._e()
+                                            })
                                           ]
                                         )
                                       : _vm._e()
@@ -57597,25 +56409,19 @@ var render = function() {
                                           {
                                             name: "model",
                                             rawName: "v-model",
-                                            value: _vm.titleInputIbc,
-                                            expression: "titleInputIbc"
+                                            value: _vm.title,
+                                            expression: "title"
                                           }
                                         ],
                                         staticClass: "form-control",
                                         attrs: { type: "text", id: "usr" },
-                                        domProps: { value: _vm.titleInputIbc },
+                                        domProps: { value: _vm.title },
                                         on: {
-                                          keyup: function($event) {
-                                            return _vm.getTitleIbc(
-                                              _vm.titleInputIbc
-                                            )
-                                          },
                                           input: function($event) {
                                             if ($event.target.composing) {
                                               return
                                             }
-                                            _vm.titleInputIbc =
-                                              $event.target.value
+                                            _vm.title = $event.target.value
                                           }
                                         }
                                       })
@@ -57631,26 +56437,19 @@ var render = function() {
                                           {
                                             name: "model",
                                             rawName: "v-model",
-                                            value: _vm.companyInputIbc,
-                                            expression: "companyInputIbc"
+                                            value: _vm.company_name,
+                                            expression: "company_name"
                                           }
                                         ],
                                         staticClass: "form-control",
                                         attrs: { type: "text", id: "usr" },
-                                        domProps: {
-                                          value: _vm.companyInputIbc
-                                        },
+                                        domProps: { value: _vm.company_name },
                                         on: {
-                                          keyup: function($event) {
-                                            return _vm.getCompanyNameIbc(
-                                              _vm.companyInputIbc
-                                            )
-                                          },
                                           input: function($event) {
                                             if ($event.target.composing) {
                                               return
                                             }
-                                            _vm.companyInputIbc =
+                                            _vm.company_name =
                                               $event.target.value
                                           }
                                         }
@@ -57667,27 +56466,19 @@ var render = function() {
                                           {
                                             name: "model",
                                             rawName: "v-model",
-                                            value: _vm.addressInputIbc,
-                                            expression: "addressInputIbc"
+                                            value: _vm.address1,
+                                            expression: "address1"
                                           }
                                         ],
                                         staticClass: "form-control",
                                         attrs: { type: "text", id: "usr" },
-                                        domProps: {
-                                          value: _vm.addressInputIbc
-                                        },
+                                        domProps: { value: _vm.address1 },
                                         on: {
-                                          keyup: function($event) {
-                                            return _vm.getAddressIbc(
-                                              _vm.addressInputIbc
-                                            )
-                                          },
                                           input: function($event) {
                                             if ($event.target.composing) {
                                               return
                                             }
-                                            _vm.addressInputIbc =
-                                              $event.target.value
+                                            _vm.address1 = $event.target.value
                                           }
                                         }
                                       })
@@ -57703,27 +56494,19 @@ var render = function() {
                                           {
                                             name: "model",
                                             rawName: "v-model",
-                                            value: _vm.addressInputIbc1,
-                                            expression: "addressInputIbc1"
+                                            value: _vm.address2,
+                                            expression: "address2"
                                           }
                                         ],
                                         staticClass: "form-control",
                                         attrs: { type: "text", id: "usr" },
-                                        domProps: {
-                                          value: _vm.addressInputIbc1
-                                        },
+                                        domProps: { value: _vm.address2 },
                                         on: {
-                                          keyup: function($event) {
-                                            return _vm.getAddressIbc1(
-                                              _vm.addressInputIbc1
-                                            )
-                                          },
                                           input: function($event) {
                                             if ($event.target.composing) {
                                               return
                                             }
-                                            _vm.addressInputIbc1 =
-                                              $event.target.value
+                                            _vm.address2 = $event.target.value
                                           }
                                         }
                                       })
@@ -57743,27 +56526,21 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.officePhoneInputIbc,
-                                                expression:
-                                                  "officePhoneInputIbc"
+                                                value: _vm.office_phone,
+                                                expression: "office_phone"
                                               }
                                             ],
                                             staticClass: "form-control",
                                             attrs: { type: "text", id: "usr" },
                                             domProps: {
-                                              value: _vm.officePhoneInputIbc
+                                              value: _vm.office_phone
                                             },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getOfficePhoneIbc(
-                                                  _vm.officePhoneInputIbc
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.officePhoneInputIbc =
+                                                _vm.office_phone =
                                                   $event.target.value
                                               }
                                             }
@@ -57782,27 +56559,21 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.directPhoneInputIbc,
-                                                expression:
-                                                  "directPhoneInputIbc"
+                                                value: _vm.direct_phone,
+                                                expression: "direct_phone"
                                               }
                                             ],
                                             staticClass: "form-control",
                                             attrs: { type: "text", id: "usr" },
                                             domProps: {
-                                              value: _vm.directPhoneInputIbc
+                                              value: _vm.direct_phone
                                             },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getdirectPhoneIbc(
-                                                  _vm.directPhoneInputIbc
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.directPhoneInputIbc =
+                                                _vm.direct_phone =
                                                   $event.target.value
                                               }
                                             }
@@ -57825,26 +56596,19 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.websiteUrlInputIbc,
-                                                expression: "websiteUrlInputIbc"
+                                                value: _vm.website,
+                                                expression: "website"
                                               }
                                             ],
                                             staticClass: "form-control",
                                             attrs: { type: "text", id: "usr" },
-                                            domProps: {
-                                              value: _vm.websiteUrlInputIbc
-                                            },
+                                            domProps: { value: _vm.website },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getWebsiteUrlIbc(
-                                                  _vm.websiteUrlInputIbc
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.websiteUrlInputIbc =
+                                                _vm.website =
                                                   $event.target.value
                                               }
                                             }
@@ -57863,27 +56627,19 @@ var render = function() {
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.emailInputIbc,
-                                                expression: "emailInputIbc"
+                                                value: _vm.email,
+                                                expression: "email"
                                               }
                                             ],
                                             staticClass: "form-control",
                                             attrs: { type: "text", id: "usr" },
-                                            domProps: {
-                                              value: _vm.emailInputIbc
-                                            },
+                                            domProps: { value: _vm.email },
                                             on: {
-                                              keyup: function($event) {
-                                                return _vm.getEmailIbc(
-                                                  _vm.emailInputIbc
-                                                )
-                                              },
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.emailInputIbc =
-                                                  $event.target.value
+                                                _vm.email = $event.target.value
                                               }
                                             }
                                           })
@@ -58016,130 +56772,81 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-sm-2 left_side pl-0" }, [
     _c("ul", { staticClass: "nav border_full" }, [
-      _c(
-        "li",
-        {
-          on: {
-            click: function($event) {
-              return _vm.sendValue(1)
-            }
-          }
-        },
-        [
-          _c(
-            "div",
-            {
-              class: { inner_left_side: true, active: this.showCover == 1 },
-              on: {
-                click: function($event) {
-                  return _vm.getRightSide(1)
-                }
-              }
-            },
-            [
-              _c("h4", [_vm._v("Front Cover")]),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/" } }, [
-                _c("div", { staticClass: "inner_left_img" }, [
-                  _c("img", {
-                    attrs: { src: "images/fc.jpg", alt: "", title: "" }
-                  })
-                ])
+      _c("li", [
+        _c(
+          "div",
+          { class: { inner_left_side: true, active: this.showCover == 1 } },
+          [
+            _c("h4", [_vm._v("Front Cover")]),
+            _vm._v(" "),
+            _c("router-link", { attrs: { to: "/" } }, [
+              _c("div", { staticClass: "inner_left_img" }, [
+                _c("img", {
+                  attrs: { src: "images/fc.jpg", alt: "", title: "" }
+                })
               ])
-            ],
-            1
-          )
-        ]
-      ),
+            ])
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "li",
-        {
-          on: {
-            click: function($event) {
-              _vm.sendValue(2), _vm.getRightSide(2)
-            }
-          }
-        },
-        [
-          _c(
-            "div",
-            {
-              class: { inner_left_side: true, "active ": this.showCover == 2 }
-            },
-            [
-              _c("h4", [_vm._v("Inside Front Cover")]),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/ifc" } }, [
-                _c("div", { staticClass: "inner_left_img" }, [
-                  _c("img", {
-                    attrs: { src: "images/ifc.jpg", alt: "", title: "" }
-                  })
-                ])
+      _c("li", [
+        _c(
+          "div",
+          { class: { inner_left_side: true, "active ": this.showCover == 2 } },
+          [
+            _c("h4", [_vm._v("Inside Front Cover")]),
+            _vm._v(" "),
+            _c("router-link", { attrs: { to: "/ifc" } }, [
+              _c("div", { staticClass: "inner_left_img" }, [
+                _c("img", {
+                  attrs: { src: "images/ifc.jpg", alt: "", title: "" }
+                })
               ])
-            ],
-            1
-          )
-        ]
-      ),
+            ])
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "li",
-        {
-          on: {
-            click: function($event) {
-              _vm.getRightSide(3), _vm.sendValue(3)
-            }
-          }
-        },
-        [
-          _c(
-            "div",
-            { class: { inner_left_side: true, active: this.showCover == 3 } },
-            [
-              _c("h4", [_vm._v("Inside Back Cover")]),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/insideBackCover" } }, [
-                _c("div", { staticClass: "inner_left_img" }, [
-                  _c("img", {
-                    attrs: { src: "images/ibc.jpg", alt: "", title: "" }
-                  })
-                ])
+      _c("li", [
+        _c(
+          "div",
+          { class: { inner_left_side: true, active: this.showCover == 3 } },
+          [
+            _c("h4", [_vm._v("Inside Back Cover")]),
+            _vm._v(" "),
+            _c("router-link", { attrs: { to: "/insideBackCover" } }, [
+              _c("div", { staticClass: "inner_left_img" }, [
+                _c("img", {
+                  attrs: { src: "images/ibc.jpg", alt: "", title: "" }
+                })
               ])
-            ],
-            1
-          )
-        ]
-      ),
+            ])
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "li",
-        {
-          on: {
-            click: function($event) {
-              _vm.getRightSide(4), _vm.sendValue(4)
-            }
-          }
-        },
-        [
-          _c(
-            "div",
-            { class: { inner_left_side: true, active: this.showCover == 4 } },
-            [
-              _c("h4", [_vm._v("Back Cover")]),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/backCover" } }, [
-                _c("div", { staticClass: "inner_left_img" }, [
-                  _c("img", {
-                    attrs: { src: "images/bc.jpg", alt: "", title: "" }
-                  })
-                ])
+      _c("li", [
+        _c(
+          "div",
+          { class: { inner_left_side: true, active: this.showCover == 4 } },
+          [
+            _c("h4", [_vm._v("Back Cover")]),
+            _vm._v(" "),
+            _c("router-link", { attrs: { to: "/backCover" } }, [
+              _c("div", { staticClass: "inner_left_img" }, [
+                _c("img", {
+                  attrs: { src: "images/bc.jpg", alt: "", title: "" }
+                })
               ])
-            ],
-            1
-          )
-        ]
-      )
+            ])
+          ],
+          1
+        )
+      ])
     ])
   ])
 }
@@ -59514,1284 +58221,6 @@ var staticRenderFns = [
             })
           ]
         )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/model/ibcAddressModal.vue?vue&type=template&id=53e03ffc&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/model/ibcAddressModal.vue?vue&type=template&id=53e03ffc& ***!
-  \************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      {
-        staticClass: "modal fade show_data",
-        attrs: {
-          id: "ibcAddressModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-xl custom_address",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "tab-content" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "side_bar_content tab-pane active",
-                      attrs: { id: "content" }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "tab-pane", attrs: { id: "design" } },
-                        [
-                          _c("div", { staticClass: "content_area" }, [
-                            _c("div", [
-                              _c("div", { staticClass: "ifc_title" }, [
-                                _c("label", { attrs: { for: "usr" } }, [
-                                  _vm._v("Title")
-                                ]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.titleInputIbc,
-                                      expression: "titleInputIbc"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: { type: "text", id: "usr" },
-                                  domProps: { value: _vm.titleInputIbc },
-                                  on: {
-                                    keyup: function($event) {
-                                      return _vm.getTitleIbc(_vm.titleInputIbc)
-                                    },
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.titleInputIbc = $event.target.value
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "ifc_title" }, [
-                                _c("label", { attrs: { for: "usr" } }, [
-                                  _vm._v("Company Name")
-                                ]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.companyInputIbc,
-                                      expression: "companyInputIbc"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: { type: "text", id: "usr" },
-                                  domProps: { value: _vm.companyInputIbc },
-                                  on: {
-                                    keyup: function($event) {
-                                      return _vm.getCompanyNameIbc(
-                                        _vm.companyInputIbc
-                                      )
-                                    },
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.companyInputIbc = $event.target.value
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "ifc_title" }, [
-                                _c("label", { attrs: { for: "usr" } }, [
-                                  _vm._v("Address 1")
-                                ]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.addressInputIbc,
-                                      expression: "addressInputIbc"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: { type: "text", id: "usr" },
-                                  domProps: { value: _vm.addressInputIbc },
-                                  on: {
-                                    keyup: function($event) {
-                                      return _vm.getAddressIbc(
-                                        _vm.addressInputIbc
-                                      )
-                                    },
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.addressInputIbc = $event.target.value
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "ifc_title" }, [
-                                _c("label", { attrs: { for: "usr" } }, [
-                                  _vm._v("Address 2")
-                                ]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.addressInputIbc1,
-                                      expression: "addressInputIbc1"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: { type: "text", id: "usr" },
-                                  domProps: { value: _vm.addressInputIbc1 },
-                                  on: {
-                                    keyup: function($event) {
-                                      return _vm.getAddressIbc1(
-                                        _vm.addressInputIbc1
-                                      )
-                                    },
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.addressInputIbc1 = $event.target.value
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "ifc_title" }, [
-                                _c("div", { staticClass: "row" }, [
-                                  _c("div", { staticClass: "col-md-6" }, [
-                                    _c("label", { attrs: { for: "usr" } }, [
-                                      _vm._v("Office Phone")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.officePhoneInputIbc,
-                                          expression: "officePhoneInputIbc"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: { type: "text", id: "usr" },
-                                      domProps: {
-                                        value: _vm.officePhoneInputIbc
-                                      },
-                                      on: {
-                                        keyup: function($event) {
-                                          return _vm.getOfficePhoneIbc(
-                                            _vm.officePhoneInputIbc
-                                          )
-                                        },
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.officePhoneInputIbc =
-                                            $event.target.value
-                                        }
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-6" }, [
-                                    _c("label", { attrs: { for: "usr" } }, [
-                                      _vm._v("Direct Phone")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.directPhoneInputIbc,
-                                          expression: "directPhoneInputIbc"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: { type: "text", id: "usr" },
-                                      domProps: {
-                                        value: _vm.directPhoneInputIbc
-                                      },
-                                      on: {
-                                        keyup: function($event) {
-                                          return _vm.getdirectPhoneIbc(
-                                            _vm.directPhoneInputIbc
-                                          )
-                                        },
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.directPhoneInputIbc =
-                                            $event.target.value
-                                        }
-                                      }
-                                    })
-                                  ])
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "ifc_title" }, [
-                                _c("div", { staticClass: "row" }, [
-                                  _c("div", { staticClass: "col-md-6" }, [
-                                    _c("label", { attrs: { for: "usr" } }, [
-                                      _vm._v("Website URL")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.websiteUrlInputIbc,
-                                          expression: "websiteUrlInputIbc"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: { type: "text", id: "usr" },
-                                      domProps: {
-                                        value: _vm.websiteUrlInputIbc
-                                      },
-                                      on: {
-                                        keyup: function($event) {
-                                          return _vm.getWebsiteUrlIbc(
-                                            _vm.websiteUrlInputIbc
-                                          )
-                                        },
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.websiteUrlInputIbc =
-                                            $event.target.value
-                                        }
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-6" }, [
-                                    _c("label", { attrs: { for: "usr" } }, [
-                                      _vm._v("Email")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.emailInputIbc,
-                                          expression: "emailInputIbc"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: { type: "text", id: "usr" },
-                                      domProps: { value: _vm.emailInputIbc },
-                                      on: {
-                                        keyup: function($event) {
-                                          return _vm.getEmailIbc(
-                                            _vm.emailInputIbc
-                                          )
-                                        },
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.emailInputIbc =
-                                            $event.target.value
-                                        }
-                                      }
-                                    })
-                                  ])
-                                ])
-                              ])
-                            ])
-                          ])
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c("div", { staticClass: "inner_footer_content" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn bottom_btn",
-                      attrs: { "data-dismiss": "modal" },
-                      on: { click: _vm.cancelModel }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "ti-close",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn bottom_btn",
-                      on: {
-                        click: function($event) {
-                          return _vm.addfont("redo", false, null)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "ti-back-right" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn bottom_btn",
-                      on: {
-                        click: function($event) {
-                          return _vm.addfont("undo", false, null)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "ti-back-left" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn bottom_btn",
-                      attrs: { "data-dismiss": "modal" },
-                      on: { click: _vm.saveIbcChanges }
-                    },
-                    [_c("i", { staticClass: "ti-check" })]
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Insert New Module")])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/model/ibcImageModal.vue?vue&type=template&id=027276bb&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/model/ibcImageModal.vue?vue&type=template&id=027276bb& ***!
-  \**********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      {
-        staticClass: "modal fade show_data",
-        attrs: {
-          id: "ifcTextModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-xl", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "tab-content" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "side_bar_content tab-pane active",
-                      attrs: { id: "content" }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "tab-pane", attrs: { id: "design" } },
-                        [
-                          _c("div", { staticClass: "content_area" }, [
-                            this.openIbcModal == "profile"
-                              ? _c("div", [
-                                  _c("div", { staticClass: "font_content" }, [
-                                    _vm._v(
-                                      "\n                                                Upload Profile Image\n                                            "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "row modal_radiobox",
-                                      class: {
-                                        activeRadio:
-                                          this.IbcImageModal == "default"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "col-sm-12 text_field" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              attrs: { for: "UseTextDefault" }
-                                            },
-                                            [
-                                              _c("input", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: _vm.IbcImageModal,
-                                                    expression: "IbcImageModal"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  type: "radio",
-                                                  id: "UseTextDefault",
-                                                  value: "default",
-                                                  name: "checkifcright",
-                                                  checked: ""
-                                                },
-                                                domProps: {
-                                                  checked: _vm._q(
-                                                    _vm.IbcImageModal,
-                                                    "default"
-                                                  )
-                                                },
-                                                on: {
-                                                  change: [
-                                                    function($event) {
-                                                      _vm.IbcImageModal =
-                                                        "default"
-                                                    },
-                                                    function($event) {
-                                                      return _vm.getIbcInputValue(
-                                                        _vm.IbcImageModal
-                                                      )
-                                                    }
-                                                  ]
-                                                }
-                                              }),
-                                              _vm._v(
-                                                " Use Default Profile\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "row modal_radiobox",
-                                      class: {
-                                        activeRadio:
-                                          this.IbcImageModal == "addMedia"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "col-sm-12 text_field" },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "slideTwo" } },
-                                            [
-                                              _c("input", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: _vm.IbcImageModal,
-                                                    expression: "IbcImageModal"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  type: "radio",
-                                                  id: "addMediaIbc",
-                                                  value: "addMedia",
-                                                  name: "checkifcright",
-                                                  checked: ""
-                                                },
-                                                domProps: {
-                                                  checked: _vm._q(
-                                                    _vm.IbcImageModal,
-                                                    "addMedia"
-                                                  )
-                                                },
-                                                on: {
-                                                  change: [
-                                                    function($event) {
-                                                      _vm.IbcImageModal =
-                                                        "addMedia"
-                                                    },
-                                                    function($event) {
-                                                      return _vm.getIbcInputValue(
-                                                        _vm.IbcImageModal
-                                                      )
-                                                    }
-                                                  ]
-                                                }
-                                              }),
-                                              _vm._v(
-                                                " Add Profile Image\n                                                        "
-                                              ),
-                                              _c("toolTipsComponent", {
-                                                attrs: { title: "700 X 700" }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "add_media" }, [
-                                    _vm.displayIbcProfileMedia
-                                      ? _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-block media_btn",
-                                            attrs: {
-                                              "data-target": "#fileModal",
-                                              "data-toggle": "modal"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.check_Value(
-                                                  "ibcProfile"
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font_content" },
-                                              [_vm._v("Add Media")]
-                                            )
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  _vm.displayIbcProfileMedia
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass: "add-media-show",
-                                          attrs: {
-                                            id: "addMedia_id",
-                                            "data-section": "section-1"
-                                          }
-                                        },
-                                        [
-                                          _c("img", {
-                                            directives: [
-                                              {
-                                                name: "show",
-                                                rawName: "v-show",
-                                                value:
-                                                  _vm.imageIbcProfilePath == "",
-                                                expression:
-                                                  "imageIbcProfilePath == ''"
-                                              }
-                                            ],
-                                            staticStyle: {
-                                              "margin-bottom": "20px"
-                                            },
-                                            attrs: {
-                                              src: "images/avatar_image.jpg",
-                                              alt: "",
-                                              "data-target": "#fileModal",
-                                              "data-toggle": "modal",
-                                              title: ""
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _vm.imageIbcProfilePath != ""
-                                            ? _c("img", {
-                                                staticStyle: {
-                                                  "margin-bottom": "20px",
-                                                  "margin-top": "37px"
-                                                },
-                                                attrs: {
-                                                  "data-target": "#fileModal",
-                                                  "data-toggle": "modal",
-                                                  src: _vm.imageIbcProfilePath,
-                                                  alt: "",
-                                                  srcset: ""
-                                                }
-                                              })
-                                            : _vm._e()
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            this.openIbcModal == "mainImage"
-                              ? _c("div", [
-                                  _c("div", { staticClass: "font_content" }, [
-                                    _vm._v(
-                                      "\n                                                Upload Banner Image\n                                            "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "row modal_radiobox",
-                                      class: {
-                                        activeRadio:
-                                          this.IbcMainImage == "default"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "col-sm-12 text_field" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              attrs: { for: "UseTextDefault" }
-                                            },
-                                            [
-                                              _c("input", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: _vm.IbcMainImage,
-                                                    expression: "IbcMainImage"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  type: "radio",
-                                                  id: "UseTextDefault",
-                                                  value: "default",
-                                                  name: "checkifcright",
-                                                  checked: ""
-                                                },
-                                                domProps: {
-                                                  checked: _vm._q(
-                                                    _vm.IbcMainImage,
-                                                    "default"
-                                                  )
-                                                },
-                                                on: {
-                                                  change: [
-                                                    function($event) {
-                                                      _vm.IbcMainImage =
-                                                        "default"
-                                                    },
-                                                    function($event) {
-                                                      return _vm.getIbcMainImageInputValue(
-                                                        _vm.IbcMainImage
-                                                      )
-                                                    }
-                                                  ]
-                                                }
-                                              }),
-                                              _vm._v(
-                                                " Use Default Banner Image\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "row modal_radiobox",
-                                      class: {
-                                        activeRadio:
-                                          this.IbcMainImage == "addMedia"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "col-sm-12 text_field" },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "addMediaIbc" } },
-                                            [
-                                              _c("input", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: _vm.IbcMainImage,
-                                                    expression: "IbcMainImage"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  type: "radio",
-                                                  id: "addMediaIbc",
-                                                  value: "addMedia",
-                                                  name: "checkifcright",
-                                                  checked: ""
-                                                },
-                                                domProps: {
-                                                  checked: _vm._q(
-                                                    _vm.IbcMainImage,
-                                                    "addMedia"
-                                                  )
-                                                },
-                                                on: {
-                                                  change: [
-                                                    function($event) {
-                                                      _vm.IbcMainImage =
-                                                        "addMedia"
-                                                    },
-                                                    function($event) {
-                                                      return _vm.getIbcMainImageInputValue(
-                                                        _vm.IbcMainImage
-                                                      )
-                                                    }
-                                                  ]
-                                                }
-                                              }),
-                                              _vm._v(
-                                                " Add Banner Images\n                                                        "
-                                              ),
-                                              _c("toolTipsComponent", {
-                                                attrs: { title: "800 X 800" }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "add_media" }, [
-                                    this.displayIbcMainMedia
-                                      ? _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-block media_btn",
-                                            attrs: {
-                                              "data-target": "#fileModal",
-                                              "data-toggle": "modal"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.check_Value(
-                                                  "ibcMainImage"
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font_content" },
-                                              [_vm._v("Add Media")]
-                                            )
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  this.displayIbcMainMedia
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass: "add-media-show",
-                                          attrs: {
-                                            id: "addMedia_id",
-                                            "data-section": "section-1"
-                                          }
-                                        },
-                                        [
-                                          _c("img", {
-                                            directives: [
-                                              {
-                                                name: "show",
-                                                rawName: "v-show",
-                                                value:
-                                                  _vm.imageIbcMainPath == "",
-                                                expression:
-                                                  "imageIbcMainPath == ''"
-                                              }
-                                            ],
-                                            staticStyle: {
-                                              "margin-bottom": "20px"
-                                            },
-                                            attrs: {
-                                              src: "images/avatar_image.jpg",
-                                              alt: "",
-                                              "data-target": "#fileModal",
-                                              "data-toggle": "modal",
-                                              title: ""
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _vm.imageIbcMainPath != ""
-                                            ? _c("img", {
-                                                staticStyle: {
-                                                  "margin-bottom": "20px",
-                                                  "margin-top": "37px"
-                                                },
-                                                attrs: {
-                                                  "data-target": "#fileModal",
-                                                  "data-toggle": "modal",
-                                                  src: _vm.imageIbcMainPath,
-                                                  alt: "",
-                                                  srcset: ""
-                                                }
-                                              })
-                                            : _vm._e()
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            this.openIbcModal == "logoImage"
-                              ? _c("div", [
-                                  _c("div", { staticClass: "font_content" }, [
-                                    _vm._v(
-                                      "\n                                                Upload Logo Image\n                                            "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "row modal_radiobox",
-                                      class: {
-                                        activeRadio:
-                                          this.IbcLogoImage == "default"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "col-sm-12 text_field" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              attrs: { for: "UseTextDefault" }
-                                            },
-                                            [
-                                              _c("input", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: _vm.IbcLogoImage,
-                                                    expression: "IbcLogoImage"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  type: "radio",
-                                                  id: "UseTextDefault",
-                                                  value: "default",
-                                                  name: "checkifcright",
-                                                  checked: ""
-                                                },
-                                                domProps: {
-                                                  checked: _vm._q(
-                                                    _vm.IbcLogoImage,
-                                                    "default"
-                                                  )
-                                                },
-                                                on: {
-                                                  change: [
-                                                    function($event) {
-                                                      _vm.IbcLogoImage =
-                                                        "default"
-                                                    },
-                                                    function($event) {
-                                                      return _vm.getIbcLogoImageInputValue(
-                                                        _vm.IbcLogoImage
-                                                      )
-                                                    }
-                                                  ]
-                                                }
-                                              }),
-                                              _vm._v(
-                                                " Use Default Logo\n                                                        \n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "row modal_radiobox",
-                                      class: {
-                                        activeRadio:
-                                          this.IbcLogoImage == "remove"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "col-sm-12 text_field" },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "remove" } },
-                                            [
-                                              _c("input", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: _vm.IbcLogoImage,
-                                                    expression: "IbcLogoImage"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  type: "radio",
-                                                  value: "remove",
-                                                  id: "remove",
-                                                  name: "checkifcright",
-                                                  checked: ""
-                                                },
-                                                domProps: {
-                                                  checked: _vm._q(
-                                                    _vm.IbcLogoImage,
-                                                    "remove"
-                                                  )
-                                                },
-                                                on: {
-                                                  change: [
-                                                    function($event) {
-                                                      _vm.IbcLogoImage =
-                                                        "remove"
-                                                    },
-                                                    function($event) {
-                                                      return _vm.getIbcLogoImageInputValue(
-                                                        _vm.IbcLogoImage
-                                                      )
-                                                    }
-                                                  ]
-                                                }
-                                              }),
-                                              _vm._v(
-                                                " Remove Logo Image\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "row modal_radiobox",
-                                      class: {
-                                        activeRadio:
-                                          this.IbcLogoImage == "addMedia"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "col-sm-12 text_field" },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "addMediaIbc" } },
-                                            [
-                                              _c("input", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: _vm.IbcLogoImage,
-                                                    expression: "IbcLogoImage"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  type: "radio",
-                                                  id: "addMediaIbc",
-                                                  value: "addMedia",
-                                                  name: "checkifcright",
-                                                  checked: ""
-                                                },
-                                                domProps: {
-                                                  checked: _vm._q(
-                                                    _vm.IbcLogoImage,
-                                                    "addMedia"
-                                                  )
-                                                },
-                                                on: {
-                                                  change: [
-                                                    function($event) {
-                                                      _vm.IbcLogoImage =
-                                                        "addMedia"
-                                                    },
-                                                    function($event) {
-                                                      return _vm.getIbcLogoImageInputValue(
-                                                        _vm.IbcLogoImage
-                                                      )
-                                                    }
-                                                  ]
-                                                }
-                                              }),
-                                              _vm._v(
-                                                " Add Logo Image\n                                                        "
-                                              ),
-                                              _c("toolTipsComponent", {
-                                                attrs: { title: "900 X 900" }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "add_media" }, [
-                                    this.displayIbcLogoMedia
-                                      ? _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-block media_btn",
-                                            attrs: {
-                                              "data-target": "#fileModal",
-                                              "data-toggle": "modal"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.check_Value(
-                                                  "ibcLogoImage"
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font_content" },
-                                              [_vm._v("Add Media")]
-                                            )
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  this.displayIbcLogoMedia
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass: "add-media-show",
-                                          attrs: {
-                                            id: "addMedia_id",
-                                            "data-section": "section-1"
-                                          }
-                                        },
-                                        [
-                                          _c("img", {
-                                            directives: [
-                                              {
-                                                name: "show",
-                                                rawName: "v-show",
-                                                value:
-                                                  _vm.imageIbcLogoPath == "",
-                                                expression:
-                                                  "imageIbcLogoPath == ''"
-                                              }
-                                            ],
-                                            staticStyle: {
-                                              "margin-bottom": "20px"
-                                            },
-                                            attrs: {
-                                              src: "images/avatar_image.jpg",
-                                              alt: "",
-                                              "data-target": "#fileModal",
-                                              "data-toggle": "modal",
-                                              title: ""
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _vm.imageIbcLogoPath != ""
-                                            ? _c("img", {
-                                                staticStyle: {
-                                                  "margin-bottom": "20px",
-                                                  "margin-top": "37px"
-                                                },
-                                                attrs: {
-                                                  "data-target": "#fileModal",
-                                                  "data-toggle": "modal",
-                                                  src: _vm.imageIbcLogoPath,
-                                                  alt: "",
-                                                  srcset: ""
-                                                }
-                                              })
-                                            : _vm._e()
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ])
-                              : _vm._e()
-                          ])
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c("div", { staticClass: "inner_footer_content" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn_save",
-                      attrs: { "data-dismiss": "modal" },
-                      on: { click: _vm.saveIbcChanges }
-                    },
-                    [
-                      _vm._v("\n                                Save "),
-                      _c("i", { staticClass: "ti-check" })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn_close",
-                      attrs: { "data-dismiss": "modal" },
-                      on: { click: _vm.cancelModel }
-                    },
-                    [
-                      _vm._v("\n                                Close"),
-                      _c("i", {
-                        staticClass: "ti-close",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [
-        _vm._v("Insert New Module \n\t\t\t\t\t\t\t")
       ])
     ])
   }
@@ -80435,144 +77864,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/model/ibcAddressModal.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/components/model/ibcAddressModal.vue ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ibcAddressModal_vue_vue_type_template_id_53e03ffc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ibcAddressModal.vue?vue&type=template&id=53e03ffc& */ "./resources/js/components/model/ibcAddressModal.vue?vue&type=template&id=53e03ffc&");
-/* harmony import */ var _ibcAddressModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ibcAddressModal.vue?vue&type=script&lang=js& */ "./resources/js/components/model/ibcAddressModal.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ibcAddressModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ibcAddressModal_vue_vue_type_template_id_53e03ffc___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ibcAddressModal_vue_vue_type_template_id_53e03ffc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/model/ibcAddressModal.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/model/ibcAddressModal.vue?vue&type=script&lang=js&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/model/ibcAddressModal.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcAddressModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ibcAddressModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/model/ibcAddressModal.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcAddressModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/model/ibcAddressModal.vue?vue&type=template&id=53e03ffc&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/model/ibcAddressModal.vue?vue&type=template&id=53e03ffc& ***!
-  \******************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcAddressModal_vue_vue_type_template_id_53e03ffc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ibcAddressModal.vue?vue&type=template&id=53e03ffc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/model/ibcAddressModal.vue?vue&type=template&id=53e03ffc&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcAddressModal_vue_vue_type_template_id_53e03ffc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcAddressModal_vue_vue_type_template_id_53e03ffc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/model/ibcImageModal.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/model/ibcImageModal.vue ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ibcImageModal_vue_vue_type_template_id_027276bb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ibcImageModal.vue?vue&type=template&id=027276bb& */ "./resources/js/components/model/ibcImageModal.vue?vue&type=template&id=027276bb&");
-/* harmony import */ var _ibcImageModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ibcImageModal.vue?vue&type=script&lang=js& */ "./resources/js/components/model/ibcImageModal.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ibcImageModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ibcImageModal_vue_vue_type_template_id_027276bb___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ibcImageModal_vue_vue_type_template_id_027276bb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/model/ibcImageModal.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/model/ibcImageModal.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/model/ibcImageModal.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcImageModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ibcImageModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/model/ibcImageModal.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcImageModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/model/ibcImageModal.vue?vue&type=template&id=027276bb&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/model/ibcImageModal.vue?vue&type=template&id=027276bb& ***!
-  \****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcImageModal_vue_vue_type_template_id_027276bb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ibcImageModal.vue?vue&type=template&id=027276bb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/model/ibcImageModal.vue?vue&type=template&id=027276bb&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcImageModal_vue_vue_type_template_id_027276bb___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ibcImageModal_vue_vue_type_template_id_027276bb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/model/ifcModelInput.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/components/model/ifcModelInput.vue ***!
@@ -80997,27 +78288,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "globalMixin", function() { return globalMixin; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_leftSideComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/leftSideComponent */ "./resources/js/components/leftSideComponent.vue");
-/* harmony import */ var _components_rideSideComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/rideSideComponent */ "./resources/js/components/rideSideComponent.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_common_iconHoverComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/common/iconHoverComponent */ "./resources/js/components/common/iconHoverComponent.vue");
-/* harmony import */ var _components_common_iconHoverIfcComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/common/iconHoverIfcComponent */ "./resources/js/components/common/iconHoverIfcComponent.vue");
-/* harmony import */ var _components_model_imageUploadAreaComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/model/imageUploadAreaComponent */ "./resources/js/components/model/imageUploadAreaComponent.vue");
-/* harmony import */ var _components_ifcComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ifcComponent */ "./resources/js/components/ifcComponent.vue");
-/* harmony import */ var _components_frontCoverComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/frontCoverComponent */ "./resources/js/components/frontCoverComponent.vue");
-/* harmony import */ var _components_common_iconPreviewComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/common/iconPreviewComponent */ "./resources/js/components/common/iconPreviewComponent.vue");
-/* harmony import */ var _components_common_loaderComponet__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/common/loaderComponet */ "./resources/js/components/common/loaderComponet.vue");
-/* harmony import */ var _components_common_toolTipsComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/common/toolTipsComponent */ "./resources/js/components/common/toolTipsComponent.vue");
-/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @saeris/vue-spinners */ "./node_modules/@saeris/vue-spinners/lib/@saeris/vue-spinners.common.js");
-/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _components_leftSideComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/leftSideComponent */ "./resources/js/components/leftSideComponent.vue");
+/* harmony import */ var _components_rideSideComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/rideSideComponent */ "./resources/js/components/rideSideComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_common_iconHoverComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/common/iconHoverComponent */ "./resources/js/components/common/iconHoverComponent.vue");
+/* harmony import */ var _components_common_iconHoverIfcComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/common/iconHoverIfcComponent */ "./resources/js/components/common/iconHoverIfcComponent.vue");
+/* harmony import */ var _components_model_imageUploadAreaComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/model/imageUploadAreaComponent */ "./resources/js/components/model/imageUploadAreaComponent.vue");
+/* harmony import */ var _components_ifcComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ifcComponent */ "./resources/js/components/ifcComponent.vue");
+/* harmony import */ var _components_frontCoverComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/frontCoverComponent */ "./resources/js/components/frontCoverComponent.vue");
+/* harmony import */ var _components_common_iconPreviewComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/common/iconPreviewComponent */ "./resources/js/components/common/iconPreviewComponent.vue");
+/* harmony import */ var _components_common_loaderComponet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/common/loaderComponet */ "./resources/js/components/common/loaderComponet.vue");
+/* harmony import */ var _components_common_toolTipsComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/common/toolTipsComponent */ "./resources/js/components/common/toolTipsComponent.vue");
+/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @saeris/vue-spinners */ "./node_modules/@saeris/vue-spinners/lib/@saeris/vue-spinners.common.js");
+/* harmony import */ var _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -81040,27 +78323,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var globalMixin = {
   components: {
-    LeftSideComponent: _components_leftSideComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
-    RightSideComponent: _components_rideSideComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
-    iconHoverComponent: _components_common_iconHoverComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
+    LeftSideComponent: _components_leftSideComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+    RightSideComponent: _components_rideSideComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    iconHoverComponent: _components_common_iconHoverComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
     // iconHoverComponentIfc,
     // modelInputComponent, 
-    UplaodArea: _components_model_imageUploadAreaComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
-    IfcCover: _components_ifcComponent__WEBPACK_IMPORTED_MODULE_7__["default"],
-    frontCover: _components_frontCoverComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
-    iconHoverIfcComponent: _components_common_iconHoverIfcComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
-    iconPreviewComponent: _components_common_iconPreviewComponent__WEBPACK_IMPORTED_MODULE_9__["default"],
-    BarLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12__["BarLoader"],
-    HashLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12__["HashLoader"],
-    RingLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12__["RingLoader"],
-    ScaleLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12__["ScaleLoader"],
-    PropagateLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12__["PropagateLoader"],
-    BounceLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12__["BounceLoader"],
-    CircleLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_12__["CircleLoader"],
-    LoaderComponent: _components_common_loaderComponet__WEBPACK_IMPORTED_MODULE_10__["default"],
-    toolTipsComponent: _components_common_toolTipsComponent__WEBPACK_IMPORTED_MODULE_11__["default"]
+    UplaodArea: _components_model_imageUploadAreaComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
+    IfcCover: _components_ifcComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
+    frontCover: _components_frontCoverComponent__WEBPACK_IMPORTED_MODULE_7__["default"],
+    iconHoverIfcComponent: _components_common_iconHoverIfcComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
+    iconPreviewComponent: _components_common_iconPreviewComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
+    BarLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11__["BarLoader"],
+    HashLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11__["HashLoader"],
+    RingLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11__["RingLoader"],
+    ScaleLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11__["ScaleLoader"],
+    PropagateLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11__["PropagateLoader"],
+    BounceLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11__["BounceLoader"],
+    CircleLoader: _saeris_vue_spinners__WEBPACK_IMPORTED_MODULE_11__["CircleLoader"],
+    LoaderComponent: _components_common_loaderComponet__WEBPACK_IMPORTED_MODULE_9__["default"],
+    toolTipsComponent: _components_common_toolTipsComponent__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(['fcAddMediaShow', 'showFrontCover', 'showFrontInsideCover', 'imagePath', 'imageIfcPath', 'imageIfcSignaturePath', 'imageIbcProfilePath', 'imageIbcMainPath', 'imageIbcLogoPath', 'imageBcLogoPath', 'defaultImagePath', 'defaultIfcImagePath', 'defaultIfcSignaturePath', 'defaultIbcProfilePath', 'defaultIbcMainImagePath', 'defaultIbcLogoImagePath', 'fcLogoText', 'ifcRightTextInputValue', 'textAlign', 'hideFcText', 'displayTextArea', 'displayIfcTextArea', 'fcLogoTextDisplay', 'openModal', 'setIfc_bind', 'setIfcLogo_bind', 'setIfcSignature_bind', 'setIbcProfile_bind', 'setIbcMainImage_bind', 'setIbcLogoImage_bind', 'openIfcModalForLogo', 'openIfcModalForSignature', // 'openIbcModal',
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(['fcAddMediaShow', 'showFrontCover', 'showFrontInsideCover', 'imagePath', 'imageIfcPath', 'imageIfcSignaturePath', 'imageIbcProfilePath', 'imageIbcMainPath', 'imageIbcLogoPath', 'imageBcLogoPath', 'defaultImagePath', 'defaultIfcImagePath', 'defaultIfcSignaturePath', 'defaultIbcProfilePath', 'defaultIbcMainImagePath', 'defaultIbcLogoImagePath', 'fcLogoText', 'ifcRightTextInputValue', 'textAlign', 'hideFcText', 'displayTextArea', 'displayIfcTextArea', 'fcLogoTextDisplay', 'openModal', 'setIfc_bind', 'setIfcLogo_bind', 'setIfcSignature_bind', 'setIbcProfile_bind', 'setIbcMainImage_bind', 'setIbcLogoImage_bind', 'openIfcModalForLogo', 'openIfcModalForSignature', // 'openIbcModal',
   'openIfcModalForText', 'defaultIfcLogoPath', 'imageIfcLogoPath', 'ifcTextDisplay', 'ifcRightTextDisplay', 'ifcText', 'ifcRightText', 'displayTextAreaFor', 'displayIbcProfileMedia', 'displayIbcMainMedia', 'displayIbcLogoMedia', // 'ifcTitleText',
   // 'ifcCompanyName',
   // 'designation1',
@@ -81076,7 +78359,7 @@ var globalMixin = {
   // 'websiteUrlIfc',
   // 'emailIfc',
   // 'stNumberIfc',
-  'showTextAreaIfcRight', 'ifcRightTextValue', 'showCover', 'ibcTitleText', 'ibcCompanyNameText', 'ibcAddressText', 'ibcAddressText1', 'ibcPhoneNumberText', 'ibcOfficeNumberText', 'ibcWebsiteText', 'ibcEmailText', 'openHeaderContent', 'openFooterContent', 'bcTitleHeaderText', 'bcAddressHeaderBcText', 'bcAddressHeaderBc1Text', 'bcCityHeaderText', 'bcCountryHeaderText', 'bcTitleText', 'bcCompanyNameText', 'bcAddressText', 'bcAddressText1', 'bcPhoneNumberText', 'bcOfficeNumberText', 'bcWebsiteText', 'bcEmailText', 'previewFc', 'displayBcLogoMedia', 'setBcLogoImage_bind', 'bcLogoChooseCheckBox', 'bcProfileChooseCheckBox', 'fcModalHide', 'defaultBcLogoImagePath', 'fcTextInputValueEditor', 'Savefcloader', 'profileImage', 'defaultBcProfileImagePath', 'displayBcProfileMedia', 'setBcProfileImage_bind', 'imageBcProfilePath', 'fcCheckboxChoose', 'ifcProfileChoose', 'ifcBelowimageChoose', 'ifcSignatureChoose', 'displayIfcLogoMedia', 'displayIfcMedia', 'displayIfcSignatureMedia', 'ibcLogoCheckChoose', 'ibcBannerCheckChoose', 'ibcProfileCheckChoose', 'displayAddressLable', // 'addAddressButton',
+  'showTextAreaIfcRight', 'ifcRightTextValue', 'ibcTitleText', 'ibcCompanyNameText', 'ibcAddressText', 'ibcAddressText1', 'ibcPhoneNumberText', 'ibcOfficeNumberText', 'ibcWebsiteText', 'ibcEmailText', 'openHeaderContent', 'openFooterContent', 'bcTitleHeaderText', 'bcAddressHeaderBcText', 'bcAddressHeaderBc1Text', 'bcCityHeaderText', 'bcCountryHeaderText', 'bcTitleText', 'bcCompanyNameText', 'bcAddressText', 'bcAddressText1', 'bcPhoneNumberText', 'bcOfficeNumberText', 'bcWebsiteText', 'bcEmailText', 'previewFc', 'displayBcLogoMedia', 'setBcLogoImage_bind', 'bcLogoChooseCheckBox', 'bcProfileChooseCheckBox', 'fcModalHide', 'defaultBcLogoImagePath', 'fcTextInputValueEditor', 'Savefcloader', 'profileImage', 'defaultBcProfileImagePath', 'displayBcProfileMedia', 'setBcProfileImage_bind', 'imageBcProfilePath', 'fcCheckboxChoose', 'ifcProfileChoose', 'ifcBelowimageChoose', 'ifcSignatureChoose', 'displayIfcLogoMedia', 'displayIfcMedia', 'displayIfcSignatureMedia', 'ibcLogoCheckChoose', 'ibcBannerCheckChoose', 'ibcProfileCheckChoose', 'displayAddressLable', // 'addAddressButton',
   'ifcCompanyName2', 'designationifc', 'designationifc1', 'designationifc2', 'designationTitle', 'designationTitleset2', 'designationTitleset3', 'designationTitleset4', 'fcTextLogoAlign', 'headingTagFc', 'tempFcAlignValue', 'ImageFcAlignValue', 'tempFcCheckboxChoose', 'imagePathTemp', 'fcTextLogoEditor']), {
     tempAlignFc: {
       get: function get() {
@@ -81165,7 +78448,7 @@ var globalMixin = {
   created: function created() {// this.ACTION_CHANGE_STATE(['defaultImagePath', this.preimagepath])
   },
   mounted: function mounted() {
-    this.getRightSide(1), $(document).ready(function () {
+    $(document).ready(function () {
       $('[data-toggle="tooltip"]').tooltip();
     });
     this.ACTION_CHANGE_STATE(['defaultIbcProfilePath', this.preibcProfileimagepath]);
@@ -81176,18 +78459,6 @@ var globalMixin = {
     this.ACTION_CHANGE_STATE(['defaultImagePath', this.preimagepath]);
     var location = window.location; //console.log(location.pathname)
 
-    if (location.pathname == '/ifc') {
-      // console.log(1)
-      this.getRightSide(2), this.ACTION_CHANGE_STATE(["openModal", "inside-front-cover"]);
-    } else if (location.pathname == '/insideBackCover') {
-      this.getRightSide(3);
-    } else if (location.pathname == '/backCover') {
-      this.getRightSide(4);
-    } else {
-      //console.log(2)
-      this.ACTION_CHANGE_STATE(["openModal", "front-cover"]);
-    }
-
     if (location.pathname == '/preview') {
       var tempData = localStorage.getItem('temp');
       this.ACTION_CHANGE_STATE(['previewFc', tempData]); //   $('.hoverComponetRemove').css('display','none')
@@ -81196,26 +78467,7 @@ var globalMixin = {
       localStorage.removeItem('temp');
     }
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(['ACTION_CHANGE_STATE', 'ACTION_ADD_VALUE_TO_FC_TEXT', 'ACTION_ADD_VALUE_TO_IFC_LEFT_TEXT', 'ACTION_ADD_VALUE_TO_IFC_RIGHT_TEXT', 'ACTION_LAZY_LOAD']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapMutations"])(['REMOVE_IMAGE_BACKROUND_PATH', 'REMOVE_DEFAULT_IMAGE_PATH', 'REMOVE_DEFAULT_IFC_IMAGE_PATH', 'REMOVE_FC_TEXT_NULL', 'USE_DEFAULT_MEDIA_IFC_IMAGE_PATH', 'NUll_OPEN_IFC_MODAL_FOR_LOGO', 'REMOVE_DEFAULT_IFC_LOGO_IMAGE_PATH', 'USE_DEFAULT_MEDIA_IFC_LOGO_PATH', 'REMOVE_MODEL_IFC_LOGO', 'REMOVE_MODEL_IFC_TEXT', 'NULL_CHECKBOX_BIND', 'PUSH_SUCCESS_MESSAGE', 'PUSH_ERROR_MESSAGE', 'EMPTY_MESSAGE_LIST']), {
-    getRightSide: function getRightSide(value) {
-      //console.log(value, 'sasasas')
-      // $('.inner_left_side').addClass("active");
-      this.ACTION_CHANGE_STATE(['showTextAreaIfcRight', false]);
-
-      if (value == 1) {
-        // this.ACTION_CHANGE_STATE(['showFrontCover', true])
-        // this.ACTION_CHANGE_STATE(['showFrontInsideCover', false])
-        this.ACTION_CHANGE_STATE(['showCover', 1]);
-      } else if (value == 2) {
-        // this.ACTION_CHANGE_STATE(['showFrontCover', false])
-        // this.ACTION_CHANGE_STATE(['showFrontInsideCover', true])
-        this.ACTION_CHANGE_STATE(['showCover', 2]);
-      } else if (value == 3) {
-        this.ACTION_CHANGE_STATE(['showCover', 3]);
-      } else if (value == 4) {
-        this.ACTION_CHANGE_STATE(['showCover', 4]);
-      }
-    },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['ACTION_CHANGE_STATE', 'ACTION_ADD_VALUE_TO_FC_TEXT', 'ACTION_ADD_VALUE_TO_IFC_LEFT_TEXT', 'ACTION_ADD_VALUE_TO_IFC_RIGHT_TEXT', 'ACTION_LAZY_LOAD']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])(['REMOVE_IMAGE_BACKROUND_PATH', 'REMOVE_DEFAULT_IMAGE_PATH', 'REMOVE_DEFAULT_IFC_IMAGE_PATH', 'REMOVE_FC_TEXT_NULL', 'USE_DEFAULT_MEDIA_IFC_IMAGE_PATH', 'NUll_OPEN_IFC_MODAL_FOR_LOGO', 'REMOVE_DEFAULT_IFC_LOGO_IMAGE_PATH', 'USE_DEFAULT_MEDIA_IFC_LOGO_PATH', 'REMOVE_MODEL_IFC_LOGO', 'REMOVE_MODEL_IFC_TEXT', 'NULL_CHECKBOX_BIND', 'PUSH_SUCCESS_MESSAGE', 'PUSH_ERROR_MESSAGE', 'EMPTY_MESSAGE_LIST']), {
     preiviewTab: function preiviewTab() {
       //$('.hoverComponetRemove').css('display','none')
       //$('.hoverComponetRemove').css('display','none')
@@ -81224,323 +78476,9 @@ var globalMixin = {
       localStorage.setItem('temp', this.previewContent);
       this.ACTION_CHANGE_STATE(['previewFc', this.previewContent]);
     },
-    displayIfcModal: function displayIfcModal() {
-      $('#ifcModal').modal('show');
-    },
-    deleteLogo: function deleteLogo() {
-      this.REMOVE_IMAGE_BACKROUND_PATH();
-    },
-    // getActive (event) {
-    //     console.log(event , 'dgshd');
-    // },
-    setToImageShow: function setToImageShow(image) {
-      //console.log(image, 'Rushi')
-      if (this.setIfcLogo_bind == "addLogo") {
-        this.ACTION_CHANGE_STATE(['imageIfcLogoPath', image]);
-      } else if (this.setIfc_bind == "addMedia") {
-        this.ACTION_CHANGE_STATE(['imageIfcPath', image]);
-      } else if (this.setIfcSignature_bind == 'addSignature') {
-        this.ACTION_CHANGE_STATE(['imageIfcSignaturePath', image]);
-      } else if (this.setIbcProfile_bind == 'profileImage') {
-        this.ACTION_CHANGE_STATE(['imageIbcProfilePath', image]);
-      } else if (this.setIbcMainImage_bind == 'mainImage') {
-        this.ACTION_CHANGE_STATE(['imageIbcMainPath', image]);
-      } else if (this.setIbcLogoImage_bind == 'logoImage') {
-        this.ACTION_CHANGE_STATE(['imageIbcLogoPath', image]);
-      } else if (this.setBcLogoImage_bind == 'logoBCImage') {
-        this.ACTION_CHANGE_STATE(['imageBcLogoPath', image]);
-      } else if (this.setBcProfileImage_bind == 'profileBCImage') {
-        this.ACTION_CHANGE_STATE(['imageBcProfilePath', image]);
-      } else {
-        this.ACTION_CHANGE_STATE(['fcImage', image]); // this.ACTION_CHANGE_STATE(['imagePath', image]);
-      }
-    },
-    getInputValue: function getInputValue(e) {
-      //    var test1= e.target.dataset.id
-      // alert(value)
-      this.checkboxChoose = e.target.value;
-      this.ACTION_CHANGE_STATE(['tempFcCheckboxChoose', this.checkboxChoose]);
-
-      if (this.checkboxChoose == "addMedia") {
-        // this.ACTION_CHANGE_STATE(['fcCheckboxChoose', 'addMedia'])
-        // console.log($('.content_area').childNode)
-        $(' div').prop('contenteditable', false);
-        this.displayMedia = true;
-        this.ACTION_CHANGE_STATE(['fcAddMediaShow', true]);
-        this.ACTION_CHANGE_STATE(['textAlign', 'center']);
-        this.valueMedia = this.checkboxChoose;
-        this.REMOVE_FC_TEXT_NULL();
-        $('.editable').html('');
-        this.ACTION_CHANGE_STATE(['displayTextArea', false]);
-      } else if (this.checkboxChoose == "default") {
-        this.defaultValue = this.checkboxChoose;
-        this.REMOVE_FC_TEXT_NULL();
-        this.displayMedia = false;
-        this.ACTION_CHANGE_STATE(['fcAddMediaShow', false]);
-        this.ACTION_CHANGE_STATE(['defaultImagePath', this.preimagepath]); // this.deleteLogo();
-
-        this.REMOVE_FC_TEXT_NULL();
-        $('.editable').html('');
-        this.ACTION_CHANGE_STATE(['displayTextArea', false]);
-      } else if (this.checkboxChoose == "textLogo") {
-        this.textLogoFcValue = this.checkboxChoose;
-        this.displayMedia = false;
-
-        if (this.fcTextLogoAlign == '') {
-          this.ACTION_CHANGE_STATE(['fcTextLogoAlign', 'center']);
-        }
-
-        this.ACTION_CHANGE_STATE(['fcAddMediaShow', false]);
-        this.ACTION_CHANGE_STATE(['displayTextArea', true]); // this.ACTION_CHANGE_STATE(['imagePath', '']);
-      } else {
-        this.displayMedia = false;
-        this.ACTION_CHANGE_STATE(['fcAddMediaShow', false]);
-        this.REMOVE_FC_TEXT_NULL();
-        this.ACTION_CHANGE_STATE(['defaultImagePath', '']);
-        this.ACTION_CHANGE_STATE(['displayTextArea', false]);
-      }
-    },
     saveFCPreview: function saveFCPreview() {
       this.fcContent = $('.preview_content').html();
       this.ACTION_CHANGE_STATE(['fcPreview', this.fcContent]);
-    },
-    saveChanges: function saveChanges() {
-      this.saveFCPreview();
-      var text = $('.editable').html();
-      this.ACTION_CHANGE_STATE(['imagePath', this.imagePathTemp]);
-      this.ACTION_CHANGE_STATE(['fcCheckboxChoose', this.tempFcCheckboxChoose]);
-      alert(this.fcCheckboxChoose);
-
-      if (this.tempFcCheckboxChoose == 'textLogo' || this.fcCheckboxChoose == 'textLogo') {
-        this.ACTION_CHANGE_STATE(['fcTextLogoAlign', this.tempFcAlignValue]);
-        this.ACTION_CHANGE_STATE(['fcLogoTextDisplay', true]);
-        this.ACTION_ADD_VALUE_TO_FC_TEXT(text);
-        this.ACTION_CHANGE_STATE(['fcTextInputValueEditor', text]);
-        this.ACTION_CHANGE_STATE(['fcLogoText', text]);
-        this.ACTION_CHANGE_STATE(['hideFcText', false]);
-        this.deleteLogo();
-      } else {
-        this.ACTION_CHANGE_STATE(["textAlign", this.ImageFcAlignValue]);
-        this.ACTION_CHANGE_STATE(['fcLogoText', '']);
-        this.ACTION_CHANGE_STATE(['hideFcText', true]);
-        this.ACTION_CHANGE_STATE(['fcLogoTextDisplay', false]);
-      }
-
-      if (this.fcCheckboxChoose == 'remove') {
-        this.REMOVE_DEFAULT_IMAGE_PATH();
-      } else if (this.fcCheckboxChoose == 'default') {
-        this.deleteLogo();
-      }
-    },
-    cancelModel: function cancelModel() {
-      // this.selectValue = ''
-      this.ACTION_CHANGE_STATE(['fcModalHide', false]);
-      this.displayMedia = false;
-      this.NUll_OPEN_IFC_MODAL_FOR_LOGO();
-      this.REMOVE_MODEL_IFC_TEXT();
-      this.ACTION_CHANGE_STATE(['tempFcCheckboxChoose', this.fcCheckboxChoose]); // this.ACTION_CHANGE_STATE(['fcCheckboxChoose',this.fcCheckboxChoose])
-
-      this.ACTION_CHANGE_STATE(['openIfcModalForSignature', '']);
-      this.ACTION_CHANGE_STATE(['setIbcProfile_bind', '']);
-      this.ACTION_CHANGE_STATE(['setIbcMainImage_bind', '']);
-      this.ACTION_CHANGE_STATE(['setIbcLogoImage_bind', '']);
-      this.ACTION_CHANGE_STATE(['setBcLogoImage_bind', '']);
-      this.ACTION_CHANGE_STATE(['setBcProfileImage_bind', '']);
-      this.ACTION_CHANGE_STATE(["setIfc_bind", ""]);
-      this.ACTION_CHANGE_STATE(["setIfcLogo_bind", ""]);
-      this.ACTION_CHANGE_STATE(["setIfcSignature_bind", ""]);
-      this.ACTION_CHANGE_STATE(['displayAddressLable', false]); // this.ACTION_CHANGE_STATE(['addAddressButton', true])
-      //console.log(this.ifcBelowimageChoose,'Rushi')
-
-      this.ACTION_CHANGE_STATE(['tempFcAlignValue', this.tempAlignFc]);
-      this.ACTION_CHANGE_STATE(['ImageFcAlignValue', this.tempImageAlignFc]);
-      this.ACTION_CHANGE_STATE(['ifcBelowimageChooseTemp', this.$store.state.ifcBelowimageChoose]); // this section is only for fc\
-
-      if (this.fcCheckboxChoose != "addMedia") {
-        this.ACTION_CHANGE_STATE(['imagePathTemp', '']);
-      }
-
-      if (this.fcCheckboxChoose == "addMedia") {
-        // this.ACTION_CHANGE_STATE(['fcCheckboxChoose', 'addMedia'])
-        // console.log($('.content_area').childNode)
-        $(' div').prop('contenteditable', false);
-        this.displayMedia = true;
-        this.ACTION_CHANGE_STATE(['fcAddMediaShow', true]);
-        this.ACTION_CHANGE_STATE(['textAlign', 'center']);
-        this.valueMedia = this.fcCheckboxChoose;
-        this.REMOVE_FC_TEXT_NULL();
-        $('.editable').html('');
-        this.ACTION_CHANGE_STATE(['defaultImagePath', '']);
-        this.ACTION_CHANGE_STATE(['displayTextArea', false]);
-      } else if (this.fcCheckboxChoose == "default") {
-        this.defaultValue = this.fcCheckboxChoose;
-        this.REMOVE_FC_TEXT_NULL();
-        this.displayMedia = false;
-        this.ACTION_CHANGE_STATE(['fcAddMediaShow', false]);
-        this.ACTION_CHANGE_STATE(['defaultImagePath', this.preimagepath]); // this.deleteLogo();
-
-        this.REMOVE_FC_TEXT_NULL();
-        $('.editable').html('');
-        this.ACTION_CHANGE_STATE(['displayTextArea', false]);
-      } else if (this.fcCheckboxChoose == "textLogo") {
-        this.textLogoFcValue = this.fcCheckboxChoose;
-        this.displayMedia = false;
-
-        if (this.fcTextLogoAlign == '') {
-          this.ACTION_CHANGE_STATE(['fcTextLogoAlign', 'center']);
-        }
-
-        this.ACTION_CHANGE_STATE(['fcAddMediaShow', false]);
-        this.ACTION_CHANGE_STATE(['displayTextArea', true]); // this.ACTION_CHANGE_STATE(['imagePath', '']);
-      } else if (this.fcCheckboxChoose == 'remove') {
-        this.displayMedia = false;
-        this.ACTION_CHANGE_STATE(['fcAddMediaShow', false]);
-        this.REMOVE_FC_TEXT_NULL();
-        this.ACTION_CHANGE_STATE(['defaultImagePath', '']);
-        this.ACTION_CHANGE_STATE(['displayTextArea', false]);
-      } // end section
-
-    },
-    addfont: function addfont(command) {
-      // document.execCommand(command, showUI, value);
-      document.getElementById("editable").style.textAlign = command; // this.ACTION_CHANGE_STATE(['fcTextLogoAlign',command])
-
-      this.tempAlignFc = command;
-    },
-    changeFontColor: function changeFontColor(color_picker) {
-      this.addfont("foreColor", false, color_picker);
-    },
-    imgAlignStyle: function imgAlignStyle(style) {
-      this.tempImageAlignFc = style;
-    },
-    getvalue: function getvalue() {
-      var text = $('.editable').html();
-      this.textInputValue = text;
-    },
-    sendValue: function sendValue(value) {
-      if (value == 1) {
-        this.ACTION_CHANGE_STATE(["openModal", "front-cover"]);
-      }
-
-      if (value == 2) {
-        this.ACTION_CHANGE_STATE(["openModal", "inside-front-cover"]);
-      }
-    },
-    getIfcInputValue: function getIfcInputValue(value) {
-      //console.log(value,'Rusfdfdf')
-      this.ifcCheckboxChoose = value;
-      this.ACTION_CHANGE_STATE(['ifcProfileChoose', this.ifcCheckboxChoose]);
-
-      if (this.ifcCheckboxChoose == "default") {
-        this.ACTION_CHANGE_STATE(['displayIfcMedia', false]);
-        this.ACTION_CHANGE_STATE(['defaultIfcImagePath', this.preifcimagepath]);
-      }
-
-      var valueOfCheckbox = this.selectIfcValue;
-
-      if (this.ifcCheckboxChoose == "addMedia") {
-        //console.log(valueOfCheckbox, 'scasa')
-        this.ACTION_CHANGE_STATE(['displayIfcMedia', true]);
-        this.ACTION_CHANGE_STATE(["setIfc_bind", "addMedia"]);
-      } else {
-        this.ACTION_CHANGE_STATE(['displayIfcMedia', false]);
-      }
-    },
-    getIfcLogoInputValue: function getIfcLogoInputValue(value) {
-      this.ifcLogoCheckboxChoose = value; //alert('sasasasass')
-
-      console.log(this.ifcLogoCheckboxChoose);
-      this.ACTION_CHANGE_STATE(['ifcBelowimageChoose', this.ifcLogoCheckboxChoose]);
-
-      if (this.ifcLogoCheckboxChoose == "default") {
-        this.ACTION_CHANGE_STATE(['displayIfcLogoMedia', false]);
-        this.ACTION_CHANGE_STATE(['defaultIfcLogoPath', this.preifclogoimagepath]); //this.ACTION_CHANGE_STATE(['imageIfcLogoPath', '']);
-      } else if (this.ifcLogoCheckboxChoose == "addMedia") {
-        this.ACTION_CHANGE_STATE(['displayIfcLogoMedia', true]);
-        this.ACTION_CHANGE_STATE(["setIfcLogo_bind", "addLogo"]);
-      } else {
-        this.ACTION_CHANGE_STATE(['displayIfcLogoMedia', false]);
-      }
-    },
-    getIfcSignatureInputValue: function getIfcSignatureInputValue(value) {
-      // alert(value)
-      this.ifcSignatureCheckboxChoose = value; //alert(this.ifcSignatureCheckboxChoose)
-
-      this.ACTION_CHANGE_STATE(['ifcSignatureChoose', this.ifcSignatureCheckboxChoose]);
-
-      if (this.ifcSignatureCheckboxChoose == 'default') {
-        this.ACTION_CHANGE_STATE(['displayIfcSignatureMedia', false]);
-        this.ACTION_CHANGE_STATE(['defaultIfcSignaturePath', this.preifcSignatureimagepath]); // this.ACTION_CHANGE_STATE(['imageIfcSignaturePath', '']);
-      } else if (this.ifcSignatureCheckboxChoose == 'addMedia') {
-        this.ACTION_CHANGE_STATE(['displayIfcSignatureMedia', true]);
-        this.ACTION_CHANGE_STATE(["setIfcSignature_bind", "addSignature"]);
-      } else {
-        // this.ACTION_CHANGE_STATE(['defaultIfcSignaturePath', ''])
-        // this.ACTION_CHANGE_STATE(['imageIfcSignaturePath', '']);
-        this.ACTION_CHANGE_STATE(['displayIfcSignatureMedia', false]);
-      }
-    },
-    getIfcTextInputValue: function getIfcTextInputValue(value) {
-      this.ifcTextCheckboxChoose = value;
-
-      if (this.ifcTextCheckboxChoose == 'remove') {
-        this.ACTION_CHANGE_STATE(['displayIfcTextArea', true]);
-      } else {
-        this.ACTION_CHANGE_STATE(['displayIfcTextArea', false]);
-      }
-    },
-    getIbcInputValue: function getIbcInputValue(value) {
-      this.ibcProfileImageCheckboxChoose = value;
-      this.ACTION_CHANGE_STATE(['ibcProfileCheckChoose', this.ibcProfileImageCheckboxChoose]);
-
-      if (this.ibcProfileImageCheckboxChoose == 'addMedia') {
-        this.ACTION_CHANGE_STATE(['displayIbcProfileMedia', true]);
-        this.ACTION_CHANGE_STATE(['setIbcProfile_bind', 'profileImage']);
-      } else if (this.ibcProfileImageCheckboxChoose == 'default') {
-        this.ACTION_CHANGE_STATE(['defaultIbcProfilePath', this.preibcProfileimagepath]);
-        this.ACTION_CHANGE_STATE(['displayIbcProfileMedia', false]);
-      } else {
-        this.ACTION_CHANGE_STATE(['displayIbcProfileMedia', false]);
-        this.ACTION_CHANGE_STATE(['defaultIbcProfilePath', '']);
-      } //   this.ifcRightTextCheckbox = value
-      //   if(this.ifcRightTextCheckbox == 'remove'){
-      //     this.ACTION_CHANGE_STATE(['displayTextAreaFor', true])
-      //   }else{
-      //     this.ACTION_CHANGE_STATE(['displayTextAreaFor', false])
-      //   }
-
-    },
-    getIbcMainImageInputValue: function getIbcMainImageInputValue(value) {
-      alert(value);
-      this.ibcMainImageCheckboxChoose = value;
-      this.ACTION_CHANGE_STATE(['ibcBannerCheckChoose', this.ibcMainImageCheckboxChoose]);
-
-      if (this.ibcMainImageCheckboxChoose == 'addMedia') {
-        this.ACTION_CHANGE_STATE(['displayIbcMainMedia', true]);
-        this.ACTION_CHANGE_STATE(['setIbcMainImage_bind', 'mainImage']);
-      } else if (this.ibcMainImageCheckboxChoose == 'default') {
-        this.ACTION_CHANGE_STATE(['defaultIbcMainImagePath', this.preibcMainimagepath]);
-        this.ACTION_CHANGE_STATE(['displayIbcMainMedia', false]);
-      } else {
-        this.ACTION_CHANGE_STATE(['displayIbcMainMedia', false]);
-        this.ACTION_CHANGE_STATE(['defaultIbcMainImagePath', '']);
-        this.ACTION_CHANGE_STATE(['imageIbcMainPath', '']);
-      }
-    },
-    getIbcLogoImageInputValue: function getIbcLogoImageInputValue(value) {
-      this.ibcLogoImageCheckboxChoose = value;
-      this.ACTION_CHANGE_STATE(['ibcLogoCheckChoose', this.ibcLogoImageCheckboxChoose]);
-
-      if (this.ibcLogoImageCheckboxChoose == 'addMedia') {
-        this.ACTION_CHANGE_STATE(['displayIbcLogoMedia', true]);
-        this.ACTION_CHANGE_STATE(['setIbcLogoImage_bind', 'logoImage']);
-      } else if (this.ibcLogoImageCheckboxChoose == 'default') {
-        this.ACTION_CHANGE_STATE(['defaultIbcLogoImagePath', this.preibcLogoimagepath]);
-        this.ACTION_CHANGE_STATE(['displayIbcLogoMedia', false]);
-      } else {
-        this.ACTION_CHANGE_STATE(['displayIbcLogoMedia', false]);
-        this.ACTION_CHANGE_STATE(['defaultIbcLogoImagePath', '']);
-      }
     },
     getBcLogoImageInputValue: function getBcLogoImageInputValue(value) {
       this.bcLogoImageCheckboxChooseSelect = value;
@@ -81561,119 +78499,9 @@ var globalMixin = {
       this.ifcContent = $('.preview_content').html();
       this.ACTION_CHANGE_STATE(['ifcPreview', this.ifcContent]);
     },
-    saveIfcChanges: function saveIfcChanges() {
-      this.ACTION_CHANGE_STATE(['ifcTitleText', this.titleInputIfcTemp]);
-      this.ACTION_CHANGE_STATE(['ifcCompanyName', this.ifcCompanyNameTemp]);
-      this.ACTION_CHANGE_STATE(['designation1', this.designationTemp1]);
-      this.ACTION_CHANGE_STATE(['designation2', this.designationTemp2]);
-      this.ACTION_CHANGE_STATE(['designation3', this.designationTemp3]);
-      this.ACTION_CHANGE_STATE(['designationTitle1', this.designationTitleTemp1]);
-      this.ACTION_CHANGE_STATE(['designationTitle2', this.designationTitleTemp2]);
-      this.ACTION_CHANGE_STATE(['designationTitle3', this.designationTitleTemp3]);
-      this.ACTION_CHANGE_STATE(['designationTitle4', this.designationTitleTemp4]);
-      this.ACTION_CHANGE_STATE(['ifcCompanyName2', this.ifcCompanyNameTemp2]);
-      this.ACTION_CHANGE_STATE(['designationifc', this.designationifcTemp]);
-      this.ACTION_CHANGE_STATE(['designationifc1', this.designationifcTemp1]);
-      this.ACTION_CHANGE_STATE(['designationifc2', this.designationifcTemp2]);
-      this.ACTION_CHANGE_STATE(['designationTitle', this.designationTitleTemp]);
-      this.ACTION_CHANGE_STATE(['designationTitleset2', this.designationTitlesetTemp2]);
-      this.ACTION_CHANGE_STATE(['designationTitleset3', this.designationTitlesetTemp3]);
-      this.ACTION_CHANGE_STATE(['designationTitleset4', this.designationTitlesetTemp4]);
-      this.ACTION_CHANGE_STATE(['addressIfc1', this.addressIfcTemp1]);
-      this.ACTION_CHANGE_STATE(['stNumberIfc', this.stNumberIfcTemp]);
-      this.ACTION_CHANGE_STATE(['emailIfc', this.emailIfcTemp]);
-      this.ACTION_CHANGE_STATE(['websiteUrlIfc', this.websiteUrlIfcTemp]);
-      this.ACTION_CHANGE_STATE(['officePhone', this.officePhoneTemp]);
-      this.ACTION_CHANGE_STATE(['directPhoneIfc', this.directPhoneIfcTemp]);
-      this.ACTION_CHANGE_STATE(['ifcProfileChoose', this.ifcProfileChooseTemp]);
-      this.ACTION_CHANGE_STATE(['ifcBelowimageChoose', this.ifcBelowimageChooseTemp]);
-      this.saveIFCPreview();
-      this.NUll_OPEN_IFC_MODAL_FOR_LOGO();
-      this.REMOVE_MODEL_IFC_TEXT();
-
-      if (this.ifcTextCheckboxChoose == 'remove') {
-        var text = $('.editable').html();
-        this.ACTION_CHANGE_STATE(['ifcTextDisplay', true]);
-        this.ACTION_ADD_VALUE_TO_IFC_LEFT_TEXT(text);
-        this.ACTION_CHANGE_STATE(['ifcText', text]);
-      }
-
-      if (this.ifcTextCheckboxChoose == 'default') {
-        this.ACTION_CHANGE_STATE(['ifcTextDisplay', false]);
-        this.ACTION_CHANGE_STATE(['imageIfcLogoPath', '']);
-      }
-
-      if (this.ifcCheckboxChoose == 'remove') {
-        this.REMOVE_DEFAULT_IFC_IMAGE_PATH();
-      }
-
-      if (this.ifcCheckboxChoose == "default") {
-        this.USE_DEFAULT_MEDIA_IFC_IMAGE_PATH();
-      }
-
-      if (this.ifcLogoCheckboxChoose == 'remove') {
-        this.REMOVE_DEFAULT_IFC_LOGO_IMAGE_PATH();
-      }
-
-      if (this.ifcLogoCheckboxChoose == 'default') {
-        this.USE_DEFAULT_MEDIA_IFC_LOGO_PATH();
-      }
-
-      if (this.ifcRightTextCheckbox == 'remove') {
-        var text = $('.editable').html();
-        this.ACTION_CHANGE_STATE(['ifcRightTextDisplay', true]); //  this.ACTION_ADD_VALUE_TO_IFC_LEFT_TEXT(text)
-
-        this.ACTION_CHANGE_STATE(['ifcRightText', text]);
-      }
-
-      if (this.ifcRightTextCheckbox == "default") {
-        this.ACTION_CHANGE_STATE(['ifcRightTextDisplay', false]);
-      }
-
-      if (this.ifcSignatureCheckboxChoose == 'remove') {
-        //alert('sss')
-        this.ACTION_CHANGE_STATE(['defaultIfcSignaturePath', '']);
-        this.ACTION_CHANGE_STATE(['imageIfcSignaturePath', '']);
-      }
-
-      if (this.ifcSignatureCheckboxChoose == 'default') {
-        this.ACTION_CHANGE_STATE(['imageIfcSignaturePath', '']);
-      }
-
-      this.ifcTextCheckboxChoose = ''; // this.NULL_CHECKBOX_BIND()
-
-      this.ACTION_CHANGE_STATE(["setIfc_bind", ""]);
-      this.ACTION_CHANGE_STATE(["setIfcLogo_bind", ""]);
-      this.ACTION_CHANGE_STATE(["setIfcSignature_bind", ""]); // this.displayIfcSignatureMedia = false
-
-      this.ACTION_CHANGE_STATE(['openIfcModalForSignature', '']);
-      this.ACTION_CHANGE_STATE(['openIfcModalForLogo', '']);
-    },
     saveIBCPreview: function saveIBCPreview() {
       this.ibcContent = $('.preview_content').html();
       this.ACTION_CHANGE_STATE(['ibcPreview', this.ibcContent]);
-    },
-    saveIbcChanges: function saveIbcChanges() {
-      this.saveIBCPreview(); //console.log(this.ibcProfileImageCheckboxChoose,'test123')
-
-      if (this.ibcProfileImageCheckboxChoose == 'remove') {
-        this.ACTION_CHANGE_STATE(['defaultIbcProfilePath', '']);
-        this.ACTION_CHANGE_STATE(['imageIbcProfilePath', '']);
-      } else if (this.ibcProfileImageCheckboxChoose == 'default') {
-        this.ACTION_CHANGE_STATE(['imageIbcProfilePath', '']);
-      } else if (this.ibcMainImageCheckboxChoose == 'remove') {
-        this.ACTION_CHANGE_STATE(['imageIbcMainPath', '']);
-      } else if (this.ibcMainImageCheckboxChoose == 'default') {
-        this.ACTION_CHANGE_STATE(['imageIbcMainPath', '']);
-      } else if (this.ibcLogoImageCheckboxChoose == 'remove') {
-        this.ACTION_CHANGE_STATE(['imageIbcLogoPath', '']);
-      } else if (this.ibcLogoImageCheckboxChoose == 'default') {
-        this.ACTION_CHANGE_STATE(['imageIbcLogoPath', '']);
-      }
-
-      this.ACTION_CHANGE_STATE(['setIbcProfile_bind', '']);
-      this.ACTION_CHANGE_STATE(['setIbcMainImage_bind', '']);
-      this.ACTION_CHANGE_STATE(['setIbcLogoImage_bind', '']);
     },
     saveBcChanges: function saveBcChanges() {
       //this.saveIBCPreview()
@@ -81690,259 +78518,6 @@ var globalMixin = {
       }
 
       this.ACTION_CHANGE_STATE(['setBcLogoImage_bind', '']);
-    },
-    displayifclogo: function displayifclogo(e) {
-      // alert('tests')
-      var vget = e.path[3];
-      console.log(e);
-      var classModal = $(vget).attr('class'); //console.log(classModal,'Rushi')       
-
-      var classPresentIbcLogo = $(vget).hasClass("ibc_logo");
-      var classPresentIbcImage = $(vget).hasClass("inside_bc_img");
-      var classPresentIbcProfileImage = $(vget).hasClass("ibc_profile"); //console.log(classPresentIbcImage)
-
-      var classPresentIbcProfile_text = $(vget).hasClass("profile_text");
-      var classPresentbcProfile = $(vget).hasClass("ibc_logo");
-      var classPresentbcText = $(vget).hasClass("bc_address");
-      var classPresentbcHeader = $(vget).hasClass("bc_header");
-      var classPresentbcProfile = $(vget).hasClass("profile_imge_bc");
-      var classPresentBcFooter = $(vget).hasClass("footer_text");
-
-      if (classModal == 'below_logo') {
-        this.ACTION_CHANGE_STATE(['openIfcModalForLogo', 'ifc-logo']);
-        this.REMOVE_MODEL_IFC_TEXT();
-        this.ACTION_CHANGE_STATE(['openIfcModalForSignature', '']);
-      }
-
-      if (classModal == 'profile_text') {
-        this.ACTION_CHANGE_STATE(['openIfcModalForText', 'ifc-text']); //this.REMOVE_MODEL_IFC_LOGO()
-
-        this.ACTION_CHANGE_STATE(['openIfcModalForLogo', '']);
-      } // if(classModal ==  'col-sm-8 bc_address bc_image'){
-      //     alert('1213')
-      //     this.ACTION_CHANGE_STATE(['openIfcModalForText', 'ifc-text'])
-      //     this.ACTION_CHANGE_STATE(['openFooterContent', 'footer-text'])
-      //     this.ACTION_CHANGE_STATE(['openHeaderContent', ''])
-      //     this.ACTION_CHANGE_STATE(['openIfcModalForLogo',''])
-      //     //this.REMOVE_MODEL_IFC_LOGO()
-      // }
-
-
-      if (classModal == 'right_ifc_content') {
-        $('#ifcTextModal').modal('show');
-      }
-
-      if (classModal == 'col-md-12 ibc_logo p-0') {
-        $('#ifcTextModal1').modal('show');
-      } // if(classModal == 'bc_header'){
-      // }
-      // if(classModal == 'profile_imge_bc'){
-      //     alert('sasfagsf')
-      //     this.ACTION_CHANGE_STATE(['profileImage', 'bottom_image'])
-      //     this.ACTION_CHANGE_STATE(['openIbcModal', ''])
-      //     $('#ifcTextModal1').modal('show');
-      // }
-
-
-      if (classModal == 'ifc_signature_image') {
-        this.ACTION_CHANGE_STATE(['openIfcModalForSignature', 'ifc-signature']);
-        $('#ifcModal').modal('show');
-        /*REUSE THIS MODAL */
-        // $('#ifcTextModal').modal('show')
-
-        /*REUSE THIS MODAL */
-      } else {
-        $('#ifcModal').modal('show');
-      }
-      /** For IBC images    **/
-
-
-      if (classPresentIbcProfileImage == true) {
-        // this.ACTION_CHANGE_STATE(['openIbcModal', 'profile'])
-        $('#ifcTextModal').modal('show');
-      } else if (classPresentIbcLogo == true) {
-        // this.ACTION_CHANGE_STATE(['openIbcModal', 'logoImage'])
-        this.ACTION_CHANGE_STATE(['profileImage', '']);
-        $('#ifcTextModal').modal('show');
-      } else if (classPresentIbcImage == true) {
-        // this.ACTION_CHANGE_STATE(['openIbcModal', 'mainImage'])
-        $('#ifcTextModal').modal('show');
-      } else if (classPresentIbcProfile_text == true) {
-        $('#ibcAddressModal').modal('show');
-      } else if (classPresentbcText == true) {
-        this.ACTION_CHANGE_STATE(['openIfcModalForText', 'ifc-text']);
-        this.ACTION_CHANGE_STATE(['openFooterContent', 'footer-text']);
-        this.ACTION_CHANGE_STATE(['openHeaderContent', '']);
-        this.ACTION_CHANGE_STATE(['openIfcModalForLogo', '']);
-        $('#bcAddressModal').modal('show');
-      } else if (classPresentbcProfile == true) {
-        this.ACTION_CHANGE_STATE(['profileImage', 'bottom_image']); // this.ACTION_CHANGE_STATE(['openIbcModal', ''])
-
-        $('#ifcTextModal1').modal('show');
-      } else if (classPresentbcHeader == true) {
-        this.ACTION_CHANGE_STATE(['openHeaderContent', 'header-text']);
-        this.ACTION_CHANGE_STATE(['openFooterContent', '']);
-        $('#bcAddressModal').modal('show');
-      } else if (classPresentBcFooter == true) {
-        $('#bcAddressModal').modal('show');
-      }
-    },
-    check_Value: function check_Value(value) {
-      //console.log(value, 'value')
-      if (value == 1) {
-        if (this.ifcCheckboxChoose == 'addMedia' || this.ifcProfileChoose == 'addMedia') {
-          this.ACTION_CHANGE_STATE(["setIfc_bind", "addMedia"]);
-        }
-      } else if (value == 2) {
-        if (this.ifcLogoCheckboxChoose == 'addMedia' || this.ifcBelowimageChoose == 'addMedia') {
-          this.ACTION_CHANGE_STATE(["setIfcLogo_bind", "addLogo"]);
-        }
-      } else if (value == 3) {
-        if (this.ifcSignatureCheckboxChoose == 'addMedia' || this.ifcSignatureChoose == 'addMedia') {
-          this.ACTION_CHANGE_STATE(['setIfcSignature_bind', 'addSignature']);
-        }
-      } else if (value == 'ibcProfile') {
-        if (this.ibcProfileImageCheckboxChoose == 'addMedia' || this.ibcProfileCheckChoose == 'addMedia') {
-          this.ACTION_CHANGE_STATE(['setIbcProfile_bind', 'profileImage']);
-        }
-      } else if (value == 'ibcMainImage') {
-        if (this.ibcMainImageCheckboxChoose == 'addMedia' || this.ibcBannerCheckChoose == 'addMedia') {
-          this.ACTION_CHANGE_STATE(['setIbcMainImage_bind', 'mainImage']);
-        }
-      } else if (value == 'ibcLogoImage') {
-        if (this.ibcLogoImageCheckboxChoose == 'addMedia' || this.ibcLogoCheckChoose == 'addMedia') {
-          this.ACTION_CHANGE_STATE(['setIbcLogoImage_bind', 'logoImage']);
-        }
-      } else if (value == 'BcLogoImage') {
-        if (this.bcLogoImageCheckboxChoose == 'addMedia' || this.bcLogoChooseCheckBox == 'addMedia') {
-          this.ACTION_CHANGE_STATE(['setBcLogoImage_bind', 'logoBCImage']);
-        }
-      } else if (value == 'BcProfileImage') {
-        if (this.bcProfileImageCheckboxChooseSelect == 'addMedia' || this.bcProfileChooseCheckBox == 'addMedia') {
-          this.ACTION_CHANGE_STATE(['setBcProfileImage_bind', 'profileBCImage']);
-        }
-      }
-    },
-    getTitleIfc: function getTitleIfc(value) {
-      this.ifcTempTitleTExt = value;
-    },
-    getCompanyNameIfc: function getCompanyNameIfc(value) {
-      this.ACTION_CHANGE_STATE(['ifcCompanyName', value]);
-    },
-    getdesignationIfc1: function getdesignationIfc1(value) {
-      this.ACTION_CHANGE_STATE(['designation1', value]);
-    },
-    getdesignationIfc2: function getdesignationIfc2(value) {
-      this.ACTION_CHANGE_STATE(['designation2', value]);
-    },
-    getdesignationIfc3: function getdesignationIfc3(value) {
-      this.ACTION_CHANGE_STATE(['designation3', value]);
-    },
-    getdesignationTitleIfc1: function getdesignationTitleIfc1(value) {
-      this.ACTION_CHANGE_STATE(['designationTitle1', value]);
-    },
-    getdesignationTitleIfc2: function getdesignationTitleIfc2(value) {
-      this.ACTION_CHANGE_STATE(['designationTitle2', value]);
-    },
-    getdesignationTitleIfc3: function getdesignationTitleIfc3(value) {
-      this.ACTION_CHANGE_STATE(['designationTitle3', value]);
-    },
-    getdesignationTitleIfc4: function getdesignationTitleIfc4(value) {
-      this.ACTION_CHANGE_STATE(['designationTitle4', value]);
-    },
-    getAddressIfc1: function getAddressIfc1(value) {
-      this.ACTION_CHANGE_STATE(['addressIfc1', value]);
-    },
-    getdirectPhoneIfc: function getdirectPhoneIfc(value) {
-      this.ACTION_CHANGE_STATE(['directPhoneIfc', value]);
-    },
-    getOfficePhoneIfc: function getOfficePhoneIfc(value) {
-      this.ACTION_CHANGE_STATE(['officePhone', value]);
-    },
-    getWebsiteUrlIfc: function getWebsiteUrlIfc(value) {
-      this.ACTION_CHANGE_STATE(['websiteUrlIfc', value]);
-    },
-    getEmailIfc: function getEmailIfc(value) {
-      this.ACTION_CHANGE_STATE(['emailIfc', value]);
-    },
-    getstNumberIfc: function getstNumberIfc(value) {
-      this.ACTION_CHANGE_STATE(['stNumberIfc', value]);
-    },
-    editIfcRight: function editIfcRight() {
-      this.ACTION_CHANGE_STATE(['showTextAreaIfcRight', true]);
-      $('.hoverComponetRemove').addClass('disabled_data');
-    },
-    getTitleIbc: function getTitleIbc(value) {
-      this.ACTION_CHANGE_STATE(['ibcTitleText', value]);
-    },
-    getCompanyNameIbc: function getCompanyNameIbc(value) {
-      this.ACTION_CHANGE_STATE(['ibcCompanyNameText', value]);
-    },
-    getAddressIbc: function getAddressIbc(value) {
-      this.ACTION_CHANGE_STATE(['ibcAddressText', value]);
-    },
-    getAddressIbc1: function getAddressIbc1(value) {
-      this.ACTION_CHANGE_STATE(['ibcAddressText1', value]);
-    },
-    getdirectPhoneIbc: function getdirectPhoneIbc(value) {
-      this.ACTION_CHANGE_STATE(['ibcPhoneNumberText', value]);
-    },
-    getOfficePhoneIbc: function getOfficePhoneIbc(value) {
-      this.ACTION_CHANGE_STATE(['ibcOfficeNumberText', value]);
-    },
-    getWebsiteUrlIbc: function getWebsiteUrlIbc(value) {
-      this.ACTION_CHANGE_STATE(['ibcWebsiteText', value]);
-    },
-    getEmailIbc: function getEmailIbc(value) {
-      this.ACTION_CHANGE_STATE(['ibcEmailText', value]);
-    },
-    saveIfcRight: function saveIfcRight() {
-      $('.hoverComponetRemove').removeClass('disabled_data');
-      this.saveIFCPreview();
-      this.ACTION_CHANGE_STATE(['showTextAreaIfcRight', false]); //console.log($('.editable_ifc_text').html())
-
-      var text = $('.editable_ifc_text').html();
-      this.ACTION_ADD_VALUE_TO_IFC_RIGHT_TEXT(text);
-      this.ACTION_CHANGE_STATE(['ifcRightTextInputValue', text]);
-    },
-    getTitleBc: function getTitleBc(value) {
-      this.ACTION_CHANGE_STATE(['bcTitleText', value]);
-    },
-    getCompanyNameBc: function getCompanyNameBc(value) {
-      this.ACTION_CHANGE_STATE(['bcCompanyNameText', value]);
-    },
-    getAddressBc: function getAddressBc(value) {
-      this.ACTION_CHANGE_STATE(['bcAddressText', value]);
-    },
-    getAddressBc1: function getAddressBc1(value) {
-      this.ACTION_CHANGE_STATE(['bcAddressText1', value]);
-    },
-    getdirectPhoneBc: function getdirectPhoneBc(value) {
-      this.ACTION_CHANGE_STATE(['bcPhoneNumberText', value]);
-    },
-    getOfficePhoneBc1: function getOfficePhoneBc1(value) {
-      this.ACTION_CHANGE_STATE(['bcOfficeNumberText', value]);
-    },
-    getWebsiteUrlBc: function getWebsiteUrlBc(value) {
-      this.ACTION_CHANGE_STATE(['bcWebsiteText', value]);
-    },
-    getEmailBc: function getEmailBc(value) {
-      this.ACTION_CHANGE_STATE(['bcEmailText', value]);
-    },
-    getTitleHeaderBc: function getTitleHeaderBc(value) {
-      this.ACTION_CHANGE_STATE(['bcTitleHeaderText', value]);
-    },
-    getAddressHeaderBc: function getAddressHeaderBc(value) {
-      this.ACTION_CHANGE_STATE(['bcAddressHeaderBcText', value]);
-    },
-    getAddressHeaderBc1: function getAddressHeaderBc1(value) {
-      this.ACTION_CHANGE_STATE(['bcAddressHeaderBc1Text', value]);
-    },
-    getCityHeaderBc: function getCityHeaderBc(value) {
-      this.ACTION_CHANGE_STATE(['bcCityHeaderText', value]);
-    },
-    getCountryHeaderBc: function getCountryHeaderBc(value) {
-      this.ACTION_CHANGE_STATE(['bcCountryHeaderText', value]);
     },
     changeView: function changeView(viewData) {
       if (viewData == 'desktop') {
@@ -81971,18 +78546,6 @@ var globalMixin = {
       var allHtml = fcPreviewHtml + ifcPreviewHtml + ibcPreviewHtml; //   console.log(allHtml, ';sas')
 
       this.style_html(allHtml);
-    },
-    getBcProfileImageInputValue: function getBcProfileImageInputValue(value) {
-      this.bcProfileImageCheckboxChooseSelect = value;
-      this.ACTION_CHANGE_STATE(['bcProfileChooseCheckBox', this.bcProfileImageCheckboxChooseSelect]);
-
-      if (this.bcProfileImageCheckboxChooseSelect == 'addMedia') {
-        this.ACTION_CHANGE_STATE(['displayBcProfileMedia', true]);
-        this.ACTION_CHANGE_STATE(['setBcProfileImage_bind', 'profileBCImage']);
-      } else {
-        this.ACTION_CHANGE_STATE(['defaultBcProfileImagePath', this.prebcProfileimagepath]);
-        this.ACTION_CHANGE_STATE(['displayBcProfileMedia', false]); //this.ACTION_CHANGE_STATE(['imageBcProfilePath', ''])
-      }
     },
 
     /*For html Format into multiple line */
@@ -82043,425 +78606,9 @@ var globalMixin = {
       return result;
     },
 
-    /*--for fc Db value -POST method--- */
-    saveFcValueToDb: function saveFcValueToDb() {
-      var _this = this;
-
-      this.EMPTY_MESSAGE_LIST();
-      this.ACTION_CHANGE_STATE(['Savefcloader', true]); //console.log(this.checkboxChoose, 'sasgahg')
-
-      var data = {
-        columnName: 'front_cover',
-        defaultImage: this.defaultImagePath,
-        AddedImage: this.imagePath,
-        textLogo: this.fcLogoText,
-        checkboxChoose: this.fcCheckboxChoose,
-        alignment: this.textAlign,
-        textAlign: this.fcTextLogoAlign,
-        headingTag: this.headingTagFc
-      };
-      console.log(data, 'data');
-      axios.post("api/userBooks", data).then(function (response) {
-        _this.PUSH_SUCCESS_MESSAGE('Front cover saved successfully!');
-
-        var self = _this;
-        setTimeout(function () {
-          self.ACTION_CHANGE_STATE(['Savefcloader', false]);
-        }, 2000);
-      })["catch"](function (errorResponse) {
-        console.log(errorResponse, "errorResponse");
-
-        _this.PUSH_SUCCESS_MESSAGE('Internal server error');
-      });
-    },
-
-    /*--END--- */
-    getfcUserBook: function () {
-      var _getfcUserBook = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this2 = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios.get("api/userBooks/1").then(function (response) {
-                  var checkboxSelected = response.data.data.front_cover != '' ? response.data.data.front_cover.checkboxChoose : 'default';
-
-                  if (response.data.data.front_cover.checkboxChoose == 'default') {
-                    //console.log(response.data.data.front_cover.defaultImage, "success");
-                    _this2.ACTION_CHANGE_STATE(['fcCheckboxChoose', checkboxSelected]);
-                  } else if (response.data.data.front_cover.checkboxChoose == 'addMedia') {
-                    //console.log(response.data.data.front_cover.AddedImage, "success");
-                    //alert('here')
-                    _this2.ACTION_CHANGE_STATE(['fcAddMediaShow', true]);
-
-                    var updatedImagePath = response.data.data.front_cover.AddedImage;
-
-                    _this2.ACTION_CHANGE_STATE(['imagePathTemp', updatedImagePath]);
-
-                    _this2.ACTION_CHANGE_STATE(['fcCheckboxChoose', checkboxSelected]);
-
-                    _this2.ACTION_CHANGE_STATE(['textAlign', response.data.data.front_cover.alignment]);
-                  } else if (response.data.data.front_cover.checkboxChoose == 'textLogo') {
-                    //console.log(response.data.data.front_cover.textLogo, "success");
-                    _this2.ACTION_CHANGE_STATE(['fcTextLogoAlign', response.data.data.front_cover.textAlign]);
-
-                    _this2.ACTION_CHANGE_STATE(["headingTagFc", response.data.data.front_cover.headingTag]);
-
-                    var dbfctextlogo = response.data.data.front_cover.textLogo;
-
-                    _this2.ACTION_CHANGE_STATE(['fcLogoText', dbfctextlogo]);
-
-                    _this2.ACTION_CHANGE_STATE(['fcTextInputValueEditor', dbfctextlogo]);
-
-                    _this2.ACTION_CHANGE_STATE(['defaultImagePath', '']);
-
-                    _this2.ACTION_CHANGE_STATE(['fcLogoTextDisplay', true]);
-
-                    _this2.ACTION_CHANGE_STATE(['hideFcText', false]);
-
-                    _this2.ACTION_CHANGE_STATE(['fcCheckboxChoose', checkboxSelected]);
-
-                    _this2.ACTION_CHANGE_STATE(['displayTextArea', true]);
-
-                    _this2.tempAlignFc = response.data.data.front_cover.textAlign;
-                  } else if (response.data.data.front_cover.checkboxChoose == 'remove') {
-                    _this2.ACTION_CHANGE_STATE(['fcCheckboxChoose', 'remove']);
-
-                    _this2.ACTION_CHANGE_STATE(['defaultImagePath', '']);
-                  }
-
-                  _this2.ACTION_CHANGE_STATE(['tempFcCheckboxChoose', _this2.fcCheckboxChoose]);
-                })["catch"](function (errorResponse) {
-                  console.log(errorResponse, "errorResponse");
-                });
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      function getfcUserBook() {
-        return _getfcUserBook.apply(this, arguments);
-      }
-
-      return getfcUserBook;
-    }(),
-
-    /*--for ifc Db value -POST method--- */
-    saveifcDataToDb: function saveifcDataToDb() {
-      var _this3 = this;
-
-      this.ACTION_CHANGE_STATE(['Savefcloader', true]);
-      var data = {
-        columnName: 'inside_front_cover',
-        ifcProfileimage: [{
-          ifcProfileChooseDb: this.ifcProfileChoose,
-          defaultProfile: this.defaultIfcImagePath,
-          NewAddedProfile: this.imageIfcPath
-        }],
-        ifcBelowImage: [{
-          ifcBelowimageChooseDb: this.ifcBelowimageChoose,
-          defaultBelowLogo: this.defaultIfcLogoPath,
-          NewAddedBelowLogo: this.imageIfcLogoPath
-        }],
-        ifcSignature: [{
-          ifcSignatureChooseDb: this.ifcSignatureChoose,
-          defaultSignatureImage: this.defaultIfcSignaturePath,
-          NewAddedSignatureImage: this.imageIfcSignaturePath
-        }],
-        // profileText: [{
-        //     ifcTitleText: this.ifcTitleText,
-        //     ifcCompanyName: this.ifcCompanyName,
-        //     designation1: this.designation1,
-        //     designation2: this.designation2,
-        //     designation3: this.designation3,
-        //     designationTitle: this.designationTitle,
-        //     designationTitleset2: this.designationTitleset2,
-        //     designationTitleset3: this.designationTitleset3,
-        //     designationTitleset4: this.designationTitleset4,
-        //     ifcCompanyName2: this.ifcCompanyName2,
-        //     designationifc: this.designationifc,
-        //     designationifc1: this.designationifc1,
-        //     designationifc2: this.designationifc2,
-        //     designationTitle1: this.designationTitle1,
-        //     designationTitle2: this.designationTitle2,
-        //     designationTitle3: this.designationTitle3,
-        //     designationTitle4: this.designationTitle4,
-        //     addressIfc1: this.addressIfc1,
-        //     directPhoneIfc: this.directPhoneIfc,
-        //     officePhone: this.officePhone,
-        //     websiteUrlIfc: this.websiteUrlIfc,
-        //     emailIfc: this.emailIfc,
-        //     stNumberIfc: this.stNumberIfc
-        // }],
-        right_ifc_content: this.ifcRightTextInputValue != '' ? this.ifcRightTextInputValue : this.inputTextRightIfc
-      };
-      console.log(data, 'ifc');
-      axios.post("api/userBooks", data).then(function (response) {
-        console.log(response, "success");
-        var self = _this3;
-        setTimeout(function () {
-          self.ACTION_CHANGE_STATE(['Savefcloader', false]);
-        }, 2000);
-      })["catch"](function (errorResponse) {
-        console.log(errorResponse, "errorResponse");
-      });
-    },
-
-    /*------- End  -----*/
-
-    /*GET Request  IFC */
-    getifcUserBook: function () {
-      var _getifcUserBook = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this4 = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.get("api/userBooks/1").then(function (response) {
-                  var responseDbDataProfile = response.data.data.inside_front_cover.ifcProfileimage[0].ifcProfileChooseDb;
-
-                  _this4.ACTION_CHANGE_STATE(['ifcProfileChoose', responseDbDataProfile]);
-
-                  var responseDbDataSignature = response.data.data.inside_front_cover.ifcSignature[0].ifcSignatureChooseDb;
-
-                  _this4.ACTION_CHANGE_STATE(['ifcSignatureChoose', responseDbDataSignature]);
-
-                  var responseDbDataBelowImage = response.data.data.inside_front_cover.ifcBelowImage[0].ifcBelowimageChooseDb;
-
-                  _this4.ACTION_CHANGE_STATE(['ifcBelowimageChoose', responseDbDataBelowImage]);
-
-                  var responseDbDataProfileText = response.data.data.inside_front_cover.profileText; //console.log(responseDbDataProfileText,'Rushi')
-
-                  var ifcCompanyNameData = response.data.data.inside_front_cover.profileText[0].ifcCompanyName2;
-
-                  if (ifcCompanyNameData != null) {
-                    _this4.ACTION_CHANGE_STATE(['displayAddressLable', true]); // this.ACTION_CHANGE_STATE(['addAddressButton', false])
-
-                  }
-
-                  responseDbDataProfileText.map(function (d) {
-                    _this4.ACTION_CHANGE_STATE(['ifcTitleText', d.ifcTitleText]);
-
-                    _this4.ACTION_CHANGE_STATE(['ifcCompanyName', d.ifcCompanyName]);
-
-                    _this4.ACTION_CHANGE_STATE(['designation1', d.designation1]);
-
-                    _this4.ACTION_CHANGE_STATE(['designation2', d.designation2]);
-
-                    _this4.ACTION_CHANGE_STATE(['designation3', d.designation3]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationTitle1', d.designationTitle1]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationTitle2', d.designationTitle2]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationTitle3', d.designationTitle3]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationTitle4', d.designationTitle4]);
-
-                    _this4.ACTION_CHANGE_STATE(['ifcCompanyName2', d.ifcCompanyName2]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationifc', d.designationifc]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationifc1', d.designationifc1]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationifc2', d.designationifc2]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationTitle', d.designationTitle]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationTitleset2', d.designationTitleset2]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationTitleset3', d.designationTitleset3]);
-
-                    _this4.ACTION_CHANGE_STATE(['designationTitleset4', d.designationTitleset4]);
-
-                    _this4.ACTION_CHANGE_STATE(['addressIfc1', d.addressIfc1]);
-
-                    _this4.ACTION_CHANGE_STATE(['directPhoneIfc', d.directPhoneIfc]);
-
-                    _this4.ACTION_CHANGE_STATE(['officePhone', d.officePhone]);
-
-                    _this4.ACTION_CHANGE_STATE(['websiteUrlIfc', d.websiteUrlIfc]);
-
-                    _this4.ACTION_CHANGE_STATE(['emailIfc', d.emailIfc]);
-
-                    _this4.ACTION_CHANGE_STATE(['stNumberIfc', d.stNumberIfc]);
-                  });
-                  var rightIfcDbContent = response.data.data.inside_front_cover.right_ifc_content;
-
-                  _this4.ACTION_CHANGE_STATE(['ifcRightTextInputValue', rightIfcDbContent]); //console.log(rightIfcDbContent)
-
-
-                  if (responseDbDataProfile == "addMedia") {
-                    _this4.ACTION_CHANGE_STATE(['displayIfcMedia', true]);
-
-                    var updatedImage = response.data.data.inside_front_cover.ifcProfileimage[0].NewAddedProfile;
-
-                    _this4.ACTION_CHANGE_STATE(['imageIfcPath', updatedImage]);
-                  }
-
-                  if (responseDbDataSignature == "addMedia") {
-                    _this4.ACTION_CHANGE_STATE(['displayIfcSignatureMedia', true]);
-
-                    var updatedImage = response.data.data.inside_front_cover.ifcSignature[0].NewAddedSignatureImage;
-
-                    _this4.ACTION_CHANGE_STATE(['imageIfcSignaturePath', updatedImage]);
-                  }
-
-                  if (responseDbDataBelowImage == "addMedia") {
-                    _this4.ACTION_CHANGE_STATE(['displayIfcLogoMedia', true]);
-
-                    var updatedImage = response.data.data.inside_front_cover.ifcBelowImage[0].NewAddedBelowLogo;
-
-                    _this4.ACTION_CHANGE_STATE(['imageIfcLogoPath', updatedImage]);
-                  }
-                })["catch"](function (errorResponse) {
-                  console.log(errorResponse, "errorResponse");
-                });
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      function getifcUserBook() {
-        return _getifcUserBook.apply(this, arguments);
-      }
-
-      return getifcUserBook;
-    }(),
-
-    /*---- END----- */
-
-    /*---POST IBC---*/
-    saveibcDataToDb: function saveibcDataToDb() {
-      var _this5 = this;
-
-      this.ACTION_CHANGE_STATE(['Savefcloader', true]);
-      var data = {
-        columnName: "inside_back_cover",
-        IbcAddressInput: [{
-          ibcTitleText: this.ibcTitleText,
-          ibcCompanyNameText: this.ibcCompanyNameText,
-          ibcAddressText: this.ibcAddressText,
-          ibcAddressText1: this.ibcAddressText1,
-          ibcOfficeNumberText: this.ibcOfficeNumberText,
-          ibcPhoneNumberText: this.ibcPhoneNumberText,
-          ibcWebsiteText: this.ibcWebsiteText,
-          ibcEmailText: this.ibcEmailText
-        }],
-        ibcProfile: [{
-          ibcProfileChooseDb: this.ibcProfileCheckChoose,
-          defaultProfileImage: this.defaultIbcProfilePath,
-          NewAddedProfile: this.imageIbcProfilePath
-        }],
-        ibcLogo: [{
-          ibcLogoChooseDb: this.ibcLogoCheckChoose,
-          defaultLogoImage: this.defaultIbcLogoImagePath,
-          NewAddedLogo: this.imageIbcLogoPath
-        }],
-        insideBcImg: [{
-          insideIbcImgChooseDb: this.ibcBannerCheckChoose,
-          defaultBannerImage: this.defaultIbcMainImagePath,
-          NewAddedBanner: this.imageIbcMainPath
-        }]
-      };
-      console.log(data, 'ibc');
-      axios.post("api/userBooks", data).then(function (response) {
-        console.log(response, 'success');
-        var self = _this5;
-        setTimeout(function () {
-          self.ACTION_CHANGE_STATE(['Savefcloader', false]);
-        }, 2000);
-      })["catch"](function (errorResponse) {
-        console.log(errorResponse, 'error');
-      });
-    },
-
-    /*--END---*/
-
-    /*---GET Request IBC---*/
-    getIbcUserBook: function getIbcUserBook() {
-      var _this6 = this;
-
-      axios.get("api/userBooks/1").then(function (response) {
-        console.log(response, 'ibc');
-        var logoCheckoboxDbValue = response.data.data.inside_back_cover.ibcLogo[0].ibcLogoChooseDb;
-        var ProfileChooseDb = response.data.data.inside_back_cover.ibcProfile[0].ibcProfileChooseDb;
-        var IbcImgChooseDb = response.data.data.inside_back_cover.insideBcImg[0].insideIbcImgChooseDb;
-
-        _this6.ACTION_CHANGE_STATE(['ibcProfileCheckChoose', ProfileChooseDb]);
-
-        _this6.ACTION_CHANGE_STATE(['ibcLogoCheckChoose', logoCheckoboxDbValue]);
-
-        _this6.ACTION_CHANGE_STATE(['ibcBannerCheckChoose', IbcImgChooseDb]);
-
-        if (ProfileChooseDb == 'addMedia') {
-          _this6.ACTION_CHANGE_STATE(['displayIbcProfileMedia', true]);
-
-          var updatedImage = response.data.data.inside_back_cover.ibcProfile[0].NewAddedProfile;
-
-          _this6.ACTION_CHANGE_STATE(['imageIbcProfilePath', updatedImage]);
-        }
-
-        if (logoCheckoboxDbValue == 'addMedia') {
-          _this6.ACTION_CHANGE_STATE(['displayIbcLogoMedia', true]);
-
-          var updatedImageLogo = response.data.data.inside_back_cover.ibcLogo[0].NewAddedLogo;
-
-          _this6.ACTION_CHANGE_STATE(['imageIbcLogoPath', updatedImageLogo]);
-        }
-
-        if (IbcImgChooseDb == 'addMedia') {
-          _this6.ACTION_CHANGE_STATE(['displayIbcMainMedia', true]);
-
-          var updatedImageBanner = response.data.data.inside_back_cover.insideBcImg[0].NewAddedBanner;
-
-          _this6.ACTION_CHANGE_STATE(['imageIbcMainPath', updatedImageBanner]);
-        }
-
-        var ibcAddressDbValue = response.data.data.inside_back_cover.IbcAddressInput;
-        ibcAddressDbValue.map(function (d) {
-          _this6.ACTION_CHANGE_STATE(['ibcTitleText', d.ibcTitleText]);
-
-          _this6.ACTION_CHANGE_STATE(['ibcCompanyNameText', d.ibcCompanyNameText]);
-
-          _this6.ACTION_CHANGE_STATE(['ibcAddressText', d.ibcAddressText]);
-
-          _this6.ACTION_CHANGE_STATE(['ibcAddressText1', d.ibcAddressText1]);
-
-          _this6.ACTION_CHANGE_STATE(['ibcOfficeNumberText', d.ibcOfficeNumberText]);
-
-          _this6.ACTION_CHANGE_STATE(['ibcPhoneNumberText', d.ibcPhoneNumberText]);
-
-          _this6.ACTION_CHANGE_STATE(['ibcWebsiteText', d.ibcWebsiteText]);
-
-          _this6.ACTION_CHANGE_STATE(['ibcEmailText', d.ibcEmailText]);
-        });
-      })["catch"](function (errorResponse) {
-        console.log(errorResponse, "errorResponse");
-      });
-    },
-
-    /*---END---*/
-
     /*POST BC*/
     savebcDataToDb: function savebcDataToDb() {
-      var _this7 = this;
+      var _this = this;
 
       this.ACTION_CHANGE_STATE(['Savefcloader', true]);
       var data = {
@@ -82497,7 +78644,7 @@ var globalMixin = {
       };
       axios.post("api/userBooks", data).then(function (response) {
         console.log(response, "success");
-        var self = _this7;
+        var self = _this;
         setTimeout(function () {
           self.ACTION_CHANGE_STATE(['Savefcloader', false]);
         }, 2000);
@@ -82510,60 +78657,60 @@ var globalMixin = {
 
     /*GET Request  BC */
     getBCUserBook: function getBCUserBook() {
-      var _this8 = this;
+      var _this2 = this;
 
       axios.get("api/userBooks/1").then(function (response) {
         //console.log(response,'Rushi')
         var responseDbHeaderContent = response.data.data.back_cover.bcHeaderContent;
         responseDbHeaderContent.map(function (d) {
-          _this8.ACTION_CHANGE_STATE(['bcTitleHeaderText', d.bcTitleHeaderText]);
+          _this2.ACTION_CHANGE_STATE(['bcTitleHeaderText', d.bcTitleHeaderText]);
 
-          _this8.ACTION_CHANGE_STATE(['bcAddressHeaderBcText', d.bcAddressHeaderBcText]);
+          _this2.ACTION_CHANGE_STATE(['bcAddressHeaderBcText', d.bcAddressHeaderBcText]);
 
-          _this8.ACTION_CHANGE_STATE(['bcAddressHeaderBc1Text', d.bcAddressHeaderBc1Text]);
+          _this2.ACTION_CHANGE_STATE(['bcAddressHeaderBc1Text', d.bcAddressHeaderBc1Text]);
 
-          _this8.ACTION_CHANGE_STATE(['bcCityHeaderText', d.bcCityHeaderText]);
+          _this2.ACTION_CHANGE_STATE(['bcCityHeaderText', d.bcCityHeaderText]);
 
-          _this8.ACTION_CHANGE_STATE(['bcCountryHeaderText', d.bcCountryHeaderText]);
+          _this2.ACTION_CHANGE_STATE(['bcCountryHeaderText', d.bcCountryHeaderText]);
         });
         var responseDbFooterContent = response.data.data.back_cover.bcFooterContent;
         responseDbFooterContent.map(function (d) {
-          _this8.ACTION_CHANGE_STATE(['bcTitleText', d.bcTitleText]);
+          _this2.ACTION_CHANGE_STATE(['bcTitleText', d.bcTitleText]);
 
-          _this8.ACTION_CHANGE_STATE(['bcCompanyNameText', d.bcCompanyNameText]);
+          _this2.ACTION_CHANGE_STATE(['bcCompanyNameText', d.bcCompanyNameText]);
 
-          _this8.ACTION_CHANGE_STATE(['bcAddressText', d.bcAddressText]);
+          _this2.ACTION_CHANGE_STATE(['bcAddressText', d.bcAddressText]);
 
-          _this8.ACTION_CHANGE_STATE(['bcAddressText1', d.bcAddressText1]);
+          _this2.ACTION_CHANGE_STATE(['bcAddressText1', d.bcAddressText1]);
 
-          _this8.ACTION_CHANGE_STATE(['bcOfficeNumberText', d.bcOfficeNumberText]);
+          _this2.ACTION_CHANGE_STATE(['bcOfficeNumberText', d.bcOfficeNumberText]);
 
-          _this8.ACTION_CHANGE_STATE(['bcPhoneNumberText', d.bcPhoneNumberText]);
+          _this2.ACTION_CHANGE_STATE(['bcPhoneNumberText', d.bcPhoneNumberText]);
 
-          _this8.ACTION_CHANGE_STATE(['bcWebsiteText', d.bcWebsiteText]);
+          _this2.ACTION_CHANGE_STATE(['bcWebsiteText', d.bcWebsiteText]);
 
-          _this8.ACTION_CHANGE_STATE(['bcEmailText', d.bcEmailText]);
+          _this2.ACTION_CHANGE_STATE(['bcEmailText', d.bcEmailText]);
         });
         var responseDbHeaderImageCheck = response.data.data.back_cover.bcHeaderImage[0].bcLogoChooseCheckBox;
 
-        _this8.ACTION_CHANGE_STATE(['bcLogoChooseCheckBox', responseDbHeaderImageCheck]);
+        _this2.ACTION_CHANGE_STATE(['bcLogoChooseCheckBox', responseDbHeaderImageCheck]);
 
         if (responseDbHeaderImageCheck == "addMedia") {
           //this.ACTION_CHANGE_STATE(['bcLogoImageCheckboxChoose', 'addMedia'])                    
-          _this8.ACTION_CHANGE_STATE(['displayBcLogoMedia', true]);
+          _this2.ACTION_CHANGE_STATE(['displayBcLogoMedia', true]);
 
-          _this8.ACTION_CHANGE_STATE(['imageBcLogoPath', response.data.data.back_cover.bcHeaderImage[0].imageBcLogoPath]);
+          _this2.ACTION_CHANGE_STATE(['imageBcLogoPath', response.data.data.back_cover.bcHeaderImage[0].imageBcLogoPath]);
         }
 
         var responseDbFooterImageCheck = response.data.data.back_cover.bcFooterImage[0].bcProfileChooseCheckBox;
 
-        _this8.ACTION_CHANGE_STATE(['bcProfileChooseCheckBox', responseDbFooterImageCheck]);
+        _this2.ACTION_CHANGE_STATE(['bcProfileChooseCheckBox', responseDbFooterImageCheck]);
 
         if (responseDbFooterImageCheck == "addMedia") {
           //this.ACTION_CHANGE_STATE(['bcProfileImageCheckboxChoose', 'addMedia'])
-          _this8.ACTION_CHANGE_STATE(['displayBcProfileMedia', true]);
+          _this2.ACTION_CHANGE_STATE(['displayBcProfileMedia', true]);
 
-          _this8.ACTION_CHANGE_STATE(['imageBcProfilePath', response.data.data.back_cover.bcFooterImage[0].imageBcProfilePath]);
+          _this2.ACTION_CHANGE_STATE(['imageBcProfilePath', response.data.data.back_cover.bcFooterImage[0].imageBcProfilePath]);
         }
       })["catch"](function (errorResponse) {
         console.log(errorResponse, "errorResponse");
@@ -82809,7 +78956,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     setBcProfileImage_bind: '',
     displayBcProfileMedia: false,
     bcProfileImageCheckboxChoose: ''
-  }, _defineProperty(_state, "setBcProfileImage_bind", ''), _defineProperty(_state, "imageBcProfilePath", ''), _defineProperty(_state, "profileImage", ''), _defineProperty(_state, "fcCheckboxChoose", 'default'), _defineProperty(_state, "ifcSignatureChoose", 'default'), _defineProperty(_state, "ifcProfileChoose", 'default'), _defineProperty(_state, "ifcBelowimageChoose", 'default'), _defineProperty(_state, "ibcLogoCheckChoose", 'default'), _defineProperty(_state, "ibcBannerCheckChoose", 'default'), _defineProperty(_state, "ibcProfileCheckChoose", 'default'), _defineProperty(_state, "hideIconEdit", false), _defineProperty(_state, "displayIfcLogoMedia", false), _defineProperty(_state, "displayIfcMedia", false), _defineProperty(_state, "displayIfcSignatureMedia", false), _defineProperty(_state, "bcLogoChooseCheckBox", 'default'), _defineProperty(_state, "bcProfileChooseCheckBox", 'default'), _defineProperty(_state, "displayAddressLable", false), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "designationifc", ''), _defineProperty(_state, "designationifc1", ''), _defineProperty(_state, "designationifc2", ''), _defineProperty(_state, "designationTitle", ''), _defineProperty(_state, "designationTitleset2", ''), _defineProperty(_state, "designationTitleset3", ''), _defineProperty(_state, "designationTitleset4", ''), _defineProperty(_state, "errorMessage", []), _defineProperty(_state, "successMessage", []), _defineProperty(_state, "headingTagFc", ''), _defineProperty(_state, "tempFcAlignValue", 'center'), _defineProperty(_state, "ImageFcAlignValue", 'center'), _defineProperty(_state, "tempFcCheckboxChoose", ''), _defineProperty(_state, "fcModalHide", false), _defineProperty(_state, "fcRadioButton", 'default'), _defineProperty(_state, "fcTextLogoEditor", '<h1></h1>'), _defineProperty(_state, "fcImageAlign", 'center'), _defineProperty(_state, "fcImage", 'images/avatar_image.jpg'), _defineProperty(_state, "fcTextAlign", 'center'), _defineProperty(_state, "fcHeadingText", ''), _defineProperty(_state, "ifcPhotoRadio", 'default'), _defineProperty(_state, "ifcPhotoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcName", 'Kat Nitsous'), _defineProperty(_state, "ifcCompanyName", 'Sotheby’s International Realty, Inc.'), _defineProperty(_state, "ifcdesignation1", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation2", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation3", 'C(k)PÂ®'), _defineProperty(_state, "ifcTitle1", 'Business Development Director '), _defineProperty(_state, "ifcTitle2", '401(K) Consulting Director '), _defineProperty(_state, "ifcTitle3", 'Alternative Investments Director '), _defineProperty(_state, "ifcTitle4", 'Associate Stock Plan Director'), _defineProperty(_state, "ifcaddress", '16027 VENTURA BLVD, Suite 330 ENCINO, CA, 91436'), _defineProperty(_state, "ifcDirectPhone", 'M : 323-228-3805 '), _defineProperty(_state, "ifcOfficePhone", 'O : 626-396-9400'), _defineProperty(_state, "ifcWebsite", 'sothebyshomes.com'), _defineProperty(_state, "ifcEmail", 'kat.nitsou@sothebyinternational.com'), _defineProperty(_state, "ifcMemberCstNumber", 'NMLS#'), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "ifcdesignation21", ''), _defineProperty(_state, "ifcdesignation22", ''), _defineProperty(_state, "ifcdesignation23", ''), _defineProperty(_state, "ifcTitle21", ''), _defineProperty(_state, "ifcTitle22", ''), _defineProperty(_state, "ifcTitle23", ''), _defineProperty(_state, "ifcTitle24", ''), _defineProperty(_state, "ifcAddSecondAddress", true), _defineProperty(_state, "ifcSecondAddress", false), _defineProperty(_state, "ifcLogoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcLogoRadioButton", 'default'), _defineProperty(_state, "ifcSignatureImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcSignatureRadioButton", 'default'), _defineProperty(_state, "ifcTextEditor", ''), _defineProperty(_state, "ibcLogoRadioButton", 'default'), _defineProperty(_state, "ibcLogoImage", 'images/avatar_image.jpg'), _state),
+  }, _defineProperty(_state, "setBcProfileImage_bind", ''), _defineProperty(_state, "imageBcProfilePath", ''), _defineProperty(_state, "profileImage", ''), _defineProperty(_state, "fcCheckboxChoose", 'default'), _defineProperty(_state, "ifcSignatureChoose", 'default'), _defineProperty(_state, "ifcProfileChoose", 'default'), _defineProperty(_state, "ifcBelowimageChoose", 'default'), _defineProperty(_state, "ibcLogoCheckChoose", 'default'), _defineProperty(_state, "ibcBannerCheckChoose", 'default'), _defineProperty(_state, "ibcProfileCheckChoose", 'default'), _defineProperty(_state, "hideIconEdit", false), _defineProperty(_state, "displayIfcLogoMedia", false), _defineProperty(_state, "displayIfcMedia", false), _defineProperty(_state, "displayIfcSignatureMedia", false), _defineProperty(_state, "bcLogoChooseCheckBox", 'default'), _defineProperty(_state, "bcProfileChooseCheckBox", 'default'), _defineProperty(_state, "displayAddressLable", false), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "designationifc", ''), _defineProperty(_state, "designationifc1", ''), _defineProperty(_state, "designationifc2", ''), _defineProperty(_state, "designationTitle", ''), _defineProperty(_state, "designationTitleset2", ''), _defineProperty(_state, "designationTitleset3", ''), _defineProperty(_state, "designationTitleset4", ''), _defineProperty(_state, "errorMessage", []), _defineProperty(_state, "successMessage", []), _defineProperty(_state, "headingTagFc", ''), _defineProperty(_state, "tempFcAlignValue", 'center'), _defineProperty(_state, "ImageFcAlignValue", 'center'), _defineProperty(_state, "tempFcCheckboxChoose", ''), _defineProperty(_state, "fcModalHide", false), _defineProperty(_state, "fcRadioButton", 'default'), _defineProperty(_state, "fcTextLogoEditor", '<h1></h1>'), _defineProperty(_state, "fcImageAlign", 'center'), _defineProperty(_state, "fcImage", 'images/avatar_image.jpg'), _defineProperty(_state, "fcTextAlign", 'center'), _defineProperty(_state, "fcHeadingText", ''), _defineProperty(_state, "ifcPhotoRadio", 'default'), _defineProperty(_state, "ifcPhotoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcName", 'Kat Nitsous'), _defineProperty(_state, "ifcCompanyName", 'Sotheby’s International Realty, Inc.'), _defineProperty(_state, "ifcdesignation1", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation2", 'ADPAÂ®'), _defineProperty(_state, "ifcdesignation3", 'C(k)PÂ®'), _defineProperty(_state, "ifcTitle1", 'Business Development Director '), _defineProperty(_state, "ifcTitle2", '401(K) Consulting Director '), _defineProperty(_state, "ifcTitle3", 'Alternative Investments Director '), _defineProperty(_state, "ifcTitle4", 'Associate Stock Plan Director'), _defineProperty(_state, "ifcaddress", '16027 VENTURA BLVD, Suite 330 ENCINO, CA, 91436'), _defineProperty(_state, "ifcDirectPhone", 'M : 323-228-3805 '), _defineProperty(_state, "ifcOfficePhone", 'O : 626-396-9400'), _defineProperty(_state, "ifcWebsite", 'sothebyshomes.com'), _defineProperty(_state, "ifcEmail", 'kat.nitsou@sothebyinternational.com'), _defineProperty(_state, "ifcMemberCstNumber", 'NMLS#'), _defineProperty(_state, "ifcCompanyName2", ''), _defineProperty(_state, "ifcdesignation21", ''), _defineProperty(_state, "ifcdesignation22", ''), _defineProperty(_state, "ifcdesignation23", ''), _defineProperty(_state, "ifcTitle21", ''), _defineProperty(_state, "ifcTitle22", ''), _defineProperty(_state, "ifcTitle23", ''), _defineProperty(_state, "ifcTitle24", ''), _defineProperty(_state, "ifcAddSecondAddress", true), _defineProperty(_state, "ifcSecondAddress", false), _defineProperty(_state, "ifcLogoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcLogoRadioButton", 'default'), _defineProperty(_state, "ifcSignatureImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ifcSignatureRadioButton", 'default'), _defineProperty(_state, "ifcTextEditor", ''), _defineProperty(_state, "ibcLogoRadioButton", 'default'), _defineProperty(_state, "ibcLogoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ibcMainImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ibcMainRadioButton", 'default'), _defineProperty(_state, "ibcPhotoImage", 'images/avatar_image.jpg'), _defineProperty(_state, "ibcPhotoRadioButton", 'default'), _defineProperty(_state, "ibcTitle", 'Kat Nitsous'), _defineProperty(_state, "ibcCompanyName", 'Sotheby’s International Realty, Inc.'), _defineProperty(_state, "ibcAddress1", '16027 VENTURA BLVD, Suite 330'), _defineProperty(_state, "ibcAddress2", 'ENCINO, CA, 91436'), _defineProperty(_state, "ibcDirectPhone", 'M : 323-228-3805'), _defineProperty(_state, "ibcOfficePhone", 'O : 626-396-9400'), _defineProperty(_state, "ibcWebsite", 'sothebyshomes.com'), _defineProperty(_state, "ibcEmail", 'kat.nitsou@sothebyinternational.com'), _state),
   getters: {},
   mutations: {
     CHANGE_STATE: function CHANGE_STATE(state, value) {

@@ -1,11 +1,13 @@
 <template>
     <div>
+        <alertComponent></alertComponent>
         <div class="row main_container m-0">
             <LeftSideComponent />
             <div class="col-sm-10 right_side">
             <div class="gjs-pn-buttons top_preview"></div>
             <router-link to="/preview" target="_blank"><button class="preview_mag" @click="preiviewTab()">Preview</button></router-link>
-            <button class="save_ifc_to_db" @click="saveibcDataToDb">Save Preview</button>
+            <button class="save_ifc_to_db" @click="saveDownload">Save & download</button>
+            <button class="save_ifc_to_db" @click="onSubmit">Save</button>
               <LoaderComponent/>
                 <div class="preview_responsive" v-if="!this.$store.state.Savefcloader">
                     <div class="inner_right_side preview_content">
@@ -20,10 +22,8 @@
                             </div>
                             <div class="col-sm-12 p-0 inside_bc_img">
                                   <iconHoverIfcComponent class="insidefc_profile" @click.native="openIbcModal(2)"/> 
-                                <!-- <img v-if="this.imageIbcMainPath == ''" :src="this.defaultIbcMainImagePath" alt="" title="">
-                                <img v-if="this.imageIbcMainPath != ''" :src="this.imageIbcMainPath" alt=""> -->
-                                <div v-if="this.imageIbcMainPath == ''" :style="{height: '100%',backgroundPosition: 'center center', backgroundSize: 'cover', backgroundImage:'url('+this.defaultIbcMainImagePath+')'}"></div>
-                                <div v-if="this.imageIbcMainPath != ''" :style="{height: '100%',backgroundPosition: 'center center', backgroundSize: 'cover', backgroundImage:'url('+this.imageIbcMainPath+')'}"></div>
+                                <div v-if="this.mainRadioButton == 'default'" :style="{height: '100%',backgroundPosition: 'center center', backgroundSize: 'cover', backgroundImage:'url('+this.defaultMainImage+')'}"></div>
+                                <div v-if="this.mainRadioButton != ''" :style="{height: '100%',backgroundPosition: 'center center', backgroundSize: 'cover', backgroundImage:'url('+this.mainImage+')'}"></div>
                             </div>
                             <div class="row below_title_text m-0">
                                 <div class="col-md-6">
@@ -44,21 +44,21 @@
                                     <div class="row">
                                         <div class="col-md-3 p-0 ibc_profile">
                                             <iconHoverIfcComponent class="insidefc_profile" @click.native="openIbcModal(3)"/> 
-                                            <img v-if="this.imageIbcProfilePath == ''" :src="defaultIbcProfilePath" alt="" title="">
-                                            <img v-if="this.imageIbcProfilePath != ''" :src="imageIbcProfilePath" alt="" title="">
+                                            <img v-if="this.photoRadioButton == 'default'" :src="this.defaultPhotoImage" alt="" title="">
+                                            <img v-if="this.photoRadioButton == 'addMedia'" :src="photoImage" alt="" title="">
                                         </div>
                                         <div class="col-md-9">
                                             <div class="profile_text pl-3">
                                                 <iconHoverIfcComponent class="insidefc_profile" @click.native="openIbcModal(4)"/>
-                                                <h2>{{this.ibcTitleText}}</h2>
-                                                <p><b>{{this.ibcCompanyNameText}}</b></p>
-                                                <p>{{this.ibcAddressText}}</p>
-                                                <p>{{this.ibcAddressText1}}</p>
-                                                <p>{{this.ibcOfficeNumberText}}</p>
-                                                <p>{{this.ibcPhoneNumberText}}</p>
+                                                <h2>{{this.title}}</h2>
+                                                <p><b>{{this.company_name}}</b></p>
+                                                <p>{{this.address1}}</p>
+                                                <p>{{this.address2}}</p>
+                                                <p>{{this.direct_phone}}</p>
+                                                <p>{{this.office_phone}}</p>
                                                 <p class="mb-3"></p>
-                                                <p>{{this.ibcWebsiteText}}</p>
-                                                <p>{{this.ibcEmailText}}</p>
+                                                <p>{{this.website}}</p>
+                                                <p>{{this.email}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +109,7 @@
                                                 <div class="col-sm-12 text_field">
 													<label for="addMediaIbc">
 														<input type="radio" id="addMediaIbc" value="addMedia" v-model="logoRadioButton" @change="logoRadioButtonChange" name="checkifcright" checked /> Add Logo Image
-                                                        <toolTipsComponent title="900 X 900"/>
+                                                        <toolTipsComponent title="300 X 150"/>
 													</label>
 												</div>
                                             </div>
@@ -129,36 +129,31 @@
                                             <div class="font_content">
                                                 Upload Banner Image
                                             </div>
-                                            <div class="row modal_radiobox" :class="{'activeRadio':this.IbcMainImage == 'default' }">
+                                            <div class="row modal_radiobox" :class="{'activeRadio':this.mainRadioButton == 'default' }">
                                                 <div class="col-sm-12 text_field">
 													<label for="UseTextDefault">
-														<input type="radio" id="UseTextDefault" value="default" v-model="IbcMainImage" @change="getIbcMainImageInputValue(IbcMainImage)" name="checkifcright" checked /> Use Default Banner Image
+														<input type="radio" id="UseTextDefault" value="default" v-model="mainRadioButton" @change="mainRadioButtonChange" name="checkifcright" /> Use Default Banner Image
 													</label>
 												</div>
                                             </div>
-                                            <!-- <div class="row modal_radiobox" :class="{'activeRadio':this.IbcMainImage == 'remove' }">
-                                                <div class="col-sm-12 text_field">
-													<label for="remove">
-														<input type="radio" value="remove" v-model="IbcMainImage" @change="getIbcMainImageInputValue(IbcMainImage)" id="remove" name="checkifcright" checked /> Remove Banner Images
-													</label>
-												</div>
-                                            </div> -->
-                                            <div class="row modal_radiobox" :class="{'activeRadio':this.IbcMainImage == 'addMedia' }">
+                                            <div class="row modal_radiobox" :class="{'activeRadio':this.mainRadioButton == 'addMedia' }">
                                                 <div class="col-sm-12 text_field">
 													<label for="addMediaIbc">
-														<input type="radio" id="addMediaIbc" value="addMedia" v-model="IbcMainImage" @change="getIbcMainImageInputValue(IbcMainImage)" name="checkifcright" checked /> Add Banner Images
-                                                        <toolTipsComponent title="800 X 800"/>
+														<input type="radio" id="addMediaIbc" value="addMedia" v-model="mainRadioButton" @change="mainRadioButtonChange" name="checkifcright" /> Add Banner Images
+                                                        <toolTipsComponent title="1200 x 500"/>
 													</label>
 												</div>
                                             </div>
                                             <div class="add_media">
-                                                <button v-if="this.displayIbcMainMedia" class="btn btn-block media_btn" @click="check_Value('ibcMainImage')" data-target="#fileModal" data-toggle="modal">
+                                                <button v-if="this.mainRadioButton == 'addMedia'" class="btn btn-block media_btn" data-target="#fileModal" data-toggle="modal">
                                                     <span class="font_content">Add Media</span>
                                                 </button>
                                             </div>
-                                            <div v-if="this.displayIbcMainMedia" class="add-media-show" id="addMedia_id" data-section="section-1">
-                                                <img src="images/avatar_image.jpg" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;" v-show="imageIbcMainPath == ''">
-                                                <img data-target="#fileModal" data-toggle="modal" v-if="imageIbcMainPath != ''" :src="imageIbcMainPath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;">
+                                            <div v-if="this.mainRadioButton == 'default'" class="add-media-show" id="addMedia_id" data-section="section-1">
+                                                <img :src="this.defaultMainImage" alt="" title="" style="margin-bottom:20px;">
+                                            </div>
+                                            <div v-if="this.mainRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
+                                                <img :src="this.mainImage" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;">
                                             </div>
                                         </div>
                                         <!---END mainImage IBC ---->
@@ -167,36 +162,32 @@
                                             <div class="font_content">
                                                 Upload Profile Image
                                             </div>
-                                            <div class="row modal_radiobox" :class="{'activeRadio':this.IbcImageModal == 'default' }">
+                                            <div class="row modal_radiobox" :class="{'activeRadio':this.photoRadioButton == 'default' }">
                                                 <div class="col-sm-12 text_field">
 													<label for="UseTextDefault">
-														<input type="radio" id="UseTextDefault" value="default" v-model="IbcImageModal" @change="getIbcInputValue(IbcImageModal)" name="checkifcright" checked /> Use Default Profile
+														<input type="radio" id="UseTextDefault" value="default" v-model="photoRadioButton" name="checkifcright" /> Use Default Profile
 													</label>
 												</div>
                                             </div>
-                                            <!-- <div class="row modal_radiobox" :class="{'activeRadio':this.IbcImageModal == 'remove' }">
+                                            <div class="row modal_radiobox" :class="{'activeRadio':this.photoRadioButton == 'addMedia' }">
                                                 <div class="col-sm-12 text_field">
-													<label for="remove">
-														<input type="radio" value="remove" v-model="IbcImageModal" @change="getIbcInputValue(IbcImageModal)" id="remove" name="checkifcright" checked /> Remove Profile
+													<label for="addMediaIbc">
+														<input type="radio" id="addMediaIbc" value="addMedia" v-model="photoRadioButton"  name="checkifcright" /> Add Profile Image
+                                                        <toolTipsComponent title="320 X 500"/>
 													</label>
 												</div>
-                                            </div> -->
-                                            <div class="row modal_radiobox" :class="{'activeRadio':this.IbcImageModal == 'addMedia' }">
-                                                <div class="col-sm-12 text_field">
-													<label for="slideTwo">
-														<input type="radio" id="addMediaIbc" value="addMedia" v-model="IbcImageModal" @change="getIbcInputValue(IbcImageModal)" name="checkifcright" checked /> Add Profile Image
-                                                        <toolTipsComponent title="700 X 700"/>
-													</label>
-												</div>
+                                            </div>
+                                            <div v-if="photoRadioButton == 'default'" class="add-media-show" id="addMedia_id" data-section="section-1">
+                                                <img :src="this.defaultPhotoImage" alt="" title="" style="margin-bottom:20px;">
                                             </div>
                                             <div class="add_media">
-                                                <button v-if="displayIbcProfileMedia" class="btn btn-block media_btn" @click="check_Value('ibcProfile')" data-target="#fileModal" data-toggle="modal">
+                                                <button v-if="photoRadioButton == 'addMedia'" class="btn btn-block media_btn" @click="check_Value('ibcProfile')" data-target="#fileModal" data-toggle="modal">
                                                     <span class="font_content">Add Media</span>
                                                 </button>
                                             </div>
-                                            <div v-if="displayIbcProfileMedia" class="add-media-show" id="addMedia_id" data-section="section-1">
-                                                <img src="images/avatar_image.jpg" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;" v-show="imageIbcProfilePath == ''">
-                                                <img data-target="#fileModal" data-toggle="modal" v-if="imageIbcProfilePath != ''" :src="imageIbcProfilePath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;">
+                                            <div v-if="photoRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
+                                                <img :src="this.photoImage" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;">
+                                                <!-- <img data-target="#fileModal" data-toggle="modal" v-if="imageIbcProfilePath != ''" :src="imageIbcProfilePath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;"> -->
                                             </div>
                                         </div>
                                         <!---END profile_image IBC ---->
@@ -204,23 +195,23 @@
                                         <div v-if="this.open_pop_up == 4 ">
                                             <div class="ifc_title">
                                                 <label for="usr">Title</label>
-                                                <input type="text" v-model='titleInputIbc' @keyup="getTitleIbc(titleInputIbc)" class="form-control" id="usr">
+                                                <input type="text" v-model='title' class="form-control" id="usr">
                                             </div>
                                             <div class="ifc_title">
                                                 <label for="usr">Company Name</label>
-                                                <input type="text" v-model='companyInputIbc' @keyup="getCompanyNameIbc(companyInputIbc)" class="form-control" id="usr">
+                                                <input type="text" v-model="company_name" class="form-control" id="usr">
                                             </div>                                       
                                             <!------------------>
                                             <!------------------>
                                             <div class="ifc_title">
                                                 <label for="usr">Address 1</label>
-                                                <input type="text" v-model='addressInputIbc' @keyup="getAddressIbc(addressInputIbc)" class="form-control" id="usr">
+                                                <input type="text" v-model="address1" class="form-control" id="usr">
                                             </div>
                                             <!---------------------->
                                              <!------------------>
                                             <div class="ifc_title">
                                                 <label for="usr">Address 2</label>
-                                                <input type="text" v-model='addressInputIbc1' @keyup="getAddressIbc1(addressInputIbc1)" class="form-control" id="usr">
+                                                <input type="text" v-model="address2" class="form-control" id="usr">
                                             </div>
                                             <!---------------------->
                                          
@@ -229,13 +220,13 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="usr">Office Phone</label>
-                                                        <input type="text" v-model='officePhoneInputIbc' @keyup="getOfficePhoneIbc(officePhoneInputIbc)" class="form-control" id="usr">
+                                                        <input type="text" v-model="office_phone" class="form-control" id="usr">
                                                     </div>
                                                     <!---------------------->
                                                     <!------------------>
                                                     <div class="col-md-6">
                                                         <label for="usr">Direct Phone</label>
-                                                        <input type="text" v-model='directPhoneInputIbc' @keyup="getdirectPhoneIbc(directPhoneInputIbc)" class="form-control" id="usr">
+                                                        <input type="text" v-model="direct_phone" class="form-control" id="usr">
                                                     </div>
                                                 </div>
                                             </div>
@@ -245,13 +236,13 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="usr">Website URL</label>
-                                                        <input type="text" v-model='websiteUrlInputIbc' @keyup="getWebsiteUrlIbc(websiteUrlInputIbc)" class="form-control" id="usr">
+                                                        <input type="text" v-model="website" class="form-control" id="usr">
                                                      </div>
                                                     <!---------------------->
                                                     <!------------------>
                                                     <div class="col-md-6">
                                                         <label for="usr">Email</label>
-                                                        <input type="text" v-model='emailInputIbc' @keyup="getEmailIbc(emailInputIbc)" class="form-control" id="usr">
+                                                        <input type="text" v-model="email" class="form-control" id="usr">
                                                     </div>
                                                 </div>
                                             </div>
@@ -281,21 +272,31 @@
 </template>
 
 <script>
-import ibcImageModelComponent from "./model/ibcImageModal";
-import ibcAddressInputComponent from "./model/ibcAddressModal";
+import alertComponent from './common/alertComponent';
 import FileModalComponent from "./model/fileModalComponent";
 import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
     components:{
-       ibcImageModelComponent,
-       FileModalComponent,
-       ibcAddressInputComponent,
+        alertComponent,
+        FileModalComponent,
     },
     computed: {
         ...mapState([
             'ibcPreview',
             'ibcLogoRadioButton',
-            'ibcLogoImage'
+            'ibcLogoImage',
+            'ibcMainImage',
+            'ibcMainRadioButton',
+            'ibcPhotoRadioButton',
+            'ibcPhotoImage',
+            'ibcTitle',
+            'ibcCompanyName',
+            'ibcAddress1',
+            'ibcAddress2',
+            'ibcOfficePhone',
+            'ibcDirectPhone',
+            'ibcWebsite',
+            'ibcEmail'
         ])
     },
     data(){
@@ -308,17 +309,47 @@ export default {
             open_pop_up : '',
             defaultLogo : 'images/ibc_logo.png',
             logoRadioButton : this.$store.state.ibcLogoRadioButton,
-            logoImage : this.$store.state.ibcLogoImage 
+            logoImage : this.$store.state.ibcLogoImage,
+            // main image 
+            defaultMainImage : 'images/ibc_img.jpg',
+            mainImage : this.$store.state.ibcMainImage,
+            mainRadioButton : this.$store.state.ibcMainRadioButton,
+            // photo section
+            photoRadioButton : this.$store.state.ibcPhotoRadioButton,
+            defaultPhotoImage : 'images/profile_pic.jpg',
+            photoImage : this.$store.state.ibcPhotoImage,
+            // address section 
+            title : this.$store.state.ibcTitle,
+            company_name : this.$store.state.ibcCompanyName,
+            address1 : this.$store.state.ibcAddress1,
+            address2 : this.$store.state.ibcAddress2,
+            office_phone : this.$store.state.ibcOfficePhone,
+            direct_phone : this.$store.state.ibcDirectPhone,
+            website : this.$store.state.ibcWebsite,
+            email : this.$store.state.ibcEmail
         }
+    },
+    created(){
+        this.get_ibc_data();
     },
    mounted(){
         this.saveIBCPreview()
-        this.getIbcUserBook()
+        this.ACTION_CHANGE_STATE(['showCover',3])
+        var container = this.$el.querySelector(".border_full");
+        container.scrollTop = container.scrollHeight;
     },
     methods:{
         ...mapMutations([
             'CHANGE_STATE'
         ]),
+        ...mapActions([
+			'ACTION_CHANGE_STATE'
+		]),
+		...mapMutations([
+			'EMPTY_MESSAGE_LIST',
+			'PUSH_SUCCESS_MESSAGE',
+			'PUSH_ERROR_MESSAGE'
+		]),
         openIbcModal(value){
             this.open_pop_up = value
             $('#ibcModal').modal('show');
@@ -326,23 +357,137 @@ export default {
         setImage(value){
             if(this.open_pop_up == 1){
                 this.logoImage = value
+            }else if(this.open_pop_up == 2){
+                this.mainImage = value
+            }else if(this.open_pop_up == 3){
+                this.photoImage = value
             }
         },
         cancelModal(){
             // logo section
-            this.logoImage = this.ibcLogoImage
-            this.logoRadioButton = this.ibcLogoRadioButton
+            this.logoImage = this.ibcLogoImage;
+            this.logoRadioButton = this.ibcLogoRadioButton;
+            // main image section
+            this.mainRadioButton = this.ibcMainRadioButton;
+            this.mainImage = this.ibcMainImage;
+            // photo image
+            this.photoRadioButton = this.ibcPhotoRadioButton;
+            this.photoImage  = this.ibcPhotoImage;
+            // address section
+            this.title = this.ibcTitle;
+            this.company_name = this.ibcCompanyName;
+            this.address1 = this.ibcAddress1;
+            this.address2 = this.ibcAddress2;
+            this.office_phone = this.ibcOfficePhone;
+            this.direct_phone = this.ibcDirectPhone;
+            this.website = this.ibcWebsite;
+            this.email = this.ibcEmail;
         },
         saveChanges(){
             if(this.open_pop_up == 1 && this.logoImage == 'images/avatar_image.jpg' && this.logoRadioButton == 'addMedia'){
                 this.logoRadioButton = this.ibcLogoRadioButton
+            }else if(this.open_pop_up == 2 && this.mainImage == 'images/avatar_image.jpg' && this.mainRadioButton == 'addMedia'){
+                this.mainRadioButton = this.ibcMainRadioButton;
+            }else if(this.open_pop_up == 3 && this.photoImage == 'images/avatar_image.jpg' && this.photoRadioButton == 'addMedia'){
+                this.photoRadioButton = this.ibcPhotoRadioButton;
             }
             this.CHANGE_STATE(['ibcLogoRadioButton',this.logoRadioButton]);
             this.CHANGE_STATE(['ibcLogoImage',this.logoImage]);
+            // main image section
+            this.CHANGE_STATE(['ibcMainRadioButton',this.mainRadioButton]);
+            this.CHANGE_STATE(['ibcMainImage',this.mainImage]);
+            // photo image
+            this.CHANGE_STATE(['ibcPhotoRadioButton',this.photoRadioButton]);
+            this.CHANGE_STATE(['ibcPhotoImage',this.photoImage]);
+            // address section
+            this.CHANGE_STATE(['ibcTitle',this.title]);
+            this.CHANGE_STATE(['ibcCompanyName',this.company_name]);
+            this.CHANGE_STATE(['ibcAddress1',this.address1]);
+            this.CHANGE_STATE(['ibcAddress2',this.address2]);
+            this.CHANGE_STATE(['ibcOfficePhone',this.office_phone]);
+            this.CHANGE_STATE(['ibcDirectPhone',this.direct_phone]);
+            this.CHANGE_STATE(['ibcWebsite',this.website]);
+            this.CHANGE_STATE(['ibcEmail',this.email]);
+
         },
         logoRadioButtonChange(e){
             var value = e.target.value
             this.logoRadioButton = value
+        },
+        mainRadioButtonChange(e){
+            const value = e.target.value
+            this.mainRadioButton = value
+        },
+        onSubmit(){
+            this.EMPTY_MESSAGE_LIST();
+            const data = {
+                columnName: 'inside_back_cover',
+                logoRadioButton : this.logoRadioButton,
+                logoImage : this.logoImage,
+                // main image 
+                mainImage : this.mainImage,
+                mainRadioButton : this.mainRadioButton,
+                // photo section
+                photoRadioButton : this.photoRadioButton,
+                photoImage : this.photoImage,
+                // address section 
+                title : this.title,
+                company_name : this.company_name,
+                address1 : this.address1,
+                address2 : this.address2,
+                office_phone : this.office_phone,
+                direct_phone : this.direct_phone,
+                website : this.website,
+                email : this.email
+            }
+            axios.post("api/userBooks", data)
+			.then(response => {
+                const inside_back_cover = response.data.data
+                this.setIbcData(inside_back_cover);
+                this.PUSH_SUCCESS_MESSAGE('Inside back cover saved successfully!');
+            })
+            .catch(error => {
+                this.PUSH_ERROR_MESSAGE('Internal server error');
+            })
+        },
+        saveDownload(){
+            this.onSubmit();
+        },
+        setIbcData(data){
+            console.log(data)
+            if(data){
+                // save into data property
+                // logo section
+                this.logoImage = data.logoImage;
+                this.logoRadioButton = data.logoRadioButton;
+                // main image section
+                this.mainRadioButton = data.mainRadioButton;
+                this.mainImage = data.mainImage;
+                // photo image
+                this.photoRadioButton = data.photoRadioButton;
+                this.photoImage  = data.photoImage;
+                // address section
+                this.title = data.title;
+                this.company_name = data.company_name;
+                this.address1 = data.address1;
+                this.address2 = data.address2;
+                this.office_phone = data.office_phone;
+                this.direct_phone = data.direct_phone;
+                this.website = data.website;
+                this.email = data.email;
+
+                this.saveChanges();
+            }
+        },
+        get_ibc_data(){
+            axios.get("api/userBooks/1")
+            .then(response => {
+                const inside_back_cover = response.data.data.inside_back_cover
+                this.setIbcData(inside_back_cover);
+            })
+            .catch(error => {
+                this.PUSH_ERROR_MESSAGE('Problem in geting data!')
+            })
         }
     }
 }

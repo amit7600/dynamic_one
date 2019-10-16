@@ -1,5 +1,1 @@
-# installation guide
-
-### Run this command
-
-## composer install
+# dynamic_one

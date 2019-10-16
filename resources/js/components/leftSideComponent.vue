@@ -1,8 +1,8 @@
 <template>
     <div class="col-sm-2 left_side pl-0">
         <ul class="nav border_full">
-            <li  @click="sendValue(1)">
-                <div :class="{'inner_left_side': true, 'active': this.showCover == 1}" @click="getRightSide(1) ">
+            <li  >
+                <div :class="{'inner_left_side': true, 'active': this.showCover == 1}" >
                     <h4>Front Cover</h4> 
                     <router-link to="/" >
                         <div class="inner_left_img">
@@ -11,7 +11,7 @@
                     </router-link>
                 </div> 
             </li>
-            <li  @click="sendValue(2), getRightSide(2)">
+            <li>
                 <div :class="{'inner_left_side': true, 'active ': this.showCover == 2}">
                     <h4>Inside Front Cover</h4> 
                     <router-link to="/ifc">
@@ -21,7 +21,7 @@
                     </router-link>
                 </div>
             </li>
-            <li @click="getRightSide(3), sendValue(3)">
+            <li>
                 <div :class="{ 'inner_left_side': true, 'active': this.showCover == 3}" >
                     <h4>Inside Back Cover</h4>
                     <router-link to="/insideBackCover">
@@ -31,7 +31,7 @@
                     </router-link>
                 </div>
             </li>
-            <li  @click="getRightSide(4), sendValue(4)">
+            <li>
                 <div :class="{'inner_left_side':true, 'active': this.showCover == 4}" >
                     <h4>Back Cover</h4> 
                     <router-link to="/backCover">
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     data(){
         return {
@@ -54,6 +55,11 @@ export default {
     },
    mounted(){
     this.showOne = this.showFrontCover
+   },
+   computed: {
+       ...mapState([
+           'showCover'
+       ])
    },
    methods:{
        newData(){

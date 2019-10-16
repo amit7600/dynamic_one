@@ -207,7 +207,21 @@ export const store = new Vuex.Store({
         // ibc section start
         ibcLogoRadioButton: 'default',
         ibcLogoImage: 'images/avatar_image.jpg',
-        
+        // main image
+        ibcMainImage: 'images/avatar_image.jpg',
+        ibcMainRadioButton: 'default',
+        // photo image
+        ibcPhotoImage: 'images/avatar_image.jpg',
+        ibcPhotoRadioButton: 'default',
+        // address section
+        ibcTitle: 'Kat Nitsous',
+        ibcCompanyName: 'Sotheby’s International Realty, Inc.',
+        ibcAddress1: '16027 VENTURA BLVD, Suite 330',
+        ibcAddress2: 'ENCINO, CA, 91436',
+        ibcDirectPhone: 'M : 323-228-3805',
+        ibcOfficePhone: 'O : 626-396-9400',
+        ibcWebsite: 'sothebyshomes.com',
+        ibcEmail: 'kat.nitsou@sothebyinternational.com',
 
 
 
