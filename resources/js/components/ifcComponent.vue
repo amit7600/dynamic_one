@@ -796,7 +796,7 @@ export default {
         },
         onSubmit(){
             this.EMPTY_MESSAGE_LIST()
-            this.ACTION_CHANGE_STATE(['Savefcloader', true])
+            this.ACTION_CHANGE_STATE(['loader', true])
             var data = {
                 columnName: 'inside_front_cover',
                 textEditor : this.textEditor,
@@ -840,27 +840,32 @@ export default {
                 const inside_front_cover = response.data.data;
                 
                 this.setIfcData(inside_front_cover)                
-                this.PUSH_SUCCESS_MESSAGE('Inside front cover saved successfully!');
-                this.ACTION_CHANGE_STATE(['Savefcloader', false])
+                // this.PUSH_SUCCESS_MESSAGE('Inside front cover saved successfully!');
+                this.alertSuccess('Inside front cover saved successfully!');
+                this.ACTION_CHANGE_STATE(['loader', false])
             })
             .catch(error => {
-                this.PUSH_ERROR_MESSAGE('Internal server error!');
+                // this.PUSH_ERROR_MESSAGE('Internal server error!');
+                this.alertError('Internal server error!');
+                this.ACTION_CHANGE_STATE(['loader', false])
             })
         },
         saveDownload(){
             this.onSubmit();
         },
         get_ifc_data(){
-            this.ACTION_CHANGE_STATE(['Savefcloader', true])
+            this.ACTION_CHANGE_STATE(['loader', true])
             axios.get("api/userBooks/1")
             .then(response => {
                 const inside_front_cover = response.data.data.inside_front_cover;
                 this.setIfcData(inside_front_cover)
                 
-                this.ACTION_CHANGE_STATE(['Savefcloader', false])
+                this.ACTION_CHANGE_STATE(['loader', false])
             })
             .catch(error => {
-                this.PUSH_ERROR_MESSAGE('Internal server error!');
+                // this.PUSH_ERROR_MESSAGE('Internal server error!');
+                this.alertError('Internal server error!');
+                this.ACTION_CHANGE_STATE(['loader', false])
             })
         },
         setIfcData(inside_front_cover){

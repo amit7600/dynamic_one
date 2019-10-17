@@ -1,23 +1,39 @@
 <template>
   <div>
-       <div v-if="this.$store.state.Savefcloader" class='loader' style="position: absolute;left: 45%;top: 45%;">
-            <BounceLoader :color='this.loaderColor' :size='this.loader' :height='loaderHeight' />
-        </div>
+    <div class="vld-parent">
+      <loading
+        :active.sync="loader"
+        :can-cancel="true"
+        :is-full-page="fullPage"
+        color="#3949ab"
+      ></loading>
+    </div>
   </div>
 </template>
 
 <script>
+// Import component
+import Loading from "vue-loading-overlay";
+// Import stylesheet
+import "vue-loading-overlay/dist/vue-loading.css";
+import { mapState } from "vuex";
+
 export default {
-    data(){
-       return{
-            loader:parseInt(100),
-            loaderHeight:parseInt(20),
-            loaderColor:'#3949ab'
-        }
-    }
-}
+  data() {
+    return {
+      isLoading: false,
+      fullPage: true
+    };
+  },
+  computed: {
+    ...mapState(["loader"])
+  },
+  components: {
+    Loading
+  },
+  methods: {}
+};
 </script>
 
 <style>
-
 </style>

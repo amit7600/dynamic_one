@@ -420,6 +420,7 @@ export default {
         },
         onSubmit(){
             this.EMPTY_MESSAGE_LIST();
+            this.ACTION_CHANGE_STATE(['loader', true])
             const data = {
                 columnName: 'inside_back_cover',
                 logoRadioButton : this.logoRadioButton,
@@ -444,17 +445,20 @@ export default {
 			.then(response => {
                 const inside_back_cover = response.data.data
                 this.setIbcData(inside_back_cover);
-                this.PUSH_SUCCESS_MESSAGE('Inside back cover saved successfully!');
+                // this.PUSH_SUCCESS_MESSAGE('Inside back cover saved successfully!');
+                this.alertSuccess('Inside back cover saved successfully!');
+                this.ACTION_CHANGE_STATE(['loader', false])
             })
             .catch(error => {
-                this.PUSH_ERROR_MESSAGE('Internal server error');
+                // this.PUSH_ERROR_MESSAGE('Internal server error');
+                this.alertError('Internal server error!')
+                this.ACTION_CHANGE_STATE(['loader', false])
             })
         },
         saveDownload(){
             this.onSubmit();
         },
         setIbcData(data){
-            console.log(data)
             if(data){
                 // save into data property
                 // logo section
@@ -480,13 +484,17 @@ export default {
             }
         },
         get_ibc_data(){
+            this.ACTION_CHANGE_STATE(['loader', true])
             axios.get("api/userBooks/1")
             .then(response => {
                 const inside_back_cover = response.data.data.inside_back_cover
                 this.setIbcData(inside_back_cover);
+                this.ACTION_CHANGE_STATE(['loader', false])
             })
             .catch(error => {
-                this.PUSH_ERROR_MESSAGE('Problem in geting data!')
+                // this.PUSH_ERROR_MESSAGE('Problem in geting data!')
+                this.alertError('Problem in geting data!')
+                this.ACTION_CHANGE_STATE(['loader', false])
             })
         }
     }

@@ -245,6 +245,9 @@ export const store = new Vuex.Store({
         bcWebsite: 'sothebyshomes.com',
         bcEmail: 'kat.nitsou@sothebyinternational.com',
 
+        // this is for loader
+        loader: false
+
     },
     getters: {},
     mutations: {

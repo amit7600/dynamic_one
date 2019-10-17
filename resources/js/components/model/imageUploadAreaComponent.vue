@@ -13,11 +13,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
     mounted () {
         this.getLibraryImages()
     },
     methods: {
+        ...mapActions([
+            'ACTION_CHANGE_STATE'
+        ]),
         getLibraryImages () {
             axios.get('api/imageLibrary')
             .then (response => {
@@ -33,6 +37,7 @@ export default {
             this.uploadImages(files[0]);
         },
         uploadImages(files) {
+            this.ACTION_CHANGE_STATE(['loader', true])
             var data = new FormData();
             var file = files;
             data.append("image", file);
@@ -44,9 +49,11 @@ export default {
                 document.getElementById("uploadImage").value = "";
                 this.setImage(response.data.uploadImage)
                 $('#fileModalClose').click()
+                this.ACTION_CHANGE_STATE(['loader', false])
             })
             .catch(errorResponse => {
                 console.log(errorResponse, "errorResponse");
+                this.ACTION_CHANGE_STATE(['loader', false])
             });
         },
         setImage(image){

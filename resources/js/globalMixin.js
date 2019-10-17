@@ -282,13 +282,6 @@ export const globalMixin = {
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
-
-        this.ACTION_CHANGE_STATE(['defaultIbcProfilePath', this.preibcProfileimagepath])
-        this.ACTION_CHANGE_STATE(['defaultIbcMainImagePath', this.preibcMainimagepath])
-        this.ACTION_CHANGE_STATE(['defaultIbcLogoImagePath', this.preibcLogoimagepath])
-        this.ACTION_CHANGE_STATE(['defaultBcLogoImagePath', this.prebcLogoimagepath])
-        this.ACTION_CHANGE_STATE(['defaultBcProfileImagePath', this.prebcProfileimagepath])
-        this.ACTION_CHANGE_STATE(['defaultImagePath', this.preimagepath])
         var location = window.location
         //console.log(location.pathname)
         if (location.pathname == '/preview') {
@@ -326,6 +319,28 @@ export const globalMixin = {
             'PUSH_ERROR_MESSAGE',
             'EMPTY_MESSAGE_LIST'
         ]),
+        alertSuccess(message){
+            this.$toast.success({
+                title:'Success',
+                message:message,
+                progressBar:true,
+                position:'top right',
+                timeOut : 5000,
+                showMethod:'bounceInLeft',
+                hideMethod:'bounceOutLeft'
+            })
+        },
+        alertError(message){
+            this.$toast.error({
+                title:'Error',
+                message:message,
+                progressBar:true,
+                position:'top right',
+                timeOut : 5000,
+                showMethod:'bounceInLeft',
+                hideMethod:'bounceOutLeft'
+            })
+        },
         preiviewTab() {
             //$('.hoverComponetRemove').css('display','none')
             //$('.hoverComponetRemove').css('display','none')

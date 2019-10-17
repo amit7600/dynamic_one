@@ -288,7 +288,7 @@ export default {
 		},
 		save_front_cover(){
 			this.EMPTY_MESSAGE_LIST()
-			this.ACTION_CHANGE_STATE(['Savefcloader', true])
+			this.ACTION_CHANGE_STATE(['loader', true])
 			var data = {
 				columnName: 'front_cover',
 				HeadingTag : this.HeadingTag, 
@@ -309,16 +309,20 @@ export default {
 					this.defaultImage = front_cover.defaultImage;
 					this.ACTION_CHANGE_STATE(['fcImage',front_cover.fcImage]);
 					this.ACTION_CHANGE_STATE(['fcTextLogoEditor',front_cover.fcTextLogoEditor]);
-				this.PUSH_SUCCESS_MESSAGE('Front cover saved successfully!')
+				// this.PUSH_SUCCESS_MESSAGE('Front cover saved successfully!')
+					this.alertSuccess('Front cover saved successfully!')
 				
-				this.ACTION_CHANGE_STATE(['Savefcloader', false])
+				this.ACTION_CHANGE_STATE(['loader', false])
 			})
 			.catch(error => {
 				console.log(error)
-				this.PUSH_ERROR_MESSAGE('Internal server error');
+				this.ACTION_CHANGE_STATE(['loader', false])
+				// this.PUSH_ERROR_MESSAGE('Internal server error');
+				this.alertError('Internal server error!');
 			});
 		},
 		getUserData(){
+			this.ACTION_CHANGE_STATE(['loader', true])
 			axios.get("api/userBooks/1")
 			.then(response => {
 				const front_cover = response.data.data.front_cover
@@ -338,22 +342,26 @@ export default {
 					this.logoTextAlign = front_cover.logoTextAlign
 					this.fcImagePath = front_cover.fcImage
 				}
+				this.ACTION_CHANGE_STATE(['loader', false])
 			})
 			.catch(error => {
 				// this.PUSH_ERROR_MESSAGE('Internal server error');
+				this.alertError('Internal server error!');
+				this.ACTION_CHANGE_STATE(['loader', false])
 			})
 		},
 		save_and_download(){
+
 			this.save_front_cover()
+			this.ACTION_CHANGE_STATE(['loader', true])
 			axios.get('api/download_pdf/'+1)
             .then(response => {
-                // console.log(response.data)
-                // window.open(response.data.url, '_blank');
                 var link = document.createElement('a')
                 link.href = response.data.url
                 link.setAttribute('download', response.data.name)
                 document.body.appendChild(link)
-                link.click()
+				link.click()
+				this.ACTION_CHANGE_STATE(['loader', false])
             })
 		},
 		setImage(value){

@@ -14,9 +14,15 @@ import 'bootstrap/dist/js/bootstrap.js'
 import 'jquery/dist/jquery'
 import { globalMixin } from './globalMixin'
 import { store } from './store.js'
+import CxltToastr from 'cxlt-vue2-toastr'
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
+
+
+Vue.use(CxltToastr)
 
 
 Vue.mixin(globalMixin)
+
 const app = new Vue({
     el: '#app',
     mode: 'history',

@@ -1,11 +1,13 @@
 <template>
   <div>
+      <alertComponent></alertComponent>
        <div class="row main_container m-0">
             <LeftSideComponent />
             <div class="col-sm-10 right_side">
               <div class="gjs-pn-buttons top_preview"></div>
             <router-link to="/preview" target="_blank"><button class="preview_mag" @click="preiviewTab()">Preview</button></router-link>
-            <button class="save_ifc_to_db" @click="savebcDataToDb">Save Preview</button>
+            <button class="save_ifc_to_db" @click="saveDownload">Save & download</button>
+            <button class="save_ifc_to_db" @click="onSubmit">Save</button>
               <LoaderComponent/>
                 <div class="preview_responsive desktop" v-if="!this.$store.state.Savefcloader">
                     <div class="inner_right_side bc_backCover preview_content">
@@ -290,11 +292,13 @@
 </template>
 
 <script>
+import alertComponent from './common/alertComponent';
 import FileModalComponent from "./model/fileModalComponent";
 import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
     components:{
         FileModalComponent,
+        alertComponent
     },
     computed: {
         ...mapState([
@@ -346,10 +350,10 @@ export default {
             direct_phone : this.$store.state.bcDirectPhone,
             website : this.$store.state.bcWebsite,
             email : this.$store.state.bcEmail,
-
-
-
         }
+    },
+    created (){
+        this.getBcData()
     },
    mounted(){
         this.ACTION_CHANGE_STATE(['showCover',4])
@@ -358,7 +362,12 @@ export default {
     },
     methods:{
         ...mapActions([
-            'ACTION_CHANGE_STATE'
+            'ACTION_CHANGE_STATE',
+        ]),
+        ...mapMutations([
+            'EMPTY_MESSAGE_LIST',
+            'PUSH_ERROR_MESSAGE',
+            'PUSH_SUCCESS_MESSAGE'
         ]),
         ibcModal(value){
             this.open_pop_up = value
@@ -384,10 +393,18 @@ export default {
             // profile image section
             this.profileRadioButton = this.bcProfileRadioButton;
             this.profileImage = this.bcProfileImage;
-            // 
+            // profile text section
+            this.title = this.bcTitle;
+            this.company_name = this.bcCompanyName;
+            this.address1 = this.bcAddress1;
+            this.address2 = this.bcAddress2;
+            this.office_phone = this.bcOfficePhone;
+            this.direct_phone = this.bcDirectPhone;
+            this.website = this.bcWebsite;
+            this.email = this.bcEmail;
+
         },
         saveChanges(){
-
             if(this.open_pop_up == 2 && this.logoRadioButton == 'addMedia' && this.logoImage == 'images/avatar_image.jpg'){
                 this.logoRadioButton = this.bcLogoRadioButton;
             }else if(this.open_pop_up == 3 && this.profileRadioButton == 'addMedia' && this.profileImage == 'images/avatar_image.jpg'){
@@ -405,6 +422,107 @@ export default {
             // profile image section
             this.ACTION_CHANGE_STATE(['bcProfileRadioButton',this.profileRadioButton]);
             this.ACTION_CHANGE_STATE(['bcProfileImage',this.profileImage]);
+            // profile text section
+            this.ACTION_CHANGE_STATE(['bcTitle',this.headName]);
+            this.ACTION_CHANGE_STATE(['bcCompanyName',this.headAddress1]);
+            this.ACTION_CHANGE_STATE(['bcAddress1',this.headAddress2]);
+            this.ACTION_CHANGE_STATE(['bcAddress2',this.headCity]);
+            this.ACTION_CHANGE_STATE(['bcOfficePhone',this.headCountry]);
+            this.ACTION_CHANGE_STATE(['bcDirectPhone',this.headName]);
+            this.ACTION_CHANGE_STATE(['bcWebsite',this.headAddress1]);
+            this.ACTION_CHANGE_STATE(['bcEmail',this.headAddress2]);
+        },
+        onSubmit(){
+            this.EMPTY_MESSAGE_LIST();
+            this.ACTION_CHANGE_STATE(['loader', true])
+            var data = {
+                columnName: 'back_cover',
+                // header address section
+                headName : this.headName,
+                headAddress1 : this.headAddress1,
+                headAddress2 : this.headAddress2,
+                headCity : this.headCity,
+                headCountry : this.headCountry,
+                // logo image section
+                logoRadioButton : this.logoRadioButton,
+                logoImage : this.logoImage,
+                // profile image section
+                profileRadioButton : this.profileRadioButton,
+                profileImage : this.profileImage,
+                // profile text section
+                title : this.title,
+                company_name : this.company_name,
+                address1 : this.address1,
+                address2 : this.address2,
+                office_phone : this.office_phone,
+                direct_phone : this.direct_phone,
+                website : this.website,
+                email : this.email,
+            }
+
+            axios.post("api/userBooks", data)
+			.then(response => {
+                // this.PUSH_SUCCESS_MESSAGE('Back cover saved successfully!');
+                this.alertSuccess('Back cover saved successfully!');
+
+                const back_cover = response.data.data;
+                // for set the data
+                this.setBcData(back_cover);
+
+                this.ACTION_CHANGE_STATE(['loader', false])
+
+            })
+            .catch(error => {
+                // this.PUSH_ERROR_MESSAGE('Internal server error!');
+                this.alertError('Internal server error!');
+                this.ACTION_CHANGE_STATE(['loader', false])
+            })
+
+        },
+        saveDownload(){
+
+        },
+        setBcData(data){
+            if(data){
+                // header address section
+                this.headName = data.headName;
+                this.headAddress1 = data.headAddress1 != undefined ? data.headAddress1 : this.bcHeadAddress1;
+                this.headAddress2 = data.headAddress2 != undefined ? data.headAddress2 : this.bcHeadAddress2;
+                this.headCity = data.headCity != undefined ? data.headCity : this.bcHeadCity;
+                this.headCountry = data.headCountry != undefined ? data.headCountry : this.bcHeadCountry;
+                // logo image section
+                this.logoRadioButton = data.logoRadioButton != undefined ? data.logoRadioButton : this.bcLogoRadioButton;
+                this.logoImage = data.logoImage != undefined ? data.logoImage : this.bcLogoImage;
+                // profile image section
+                this.profileRadioButton = data.profileRadioButton != undefined ? data.profileRadioButton : this.bcProfileRadioButton;
+                this.profileImage = data.profileImage != undefined ? data.profileImage : this.bcProfileImage;
+                // profile text section
+                this.title = data.title != undefined ? data.title : this.bcTitle;
+                this.company_name = data.company_name != undefined ? data.company_name : this.bcCompanyName;
+                this.address1 = data.address1 != undefined ? data.address1 : this.bcAddress1;
+                this.address2 = data.address2 != undefined ? data.address2 : this.bcAddress2;
+                this.office_phone = data.office_phone != undefined ? data.office_phone : this.bcOfficePhone;
+                this.direct_phone = data.direct_phone != undefined ? data.direct_phone : this.bcDirectPhone;
+                this.website = data.website != undefined ? data.website : this.bcWebsite;
+                this.email = data.email != undefined ? data.email : this.bcEmail;
+                // for store data into vuex store
+                this.saveChanges();
+            }
+        },
+        getBcData(){
+            this.ACTION_CHANGE_STATE(['loader', true])
+            axios.get("api/userBooks/1")
+			.then(response => {
+                const back_cover = response.data.data.back_cover;
+                // for set the data
+                this.setBcData(back_cover);
+                this.ACTION_CHANGE_STATE(['loader', false])
+            })
+            .catch(error => {
+                // this.PUSH_ERROR_MESSAGE('Problem in geting data!');
+                this.alertError('Problem in getting data!');
+                this.ACTION_CHANGE_STATE(['loader', false])
+            })
         }
     },   
 }
