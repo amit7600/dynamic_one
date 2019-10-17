@@ -20,8 +20,8 @@
                             <div class="top-title">
                                 <p>{{this.headName}}</p>
                                 <p>{{this.headAddress1}}</p>
-                                <p>{{this.headAddress2 + ' ,'}}</p>
-                                <p>{{this.headCity + ' ,'}} {{this.headCountry}}</p>
+                                <p>{{this.headAddress2 != '' ? this.headAddress2 + ' ,' : ''}}</p>
+                                <p>{{this.headCity != '' ? this.headCity + ' ,' : ''}} {{this.headCountry}}</p>
                             </div>
                         </div>
                            <!-- header text section end here -->
@@ -163,7 +163,7 @@
                                                 </button>
                                             </div>
                                             <div v-if="this.logoRadioButton == 'default'" class="add-media-show" id="addMedia_id" data-section="section-1">
-                                                <img :src="this.defaultLogoImage" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;">
+                                                <img :src="this.defaultLogoImage" alt="" title="" style="margin-bottom:20px;">
                                             </div>
                                             <div v-if="this.logoRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
                                                 <img :src="this.logoImage" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;">
@@ -200,7 +200,7 @@
                                                 </button>
                                             </div>
                                             <div v-if="this.profileRadioButton == 'default'" class="add-media-show" id="addMedia_id" data-section="section-1">
-                                                <img :src="this.defaultProfileImage" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;">
+                                                <img :src="this.defaultProfileImage" alt=""  title="" style="margin-bottom:20px;">
                                             </div>
                                             <div v-if="this.profileRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
                                                 <img :src="this.profileImage" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;">
@@ -486,25 +486,25 @@ export default {
             if(data){
                 // header address section
                 this.headName = data.headName;
-                this.headAddress1 = data.headAddress1 != undefined ? data.headAddress1 : this.bcHeadAddress1;
-                this.headAddress2 = data.headAddress2 != undefined ? data.headAddress2 : this.bcHeadAddress2;
-                this.headCity = data.headCity != undefined ? data.headCity : this.bcHeadCity;
-                this.headCountry = data.headCountry != undefined ? data.headCountry : this.bcHeadCountry;
+                this.headAddress1 = data.headAddress1 != null ? data.headAddress1 : '';
+                this.headAddress2 = data.headAddress2 != null ? data.headAddress2 : '';
+                this.headCity = data.headCity != null ? data.headCity : '';
+                this.headCountry = data.headCountry != null ? data.headCountry : '';
                 // logo image section
-                this.logoRadioButton = data.logoRadioButton != undefined ? data.logoRadioButton : this.bcLogoRadioButton;
-                this.logoImage = data.logoImage != undefined ? data.logoImage : this.bcLogoImage;
+                this.logoRadioButton = data.logoRadioButton != null ? data.logoRadioButton : '';
+                this.logoImage = data.logoImage != null ? data.logoImage : '';
                 // profile image section
-                this.profileRadioButton = data.profileRadioButton != undefined ? data.profileRadioButton : this.bcProfileRadioButton;
-                this.profileImage = data.profileImage != undefined ? data.profileImage : this.bcProfileImage;
+                this.profileRadioButton = data.profileRadioButton != null ? data.profileRadioButton : '';
+                this.profileImage = data.profileImage != null ? data.profileImage : '';
                 // profile text section
-                this.title = data.title != undefined ? data.title : this.bcTitle;
-                this.company_name = data.company_name != undefined ? data.company_name : this.bcCompanyName;
-                this.address1 = data.address1 != undefined ? data.address1 : this.bcAddress1;
-                this.address2 = data.address2 != undefined ? data.address2 : this.bcAddress2;
-                this.office_phone = data.office_phone != undefined ? data.office_phone : this.bcOfficePhone;
-                this.direct_phone = data.direct_phone != undefined ? data.direct_phone : this.bcDirectPhone;
-                this.website = data.website != undefined ? data.website : this.bcWebsite;
-                this.email = data.email != undefined ? data.email : this.bcEmail;
+                this.title = data.title != null ? data.title : '';
+                this.company_name = data.company_name != null ? data.company_name : '';
+                this.address1 = data.address1 != null ? data.address1 : '';
+                this.address2 = data.address2 != null ? data.address2 : '';
+                this.office_phone = data.office_phone != null ? data.office_phone : '';
+                this.direct_phone = data.direct_phone != null ? data.direct_phone : '';
+                this.website = data.website != null ? data.website : '';
+                this.email = data.email != null ? data.email : '';
                 // for store data into vuex store
                 this.saveChanges();
             }
@@ -515,6 +515,7 @@ export default {
 			.then(response => {
                 const back_cover = response.data.data.back_cover;
                 // for set the data
+                console.log(back_cover)
                 this.setBcData(back_cover);
                 this.ACTION_CHANGE_STATE(['loader', false])
             })

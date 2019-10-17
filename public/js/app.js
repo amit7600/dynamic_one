@@ -9073,25 +9073,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (data) {
         // header address section
         this.headName = data.headName;
-        this.headAddress1 = data.headAddress1 != undefined ? data.headAddress1 : this.bcHeadAddress1;
-        this.headAddress2 = data.headAddress2 != undefined ? data.headAddress2 : this.bcHeadAddress2;
-        this.headCity = data.headCity != undefined ? data.headCity : this.bcHeadCity;
-        this.headCountry = data.headCountry != undefined ? data.headCountry : this.bcHeadCountry; // logo image section
+        this.headAddress1 = data.headAddress1 != null ? data.headAddress1 : '';
+        this.headAddress2 = data.headAddress2 != null ? data.headAddress2 : '';
+        this.headCity = data.headCity != null ? data.headCity : '';
+        this.headCountry = data.headCountry != null ? data.headCountry : ''; // logo image section
 
-        this.logoRadioButton = data.logoRadioButton != undefined ? data.logoRadioButton : this.bcLogoRadioButton;
-        this.logoImage = data.logoImage != undefined ? data.logoImage : this.bcLogoImage; // profile image section
+        this.logoRadioButton = data.logoRadioButton != null ? data.logoRadioButton : '';
+        this.logoImage = data.logoImage != null ? data.logoImage : ''; // profile image section
 
-        this.profileRadioButton = data.profileRadioButton != undefined ? data.profileRadioButton : this.bcProfileRadioButton;
-        this.profileImage = data.profileImage != undefined ? data.profileImage : this.bcProfileImage; // profile text section
+        this.profileRadioButton = data.profileRadioButton != null ? data.profileRadioButton : '';
+        this.profileImage = data.profileImage != null ? data.profileImage : ''; // profile text section
 
-        this.title = data.title != undefined ? data.title : this.bcTitle;
-        this.company_name = data.company_name != undefined ? data.company_name : this.bcCompanyName;
-        this.address1 = data.address1 != undefined ? data.address1 : this.bcAddress1;
-        this.address2 = data.address2 != undefined ? data.address2 : this.bcAddress2;
-        this.office_phone = data.office_phone != undefined ? data.office_phone : this.bcOfficePhone;
-        this.direct_phone = data.direct_phone != undefined ? data.direct_phone : this.bcDirectPhone;
-        this.website = data.website != undefined ? data.website : this.bcWebsite;
-        this.email = data.email != undefined ? data.email : this.bcEmail; // for store data into vuex store
+        this.title = data.title != null ? data.title : '';
+        this.company_name = data.company_name != null ? data.company_name : '';
+        this.address1 = data.address1 != null ? data.address1 : '';
+        this.address2 = data.address2 != null ? data.address2 : '';
+        this.office_phone = data.office_phone != null ? data.office_phone : '';
+        this.direct_phone = data.direct_phone != null ? data.direct_phone : '';
+        this.website = data.website != null ? data.website : '';
+        this.email = data.email != null ? data.email : ''; // for store data into vuex store
 
         this.saveChanges();
       }
@@ -9102,6 +9102,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.ACTION_CHANGE_STATE(['loader', true]);
       axios.get("api/userBooks/1").then(function (response) {
         var back_cover = response.data.data.back_cover; // for set the data
+
+        console.log(back_cover);
 
         _this2.setBcData(back_cover);
 
@@ -9514,6 +9516,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -9576,7 +9583,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.fcImagePath = this.fcImage;
     },
     saveChange: function saveChange() {
-      if (this.fcImage == 'images/avatar_image.jpg' && this.radioButton == 'addMedia') {
+      if (this.fcImagePath == 'images/avatar_image.jpg' && this.radioButton == 'addMedia') {
         this.radioButton = this.fcRadioButton;
       }
 
@@ -9733,6 +9740,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -10379,6 +10387,7 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
 
       this.CHANGE_STATE(['ifcSignatureRadioButton', this.signatureRadioButton]);
       this.CHANGE_STATE(['ifcSignatureImage', this.signatureImage]);
+      this.CHANGE_STATE(['ifcTextEditor', this.textEditor]);
     },
     displayModal: function displayModal() {
       $('#ifcModal').modal('show');
@@ -10464,7 +10473,8 @@ var defaultTextIfc = 'Greetings ' + br + 'The chill in the air will soon give wa
       var text = $('.editable_ifc_text').html();
 
       if (text == '') {
-        text = defaultTextIfc;
+        console.log(this.ifcTextEditor);
+        text = this.ifcTextEditor != '' ? this.ifcTextEditor : defaultTextIfc;
       }
 
       this.textEditor = text;
@@ -10620,6 +10630,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -51400,12 +51412,22 @@ var render = function() {
                               _c("p", [_vm._v(_vm._s(this.headAddress1))]),
                               _vm._v(" "),
                               _c("p", [
-                                _vm._v(_vm._s(this.headAddress2 + " ,"))
+                                _vm._v(
+                                  _vm._s(
+                                    this.headAddress2 != ""
+                                      ? this.headAddress2 + " ,"
+                                      : ""
+                                  )
+                                )
                               ]),
                               _vm._v(" "),
                               _c("p", [
                                 _vm._v(
-                                  _vm._s(this.headCity + " ,") +
+                                  _vm._s(
+                                    this.headCity != ""
+                                      ? this.headCity + " ,"
+                                      : ""
+                                  ) +
                                     " " +
                                     _vm._s(this.headCountry)
                                 )
@@ -52003,8 +52025,6 @@ var render = function() {
                                               attrs: {
                                                 src: this.defaultLogoImage,
                                                 alt: "",
-                                                "data-target": "#fileModal",
-                                                "data-toggle": "modal",
                                                 title: ""
                                               }
                                             })
@@ -52218,8 +52238,6 @@ var render = function() {
                                               attrs: {
                                                 src: this.defaultProfileImage,
                                                 alt: "",
-                                                "data-target": "#fileModal",
-                                                "data-toggle": "modal",
                                                 title: ""
                                               }
                                             })
@@ -53248,7 +53266,7 @@ var render = function() {
                                                 "Add media\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                               ),
                                               _c("toolTipsComponent", {
-                                                attrs: { title: "100 X 100" }
+                                                attrs: { title: "180 X 80" }
                                               })
                                             ],
                                             1
@@ -53322,6 +53340,31 @@ var render = function() {
                                 ? _c("div", { staticClass: "add_media" }, [
                                     _vm._m(2)
                                   ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.radioButton == "default"
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass: "add-media-show",
+                                      attrs: {
+                                        id: "addMedia_id",
+                                        "data-section": "section-1"
+                                      }
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticStyle: {
+                                          "margin-bottom": "20px"
+                                        },
+                                        attrs: {
+                                          src: _vm.defaultImage,
+                                          alt: "",
+                                          title: ""
+                                        }
+                                      })
+                                    ]
+                                  )
                                 : _vm._e(),
                               _vm._v(" "),
                               _vm.radioButton == "addMedia"
@@ -54740,7 +54783,7 @@ var render = function() {
                                                     ),
                                                     _c("toolTipsComponent", {
                                                       attrs: {
-                                                        title: "400 X 400"
+                                                        title: "320 X 500"
                                                       }
                                                     })
                                                   ],
@@ -54775,6 +54818,33 @@ var render = function() {
                                           )
                                         : _vm._e()
                                     ]),
+                                    _vm._v(" "),
+                                    this.photoRadioButton == "default    "
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "add-media-show",
+                                            attrs: {
+                                              id: "addMedia_id",
+                                              "data-section": "section-1"
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              staticStyle: {
+                                                "margin-bottom": "20px"
+                                              },
+                                              attrs: {
+                                                src: this.defaultPhotoImage,
+                                                alt: "",
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal",
+                                                title: ""
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      : _vm._e(),
                                     _vm._v(" "),
                                     this.photoRadioButton == "addMedia"
                                       ? _c(
@@ -55980,7 +56050,7 @@ var render = function() {
                                                     ),
                                                     _c("toolTipsComponent", {
                                                       attrs: {
-                                                        title: "500 X 500"
+                                                        title: "300 X 150"
                                                       }
                                                     })
                                                   ],
@@ -56259,7 +56329,7 @@ var render = function() {
                                                     ),
                                                     _c("toolTipsComponent", {
                                                       attrs: {
-                                                        title: "600 X 600"
+                                                        title: "200 X 60"
                                                       }
                                                     })
                                                   ],
@@ -56936,6 +57006,33 @@ var render = function() {
                                         : _vm._e()
                                     ]),
                                     _vm._v(" "),
+                                    this.logoRadioButton == "default"
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "add-media-show",
+                                            attrs: {
+                                              id: "addMedia_id",
+                                              "data-section": "section-1"
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              staticStyle: {
+                                                "margin-bottom": "20px"
+                                              },
+                                              attrs: {
+                                                src: _vm.defaultLogo,
+                                                alt: "",
+                                                "data-target": "#fileModal",
+                                                "data-toggle": "modal",
+                                                title: ""
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
                                     this.logoRadioButton == "addMedia"
                                       ? _c(
                                           "div",
@@ -57417,7 +57514,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-control",
-                                        attrs: { type: "text", id: "usr" },
+                                        attrs: {
+                                          type: "text",
+                                          placeholder: "Title",
+                                          id: "usr"
+                                        },
                                         domProps: { value: _vm.title },
                                         on: {
                                           input: function($event) {
@@ -57445,7 +57546,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-control",
-                                        attrs: { type: "text", id: "usr" },
+                                        attrs: {
+                                          type: "text",
+                                          placeholder: "Company name",
+                                          id: "usr"
+                                        },
                                         domProps: { value: _vm.company_name },
                                         on: {
                                           input: function($event) {
@@ -57474,7 +57579,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-control",
-                                        attrs: { type: "text", id: "usr" },
+                                        attrs: {
+                                          type: "text",
+                                          placeholder: "Address 1",
+                                          id: "usr"
+                                        },
                                         domProps: { value: _vm.address1 },
                                         on: {
                                           input: function($event) {
@@ -57502,7 +57611,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-control",
-                                        attrs: { type: "text", id: "usr" },
+                                        attrs: {
+                                          type: "text",
+                                          placeholder: "Address 2",
+                                          id: "usr"
+                                        },
                                         domProps: { value: _vm.address2 },
                                         on: {
                                           input: function($event) {
@@ -57534,7 +57647,11 @@ var render = function() {
                                               }
                                             ],
                                             staticClass: "form-control",
-                                            attrs: { type: "text", id: "usr" },
+                                            attrs: {
+                                              type: "text",
+                                              placeholder: "Office phone",
+                                              id: "usr"
+                                            },
                                             domProps: {
                                               value: _vm.office_phone
                                             },
@@ -57567,7 +57684,11 @@ var render = function() {
                                               }
                                             ],
                                             staticClass: "form-control",
-                                            attrs: { type: "text", id: "usr" },
+                                            attrs: {
+                                              type: "text",
+                                              placeholder: "Direct phone",
+                                              id: "usr"
+                                            },
                                             domProps: {
                                               value: _vm.direct_phone
                                             },
@@ -57604,7 +57725,11 @@ var render = function() {
                                               }
                                             ],
                                             staticClass: "form-control",
-                                            attrs: { type: "text", id: "usr" },
+                                            attrs: {
+                                              type: "text",
+                                              placeholder: "Website",
+                                              id: "usr"
+                                            },
                                             domProps: { value: _vm.website },
                                             on: {
                                               input: function($event) {
@@ -57635,7 +57760,11 @@ var render = function() {
                                               }
                                             ],
                                             staticClass: "form-control",
-                                            attrs: { type: "text", id: "usr" },
+                                            attrs: {
+                                              type: "text",
+                                              placeholder: "Email",
+                                              id: "usr"
+                                            },
                                             domProps: { value: _vm.email },
                                             on: {
                                               input: function($event) {

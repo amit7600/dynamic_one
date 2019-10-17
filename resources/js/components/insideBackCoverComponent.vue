@@ -118,6 +118,9 @@
                                                     <span class="font_content">Add Media</span>
                                                 </button>
                                             </div>
+                                            <div v-if="this.logoRadioButton == 'default'" class="add-media-show" id="addMedia_id" data-section="section-1">
+                                                <img :src="defaultLogo" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;">
+                                            </div>
                                             <div v-if="this.logoRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
                                                 <img :src="logoImage" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;">
                                             </div>
@@ -187,7 +190,6 @@
                                             </div>
                                             <div v-if="photoRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
                                                 <img :src="this.photoImage" alt="" data-target="#fileModal" data-toggle="modal" title="" style="margin-bottom:20px;">
-                                                <!-- <img data-target="#fileModal" data-toggle="modal" v-if="imageIbcProfilePath != ''" :src="imageIbcProfilePath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;"> -->
                                             </div>
                                         </div>
                                         <!---END profile_image IBC ---->
@@ -195,23 +197,23 @@
                                         <div v-if="this.open_pop_up == 4 ">
                                             <div class="ifc_title">
                                                 <label for="usr">Title</label>
-                                                <input type="text" v-model='title' class="form-control" id="usr">
+                                                <input type="text" v-model="title" placeholder="Title" class="form-control" id="usr">
                                             </div>
                                             <div class="ifc_title">
                                                 <label for="usr">Company Name</label>
-                                                <input type="text" v-model="company_name" class="form-control" id="usr">
+                                                <input type="text" v-model="company_name" placeholder="Company name" class="form-control" id="usr">
                                             </div>                                       
                                             <!------------------>
                                             <!------------------>
                                             <div class="ifc_title">
                                                 <label for="usr">Address 1</label>
-                                                <input type="text" v-model="address1" class="form-control" id="usr">
+                                                <input type="text" v-model="address1" placeholder="Address 1" class="form-control" id="usr">
                                             </div>
                                             <!---------------------->
                                              <!------------------>
                                             <div class="ifc_title">
                                                 <label for="usr">Address 2</label>
-                                                <input type="text" v-model="address2" class="form-control" id="usr">
+                                                <input type="text" v-model="address2" placeholder="Address 2" class="form-control" id="usr">
                                             </div>
                                             <!---------------------->
                                          
@@ -220,13 +222,13 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="usr">Office Phone</label>
-                                                        <input type="text" v-model="office_phone" class="form-control" id="usr">
+                                                        <input type="text" v-model="office_phone" class="form-control" placeholder="Office phone" id="usr">
                                                     </div>
                                                     <!---------------------->
                                                     <!------------------>
                                                     <div class="col-md-6">
                                                         <label for="usr">Direct Phone</label>
-                                                        <input type="text" v-model="direct_phone" class="form-control" id="usr">
+                                                        <input type="text" v-model="direct_phone" class="form-control" placeholder="Direct phone" id="usr">
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,13 +238,13 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="usr">Website URL</label>
-                                                        <input type="text" v-model="website" class="form-control" id="usr">
+                                                        <input type="text" v-model="website" class="form-control" placeholder="Website" id="usr">
                                                      </div>
                                                     <!---------------------->
                                                     <!------------------>
                                                     <div class="col-md-6">
                                                         <label for="usr">Email</label>
-                                                        <input type="text" v-model="email" class="form-control" id="usr">
+                                                        <input type="text" v-model="email" class="form-control" placeholder="Email" id="usr">
                                                     </div>
                                                 </div>
                                             </div>

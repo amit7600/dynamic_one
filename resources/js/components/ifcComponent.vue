@@ -179,7 +179,7 @@
                                                         <div class="col-sm-12 text_field">
         													<label for="addMedia">
         														<input  type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="photoRadioButton" @change="changePhotoRadio" name="check" />Add Profile Image
-                                                                <toolTipsComponent title="400 X 400"/>
+                                                                <toolTipsComponent title="320 X 500"/>
         													</label>
         												</div>                                                        
                                                     </div>
@@ -189,10 +189,11 @@
                                                         <span class="font_content">Add Media</span>
                                                     </button>
                                                 </div>
-                                                <!-- @click="check_Value(1)" -->
+                                                <div v-if="this.photoRadioButton == 'default    '" class="add-media-show" id="addMedia_id" data-section="section-1">
+                                                    <img :src="this.defaultPhotoImage" alt="" data-target="#fileModal" data-toggle="modal"  title=""  style="margin-bottom:20px;" >
+                                                </div>
                                                 <div v-if="this.photoRadioButton == 'addMedia'" class="add-media-show" id="addMedia_id" data-section="section-1">
                                                     <img :src="this.photoImage" alt="" data-target="#fileModal" data-toggle="modal"  title=""  style="margin-bottom:20px;" >
-                                                    <!-- <img data-target="#fileModal" data-toggle="modal"  v-if="imageIfcPath != ''" :src="imageIfcPath" alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;"> -->
                                                 </div>
                                             </div>
                                         <!---End profile image ---->
@@ -379,7 +380,7 @@
                                                         <div class="col-sm-12 text_field">
         													<label for="addMedia">
         														<input  type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="logoRadioButton" @change="logoRadioButtonChange" name="check" checked />Add Logo
-                                                                <toolTipsComponent title="500 X 500"/>
+                                                                <toolTipsComponent title="300 X 150"/>
         													</label>
         												</div>
                                                     </div>
@@ -420,7 +421,7 @@
                                                         <div class="col-sm-12 text_field">
         													<label for="addMedia">
         														<input type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="signatureRadioButton" @change="signatureRadioButtonChange" name="check" checked />Add Signature
-                                                                <toolTipsComponent title="600 X 600"/>
+                                                                <toolTipsComponent title="200 X 60"/>
         													</label>
         												</div>
                                                     </div>
@@ -701,6 +702,7 @@ export default {
             // this section for signature image
             this.CHANGE_STATE(['ifcSignatureRadioButton',this.signatureRadioButton])
             this.CHANGE_STATE(['ifcSignatureImage',this.signatureImage])
+            this.CHANGE_STATE(['ifcTextEditor',this.textEditor]);
         },
         displayModal() {
                 $('#ifcModal').modal('show');
@@ -783,7 +785,8 @@ export default {
             $('.hoverComponetRemove').removeClass('disabled_data')
             var text = $('.editable_ifc_text').html()
             if(text == ''){
-                text = defaultTextIfc;
+                console.log(this.ifcTextEditor)
+                text = this.ifcTextEditor != '' ? this.ifcTextEditor : defaultTextIfc;
             }
             this.textEditor = text;
             this.showTextEditor = false;

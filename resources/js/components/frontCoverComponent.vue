@@ -62,7 +62,7 @@
 												<div class="col-sm-12 text_field">
 													<label for="addMedia">
 														<input type="radio" id="addMedia" data-id="addMedia_id" value="addMedia" v-model="radioButton" @change="radioButtonChange" name="check" :chacked="radioButton == 'addMedia' ? 'checked': ''" />Add media
-														<toolTipsComponent title="100 X 100"/>
+														<toolTipsComponent title="180 X 80"/>
 													</label>
 												</div>
 											</div>
@@ -78,6 +78,11 @@
 											<button  class="btn btn-block media_btn" data-target="#fileModal" data-toggle="modal">
 												<span class="font_content">Add Media</span>
 											</button>
+										</div>
+										<div  class="add-media-show" id="addMedia_id" data-section="section-1" v-if="radioButton == 'default'">
+											<img :src="defaultImage" alt="" title=""  style="margin-bottom:20px;" >
+											
+											<!-- <img data-target="#fileModal" data-toggle="modal"  alt="" srcset="" style="margin-bottom:20px; margin-top: 37px;"> -->
 										</div>
 										<div  class="add-media-show" id="addMedia_id" data-section="section-1" v-if="radioButton == 'addMedia'">
 											<img :src="fcImagePath" alt="" data-target="#fileModal" data-toggle="modal"  title=""  style="margin-bottom:20px;" >
@@ -255,7 +260,7 @@ export default {
 
 		},
 		saveChange(){
-			if(this.fcImage == 'images/avatar_image.jpg' && this.radioButton == 'addMedia'){
+			if(this.fcImagePath == 'images/avatar_image.jpg' && this.radioButton == 'addMedia'){
 				this.radioButton = this.fcRadioButton;
 			}
 			var text = $('.editable').html();
