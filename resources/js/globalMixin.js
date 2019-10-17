@@ -151,8 +151,6 @@ export const globalMixin = {
             'defaultBcLogoImagePath',
             'fcTextInputValueEditor',
             'Savefcloader',
-
-            'profileImage',
             'defaultBcProfileImagePath',
             'displayBcProfileMedia',
             'setBcProfileImage_bind',
@@ -281,9 +279,9 @@ export const globalMixin = {
         // this.ACTION_CHANGE_STATE(['defaultImagePath', this.preimagepath])
     },
     mounted() {
-            $(document).ready(function () {
-                $('[data-toggle="tooltip"]').tooltip();
-            });
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
         this.ACTION_CHANGE_STATE(['defaultIbcProfilePath', this.preibcProfileimagepath])
         this.ACTION_CHANGE_STATE(['defaultIbcMainImagePath', this.preibcMainimagepath])

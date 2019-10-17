@@ -54,7 +54,7 @@ class ImageLibraryController extends Controller
                 $image = $request->file('image');
                 $tempname = explode('.', $image->getClientOriginalName());
                 $tempname = str_replace(' ', '_', $tempname);
-                $name = $tempname[0].'_'.time().'.'.$image->getClientOriginalExtension();
+                $name = time().'.'.$image->getClientOriginalExtension();
                 // $path = 'uploads/book'.$request->get('bookId').'/'.$request->get('coverPage');
                 $path = '/uploads/0000';
                 if (! \File::isDirectory(public_path().$path)) {
