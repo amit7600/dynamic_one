@@ -325,7 +325,7 @@ export const globalMixin = {
                 message:message,
                 progressBar:true,
                 position:'top right',
-                timeOut : 5000,
+                timeOut : 3000,
                 showMethod:'bounceInLeft',
                 hideMethod:'bounceOutLeft'
             })
@@ -336,7 +336,7 @@ export const globalMixin = {
                 message:message,
                 progressBar:true,
                 position:'top right',
-                timeOut : 5000,
+                timeOut : 3000,
                 showMethod:'bounceInLeft',
                 hideMethod:'bounceOutLeft'
             })

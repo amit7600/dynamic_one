@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="inner_right_side 1" v-if="showFrontCover">
+        <div class="inner_right_side 1" >
                 <div class="cover_img">
                     <img src="images/front_cover.jpg">
                 </div>
@@ -194,7 +194,8 @@ export default {
 			defaultImage : 'images/logo.png',
 			imageAlign : this.$store.state.fcImageAlign,
 			logoTextAlign : this.$store.state.fcTextAlign,
-			fcImagePath : this.$store.state.fcImage
+			fcImagePath : this.$store.state.fcImage,
+			userId : this.$session.get('userId')
 		};
     },
     computed: {
@@ -328,9 +329,10 @@ export default {
 		},
 		getUserData(){
 			this.ACTION_CHANGE_STATE(['loader', true])
-			axios.get("api/userBooks/1")
+			axios.defaults.headers.common['Authorization'] = this.$session.get('accessToken') 
+			axios.get("api/userBooks/"+this.userId)
 			.then(response => {
-				const front_cover = response.data.data.front_cover
+				const front_cover = response.data.data != null ? response.data.data.front_cover : response.data.data
 				if(front_cover){
 					// store into vuex
 					this.ACTION_CHANGE_STATE(['fcImageAlign',front_cover.imageAlign]);
@@ -351,6 +353,7 @@ export default {
 			})
 			.catch(error => {
 				// this.PUSH_ERROR_MESSAGE('Internal server error');
+				console.log(error)
 				this.alertError('Internal server error!');
 				this.ACTION_CHANGE_STATE(['loader', false])
 			})

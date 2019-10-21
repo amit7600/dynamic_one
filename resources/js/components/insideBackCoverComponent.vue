@@ -4,10 +4,7 @@
         <div class="row main_container m-0">
             <LeftSideComponent />
             <div class="col-sm-10 right_side">
-            <div class="gjs-pn-buttons top_preview"></div>
-            <router-link to="/preview" target="_blank"><button class="preview_mag" @click="preiviewTab()">Preview</button></router-link>
-            <button class="save_ifc_to_db" @click="saveDownload">Save & download</button>
-            <button class="save_ifc_to_db" @click="onSubmit">Save</button>
+              <headerComponent></headerComponent>
               <LoaderComponent/>
                 <div class="preview_responsive" v-if="!this.$store.state.Savefcloader">
                     <div class="inner_right_side preview_content">
@@ -274,6 +271,7 @@
 </template>
 
 <script>
+import headerComponent from './common/headerComponent'
 import alertComponent from './common/alertComponent';
 import FileModalComponent from "./model/fileModalComponent";
 import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
@@ -281,6 +279,7 @@ export default {
     components:{
         alertComponent,
         FileModalComponent,
+        headerComponent
     },
     computed: {
         ...mapState([
@@ -328,7 +327,8 @@ export default {
             office_phone : this.$store.state.ibcOfficePhone,
             direct_phone : this.$store.state.ibcDirectPhone,
             website : this.$store.state.ibcWebsite,
-            email : this.$store.state.ibcEmail
+            email : this.$store.state.ibcEmail,
+            userId : this.$session.get('userId'),
         }
     },
     created(){
@@ -420,7 +420,7 @@ export default {
             const value = e.target.value
             this.mainRadioButton = value
         },
-        onSubmit(){
+        saveCover(){
             this.EMPTY_MESSAGE_LIST();
             this.ACTION_CHANGE_STATE(['loader', true])
             const data = {
@@ -443,7 +443,8 @@ export default {
                 website : this.website,
                 email : this.email
             }
-            axios.post("api/userBooks", data)
+            axios.defaults.headers.common['Authorization'] = this.$session.get('accessToken')
+            axios.post("/api/userBooks", data)
 			.then(response => {
                 const inside_back_cover = response.data.data
                 this.setIbcData(inside_back_cover);
@@ -457,8 +458,8 @@ export default {
                 this.ACTION_CHANGE_STATE(['loader', false])
             })
         },
-        saveDownload(){
-            this.onSubmit();
+        downloadCover(){
+            this.saveCover();
         },
         setIbcData(data){
             if(data){
@@ -487,9 +488,10 @@ export default {
         },
         get_ibc_data(){
             this.ACTION_CHANGE_STATE(['loader', true])
-            axios.get("api/userBooks/1")
+            axios.defaults.headers.common['Authorization'] = this.$session.get('accessToken') 
+            axios.get("/api/userBooks/"+ this.userId)
             .then(response => {
-                const inside_back_cover = response.data.data.inside_back_cover
+                const inside_back_cover = response.data.data != null ? response.data.data.inside_back_cover : response.data.data;
                 this.setIbcData(inside_back_cover);
                 this.ACTION_CHANGE_STATE(['loader', false])
             })

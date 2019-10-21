@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\ImageLibrary;
 use DB;
+use Auth;
 
 class ImageLibraryController extends Controller
 {
@@ -15,8 +16,10 @@ class ImageLibraryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $library = ImageLibrary::orderBy('id', 'DESC')->get();
+    {   
+        $userId = Auth::id();
+        $library = ImageLibrary::where('user_id',$userId)->orderBy('id', 'DESC')->get();
+
         $image = [];
         foreach ($library as $key => $value) {
             if(file_exists(\public_path($value->path))){
@@ -50,6 +53,7 @@ class ImageLibraryController extends Controller
     {
         try {
             DB::beginTransaction();
+            $userId = Auth::id();
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $tempname = explode('.', $image->getClientOriginalName());
@@ -67,12 +71,12 @@ class ImageLibraryController extends Controller
                 
                 $data = ImageLibrary::create([
                     // 'user_id'       => Auth::user()->id,
-                    'user_id'       => 1,
+                    'user_id'       => $userId,
                     'path'          => $path.'/'.$name,
                     'type'          => $request->get('type')
                 ]);
                 DB::commit();
-                $library = ImageLibrary::orderBy('id', 'DESC')->where('user_id', 1)->get();
+                $library = ImageLibrary::orderBy('id', 'DESC')->where('user_id', $userId)->get();
                 $image = [];
                 foreach ($library as $key => $value) {
                     if(file_exists(\public_path($value->path))){

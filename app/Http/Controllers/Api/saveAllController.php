@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\userBook;
 use DB;
+use Auth;
 
 class saveAllController extends Controller
 {
@@ -16,7 +17,9 @@ class saveAllController extends Controller
      */
     public function index()
     {
-        $library = userBook::get();
+        $userId = Auth::id();
+
+        $library = userBook::whereId($userId)->get();
         return response()->json([
             'success'    => true,
             'data'       => $library,
@@ -56,7 +59,8 @@ class saveAllController extends Controller
     {
         //
         try{
-            $user = \DB::table('user_books')->where('user_id',1)->first();
+            $userId = Auth::id();
+            $user = \DB::table('user_books')->where('user_id',$userId)->first();
             if ($user) {
                 $user->front_cover = $user->front_cover ? unserialize($user->front_cover) : '';
                 $user->inside_front_cover = $user->inside_front_cover ? unserialize($user->inside_front_cover) : '';
@@ -123,20 +127,21 @@ class saveAllController extends Controller
             DB::beginTransaction();
             $makeSerialize = serialize($request->all());
             $userdata = \DB::table('user_books')->where('user_id',1)->first();
+            $userId = Auth::id();
             if($userdata){
-                userBook::where('user_id', 1)->update([
+                userBook::where('user_id', $userId)->update([
                     $request->get('columnName')   => $makeSerialize,
                     ]);
             }else{
                 userBook::create([
-                    'user_id'   => 1,
+                    'user_id'   => $userId,
                     $request->get('columnName')   => $makeSerialize,
                 ]);
             }
             
             DB::commit();
             $columnName = $request->get('columnName');
-            $data = userBook::where('user_id',1)->first();
+            $data = userBook::where('user_id',$userId)->first();
             $userBook = $data->$columnName;
             
             return response()->json([

@@ -193,7 +193,9 @@ input[type=radio]:checked:disabled:before{transform:scale(1);background-color:#b
 .bc_text_inner .text_inner p{color: #fff; margin-bottom: 0}
 .bc_address p {margin-bottom: 0}
 .inside_bc .bc_address{padding-left:5%;color: #fff; margin-top: 38%;}
-.top_preview.gjs-pn-buttons {text-align: center;padding: 18px 7px;}
+.top_preview.gjs-pn-buttons {text-align: right;padding:10px 7px;}
+.icon_top {background: #fff;border: 1px solid #3949ab;  color:#3949ab;padding: 3px 15px; border-radius: 4px;font-size: 18px;margin: 0 3px;box-shadow: 2px 2px 4px rgba(0,0,0,0.2);}
+.icon_top:hover { color: #fff; background:#3949ab ;}
 .top_preview.gjs-pn-buttons .gjs-pn-btn {height: 45px;width: 70px;cursor: pointer; display: inline-block;}
 .top_preview.gjs-pn-buttons .gjs-pn-btn img {height: 100%;width: auto;}
 .right_ifc_content select {background: #3949ab;border: none;color: #fff;-webkit-appearance: none;}
@@ -380,3 +382,59 @@ margin-left: 12px;}
 	font-size: 16px;
 }
 .bc_header {position: relative;}
+.login_form { height:100vh;background: linear-gradient(to right, #0062E6, #33AEFF);}
+  .login_form .card-signin {
+	border: 0;
+	border-radius: 1rem;
+	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+	margin-top: 30% !important;
+  }
+  
+  .login_form .card-signin .card-title {
+	margin-bottom: 2rem;
+	font-weight: 300;
+	font-size: 1.5rem;
+  }
+  
+  .login_form .card-signin .card-body {
+	padding: 2rem;
+  }
+  
+  .login_form .form-signin {
+	width: 100%;
+  }
+  
+  .login_form .form-signin .btn {
+	font-size: 80%;
+	border-radius: 5rem;
+	letter-spacing: .1rem;
+	font-weight: bold;
+	padding: 1rem;
+	transition: all 0.2s;
+  }
+  
+  .login_form .form-label-group {
+	position: relative;
+	margin-bottom: 1rem;
+	float: left;
+    width: 100%;
+  }
+  
+  .login_form .form-label-group input {
+	height: auto;
+	border-radius: 2rem;
+	width: 100% !important;
+  }
+
+  
+  .login_form .form-label-group>label {
+	display: block;
+	width: 100%;
+	margin-bottom: 0;
+	padding: 0px;
+	line-height: 1.5;
+	color: #495057;
+	border: 1px solid transparent;
+	border-radius: .25rem;
+	transition: all .1s ease-in-out;
+  }

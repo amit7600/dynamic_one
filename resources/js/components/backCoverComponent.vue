@@ -4,12 +4,9 @@
        <div class="row main_container m-0">
             <LeftSideComponent />
             <div class="col-sm-10 right_side">
-              <div class="gjs-pn-buttons top_preview"></div>
-            <router-link to="/preview" target="_blank"><button class="preview_mag" @click="preiviewTab()">Preview</button></router-link>
-            <button class="save_ifc_to_db" @click="saveDownload">Save & download</button>
-            <button class="save_ifc_to_db" @click="onSubmit">Save</button>
+              <headerComponent></headerComponent>
               <LoaderComponent/>
-                <div class="preview_responsive desktop" v-if="!this.$store.state.Savefcloader">
+                <div class="preview_responsive desktop" >
                     <div class="inner_right_side bc_backCover preview_content">
                         <div class="cover_img "> 
                             <img src="images/back_cover.jpg" style="opacity: 1">
@@ -292,13 +289,15 @@
 </template>
 
 <script>
+import headerComponent from './common/headerComponent';
 import alertComponent from './common/alertComponent';
 import FileModalComponent from "./model/fileModalComponent";
 import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
     components:{
         FileModalComponent,
-        alertComponent
+        alertComponent,
+        headerComponent
     },
     computed: {
         ...mapState([
@@ -350,6 +349,7 @@ export default {
             direct_phone : this.$store.state.bcDirectPhone,
             website : this.$store.state.bcWebsite,
             email : this.$store.state.bcEmail,
+            userId : this.$session.get('userId')
         }
     },
     created (){
@@ -432,7 +432,7 @@ export default {
             this.ACTION_CHANGE_STATE(['bcWebsite',this.headAddress1]);
             this.ACTION_CHANGE_STATE(['bcEmail',this.headAddress2]);
         },
-        onSubmit(){
+        saveCover(){
             this.EMPTY_MESSAGE_LIST();
             this.ACTION_CHANGE_STATE(['loader', true])
             var data = {
@@ -459,7 +459,7 @@ export default {
                 website : this.website,
                 email : this.email,
             }
-
+            axios.defaults.headers.common['Authorization'] = this.$session.get('accessToken') 
             axios.post("api/userBooks", data)
 			.then(response => {
                 // this.PUSH_SUCCESS_MESSAGE('Back cover saved successfully!');
@@ -479,8 +479,8 @@ export default {
             })
 
         },
-        saveDownload(){
-
+        downloadCover(){
+            this.saveCover();
         },
         setBcData(data){
             if(data){
@@ -511,11 +511,11 @@ export default {
         },
         getBcData(){
             this.ACTION_CHANGE_STATE(['loader', true])
-            axios.get("api/userBooks/1")
+            axios.defaults.headers.common['Authorization'] = this.$session.get('accessToken') 
+            axios.get("api/userBooks/"+this.userId)
 			.then(response => {
-                const back_cover = response.data.data.back_cover;
+                const back_cover = response.data.data != null ? response.data.data.back_cover : response.data.data;
                 // for set the data
-                console.log(back_cover)
                 this.setBcData(back_cover);
                 this.ACTION_CHANGE_STATE(['loader', false])
             })

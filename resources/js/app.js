@@ -16,8 +16,11 @@ import { globalMixin } from './globalMixin'
 import { store } from './store.js'
 import CxltToastr from 'cxlt-vue2-toastr'
 import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
+import VueSession from 'vue-session'
 
 
+
+Vue.use(VueSession)
 Vue.use(CxltToastr)
 
 

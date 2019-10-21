@@ -4,7 +4,7 @@
             <li  >
                 <div :class="{'inner_left_side': true, 'active': this.showCover == 1}" >
                     <h4>Front Cover</h4> 
-                    <router-link to="/" >
+                    <router-link to="/front_cover" >
                         <div class="inner_left_img">
                             <img src="images/fc.jpg" alt="" title="">        
                         </div>

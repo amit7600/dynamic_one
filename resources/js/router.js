@@ -7,6 +7,7 @@ import insideBackCover from "./components/insideBackCoverComponent";
 import BackCover from "./components/backCoverComponent";
 import Preview from "./components/previewComponent";
 import AllPreview from "./components/allPreviewComponent";
+import loginComponent from './users/loginComponent';
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,10 @@ export default new VueRouter ({
     routes: [
         {
             path: '/',
+            component: loginComponent,
+        },
+        {
+            path: '/front_cover',
             component: HomeComponentOne,
         },
         {

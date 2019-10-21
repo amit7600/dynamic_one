@@ -4,10 +4,7 @@
         <div class="row main_container m-0">
 			<LeftSideComponent />
             <div class="col-sm-10 right_side">
-            <div class="gjs-pn-buttons top_preview"></div>
-            <router-link to="/preview" target="_blank"><button class="preview_mag" @click="preiviewTab()">Preview</button></router-link>
-            <button class="save_ifc_to_db" @click="saveDownload">Save & download</button>
-            <button class="save_ifc_to_db" @click="onSubmit">Save</button>
+                <headerComponent></headerComponent>
             <LoaderComponent/>
                 <div class="preview_responsive" v-if="!this.$store.state.Savefcloader">
                     <div class="inner_right_side preview_content">
@@ -463,6 +460,7 @@
 </template>
 
 <script>
+import headerComponent from './common/headerComponent';
 import alertComponent from './common/alertComponent';
 import ifcInputComponent from "./model/ifcModelInput";
 // import ifcTextInputModel from "./model/ifcTextInputModal";
@@ -477,7 +475,8 @@ export default {
          alertComponent,
         //  ifcTextInputModel,
          FileModalComponent,
-         "color-picker": ColorPicker
+         "color-picker": ColorPicker,
+         headerComponent
     },
     data(){
        return{
@@ -539,11 +538,8 @@ export default {
             signatureImage : this.$store.state.ifcSignatureImage,
             signatureRadioButton : this.$store.state.ifcSignatureRadioButton,
             // for temp
-            tempHeading : ''
-
-
-
-
+            tempHeading : '',
+            userId : this.$session.get('userId'),
        }
        
     },
@@ -797,7 +793,7 @@ export default {
             this.showTextEditor = false;
             this.textEditor = this.ifcTextEditor != '' ? this.ifcTextEditor : this.textEditor;
         },
-        onSubmit(){
+        saveCover(){
             this.EMPTY_MESSAGE_LIST()
             this.ACTION_CHANGE_STATE(['loader', true])
             var data = {
@@ -838,7 +834,8 @@ export default {
                 signatureImage : this.signatureImage,
                 // text editor
             }
-            axios.post("api/userBooks", data)
+            axios.defaults.headers.common['Authorization'] = this.$session.get('accessToken') 
+            axios.post("/api/userBooks", data)
 			.then(response => {
                 const inside_front_cover = response.data.data;
                 
@@ -853,14 +850,15 @@ export default {
                 this.ACTION_CHANGE_STATE(['loader', false])
             })
         },
-        saveDownload(){
-            this.onSubmit();
+        downloadCover(){
+            this.saveCover();
         },
         get_ifc_data(){
             this.ACTION_CHANGE_STATE(['loader', true])
-            axios.get("api/userBooks/1")
+            axios.defaults.headers.common['Authorization'] = this.$session.get('accessToken') 
+            axios.get("/api/userBooks/"+this.userId)
             .then(response => {
-                const inside_front_cover = response.data.data.inside_front_cover;
+                const inside_front_cover = response.data.data != null ? response.data.data.inside_front_cover : response.data.data;
                 this.setIfcData(inside_front_cover)
                 
                 this.ACTION_CHANGE_STATE(['loader', false])
